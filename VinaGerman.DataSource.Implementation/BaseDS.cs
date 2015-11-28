@@ -13,7 +13,7 @@ namespace VinaGerman.DataSource.Implementation
 {
     public class BaseDS<TChannel>
     {
-        //thuan commit, loc commit
+        //thuan commit, loc commit lan 2 Thuan
         //dfafdfdfdsf
         #region properties
         public static string HostName = "";
