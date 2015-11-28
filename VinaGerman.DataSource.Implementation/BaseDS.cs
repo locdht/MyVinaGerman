@@ -14,6 +14,7 @@ namespace VinaGerman.DataSource.Implementation
     public class BaseDS<TChannel>
     {
         //thuan commit
+        //dfafdfdfdsf
         #region properties
         public static string HostName = "";
         private string WindowUrl
