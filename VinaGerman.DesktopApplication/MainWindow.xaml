@@ -1,0 +1,28 @@
+﻿<Controls:MetroWindow x:Class="VinaGerman.DesktopApplication.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      GlowBrush="{DynamicResource AccentColorBrush}" Icon="Images\logo.ico"
+                      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"                      
+                      Title="VinaGerman TNHH Thiên Phú" WindowState="Maximized"
+                      Height="600" Width="1024" ShowMinButton="False" ShowMaxRestoreButton="False">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Hệ thống">
+                <MenuItem Header="_Quản lý người dùng" />                
+                <MenuItem Header="_Phân quyền" />                
+                <Separator />
+                <MenuItem Header="_Thoát" />
+            </MenuItem>
+            <MenuItem Header="_Quản lý danh mục">
+                <MenuItem Header="_Danh sách khách hàng" />
+                <MenuItem Header="_Danh sách nhà cung cấp" />                
+                <Separator />
+                <MenuItem Header="_Danh sách loại hàng hóa" />
+                <MenuItem Header="_Danh sách loại ngành nghề" />
+            </MenuItem>
+        </Menu>
+        <ContentControl Name="mainControl" Content="{Binding CurrentModel}">
+
+        </ContentControl>
+    </DockPanel>
+</Controls:MetroWindow>

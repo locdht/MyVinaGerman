@@ -1,0 +1,3 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" 
+    Service="VinaGerman.Service.Implementation.CompanySvc" 
+    Factory="VinaGerman.Service.Implementation.VinaGermanServiceHostFactory" %>

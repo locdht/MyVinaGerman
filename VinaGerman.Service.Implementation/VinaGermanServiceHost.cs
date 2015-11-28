@@ -1,0 +1,47 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Text;
+using System.Threading.Tasks;
+using VinaGerman.Business;
+using VinaGerman.Business.Implementation;
+using VinaGerman.Database;
+using VinaGerman.Database.Implementation;
+using VinaGerman.Entity;
+using VinaGerman.Wcf.Security.Server;
+
+namespace VinaGerman.Service.Implementation
+{
+    public class VinaGermanServiceHost : ServiceHost
+    {
+        public VinaGermanServiceHost(object singletonInstance, params Uri[] baseAddresses)
+            : base(singletonInstance, baseAddresses) { }
+
+        public VinaGermanServiceHost(Type serviceType, params Uri[] baseAddresses)
+            : base(serviceType, baseAddresses) { }
+
+        protected override void InitializeRuntime()
+        {
+            RegisterImplementation();            
+            base.InitializeRuntime();
+        }
+
+        #region Register implementation
+        private void RegisterImplementation()
+        {            
+            Factory.Register<IUsernamePasswordValidator, CustomUsernamePasswordValidator>();
+
+            //business layer
+            Factory.Register<IUserBL, UserBL>();
+            Factory.Register<ICompanyBL, CompanyBL>();
+
+            //database layer
+            Factory.Register<IUserDB, UserDB>();
+            Factory.Register<ICompanyDB, CompanyDB>();
+            //EntityHelper.GetFactoryInstance().Register<ICategoryTypeDB, CategoryTypeDB>();
+            //EntityHelper.GetFactoryInstance().Register<IPersonnelDB, PersonnelDB>();
+        }      
+        #endregion
+    }
+}

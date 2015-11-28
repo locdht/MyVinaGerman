@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:box="clr-namespace:VinaGerman.DesktopApplication.Views"
+                    xmlns:conv="clr-namespace:VinaGerman.DesktopApplication.Utilities"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ControlTemplate x:Key="BaseView" TargetType="UserControl">
+        <ControlTemplate.Resources>
+            <conv:BoolToVisibilityConverter x:Key="bool2Visibility"/>            
+        </ControlTemplate.Resources>
+        <Border>
+            <Grid>
+                <ContentPresenter />
+                <box:OpacityBox Visibility="{Binding IsShow,Converter={StaticResource bool2Visibility}}" DataContext="{Binding BoxModel}"/>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+</ResourceDictionary>

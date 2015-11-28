@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A87468F7-E438-4155-9957-D984AA894C81}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VinaGerman.Service.Implementation</RootNamespace>
+    <AssemblyName>VinaGerman.Service.Implementation</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PortableIoC">
+      <HintPath>..\packages\PortableIoC.1.0.0\lib\net45\PortableIoC.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommonSvc.cs" />
+    <Compile Include="CompanySvc.cs" />
+    <Compile Include="CustomUsernamePasswordValidator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VinaGermanServiceHost.cs" />
+    <Compile Include="VinaGermanServiceHostFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VinaGerman.Business.Implementation\VinaGerman.Business.Implementation.csproj">
+      <Project>{e8468913-b9c9-4398-9634-6143ae42c4aa}</Project>
+      <Name>VinaGerman.Business.Implementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VinaGerman.Business\VinaGerman.Business.csproj">
+      <Project>{c37d026d-f17a-4e82-9bdb-38bafaeefd11}</Project>
+      <Name>VinaGerman.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VinaGerman.Database.Implementation\VinaGerman.Database.Implementation.csproj">
+      <Project>{71f2e1d0-09a5-4b90-b3a8-7cf5c4b31f16}</Project>
+      <Name>VinaGerman.Database.Implementation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VinaGerman.Database\VinaGerman.Database.csproj">
+      <Project>{b1d5f544-a628-4b3e-bd48-f05a3f808773}</Project>
+      <Name>VinaGerman.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VinaGerman.Entity\VinaGerman.Entity.csproj">
+      <Project>{964df490-2f97-4e7d-865c-58ecb8c03f18}</Project>
+      <Name>VinaGerman.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VinaGerman.Service\VinaGerman.Service.csproj">
+      <Project>{7e1b0b11-e899-4495-97f9-a1c63959309a}</Project>
+      <Name>VinaGerman.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VinaGerman.Wcf.Security\VinaGerman.Wcf.Security.csproj">
+      <Project>{0d9affaf-f005-4766-833d-7c829be6d8a5}</Project>
+      <Name>VinaGerman.Wcf.Security</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

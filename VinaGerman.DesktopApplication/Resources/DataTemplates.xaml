@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:view="clr-namespace:VinaGerman.DesktopApplication.Views"
+                    xmlns:userview="clr-namespace:VinaGerman.DesktopApplication.Views.UserViews"
+                    xmlns:boxviewmodel="clr-namespace:VinaGerman.DesktopApplication.ViewModels"
+                    xmlns:viewmodel="clr-namespace:VinaGerman.DesktopApplication.ViewModels.UserViews">
+    <DataTemplate DataType="{x:Type boxviewmodel:LoadingBoxViewModel}">
+        <view:LoadingBox/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type boxviewmodel:MessageBoxViewModel}">
+        <view:MessageBox/>
+    </DataTemplate>
+
+    <!-- Views -->
+    <DataTemplate DataType="{x:Type viewmodel:uvCompanyManagementViewModel}">
+        <userview:uvCompanyManagement/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:uvCompanyDetailViewModel}">
+        <userview:uvCompanyDetail/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:uvLogonViewModel}">
+        <userview:uvLogon/>
+    </DataTemplate>
+</ResourceDictionary>

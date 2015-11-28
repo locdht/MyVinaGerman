@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="VinaGerman.DesktopApplication.Views.MessageBox"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        MaxHeight="300"
+        Height="Auto" Width="500">
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="White" Opacity="1"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="5"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="{StaticResource BackColor}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="50"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Name="lblCaption" Grid.Row="0" Grid.Column="0" Style="{DynamicResource BaseHeaderLabel}" Content="{Binding Caption}"></Label>
+            <Image Name="imgIcon" Source="/Images/Info_50.png" Grid.Column="1" Grid.Row="0" Margin="3,3,0,3"></Image>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" MaxHeight="200" MinHeight="70" VerticalScrollBarVisibility="Auto">
+            <TextBlock  Margin="3,3,3,3" Name="lblMessage" Text="{Binding Message}" TextWrapping="Wrap" Background="White" Style="{StaticResource BaseTextBlock}"></TextBlock>
+        </ScrollViewer>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding WidthColumnYES}"></ColumnDefinition>
+                <ColumnDefinition Width="{Binding WidthColumnNO}"></ColumnDefinition>
+                <ColumnDefinition Width="{Binding WidthColumnOK}"></ColumnDefinition>
+                <ColumnDefinition Width="{Binding WidthColumnCANCEL}"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Name="btnYES" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.captionYes}" Background="{StaticResource BackColor}" Command="{Binding YesCommand}" Style="{StaticResource DialogButton}" Margin="5,0,5,0" Visibility="{Binding CanShowYES}"></Button>
+            <Button Grid.Column="1" Name="btnNO" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.captionNo}" Background="{StaticResource BackColor}" Command="{Binding NoCommand}" Style="{StaticResource DialogButton}" Margin="5,0,5,0" Visibility="{Binding CanShowNO}"></Button>
+            <Button Grid.Column="2" Name="btnOK" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.captionOK}" Background="{StaticResource BackColor}" Command="{Binding OkCommand}" Style="{StaticResource DialogButton}" Margin="5,0,5,0" Visibility="{Binding CanShowOK}"></Button>
+            <Button Grid.Column="3" Name="btnCANCEL" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.captionCancel}" Background="{StaticResource BackColor}" Command="{Binding CancelCommand}" Style="{StaticResource DialogButton}" Margin="5,0,5,0" Visibility="{Binding CanShowCANCEL}"></Button>
+        </Grid>
+    </Grid>
+</UserControl>

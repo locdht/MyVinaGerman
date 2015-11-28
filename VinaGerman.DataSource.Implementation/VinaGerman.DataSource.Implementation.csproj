@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{65EA2E0D-6D52-4520-A44E-3E2F19273148}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VinaGerman.DataSource.Implementation</RootNamespace>
+    <AssemblyName>VinaGerman.DataSource.Implementation</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PortableIoC">
+      <HintPath>..\packages\PortableIoC.1.0.0\lib\net45\PortableIoC.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseDS.cs" />
+    <Compile Include="CommonDS.cs" />
+    <Compile Include="CompanyDS.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VinaGerman.DataSource\VinaGerman.DataSource.csproj">
+      <Project>{c151c0a9-8316-4b1f-a72e-7b9181c8bd9d}</Project>
+      <Name>VinaGerman.DataSource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VinaGerman.Entity\VinaGerman.Entity.csproj">
+      <Project>{964df490-2f97-4e7d-865c-58ecb8c03f18}</Project>
+      <Name>VinaGerman.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VinaGerman.Service\VinaGerman.Service.csproj">
+      <Project>{7e1b0b11-e899-4495-97f9-a1c63959309a}</Project>
+      <Name>VinaGerman.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VinaGerman.Wcf.Security\VinaGerman.Wcf.Security.csproj">
+      <Project>{0d9affaf-f005-4766-833d-7c829be6d8a5}</Project>
+      <Name>VinaGerman.Wcf.Security</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>PortableIoC</id>
+    <version>1.0.0</version>
+    <title>Portable IoC</title>
+    <authors>Jeremy Likness</authors>
+    <owners>Jeremy Likness</owners>
+    <licenseUrl>https://portableioc.codeplex.com/license</licenseUrl>
+    <projectUrl>http://portableioc.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Portable IOC is a tiny (less than 200 lines of code) thread-safe and portable Inversion of Control container. It is designed to make it simple and easy to wire dependencies for client projects include various versions of the Windows Phone, the new Windows 8 Store apps, Silverlight, and will support the desktop as well. Features include dependency resolution, lifetime management, constructor and property injection, control over registration and multiple instance support.</description>
+    <summary>Portable IOC is a tiny thread-safe Inversion of Control container that is portable between Windows Phone, Windows Store (Windows 8), Silverlight, and .NET apps.</summary>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>2012 Jeremy Likness</copyright>
+    <language>en-US</language>
+    <tags>ioc di</tags>
+  </metadata>
+</package>
