@@ -42,6 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IArticleBL.cs" />
+    <Compile Include="IIndustryBL.cs" />
+    <Compile Include="IBusinessBL.cs" />
+    <Compile Include="ICategoryBL.cs" />
     <Compile Include="ICompanyBL.cs" />
     <Compile Include="IUserBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
