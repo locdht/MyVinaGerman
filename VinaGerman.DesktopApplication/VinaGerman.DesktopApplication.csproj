@@ -119,6 +119,10 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MessageBoxViewModel.cs" />
     <Compile Include="ViewModels\MessageToken.cs" />
+    <Compile Include="ViewModels\UserViews\uvArticleManagementViewModel.cs" />
+    <Compile Include="ViewModels\UserViews\uvIndustryManagementViewModel.cs" />
+    <Compile Include="ViewModels\UserViews\uvBusinessManagementViewModel.cs" />
+    <Compile Include="ViewModels\UserViews\uvCategoryManagementViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvBaseViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvCompanyDetailViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvCompanyManagementViewModel.cs" />
@@ -131,6 +135,18 @@
     </Compile>
     <Compile Include="Views\OpacityBox.xaml.cs">
       <DependentUpon>OpacityBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\uvArticleManagement.xaml.cs">
+      <DependentUpon>uvArticleManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\uvIndustryManagement.xaml.cs">
+      <DependentUpon>uvIndustryManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\uvBusinessManagement.xaml.cs">
+      <DependentUpon>uvBusinessManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\uvCategoryManagement.xaml.cs">
+      <DependentUpon>uvCategoryManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserViews\uvCompanyDetail.xaml.cs">
       <DependentUpon>uvCompanyDetail.xaml</DependentUpon>
@@ -184,6 +200,22 @@
     <Page Include="Views\OpacityBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\uvArticleManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserViews\uvIndustryManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserViews\uvBusinessManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserViews\uvCategoryManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\UserViews\uvCompanyDetail.xaml">
       <SubType>Designer</SubType>
@@ -293,6 +325,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Info_50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\category.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

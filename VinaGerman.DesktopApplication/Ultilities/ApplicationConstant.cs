@@ -9,6 +9,10 @@ namespace VinaGerman.DesktopApplication.Ultilities
     public enum enumView
     {
         Logon,
-        CompanyManagement
+        CompanyManagement,
+        CategoryManagement,
+        BusinessManagement,
+        IndustryManagement,
+        ArticleManagement
     }
 }

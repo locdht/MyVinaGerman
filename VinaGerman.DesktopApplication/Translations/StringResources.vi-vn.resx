@@ -138,8 +138,26 @@
   <data name="btnSearch" xml:space="preserve">
     <value>Tìm</value>
   </data>
+  <data name="captionArticleInfo" xml:space="preserve">
+    <value>Thông tin mặt hàng</value>
+  </data>
+  <data name="captionArticleList" xml:space="preserve">
+    <value>Danh sách mặt hàng</value>
+  </data>
+  <data name="captionBusinessInfo" xml:space="preserve">
+    <value>Thông tin lĩnh vực</value>
+  </data>
+  <data name="captionBusinessList" xml:space="preserve">
+    <value>Danh sách lĩnh vực</value>
+  </data>
   <data name="captionCancel" xml:space="preserve">
     <value>Hủy</value>
+  </data>
+  <data name="captionCategoryInfo" xml:space="preserve">
+    <value>Thông tin loại hàng hóa</value>
+  </data>
+  <data name="captionCategoryList" xml:space="preserve">
+    <value>Danh sách loại hàng hóa</value>
   </data>
   <data name="captionCompanyInfo" xml:space="preserve">
     <value>Thông tin công ty</value>
@@ -164,6 +182,12 @@
   </data>
   <data name="captionError" xml:space="preserve">
     <value>Lỗi</value>
+  </data>
+  <data name="captionIndustryInfo" xml:space="preserve">
+    <value>Thông tin ngành nghề</value>
+  </data>
+  <data name="captionIndustryList" xml:space="preserve">
+    <value>Danh sách ngành nghề</value>
   </data>
   <data name="captionInformation" xml:space="preserve">
     <value>Thông tin</value>
@@ -192,11 +216,23 @@
   <data name="captionYes" xml:space="preserve">
     <value>Đồng ý</value>
   </data>
+  <data name="hintArticleSearch" xml:space="preserve">
+    <value>Mã mặt hàng</value>
+  </data>
+  <data name="hintCategorySearch" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="hintCompanySearch" xml:space="preserve">
     <value>Tên công ty/Điện thoại/Mã số thuế</value>
   </data>
   <data name="lblAddress" xml:space="preserve">
     <value>Địa chỉ:</value>
+  </data>
+  <data name="lblArticleNo" xml:space="preserve">
+    <value>Mã mặt hàng:</value>
+  </data>
+  <data name="lblArticleUnit" xml:space="preserve">
+    <value>Đơn vị:</value>
   </data>
   <data name="lblCompanyCode" xml:space="preserve">
     <value>Mã công ty:</value>
@@ -206,6 +242,9 @@
   </data>
   <data name="lblCustomer" xml:space="preserve">
     <value>Khách hàng:</value>
+  </data>
+  <data name="lblDescription" xml:space="preserve">
+    <value>Mô tả:</value>
   </data>
   <data name="lblFreeTextSearch" xml:space="preserve">
     <value>Nội dung:</value>

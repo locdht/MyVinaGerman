@@ -18,7 +18,10 @@ namespace VinaGerman.DesktopApplication.ViewModels
     public class MainWindowViewModel : BaseViewModel
     {
         #region Properties
-
+        public uvBaseViewModel ArticleManagementModel { get; set; }
+        public uvBaseViewModel IndustryManagementModel { get; set; }
+        public uvBaseViewModel BusinessManagementModel { get; set; }
+        public uvBaseViewModel CategoryManagementModel { get; set; }
         public uvBaseViewModel CompanyManagementModel { get; set; }
         public uvBaseViewModel LogonModel { get; set; }         
 
@@ -84,6 +87,10 @@ namespace VinaGerman.DesktopApplication.ViewModels
             ModelQueue = new List<uvBaseViewModel>();
 
             CompanyManagementModel = new uvCompanyManagementViewModel(this) { MessengerID = enumView.CompanyManagement.ToString() };
+            CategoryManagementModel = new uvCategoryManagementViewModel(this) { MessengerID = enumView.CategoryManagement.ToString() };
+            BusinessManagementModel = new uvBusinessManagementViewModel(this) { MessengerID = enumView.BusinessManagement.ToString() };
+            IndustryManagementModel = new uvIndustryManagementViewModel(this) { MessengerID = enumView.IndustryManagement.ToString() };
+            ArticleManagementModel = new uvArticleManagementViewModel(this) { MessengerID = enumView.ArticleManagement.ToString() };
             LogonModel = new uvLogonViewModel(this) { MessengerID = enumView.Logon.ToString() };
             //check if user is authorized or not
             if (!ApplicationHelper.IsAuthenticated)
@@ -163,6 +170,7 @@ namespace VinaGerman.DesktopApplication.ViewModels
         {
             VinaGerman.Entity.Factory.Register<VinaGerman.DataSource.ICommonDS, VinaGerman.DataSource.Implementation.CommonDS>();
             VinaGerman.Entity.Factory.Register<VinaGerman.DataSource.ICompanyDS, VinaGerman.DataSource.Implementation.CompanyDS>();
+            VinaGerman.Entity.Factory.Register<VinaGerman.DataSource.IBaseDataDS, VinaGerman.DataSource.Implementation.BaseDataDS>();
         }       
         #endregion
 
@@ -179,8 +187,25 @@ namespace VinaGerman.DesktopApplication.ViewModels
         {
             switch (view)
             {
+                case enumView.ArticleManagement:
+                    CurrentModel = ArticleManagementModel;
+                    SendMessage(MessageToken.ReloadMessage, null, enumView.ArticleManagement.ToString());
+                    break;
+                case enumView.IndustryManagement:
+                    CurrentModel = IndustryManagementModel;
+                    SendMessage(MessageToken.ReloadMessage, null, enumView.IndustryManagement.ToString());
+                    break;
+                case enumView.BusinessManagement:
+                    CurrentModel = BusinessManagementModel;
+                    SendMessage(MessageToken.ReloadMessage, null, enumView.BusinessManagement.ToString());
+                    break;
+                case enumView.CategoryManagement:
+                    CurrentModel = CategoryManagementModel;
+                    SendMessage(MessageToken.ReloadMessage, null, enumView.CategoryManagement.ToString());
+                    break;
                 case enumView.CompanyManagement:
                     CurrentModel = CompanyManagementModel;
+                    SendMessage(MessageToken.ReloadMessage, null, enumView.CategoryManagement.ToString());
                     break;
                 case enumView.Logon:
                     CurrentModel = LogonModel;
