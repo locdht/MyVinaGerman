@@ -35,10 +35,17 @@ namespace VinaGerman.Service.Implementation
             //business layer
             Factory.Register<IUserBL, UserBL>();
             Factory.Register<ICompanyBL, CompanyBL>();
-
+            Factory.Register<ICategoryBL, CategoryBL>();
+            Factory.Register<IBusinessBL, BusinessBL>();
+            Factory.Register<IIndustryBL, IndustryBL>();
+            Factory.Register<IArticleBL, ArticleBL>();
             //database layer
             Factory.Register<IUserDB, UserDB>();
             Factory.Register<ICompanyDB, CompanyDB>();
+            Factory.Register<ICategoryDB, CategoryDB>();
+            Factory.Register<IBusinessDB, BusinessDB>();
+            Factory.Register<IIndustryDB, IndustryDB>();
+            Factory.Register<IArticleDB, ArticleDB>();
             //EntityHelper.GetFactoryInstance().Register<ICategoryTypeDB, CategoryTypeDB>();
             //EntityHelper.GetFactoryInstance().Register<IPersonnelDB, PersonnelDB>();
         }      
