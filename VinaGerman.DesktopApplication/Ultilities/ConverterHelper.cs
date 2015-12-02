@@ -333,309 +333,41 @@ namespace VinaGerman.DesktopApplication.Utilities
         }
     }    
 
-    //#region Addresses
+    public class Language2FirstDayOfWeek : IValueConverter
+    {
 
-    //public class AddressesStringConverter : IValueConverter
-    //{
-    //    public object Convert(object value, Type targetType,
-    //      object parameter, System.Globalization.CultureInfo culture)
-    //    {
-    //        if (value != null)
-    //        {
-    //            if (value is CompanyBase)
-    //            {
-    //                CompanyBase company = (CompanyBase)value;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value != null)
+            {
+                string sLanguage = "en-us";
+                if (value.GetType() == typeof(XmlLanguage))
+                {
+                    sLanguage = ((XmlLanguage)value).IetfLanguageTag.ToLower();
+                }
+                else if (value.GetType() == typeof(string))
+                {
+                    sLanguage = value.ToString().ToLower();
+                }
+                else if (value.GetType() == typeof(CultureInfo))
+                {
+                    sLanguage = ((CultureInfo)value).IetfLanguageTag.ToLower();
+                }
 
-    //                string addresses = string.Empty;
+                switch (sLanguage)
+                {
+                    case "en-us": return DayOfWeek.Sunday;
+                    default: return DayOfWeek.Monday;
+                }
+            }
+            return DayOfWeek.Monday;
+        }
 
-    //                if (!MethodExtension.IsNullOrIgnore(company.Address1))
-    //                {
-    //                    addresses += company.Address1;
-    //                }
-
-    //                if (!MethodExtension.IsNullOrIgnore(company.Address2))
-    //                {
-    //                    if (addresses == string.Empty)
-    //                    {
-    //                        addresses += company.Address2;
-    //                    }
-    //                    else
-    //                    {
-    //                        addresses += Environment.NewLine + company.Address2;
-    //                    }
-    //                }
-
-    //                return addresses;
-    //            }
-    //            else if (value is LocationBase)
-    //            {
-    //                LocationBase Location = (LocationBase)value;
-
-    //                string addresses = string.Empty;
-
-    //                if (!MethodExtension.IsNullOrIgnore(Location.Address1))
-    //                {
-    //                    addresses += Location.Address1;
-    //                }
-
-    //                if (!MethodExtension.IsNullOrIgnore(Location.Address2))
-    //                {
-    //                    if (addresses == string.Empty)
-    //                    {
-    //                        addresses += Location.Address2;
-    //                    }
-    //                    else
-    //                    {
-    //                        addresses += Environment.NewLine + Location.Address2;
-    //                    }
-    //                }
-
-    //                return addresses;
-    //            }
-    //        }
-
-    //        return "";
-    //    }
-
-    //    public object ConvertBack(object value, Type targetType,
-    //      object parameter, System.Globalization.CultureInfo culture)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
-
-    //#endregion
-
-    //#region Descriptions
-    //public class CategoryDescriptionsStringConverter : IValueConverter
-    //{
-    //    public object Convert(object value, Type targetType,
-    //      object parameter, System.Globalization.CultureInfo culture)
-    //    {
-    //        if (value != null)
-    //        {
-    //            if (value is ControlCategoryBase)
-    //            {
-    //                ControlCategoryBase obj = (ControlCategoryBase)value;
-
-    //                if (obj.ControlCategoryId == Constants.NULL_INT || obj.ControlCategoryId == Constants.IGNORE_VALUE_INT)
-    //                {
-    //                    return obj.Comment;
-    //                }
-    //                else
-    //                {
-    //                    return obj.Description + " - " + obj.Comment;
-    //                }                    
-    //            }
-    //        }
-
-    //        return string.Empty;
-    //    }
-
-    //    public object ConvertBack(object value, Type targetType,
-    //      object parameter, System.Globalization.CultureInfo culture)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
-
-    //public class CompanyDescriptionsStringConverter : IValueConverter
-    //{
-    //    public object Convert(object value, Type targetType,
-    //      object parameter, System.Globalization.CultureInfo culture)
-    //    {
-    //        if (value != null)
-    //        {
-    //            if (value is CompanyBase)
-    //            {
-    //                CompanyBase company = (CompanyBase)value;
-
-    //                return (MethodExtension.IsNullOrIgnore(company.ShortDescription) ? (MethodExtension.IsNullOrIgnore(company.Description) ? "" : company.Description) : (company.ShortDescription));
-    //            }
-    //        }
-
-    //        return string.Empty;
-    //    }
-
-    //    public object ConvertBack(object value, Type targetType,
-    //      object parameter, System.Globalization.CultureInfo culture)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
-    //public class DocumentTypeStringConverter : IValueConverter
-    //{
-    //    public object Convert(object value, Type targetType,
-    //     object parameter, System.Globalization.CultureInfo culture)
-    //    {
-    //        if (value is int)
-    //        {
-    //            switch ((int)value)
-    //            {
-    //                case (int)enumDocumentType.DOCUMENT_TYPE_CERTIFICATE:
-    //                    {
-    //                        return StringResources.DOCUMENT_TYPE_CERTIFICATE;
-    //                    }
-    //                case (int)enumDocumentType.DOCUMENT_TYPE_INSTRUCTIONS:
-    //                    {
-    //                        return StringResources.DOCUMENT_TYPE_INSTRUCTIONS;
-    //                    }
-    //                case (int)enumDocumentType.DOCUMENT_TYPE_CONTROL_DOCUMENTATION:
-    //                    {
-    //                        return StringResources.DOCUMENT_TYPE_CONTROL_DOCUMENTATION;
-    //                    }
-    //                case (int)enumDocumentType.DOCUMENT_TYPE_DECLARATION_OF_CONFORMITY:
-    //                    {
-    //                        return StringResources.DOCUMENT_TYPE_DECLARATION_OF_CONFORMITY;
-    //                    }
-    //                case (int)enumDocumentType.DOCUMENT_TYPE_JOB_REPORT:
-    //                    {
-    //                        return StringResources.DOCUMENT_TYPE_JOB_REPORT;
-    //                    }
-    //                case (int)enumDocumentType.DOCUMENT_TYPE_JOB_REPORT_DEVATION_ONLY:
-    //                    {
-    //                        return StringResources.DOCUMENT_TYPE_JOB_REPORT_DEVATION_ONLY;
-    //                    }
-    //                case (int)enumDocumentType.DOCUMENT_TYPE_OTHER:
-    //                    {
-    //                        return StringResources.DOCUMENT_TYPE_OTHER;
-    //                    }
-    //                case (int)enumDocumentType.DOCUMENT_TYPE_PICTURE:
-    //                    {
-    //                        return StringResources.DOCUMENT_TYPE_PICTURE;
-    //                    }
-    //                case (int)enumDocumentType.DOCUMENT_TYPE_PROJECTPAGE2:
-    //                    {
-    //                        return StringResources.DOCUMENT_TYPE_PROJECTPAGE2;
-    //                    }
-    //                case (int)enumDocumentType.DOCUMENT_TYPE_SERVICE_DOCUMENTATION:
-    //                    {
-    //                        return StringResources.DOCUMENT_TYPE_SERVICE_DOCUMENTATION;
-    //                    }
-    //                default:
-    //                    {
-    //                        return StringResources.DOCUMENT_TYPE_CONTROL_DOCUMENTATION;
-    //                    }
-    //            }
-    //        }
-    //        return string.Empty;
-    //    }
-    //    public object ConvertBack(object value, Type targetType,
-    //      object parameter, System.Globalization.CultureInfo culture)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
-
-    //public class DataValueStringConverter : IMultiValueConverter
-    //{
-    //    public object Convert(object[] value, Type targetType,
-    //     object parameter, System.Globalization.CultureInfo culture)
-    //    {
-    //        if (value[1] is int)
-    //        {
-    //            DataValueBase temp = (DataValueBase)value[1];
-    //            switch (temp.DataType)
-    //            {
-    //                case (int)enumDataType.TYPE_STRING_SHORT:
-    //                    {
-    //                        return temp.DataStringShort;
-    //                    }
-    //                case (int)enumDataType.TYPE_STRING_LONG:
-    //                    {
-    //                        return temp.DataStringLong;
-    //                    }
-    //                case (int)enumDataType.TYPE_INT:
-    //                    {
-    //                        return temp.DataInteger;
-    //                    }
-    //                case (int)enumDataType.TYPE_FLOAT:
-    //                    {
-    //                        return temp.DataFloat;
-    //                    }
-    //                default:
-    //                    {
-    //                        return temp.DataStringShort;
-    //                    }
-    //            }                
-    //        }
-    //        return string.Empty;
-    //    }
-    //    public object[] ConvertBack(object value, Type[] targetType,
-    //      object parameter, System.Globalization.CultureInfo culture)
-    //    {
-    //        DataValueBase temp = (DataValueBase)parameter;
-    //        switch (temp.DataType)
-    //        {
-    //            case (int)enumDataType.TYPE_INT:
-    //                {
-    //                    try
-    //                    {
-    //                        int.Parse(value.ToString());
-    //                    }
-    //                    catch
-    //                    {
-    //                        MessageBox.Show("Wrong value");
-    //                    }
-    //                    break;
-    //                }
-    //            case (int)enumDataType.TYPE_FLOAT:
-    //                {
-    //                    try
-    //                    {
-    //                        float.Parse(value.ToString());
-    //                    }
-    //                    catch
-    //                    {
-    //                        MessageBox.Show("Wrong value");
-    //                    }
-    //                    break;
-    //                }
-    //            default:
-    //                {
-    //                    break;
-    //                }
-    //        }
-    //        string[] splitValues = ((string)value).Split(' ');
-    //        return splitValues;
-    //    }
-    //}
-
-    //public class Language2FirstDayOfWeek : IValueConverter
-    //{
-
-    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    //    {
-    //        if (value != null)
-    //        {
-    //            string sLanguage = "en-us";
-    //            if (value.GetType() == typeof(XmlLanguage))
-    //            {
-    //               sLanguage = ((XmlLanguage)value).IetfLanguageTag.ToLower();
-    //            }
-    //            else if (value.GetType() == typeof(string))
-    //            {
-    //                sLanguage = value.ToString().ToLower();
-    //            }
-    //            else if (value.GetType() == typeof(CultureInfo))
-    //            {
-    //                sLanguage = ((CultureInfo)value).IetfLanguageTag.ToLower();
-    //            }
-
-    //            switch (sLanguage)
-    //            {
-    //                case "en-us": return DayOfWeek.Sunday;
-    //                default: return DayOfWeek.Monday;
-    //            }
-    //        }
-    //        return DayOfWeek.Monday;
-    //    }
-
-    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     //public class Status2BooleanConverter : IValueConverter
     //{

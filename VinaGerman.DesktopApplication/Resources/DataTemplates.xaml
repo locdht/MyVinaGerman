@@ -12,6 +12,12 @@
     </DataTemplate>
 
     <!-- Views -->
+    <DataTemplate DataType="{x:Type viewmodel:uvPurchaseOrderDetailViewModel}">
+        <userview:uvPurchaseOrderDetail/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:uvPurchaseOrderManagementViewModel}">
+        <userview:uvPurchaseOrderManagement/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodel:uvArticleManagementViewModel}">
         <userview:uvArticleManagement/>
     </DataTemplate>
@@ -32,5 +38,5 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodel:uvLogonViewModel}">
         <userview:uvLogon/>
-    </DataTemplate>
+    </DataTemplate>    
 </ResourceDictionary>

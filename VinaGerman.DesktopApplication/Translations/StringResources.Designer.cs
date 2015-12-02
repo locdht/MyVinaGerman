@@ -430,11 +430,29 @@ namespace VinaGerman.DesktopApplication.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Business:.
+        /// </summary>
+        public static string lblBusiness {
+            get {
+                return ResourceManager.GetString("lblBusiness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Category:.
         /// </summary>
         public static string lblCategory {
             get {
                 return ResourceManager.GetString("lblCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commission:.
+        /// </summary>
+        public static string lblCommission {
+            get {
+                return ResourceManager.GetString("lblCommission", resourceCulture);
             }
         }
         
@@ -457,6 +475,15 @@ namespace VinaGerman.DesktopApplication.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contact:.
+        /// </summary>
+        public static string lblContact {
+            get {
+                return ResourceManager.GetString("lblContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customer:.
         /// </summary>
         public static string lblCustomer {
@@ -475,11 +502,47 @@ namespace VinaGerman.DesktopApplication.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Employee:.
+        /// </summary>
+        public static string lblEmployee {
+            get {
+                return ResourceManager.GetString("lblEmployee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Free text:.
         /// </summary>
         public static string lblFreeTextSearch {
             get {
                 return ResourceManager.GetString("lblFreeTextSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Industry:.
+        /// </summary>
+        public static string lblIndustry {
+            get {
+                return ResourceManager.GetString("lblIndustry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order date:.
+        /// </summary>
+        public static string lblOrderDate {
+            get {
+                return ResourceManager.GetString("lblOrderDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order number:.
+        /// </summary>
+        public static string lblOrderNumber {
+            get {
+                return ResourceManager.GetString("lblOrderNumber", resourceCulture);
             }
         }
         
@@ -507,6 +570,33 @@ namespace VinaGerman.DesktopApplication.Translations {
         public static string lblPort {
             get {
                 return ResourceManager.GetString("lblPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price:.
+        /// </summary>
+        public static string lblPrice {
+            get {
+                return ResourceManager.GetString("lblPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity:.
+        /// </summary>
+        public static string lblQuantity {
+            get {
+                return ResourceManager.GetString("lblQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remaining quantity:.
+        /// </summary>
+        public static string lblRemainQuantity {
+            get {
+                return ResourceManager.GetString("lblRemainQuantity", resourceCulture);
             }
         }
         

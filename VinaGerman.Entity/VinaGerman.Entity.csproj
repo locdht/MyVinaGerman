@@ -47,7 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
-    <Compile Include="BusinessEntity\ArticleRelationEntity.cs" />
+    <Compile Include="BusinessEntity\ArticleRelationEntity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BusinessEntity\LoanEntity.cs" />
+    <Compile Include="BusinessEntity\OrderlineEntity.cs" />
     <Compile Include="DatabaseEntity\ArticleEntity.cs" />
     <Compile Include="DatabaseEntity\BusinessEntity.cs" />
     <Compile Include="DatabaseEntity\CategoryEntity.cs" />

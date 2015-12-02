@@ -240,8 +240,14 @@
   <data name="lblArticleUnit" xml:space="preserve">
     <value>Đơn vị:</value>
   </data>
+  <data name="lblBusiness" xml:space="preserve">
+    <value>Lĩnh vực:</value>
+  </data>
   <data name="lblCategory" xml:space="preserve">
     <value>Loại mặt hàng:</value>
+  </data>
+  <data name="lblCommission" xml:space="preserve">
+    <value>Chiết khấu:</value>
   </data>
   <data name="lblCompanyCode" xml:space="preserve">
     <value>Mã công ty:</value>
@@ -249,14 +255,29 @@
   <data name="lblCompanyName" xml:space="preserve">
     <value>Tên công ty:</value>
   </data>
+  <data name="lblContact" xml:space="preserve">
+    <value>Người liên hệ:</value>
+  </data>
   <data name="lblCustomer" xml:space="preserve">
     <value>Khách hàng:</value>
   </data>
   <data name="lblDescription" xml:space="preserve">
     <value>Mô tả:</value>
   </data>
+  <data name="lblEmployee" xml:space="preserve">
+    <value>Nhân viên:</value>
+  </data>
   <data name="lblFreeTextSearch" xml:space="preserve">
     <value>Nội dung:</value>
+  </data>
+  <data name="lblIndustry" xml:space="preserve">
+    <value>Ngành nghề:</value>
+  </data>
+  <data name="lblOrderDate" xml:space="preserve">
+    <value>Ngày đặt hàng:</value>
+  </data>
+  <data name="lblOrderNumber" xml:space="preserve">
+    <value>Mã đơn đặt hàng:</value>
   </data>
   <data name="lblPassword" xml:space="preserve">
     <value>Mật khẩu:</value>
@@ -266,6 +287,15 @@
   </data>
   <data name="lblPort" xml:space="preserve">
     <value>Cổng:</value>
+  </data>
+  <data name="lblPrice" xml:space="preserve">
+    <value>Giá:</value>
+  </data>
+  <data name="lblQuantity" xml:space="preserve">
+    <value>Số lượng:</value>
+  </data>
+  <data name="lblRemainQuantity" xml:space="preserve">
+    <value>Số lượng tồn kho:</value>
   </data>
   <data name="lblServer" xml:space="preserve">
     <value>Máy chủ:</value>

@@ -18,6 +18,8 @@ namespace VinaGerman.DesktopApplication.ViewModels
     public class MainWindowViewModel : BaseViewModel
     {
         #region Properties
+        public uvBaseViewModel PurchaseOrderDetailModel { get; set; }
+        public uvBaseViewModel PurchaseOrderManagementModel { get; set; }
         public uvBaseViewModel ArticleManagementModel { get; set; }
         public uvBaseViewModel IndustryManagementModel { get; set; }
         public uvBaseViewModel BusinessManagementModel { get; set; }
@@ -62,7 +64,7 @@ namespace VinaGerman.DesktopApplication.ViewModels
 
         public MainWindowViewModel()
         {
-            ControlHelper.ApplyLanguage("vi-vn");
+            ControlHelper.ApplyLanguage(ApplicationHelper.Language);
 
             App.StartupScreen.SetMessage(StringResources.msgLoading);            
 
@@ -91,6 +93,8 @@ namespace VinaGerman.DesktopApplication.ViewModels
             BusinessManagementModel = new uvBusinessManagementViewModel(this) { MessengerID = enumView.BusinessManagement.ToString() };
             IndustryManagementModel = new uvIndustryManagementViewModel(this) { MessengerID = enumView.IndustryManagement.ToString() };
             ArticleManagementModel = new uvArticleManagementViewModel(this) { MessengerID = enumView.ArticleManagement.ToString() };
+            PurchaseOrderManagementModel = new uvPurchaseOrderManagementViewModel(this) { MessengerID = enumView.PurchaseOrderManagement.ToString() };
+            PurchaseOrderDetailModel = new uvPurchaseOrderDetailViewModel(this) { MessengerID = enumView.PurchaseOrderDetail.ToString() };
             LogonModel = new uvLogonViewModel(this) { MessengerID = enumView.Logon.ToString() };
             //check if user is authorized or not
             if (!ApplicationHelper.IsAuthenticated)
@@ -187,6 +191,14 @@ namespace VinaGerman.DesktopApplication.ViewModels
         {
             switch (view)
             {
+                case enumView.PurchaseOrderDetail:
+                    CurrentModel = PurchaseOrderDetailModel;
+                    SendMessage(MessageToken.ReloadMessage, null, enumView.PurchaseOrderDetail.ToString());
+                    break;
+                case enumView.PurchaseOrderManagement:
+                    CurrentModel = PurchaseOrderManagementModel;
+                    SendMessage(MessageToken.ReloadMessage, null, enumView.PurchaseOrderManagement.ToString());
+                    break;
                 case enumView.ArticleManagement:
                     CurrentModel = ArticleManagementModel;
                     SendMessage(MessageToken.ReloadMessage, null, enumView.ArticleManagement.ToString());

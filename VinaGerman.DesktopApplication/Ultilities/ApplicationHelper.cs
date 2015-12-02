@@ -32,7 +32,20 @@ namespace VinaGerman.DesktopApplication.Ultilities
                 Properties.Settings.Default.UserName = value;
                 Properties.Settings.Default.Save();
             }
-        }        
+        }
+
+        public static string Language
+        {
+            get
+            {
+                return Properties.Settings.Default.Language;
+            }
+            set
+            {
+                Properties.Settings.Default.Language = value;
+                Properties.Settings.Default.Save();
+            }
+        }    
         public static bool IsAuthenticated { get; set; }
         public static UserProfileEntity CurrentUserProfile { get; set; }
     }
