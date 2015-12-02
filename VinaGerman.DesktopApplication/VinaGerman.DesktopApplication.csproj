@@ -119,8 +119,8 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MessageBoxViewModel.cs" />
     <Compile Include="ViewModels\MessageToken.cs" />
-    <Compile Include="ViewModels\UserViews\uvDepartmentManagementViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvArticleManagementViewModel.cs" />
+    <Compile Include="ViewModels\UserViews\uvDepartmentManagementViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvIndustryManagementViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvBusinessManagementViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvCategoryManagementViewModel.cs" />
@@ -220,8 +220,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserViews\uvDepartmentManagement.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserViews\uvPurchaseOrderDetail.xaml">
       <SubType>Designer</SubType>

@@ -43,8 +43,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="BaseDataDS.cs" />
+  <ItemGroup>    
     <Compile Include="BaseDS.cs" />
     <Compile Include="CommonDS.cs" />
     <Compile Include="CompanyDS.cs" />
