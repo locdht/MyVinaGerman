@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="CommonSvc.cs" />
     <Compile Include="CompanySvc.cs" />
+    <Compile Include="BaseDataSvc.cs" />
     <Compile Include="CustomUsernamePasswordValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VinaGermanServiceHost.cs" />

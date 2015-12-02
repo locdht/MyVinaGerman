@@ -86,6 +86,40 @@ namespace VinaGerman.Service.Implementation
             return Factory.Resolve<IArticleBL>().DeleteArticle(entityObject);
         }
         #endregion
+
+        #region Department
+        public List<DepartmentEntity> SearchDepartment(DepartmentSearchEntity searchObject)
+        {
+            return Factory.Resolve<IDepartmentBL>().SearchDepartment(searchObject);
+        }
+
+        public DepartmentEntity AddOrUpdateDepartment(DepartmentEntity entityObject)
+        {
+            return Factory.Resolve<IDepartmentBL>().AddOrUpdateDepartment(entityObject);
+        }
+
+        public bool DeleteDepartment(DepartmentEntity entityObject)
+        {
+            return Factory.Resolve<IDepartmentBL>().DeleteDepartment(entityObject);
+        }
+        #endregion
+
+        #region Location
+        public List<LocationEntity> SearchLocation(LocationSearchEntity searchObject)
+        {
+            return Factory.Resolve<ILocationBL>().SearchLocation(searchObject);
+        }
+
+        public LocationEntity AddOrUpdateLocation(LocationEntity entityObject)
+        {
+            return Factory.Resolve<ILocationBL>().AddOrUpdateLocation(entityObject);
+        }
+
+        public bool DeleteLocation(LocationEntity entityObject)
+        {
+            return Factory.Resolve<ILocationBL>().DeleteLocation(entityObject);
+        }
+        #endregion
         public void Dispose()
         {
             //throw new NotImplementedException();

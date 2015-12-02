@@ -47,13 +47,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Oracle.ManagedDataAccess, Version=4.121.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\odp.net.managed.121.1.2\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="PortableIoC">
-      <HintPath>..\..\..\packages\PortableIoC.1.0.0\lib\portable-net4+sl4+wp7+win8\PortableIoC.dll</HintPath>
+      <HintPath>..\packages\PortableIoC.1.0.0\lib\net45\PortableIoC.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.IdentityModel" />
@@ -79,6 +74,7 @@
   <ItemGroup>
     <Content Include="Company.svc" />
     <Content Include="Common.svc" />
+    <Content Include="BaseData.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

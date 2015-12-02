@@ -115,6 +115,30 @@ namespace VinaGerman.DataSource.Implementation
             return result;
         }
         #endregion
-    
+
+        #region Department
+        public List<DepartmentEntity> SearchDepartment(DepartmentSearchEntity searchObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.SearchDepartment(searchObject);
+            channel.Dispose();
+            return result;
+        }
+        public DepartmentEntity AddOrUpdateDepartment(DepartmentEntity entityObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.AddOrUpdateDepartment(entityObject);
+            channel.Dispose();
+            return result;
+        }
+        public bool DeleteDepartment(DepartmentEntity entityObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.DeleteDepartment(entityObject);
+            channel.Dispose();
+            return result;
+        }
+        #endregion
+
     }
 }

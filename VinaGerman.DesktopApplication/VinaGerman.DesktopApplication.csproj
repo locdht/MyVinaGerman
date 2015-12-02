@@ -119,6 +119,7 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MessageBoxViewModel.cs" />
     <Compile Include="ViewModels\MessageToken.cs" />
+    <Compile Include="ViewModels\UserViews\uvDepartmentManagementViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvArticleManagementViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvIndustryManagementViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvBusinessManagementViewModel.cs" />
@@ -135,6 +136,9 @@
     </Compile>
     <Compile Include="Views\OpacityBox.xaml.cs">
       <DependentUpon>OpacityBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\uvDepartmentManagement.xaml.cs">
+      <DependentUpon>uvDepartmentManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserViews\uvArticleManagement.xaml.cs">
       <DependentUpon>uvArticleManagement.xaml</DependentUpon>
@@ -200,6 +204,10 @@
     <Page Include="Views\OpacityBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\uvDepartmentManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\UserViews\uvArticleManagement.xaml">
       <Generator>MSBuild:Compile</Generator>

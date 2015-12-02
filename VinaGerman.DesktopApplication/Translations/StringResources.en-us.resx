@@ -177,6 +177,12 @@
   <data name="captionCustomerList" xml:space="preserve">
     <value>Customer list</value>
   </data>
+  <data name="captionDepartmentInfo" xml:space="preserve">
+    <value>Department information</value>
+  </data>
+  <data name="captionDepartmentList" xml:space="preserve">
+    <value>Department List</value>
+  </data>
   <data name="captionDetail" xml:space="preserve">
     <value>Detail</value>
   </data>
@@ -224,6 +230,9 @@
   </data>
   <data name="hintCompanySearch" xml:space="preserve">
     <value>Company name/Phone/Tax Code</value>
+  </data>
+  <data name="hintDepartmentSearch" xml:space="preserve">
+    <value>Phone/Description</value>
   </data>
   <data name="lblAddress" xml:space="preserve">
     <value>Address:</value>

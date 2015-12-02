@@ -12,6 +12,9 @@
     </DataTemplate>
 
     <!-- Views -->
+    <DataTemplate DataType="{x:Type viewmodel:uvDepartmentManagementViewModel}">
+        <userview:uvDepartmentManagement/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodel:uvArticleManagementViewModel}">
         <userview:uvArticleManagement/>
     </DataTemplate>

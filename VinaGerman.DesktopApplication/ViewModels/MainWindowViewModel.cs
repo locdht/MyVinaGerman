@@ -18,6 +18,7 @@ namespace VinaGerman.DesktopApplication.ViewModels
     public class MainWindowViewModel : BaseViewModel
     {
         #region Properties
+        public uvBaseViewModel DepartmentManagementModel { get; set; }
         public uvBaseViewModel ArticleManagementModel { get; set; }
         public uvBaseViewModel IndustryManagementModel { get; set; }
         public uvBaseViewModel BusinessManagementModel { get; set; }
@@ -91,6 +92,7 @@ namespace VinaGerman.DesktopApplication.ViewModels
             BusinessManagementModel = new uvBusinessManagementViewModel(this) { MessengerID = enumView.BusinessManagement.ToString() };
             IndustryManagementModel = new uvIndustryManagementViewModel(this) { MessengerID = enumView.IndustryManagement.ToString() };
             ArticleManagementModel = new uvArticleManagementViewModel(this) { MessengerID = enumView.ArticleManagement.ToString() };
+            DepartmentManagementModel = new uvDepartmentManagementViewModel(this) { MessengerID = enumView.DepartmentManagement.ToString() };
             LogonModel = new uvLogonViewModel(this) { MessengerID = enumView.Logon.ToString() };
             //check if user is authorized or not
             if (!ApplicationHelper.IsAuthenticated)
@@ -187,6 +189,10 @@ namespace VinaGerman.DesktopApplication.ViewModels
         {
             switch (view)
             {
+                case enumView.DepartmentManagement:
+                    CurrentModel = DepartmentManagementModel;
+                    SendMessage(MessageToken.ReloadMessage, null, enumView.DepartmentManagement.ToString());
+                    break;
                 case enumView.ArticleManagement:
                     CurrentModel = ArticleManagementModel;
                     SendMessage(MessageToken.ReloadMessage, null, enumView.ArticleManagement.ToString());

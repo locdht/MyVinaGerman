@@ -34,5 +34,11 @@ namespace VinaGerman.DataSource
         ArticleEntity AddOrUpdateArticle(ArticleEntity entityObject);
         bool DeleteArticle(ArticleEntity entityObject);
         #endregion
+
+        #region Department
+        List<DepartmentEntity> SearchDepartment(DepartmentSearchEntity searchObject);
+        DepartmentEntity AddOrUpdateDepartment(DepartmentEntity entityObject);
+        bool DeleteDepartment(DepartmentEntity entityObject);
+        #endregion
     }
 }

@@ -177,6 +177,12 @@
   <data name="captionCustomerList" xml:space="preserve">
     <value>Danh sách khách hàng</value>
   </data>
+  <data name="captionDepartmentInfo" xml:space="preserve">
+    <value>Thông tin bộ phận</value>
+  </data>
+  <data name="captionDepartmentList" xml:space="preserve">
+    <value>Danh sách bộ phận</value>
+  </data>
   <data name="captionDetail" xml:space="preserve">
     <value>Chi tiết</value>
   </data>
@@ -224,6 +230,9 @@
   </data>
   <data name="hintCompanySearch" xml:space="preserve">
     <value>Tên công ty/Điện thoại/Mã số thuế</value>
+  </data>
+  <data name="hintDepartmentSearch" xml:space="preserve">
+    <value>Điện thoại/Mô tả</value>
   </data>
   <data name="lblAddress" xml:space="preserve">
     <value>Địa chỉ:</value>

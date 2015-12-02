@@ -48,5 +48,23 @@ namespace VinaGerman.Service
         [OperationContract]
         bool DeleteArticle(ArticleEntity entityObject);
         #endregion
+
+        #region Department
+        [OperationContract]
+        List<DepartmentEntity> SearchDepartment(DepartmentSearchEntity searchObject);
+        [OperationContract]
+        DepartmentEntity AddOrUpdateDepartment(DepartmentEntity entityObject);
+        [OperationContract]
+        bool DeleteDepartment(DepartmentEntity entityObject);
+        #endregion
+
+        #region Location
+        [OperationContract]
+        List<LocationEntity> SearchLocation(LocationSearchEntity searchObject);
+        [OperationContract]
+        LocationEntity AddOrUpdateLocation(LocationEntity entityObject);
+        [OperationContract]
+        bool DeleteLocation(LocationEntity entityObject);
+        #endregion
     }
 }
