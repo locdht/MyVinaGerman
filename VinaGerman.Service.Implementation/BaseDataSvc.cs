@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VinaGerman.Business;
 using VinaGerman.Entity;
+using VinaGerman.Entity.BusinessEntity;
 using VinaGerman.Entity.DatabaseEntity;
 using VinaGerman.Entity.SearchEntity;
 using VinaGerman.Wcf.Security;
@@ -84,6 +85,18 @@ namespace VinaGerman.Service.Implementation
         public bool DeleteArticle(ArticleEntity entityObject)
         {
             return Factory.Resolve<IArticleBL>().DeleteArticle(entityObject);
+        }
+        public List<ArticleRelationEntity> GetArticleRelationsForArticle(ArticleEntity searchObject)
+        {
+            return Factory.Resolve<IArticleBL>().GetArticleRelationsForArticle(searchObject);
+        }
+        public ArticleRelationEntity AddOrUpdateArticleRelation(ArticleRelationEntity entityObject)
+        {
+            return Factory.Resolve<IArticleBL>().AddOrUpdateArticleRelation(entityObject);
+        }
+        public bool DeleteArticleRelation(ArticleRelationEntity entityObject)
+        {
+            return Factory.Resolve<IArticleBL>().DeleteArticleRelation(entityObject);
         }
         #endregion
 

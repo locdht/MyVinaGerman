@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             Template="{DynamicResource BaseView}"
+             Template="{DynamicResource BaseView}" Margin="5,5,5,5"
              xmlns:helper="clr-namespace:VinaGerman.DesktopApplication.Utilities" 
              xmlns:wm="clr-namespace:VinaGerman.DesktopApplication.Utilities.Watermark" 
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
@@ -100,7 +100,7 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn CellStyle="{DynamicResource GridHeaderSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False" >
+                            <DataGridTemplateColumn Width="60" CellStyle="{DynamicResource GridHeaderSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Grid>

@@ -5,11 +5,19 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VinaGerman.Entity.DatabaseEntity
+namespace VinaGerman.Entity.BusinessEntity
 {
-    [DataContract]
-    public class ArticleEntity : VinaGerman.Entity.BaseEntity
-    {        
+    public class LoanEntity : VinaGerman.Entity.BaseEntity
+    {
+        [DataMember]
+        public int LoanId { get; set; }
+        [DataMember]
+        public int OrderId { get; set; }
+        [DataMember]
+        public int Quantity { get; set; }
+        [DataMember]
+        public int RemainingQuantity { get; set; }
+
         [DataMember]
         public int ArticleId { get; set; }
 

@@ -47,25 +47,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
+    <Compile Include="BusinessEntity\ArticleRelationEntity.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BusinessEntity\LoanEntity.cs" />
+    <Compile Include="BusinessEntity\OrderlineEntity.cs" />
+    <Compile Include="DatabaseEntity\ArticleEntity.cs" />
+    <Compile Include="DatabaseEntity\BusinessEntity.cs" />
+    <Compile Include="DatabaseEntity\CategoryEntity.cs" />
     <Compile Include="DatabaseEntity\CompanyEntity.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DatabaseEntity\ContactEntity.cs" />
     <Compile Include="DatabaseEntity\CategoryEntity.cs" />
     <Compile Include="DatabaseEntity\BusinessEntity.cs" />
     <Compile Include="DatabaseEntity\ArticleEntity.cs" />
-    <Compile Include="DatabaseEntity\LocationEntity.cs" />
     <Compile Include="DatabaseEntity\DepartmentEntity.cs" />
+    <Compile Include="DatabaseEntity\LocationEntity.cs" />
     <Compile Include="DatabaseEntity\IndustryEntity.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="DatabaseEntity\UserAccountEntity.cs" />
     <Compile Include="BusinessEntity\UserProfileEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchEntity\ArticleSearchEntity.cs" />
+    <Compile Include="SearchEntity\BusinessSearchEntity.cs" />
+    <Compile Include="SearchEntity\CategorySearchEntity.cs" />
     <Compile Include="SearchEntity\CompanySearchEntity.cs" />
     <Compile Include="SearchEntity\CategorySearchEntity.cs" />
     <Compile Include="SearchEntity\BusinessSearchEntity.cs" />
     <Compile Include="SearchEntity\ArticleSearchEntity.cs" />
-    <Compile Include="SearchEntity\LocationSearchEntity.cs" />
     <Compile Include="SearchEntity\DepartmentSearchEntity.cs" />
+    <Compile Include="SearchEntity\LocationSearchEntity.cs" />
     <Compile Include="SearchEntity\IndustrySearchEntity.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

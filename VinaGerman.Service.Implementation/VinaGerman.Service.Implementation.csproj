@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseDataSvc.cs" />
     <Compile Include="CommonSvc.cs" />
     <Compile Include="CompanySvc.cs" />
     <Compile Include="BaseDataSvc.cs" />

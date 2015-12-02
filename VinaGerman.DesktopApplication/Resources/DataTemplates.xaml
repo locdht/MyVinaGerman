@@ -15,6 +15,12 @@
     <DataTemplate DataType="{x:Type viewmodel:uvDepartmentManagementViewModel}">
         <userview:uvDepartmentManagement/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:uvPurchaseOrderDetailViewModel}">
+        <userview:uvPurchaseOrderDetail/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:uvPurchaseOrderManagementViewModel}">
+        <userview:uvPurchaseOrderManagement/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type viewmodel:uvArticleManagementViewModel}">
         <userview:uvArticleManagement/>
     </DataTemplate>

@@ -128,6 +128,12 @@
     <Compile Include="ViewModels\UserViews\uvCompanyDetailViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvCompanyManagementViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvLogonViewModel.cs" />
+    <Compile Include="ViewModels\UserViews\uvPurchaseOrderDetailViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\UserViews\uvPurchaseOrderManagementViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Views\LoadingBox.xaml.cs">
       <DependentUpon>LoadingBox.xaml</DependentUpon>
     </Compile>
@@ -139,6 +145,10 @@
     </Compile>
     <Compile Include="Views\UserViews\uvDepartmentManagement.xaml.cs">
       <DependentUpon>uvDepartmentManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\uvPurchaseOrderDetail.xaml.cs">
+      <DependentUpon>uvPurchaseOrderDetail.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\UserViews\uvArticleManagement.xaml.cs">
       <DependentUpon>uvArticleManagement.xaml</DependentUpon>
@@ -160,6 +170,10 @@
     </Compile>
     <Compile Include="Views\UserViews\uvLogon.xaml.cs">
       <DependentUpon>uvLogon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\uvPurchaseOrderManagement.xaml.cs">
+      <DependentUpon>uvPurchaseOrderManagement.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -209,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\UserViews\uvPurchaseOrderDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserViews\uvArticleManagement.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -234,6 +252,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserViews\uvLogon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\uvPurchaseOrderManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -336,6 +358,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\category.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\remove.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

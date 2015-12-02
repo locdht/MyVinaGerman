@@ -71,63 +71,10 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 }
             }
         }       
-
-        public virtual void BeforeGoBack()
-        {
-            if (IsChanged)
-            {
-                MessageBoxResult confirm = ShowMessageBox(StringResources.captionConfirm, StringResources.msgConfirmSave, MessageBoxButton.YesNoCancel);
-                if (confirm == MessageBoxResult.Cancel)
-                {
-                    return;
-                }
-                if (confirm == MessageBoxResult.Yes)
-                {
-                    if (Validate())
-                    {
-                        System.Threading.ThreadPool.QueueUserWorkItem(delegate
-                        {
-                            try
-                            {
-                                ShowLoading(StringResources.captionInformation, StringResources.msgSaving);
-                                bool isSuccess = Save();
-                                HideLoading();
-                                if (isSuccess)
-                                {
-                                    if (Application.Current != null && Application.Current.Dispatcher != null)
-                                    {
-                                        Application.Current.Dispatcher.Invoke(new Action(() =>
-                                        {
-                                            MainWindowModel.GoBack();
-                                            AfterGoBack();
-                                        }));
-                                    }
-                                }
-
-                            }
-                            catch (Exception ex)
-                            {
-                                HideLoading();
-                                ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
-                            }
-                        });                        
-                    }
-                }
-                else
-                {
-                    MainWindowModel.GoBack();
-                    AfterGoBack();                    
-                }
-            }
-            else
-            {
-                MainWindowModel.GoBack();
-                AfterGoBack();                
-            }            
-        }
+        
         public virtual void GoBack()
         {
-            BeforeGoBack();
+            
         }
         public virtual void AfterGoBack()
         {
@@ -202,8 +149,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
 
-        public virtual bool Validate() { return true; }        
-        public virtual bool Save() { return true; }        
+        //public virtual bool Validate() { return true; }        
+        //public virtual bool Save() { return true; }        
         #endregion
 
 

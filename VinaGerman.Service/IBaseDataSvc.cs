@@ -47,6 +47,12 @@ namespace VinaGerman.Service
         ArticleEntity AddOrUpdateArticle(ArticleEntity entityObject);
         [OperationContract]
         bool DeleteArticle(ArticleEntity entityObject);
+        [OperationContract]
+        List<ArticleRelationEntity> GetArticleRelationsForArticle(ArticleEntity searchObject);
+        [OperationContract]
+        ArticleRelationEntity AddOrUpdateArticleRelation(ArticleRelationEntity entityObject);
+        [OperationContract]
+        bool DeleteArticleRelation(ArticleRelationEntity entityObject);
         #endregion
 
         #region Department

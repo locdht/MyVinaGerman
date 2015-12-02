@@ -51,13 +51,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticleDB.cs" />
     <Compile Include="BaseDB.cs" />
+    <Compile Include="BusinessDB.cs" />
+    <Compile Include="CategoryDB.cs" />
     <Compile Include="CompanyDB.cs" />
     <Compile Include="CategoryDB.cs" />
     <Compile Include="BusinessDB.cs" />
     <Compile Include="ArticleDB.cs" />
-    <Compile Include="LocationDB.cs" />
     <Compile Include="DepartmentDB.cs" />
+    <Compile Include="LocationDB.cs" />
+    <Compile Include="IndustryDB.cs" />
     <Compile Include="IndustryDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserDB.cs" />

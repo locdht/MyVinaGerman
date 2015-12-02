@@ -42,8 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDepartmentBL.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ILocationBL.cs" />
-    <Compile Include="IDepartmentBL.cs" />
     <Compile Include="IArticleBL.cs" />
     <Compile Include="IIndustryBL.cs" />
     <Compile Include="IBusinessBL.cs" />

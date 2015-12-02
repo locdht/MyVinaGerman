@@ -14,5 +14,8 @@ namespace VinaGerman.Business
         List<ArticleEntity> SearchArticle(ArticleSearchEntity searchObject);
         ArticleEntity AddOrUpdateArticle(ArticleEntity entityObject);
         bool DeleteArticle(ArticleEntity entityObject);
+        List<ArticleRelationEntity> GetArticleRelationsForArticle(ArticleEntity searchObject);
+        ArticleRelationEntity AddOrUpdateArticleRelation(ArticleRelationEntity entityObject);
+        bool DeleteArticleRelation(ArticleRelationEntity entityObject);
     }
 }

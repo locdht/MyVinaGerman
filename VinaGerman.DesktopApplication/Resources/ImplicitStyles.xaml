@@ -151,6 +151,7 @@
         <Setter Property="FontWeight" Value="SemiBold" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="4,0,0,0" />
+        <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
         <Style.Triggers>
             <Trigger Property="Control.IsEnabled" Value="false">
@@ -167,7 +168,7 @@
         <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
         <Setter Property="Padding" Value="2" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}"  />
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>             
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
@@ -324,14 +325,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="BaseRoundedButton" TargetType="{x:Type Button}">
-        <Setter Property="Foreground" Value="White" />
-        <Setter Property="FontFamily" Value="Microsoft Sans Serif"/>
-        <Setter Property="FontSize" Value="14" />
+    <Style x:Key="BaseRoundedButton" TargetType="{x:Type Button}">    
         <Setter Property="Padding" Value="5" />
-        <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Background" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -348,9 +345,27 @@
         </Setter>
     </Style>
 
-    <Style x:Key="BaseImageButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}" >
+    <Style x:Key="BaseImageButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}" >                
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="Gray" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
             <Trigger Property="Control.IsEnabled" Value="false">
                 <Setter Property="Control.Opacity" Value="0.5" />
@@ -569,9 +584,16 @@
     <ControlTemplate x:Key="ComboBoxTextBoxTemplate" TargetType="{x:Type TextBox}" >
         <Border Name="PART_ContentHost" Background="White" Focusable="False" />
     </ControlTemplate>
-
+    <ControlTemplate x:Key="ComboBoxValidationErrorTemplate">
+        <DockPanel>
+            <Border BorderBrush="Blue" BorderThickness="4">
+                <AdornedElementPlaceholder />
+            </Border>
+        </DockPanel>
+    </ControlTemplate>
     <Style x:Key="BaseComboBox"  TargetType="{x:Type ComboBox}">
         <Setter Property="Margin" Value="0" />
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
         <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
         <Setter Property="UIElement.SnapsToDevicePixels" Value="True"/>

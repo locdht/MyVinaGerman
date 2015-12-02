@@ -42,13 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ILocationDB.cs" />
     <Compile Include="IDepartmentDB.cs" />
+    <Compile Include="ILocationDB.cs" />
     <Compile Include="IArticleDB.cs" />
     <Compile Include="IIndustryDB.cs" />
     <Compile Include="IBusinessDB.cs" />
     <Compile Include="ICategoryDB.cs" />
     <Compile Include="ICompanyDB.cs" />
+    <Compile Include="IIndustryDB.cs" />
     <Compile Include="IUserDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

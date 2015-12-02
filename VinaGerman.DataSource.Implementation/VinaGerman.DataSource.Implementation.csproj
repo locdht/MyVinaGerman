@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseDataDS.cs" />
     <Compile Include="BaseDS.cs" />
     <Compile Include="CommonDS.cs" />
     <Compile Include="CompanyDS.cs" />

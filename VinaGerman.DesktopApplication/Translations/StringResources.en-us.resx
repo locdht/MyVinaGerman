@@ -207,6 +207,9 @@
   <data name="captionOK" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="captionRelatedArticle" xml:space="preserve">
+    <value>Related article list</value>
+  </data>
   <data name="captionSearch" xml:space="preserve">
     <value>Search</value>
   </data>
@@ -237,11 +240,23 @@
   <data name="lblAddress" xml:space="preserve">
     <value>Address:</value>
   </data>
+  <data name="lblArticle" xml:space="preserve">
+    <value>Article:</value>
+  </data>
   <data name="lblArticleNo" xml:space="preserve">
     <value>ArticleNo:</value>
   </data>
   <data name="lblArticleUnit" xml:space="preserve">
     <value>Unit:</value>
+  </data>
+  <data name="lblBusiness" xml:space="preserve">
+    <value>Business:</value>
+  </data>
+  <data name="lblCategory" xml:space="preserve">
+    <value>Category:</value>
+  </data>
+  <data name="lblCommission" xml:space="preserve">
+    <value>Commission:</value>
   </data>
   <data name="lblCompanyCode" xml:space="preserve">
     <value>Company code:</value>
@@ -249,14 +264,29 @@
   <data name="lblCompanyName" xml:space="preserve">
     <value>Company name:</value>
   </data>
+  <data name="lblContact" xml:space="preserve">
+    <value>Contact:</value>
+  </data>
   <data name="lblCustomer" xml:space="preserve">
     <value>Customer:</value>
   </data>
   <data name="lblDescription" xml:space="preserve">
     <value>Description:</value>
   </data>
+  <data name="lblEmployee" xml:space="preserve">
+    <value>Employee:</value>
+  </data>
   <data name="lblFreeTextSearch" xml:space="preserve">
     <value>Free text:</value>
+  </data>
+  <data name="lblIndustry" xml:space="preserve">
+    <value>Industry:</value>
+  </data>
+  <data name="lblOrderDate" xml:space="preserve">
+    <value>Order date:</value>
+  </data>
+  <data name="lblOrderNumber" xml:space="preserve">
+    <value>Order number:</value>
   </data>
   <data name="lblPassword" xml:space="preserve">
     <value>Password:</value>
@@ -266,6 +296,15 @@
   </data>
   <data name="lblPort" xml:space="preserve">
     <value>Port:</value>
+  </data>
+  <data name="lblPrice" xml:space="preserve">
+    <value>Price:</value>
+  </data>
+  <data name="lblQuantity" xml:space="preserve">
+    <value>Quantity:</value>
+  </data>
+  <data name="lblRemainQuantity" xml:space="preserve">
+    <value>Remaining quantity:</value>
   </data>
   <data name="lblServer" xml:space="preserve">
     <value>Server:</value>

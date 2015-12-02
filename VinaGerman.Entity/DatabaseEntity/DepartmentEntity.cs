@@ -8,22 +8,19 @@ using System.Threading.Tasks;
 namespace VinaGerman.Entity.DatabaseEntity
 {
     [DataContract]
-    public class ArticleEntity : VinaGerman.Entity.BaseEntity
+    public class DepartmentEntity : VinaGerman.Entity.BaseEntity
     {        
         [DataMember]
-        public int ArticleId { get; set; }
+        public int DepartmentId { get; set; }
 
         [DataMember]
-        public int CategoryId { get; set; }
-
-        [DataMember]
-        public string ArticleNo { get; set; }
+        public string Phone { get; set; }
 
         [DataMember]
         public string Description { get; set; }
 
         [DataMember]
-        public string Unit { get; set; }
+        public int CompanyId { get; set; }
 
         [DataMember]
         public bool Deleted { get; set; }

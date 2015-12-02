@@ -5,5 +5,7 @@
   <SolidColorBrush x:Key="GridHeaderColor" Color="{DynamicResource AccentColor2}"></SolidColorBrush>
     <SolidColorBrush x:Key="GridHeaderSelectedColor" Color="{DynamicResource AccentColor3}"></SolidColorBrush>
     <SolidColorBrush x:Key="BackColor" Color="{DynamicResource AccentColor}"></SolidColorBrush>
-  <SolidColorBrush x:Key="GridTextBackgroundColumn">#F3EAEA</SolidColorBrush>  
+    <SolidColorBrush x:Key="GridSelectedColor" Color="{DynamicResource AccentColor4}"></SolidColorBrush>
+  <SolidColorBrush x:Key="GridTextBackgroundColumn">#F3EAEA</SolidColorBrush>
+    
 </ResourceDictionary>

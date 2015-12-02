@@ -42,13 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticleBL.cs" />
     <Compile Include="BaseBL.cs" />
+    <Compile Include="BusinessBL.cs" />
+    <Compile Include="CategoryBL.cs" />
     <Compile Include="CompanyBL.cs" />
+    <Compile Include="DepartmentBL.cs" />
+    <Compile Include="IndustryBL.cs" />
     <Compile Include="CategoryBL.cs" />
     <Compile Include="BusinessBL.cs" />
     <Compile Include="ArticleBL.cs" />
     <Compile Include="LocationBL.cs" />
-    <Compile Include="DepartmentBL.cs" />
     <Compile Include="IndustryBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserBL.cs" />
