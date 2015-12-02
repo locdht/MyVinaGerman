@@ -42,7 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IArticleDB.cs" />
+    <Compile Include="IBusinessDB.cs" />
+    <Compile Include="ICategoryDB.cs" />
     <Compile Include="ICompanyDB.cs" />
+    <Compile Include="IIndustryDB.cs" />
     <Compile Include="IUserDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

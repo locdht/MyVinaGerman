@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VinaGerman.Entity;
+using VinaGerman.Entity.BusinessEntity;
 using VinaGerman.Entity.DatabaseEntity;
 using VinaGerman.Entity.SearchEntity;
 using VinaGerman.Service;
@@ -111,6 +112,27 @@ namespace VinaGerman.DataSource.Implementation
         {
             IBaseDataSvc channel = CreateChannel();
             var result = channel.DeleteArticle(entityObject);
+            channel.Dispose();
+            return result;
+        }
+        public List<ArticleRelationEntity> GetArticleRelationsForArticle(ArticleEntity searchObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.GetArticleRelationsForArticle(searchObject);
+            channel.Dispose();
+            return result;
+        }
+        public ArticleRelationEntity AddOrUpdateArticleRelation(ArticleRelationEntity entityObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.AddOrUpdateArticleRelation(entityObject);
+            channel.Dispose();
+            return result;
+        }
+        public bool DeleteArticleRelation(ArticleRelationEntity entityObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.DeleteArticleRelation(entityObject);
             channel.Dispose();
             return result;
         }

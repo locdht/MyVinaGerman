@@ -23,6 +23,6 @@ namespace VinaGerman.Business.Implementation
         public bool DeleteBusiness(BusinessEntity entityObject)
         {
             return Factory.Resolve<IBusinessDB>().DeleteBusiness(entityObject);
-        }
+        }        
     }
 }

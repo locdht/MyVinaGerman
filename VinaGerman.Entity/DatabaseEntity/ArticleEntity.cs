@@ -14,6 +14,9 @@ namespace VinaGerman.Entity.DatabaseEntity
         public int ArticleId { get; set; }
 
         [DataMember]
+        public int CategoryId { get; set; }
+
+        [DataMember]
         public string ArticleNo { get; set; }
 
         [DataMember]

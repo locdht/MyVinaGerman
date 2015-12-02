@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VinaGerman.Database;
 using VinaGerman.Entity;
+using VinaGerman.Entity.BusinessEntity;
 using VinaGerman.Entity.DatabaseEntity;
 using VinaGerman.Entity.SearchEntity;
 
@@ -23,6 +24,18 @@ namespace VinaGerman.Business.Implementation
         public bool DeleteArticle(ArticleEntity entityObject)
         {
             return Factory.Resolve<IArticleDB>().DeleteArticle(entityObject);
+        }
+        public List<ArticleRelationEntity> GetArticleRelationsForArticle(ArticleEntity searchObject)
+        {
+            return Factory.Resolve<IArticleDB>().GetArticleRelationsForArticle(searchObject);
+        }
+        public ArticleRelationEntity AddOrUpdateArticleRelation(ArticleRelationEntity entityObject)
+        {
+            return Factory.Resolve<IArticleDB>().AddOrUpdateArticleRelation(entityObject);
+        }
+        public bool DeleteArticleRelation(ArticleRelationEntity entityObject)
+        {
+            return Factory.Resolve<IArticleDB>().DeleteArticleRelation(entityObject);
         }
     }
 }
