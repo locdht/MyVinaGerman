@@ -44,5 +44,11 @@ namespace VinaGerman.DataSource
         DepartmentEntity AddOrUpdateDepartment(DepartmentEntity entityObject);
         bool DeleteDepartment(DepartmentEntity entityObject);
         #endregion
+
+        #region Location
+        List<LocationEntity> SearchLocation(LocationSearchEntity searchObject);
+        LocationEntity AddOrUpdateLocation(LocationEntity entityObject);
+        bool DeleteLocation(LocationEntity entityObject);
+        #endregion
     }
 }
