@@ -8,10 +8,10 @@ using VinaGerman.Entity.SearchEntity;
 
 namespace VinaGerman.Business
 {
-    public interface ILocationBL
+    public interface IContactBL
     {
-        List<LocationEntity> SearchLocation(LocationSearchEntity searchObject);
-        LocationEntity AddOrUpdateLocation(LocationEntity entityObject);
-        bool DeleteLocation(LocationEntity entityObject);
+        List<ContactEntity> SearchContact(ContactSearchEntity searchObject);
+        ContactEntity AddOrUpdateContact(ContactEntity entityObject);
+        bool DeleteContact(ContactEntity entityObject);
     }
 }

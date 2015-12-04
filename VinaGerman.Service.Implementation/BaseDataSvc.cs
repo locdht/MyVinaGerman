@@ -101,38 +101,56 @@ namespace VinaGerman.Service.Implementation
         #endregion
 
         #region Department
-        public List<DepartmentEntity> SearchDepartment(DepartmentSearchEntity searchObject)
+        public List<VinaGerman.Entity.BusinessEntity.DepartmentEntity> SearchDepartment(DepartmentSearchEntity searchObject)
         {
             return Factory.Resolve<IDepartmentBL>().SearchDepartment(searchObject);
         }
 
-        public DepartmentEntity AddOrUpdateDepartment(DepartmentEntity entityObject)
+        public VinaGerman.Entity.BusinessEntity.DepartmentEntity AddOrUpdateDepartment(VinaGerman.Entity.BusinessEntity.DepartmentEntity entityObject)
         {
             return Factory.Resolve<IDepartmentBL>().AddOrUpdateDepartment(entityObject);
         }
 
-        public bool DeleteDepartment(DepartmentEntity entityObject)
+        public bool DeleteDepartment(VinaGerman.Entity.BusinessEntity.DepartmentEntity entityObject)
         {
             return Factory.Resolve<IDepartmentBL>().DeleteDepartment(entityObject);
         }
         #endregion
 
         #region Location
-        public List<LocationEntity> SearchLocation(LocationSearchEntity searchObject)
+        public List<VinaGerman.Entity.BusinessEntity.LocationEntity> SearchLocation(LocationSearchEntity searchObject)
         {
             return Factory.Resolve<ILocationBL>().SearchLocation(searchObject);
         }
 
-        public LocationEntity AddOrUpdateLocation(LocationEntity entityObject)
+        public VinaGerman.Entity.BusinessEntity.LocationEntity AddOrUpdateLocation(VinaGerman.Entity.BusinessEntity.LocationEntity entityObject)
         {
             return Factory.Resolve<ILocationBL>().AddOrUpdateLocation(entityObject);
         }
 
-        public bool DeleteLocation(LocationEntity entityObject)
+        public bool DeleteLocation(VinaGerman.Entity.BusinessEntity.LocationEntity entityObject)
         {
             return Factory.Resolve<ILocationBL>().DeleteLocation(entityObject);
         }
         #endregion
+
+        #region Contact
+        public List<VinaGerman.Entity.BusinessEntity.ContactEntity> SearchContact(ContactSearchEntity searchObject)
+        {
+            return Factory.Resolve<IContactBL>().SearchContact(searchObject);
+        }
+
+        public VinaGerman.Entity.BusinessEntity.ContactEntity AddOrUpdateContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject)
+        {
+            return Factory.Resolve<IContactBL>().AddOrUpdateContact(entityObject);
+        }
+
+        public bool DeleteContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject)
+        {
+            return Factory.Resolve<IContactBL>().DeleteContact(entityObject);
+        }
+        #endregion
+        
         public void Dispose()
         {
             //throw new NotImplementedException();
