@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrderBL.cs" />
     <Compile Include="ArticleBL.cs" />
     <Compile Include="BaseBL.cs" />
     <Compile Include="BusinessBL.cs" />

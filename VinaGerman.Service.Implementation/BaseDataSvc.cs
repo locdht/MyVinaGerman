@@ -150,7 +150,36 @@ namespace VinaGerman.Service.Implementation
             return Factory.Resolve<IContactBL>().DeleteContact(entityObject);
         }
         #endregion
-        
+
+        #region Order
+        public List<OrderEntity> SearchOrder(OrderSearchEntity searchObject)
+        {
+            return Factory.Resolve<IOrderBL>().SearchOrder(searchObject);
+        }
+
+        public OrderEntity AddOrUpdateOrder(OrderEntity entityObject)
+        {
+            return Factory.Resolve<IOrderBL>().AddOrUpdateOrder(entityObject);
+        }
+
+        public bool DeleteOrder(OrderEntity entityObject)
+        {
+            return Factory.Resolve<IOrderBL>().DeleteOrder(entityObject);
+        }
+        public List<OrderlineEntity> GetArticleRelationsForArticle(OrderEntity searchObject)
+        {
+            return Factory.Resolve<IOrderBL>().GetOrderRelationsForOrder(searchObject);
+        }
+        public OrderlineEntity AddOrUpdateArticleRelation(OrderlineEntity entityObject)
+        {
+            return Factory.Resolve<IOrderBL>().AddOrUpdateOrderRelation(entityObject);
+        }
+        public bool DeleteArticleRelation(OrderlineEntity entityObject)
+        {
+            return Factory.Resolve<IOrderBL>().DeleteOrderRelation(entityObject);
+        }
+        #endregion
+
         public void Dispose()
         {
             //throw new NotImplementedException();

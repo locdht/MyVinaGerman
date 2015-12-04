@@ -81,5 +81,21 @@ namespace VinaGerman.Service
         [OperationContract]
         bool DeleteContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject);
         #endregion
+
+        #region Order
+        [OperationContract]
+        List<OrderEntity> SearchOrder(OrderSearchEntity searchObject);
+        [OperationContract]
+        OrderEntity AddOrUpdateOrder(OrderEntity entityObject);
+        [OperationContract]
+        bool DeleteOrder(OrderEntity entityObject);
+        [OperationContract]
+        List<OrderlineEntity> GetOrderRelationsForOrder(OrderEntity searchObject);
+        [OperationContract]
+        OrderlineEntity AddOrUpdateOrderRelation(OrderlineEntity entityObject);
+        [OperationContract]
+        bool DeleteOrderRelation(OrderlineEntity entityObject);
+        #endregion
+    
     }
 }
