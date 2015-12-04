@@ -120,6 +120,7 @@
     <Compile Include="ViewModels\MessageBoxViewModel.cs" />
     <Compile Include="ViewModels\MessageToken.cs" />
     <Compile Include="ViewModels\UserViews\uvArticleManagementViewModel.cs" />
+    <Compile Include="ViewModels\UserViews\uvContactManagementViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvLocationManagementViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvDepartmentManagementViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvIndustryManagementViewModel.cs" />

@@ -18,6 +18,7 @@ namespace VinaGerman.DesktopApplication.ViewModels
     public class MainWindowViewModel : BaseViewModel
     {
         #region Properties
+        public uvBaseViewModel ContactManagementModel { get; set; }
         public uvBaseViewModel LocationManagementModel { get; set; }
         public uvBaseViewModel PurchaseOrderDetailModel { get; set; }
         public uvBaseViewModel PurchaseOrderManagementModel { get; set; }
@@ -97,6 +98,7 @@ namespace VinaGerman.DesktopApplication.ViewModels
             ArticleManagementModel = new uvArticleManagementViewModel(this) { MessengerID = enumView.ArticleManagement.ToString() };
             DepartmentManagementModel = new uvDepartmentManagementViewModel(this) { MessengerID = enumView.DepartmentManagement.ToString() };
             LocationManagementModel = new uvLocationManagementViewModel(this) { MessengerID = enumView.LocationManagement.ToString() };
+            ContactManagementModel = new uvContactManagementViewModel(this) { MessengerID = enumView.ContactManagement.ToString() };
             PurchaseOrderManagementModel = new uvPurchaseOrderManagementViewModel(this) { MessengerID = enumView.PurchaseOrderManagement.ToString() };
             PurchaseOrderDetailModel = new uvPurchaseOrderDetailViewModel(this) { MessengerID = enumView.PurchaseOrderDetail.ToString() };
             LogonModel = new uvLogonViewModel(this) { MessengerID = enumView.Logon.ToString() };
@@ -195,6 +197,11 @@ namespace VinaGerman.DesktopApplication.ViewModels
         {
             switch (view)
             {
+                //
+                case enumView.ContactManagement:
+                    CurrentModel = ContactManagementModel;
+                    SendMessage(MessageToken.ReloadMessage, null, enumView.ContactManagement.ToString());
+                    break;
                 case enumView.LocationManagement:
                     CurrentModel = LocationManagementModel;
                     SendMessage(MessageToken.ReloadMessage, null, enumView.LocationManagement.ToString());

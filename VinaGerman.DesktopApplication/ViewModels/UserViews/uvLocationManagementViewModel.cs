@@ -18,8 +18,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
     {
         //search customer model
         #region properties
-        private List<LocationEntity> _locationList = null;
-        public List<LocationEntity> LocationList 
+        private List<VinaGerman.Entity.BusinessEntity.LocationEntity> _locationList = null;
+        public List<VinaGerman.Entity.BusinessEntity.LocationEntity> LocationList 
         {
             get
             {
@@ -46,8 +46,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
 
-        private LocationEntity _selectedLocation;
-        public LocationEntity SelectedLocation
+        private VinaGerman.Entity.BusinessEntity.LocationEntity _selectedLocation;
+        public VinaGerman.Entity.BusinessEntity.LocationEntity SelectedLocation
         {
             get
             {
@@ -135,9 +135,9 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             ClearSearch();
         }
         #region method
-        public void AddOrUpdateLocation(LocationEntity newEntity)
+        public void AddOrUpdateLocation(VinaGerman.Entity.BusinessEntity.LocationEntity newEntity)
         {
-            LocationEntity oldEntity = LocationList.FirstOrDefault<LocationEntity>(p => p.LocationId == newEntity.LocationId);
+            VinaGerman.Entity.BusinessEntity.LocationEntity oldEntity = LocationList.FirstOrDefault<VinaGerman.Entity.BusinessEntity.LocationEntity>(p => p.LocationId == newEntity.LocationId);
 
             if (oldEntity == null)
             {
@@ -150,22 +150,22 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 LocationList.Insert(index, newEntity);
             }
 
-            LocationList = new List<LocationEntity>(_locationList);
+            LocationList = new List<VinaGerman.Entity.BusinessEntity.LocationEntity>(_locationList);
         }
-        public void DeleteLocation(LocationEntity newEntity)
+        public void DeleteLocation(VinaGerman.Entity.BusinessEntity.LocationEntity newEntity)
         {
-            LocationEntity oldEntity = LocationList.FirstOrDefault<LocationEntity>(p => p.LocationId == newEntity.LocationId);
+            VinaGerman.Entity.BusinessEntity.LocationEntity oldEntity = LocationList.FirstOrDefault<VinaGerman.Entity.BusinessEntity.LocationEntity>(p => p.LocationId == newEntity.LocationId);
 
             if (oldEntity != null)
             {
                 LocationList.Remove(oldEntity);
             }
 
-            LocationList = new List<LocationEntity>(_locationList);
+            LocationList = new List<VinaGerman.Entity.BusinessEntity.LocationEntity>(_locationList);
         }
         public void Add()
         {
-            var newEntity = new LocationEntity()
+            var newEntity = new VinaGerman.Entity.BusinessEntity.LocationEntity()
             {
                 Deleted = false,
                 Description = "",

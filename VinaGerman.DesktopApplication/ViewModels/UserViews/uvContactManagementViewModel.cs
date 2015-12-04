@@ -14,21 +14,21 @@ using VinaGerman.Entity.SearchEntity;
 
 namespace VinaGerman.DesktopApplication.ViewModels.UserViews
 {
-    public class uvDepartmentManagementViewModel : uvBaseViewModel
+    public class uvContactManagementViewModel : uvBaseViewModel
     {
         //search customer model
         #region properties
-        private List<VinaGerman.Entity.BusinessEntity.DepartmentEntity> _departmentList = null;
-        public List<VinaGerman.Entity.BusinessEntity.DepartmentEntity> DepartmentList 
+        private List<VinaGerman.Entity.BusinessEntity.ContactEntity> _contactList = null;
+        public List<VinaGerman.Entity.BusinessEntity.ContactEntity> ContactList 
         {
             get
             {
-                return _departmentList;
+                return _contactList;
             }
             set
             {
-                _departmentList = value;
-                RaisePropertyChanged("DepartmentList");
+                _contactList = value;
+                RaisePropertyChanged("ContactList");
             }
         }
 
@@ -46,22 +46,22 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
 
-        private VinaGerman.Entity.BusinessEntity.DepartmentEntity _selectedDepartment;
-        public VinaGerman.Entity.BusinessEntity.DepartmentEntity SelectedDepartment
+        private VinaGerman.Entity.BusinessEntity.ContactEntity _selectedContact;
+        public VinaGerman.Entity.BusinessEntity.ContactEntity SelectedContact
         {
             get
             {
-                return _selectedDepartment;
+                return _selectedContact;
             }
             set
             {
-                _selectedDepartment = value;
-                RaisePropertyChanged("SelectedDepartment");
+                _selectedContact = value;
+                RaisePropertyChanged("SelectedContact");
                 RaisePropertyChanged("CanSave");
                 RaisePropertyChanged("CanDelete");
-                if (SelectedDepartment != null)
+                if (SelectedContact != null)
                 {
-                    SelectedCompany = CompanyList.FirstOrDefault(c => c.CompanyId == SelectedDepartment.CompanyId);
+                    SelectedCompany = CompanyList.FirstOrDefault(c => c.CompanyId == SelectedContact.CompanyId);
                 }
             }
         }
@@ -92,18 +92,54 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 _selectedCompany = value;
                 RaisePropertyChanged("SelectedCompany");
 
-                if (SelectedDepartment != null && SelectedCompany != null)
+                if (SelectedContact != null && SelectedCompany != null)
                 {
-                    SelectedDepartment.CompanyId = SelectedCompany.CompanyId;
+                    SelectedContact.CompanyId = SelectedCompany.CompanyId;
                 }
 
             }
         }
+
+        private List<VinaGerman.Entity.BusinessEntity.DepartmentEntity> _departmentList = null;
+        public List<VinaGerman.Entity.BusinessEntity.DepartmentEntity> DepartmentList
+        {
+            get
+            {
+                return _departmentList;
+            }
+            set
+            {
+                _departmentList = value;
+                RaisePropertyChanged("DepartmentList");
+            }
+        }
+
+        private VinaGerman.Entity.BusinessEntity.DepartmentEntity _selectedDepartment;
+        public VinaGerman.Entity.BusinessEntity.DepartmentEntity SelectedDepartment
+        {
+            get
+            {
+                return _selectedDepartment;
+            }
+            set
+            {
+                _selectedDepartment = value;
+                RaisePropertyChanged("SelectedDepartment");
+
+                if (SelectedContact != null && SelectedCompany != null && SelectedDepartment != null)
+                {
+                    SelectedContact.CompanyId = SelectedCompany.CompanyId;
+                    SelectedContact.DepartmentId = SelectedDepartment.DepartmentId;
+                }
+
+            }
+        }
+        
         public bool CanSave
         {
             get
             {
-                return _selectedDepartment != null;
+                return _selectedContact != null;
             }
         }
 
@@ -111,7 +147,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         {
             get
             {
-                return _selectedDepartment != null && _selectedDepartment.DepartmentId > 0;
+                return _selectedContact != null && _selectedContact.ContactId > 0;
             }
         }
 
@@ -124,7 +160,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         #endregion
 
 
-        public uvDepartmentManagementViewModel(MainWindowViewModel pMainWindowViewModel)
+        public uvContactManagementViewModel(MainWindowViewModel pMainWindowViewModel)
             : base(pMainWindowViewModel)
         {
             ClearSearchCommand = new RelayCommand(ClearSearch);
@@ -135,43 +171,49 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             ClearSearch();
         }
         #region method
-        public void AddOrUpdateDepartment(VinaGerman.Entity.BusinessEntity.DepartmentEntity newEntity)
+        public void AddOrUpdateContact(VinaGerman.Entity.BusinessEntity.ContactEntity newEntity)
         {
-            VinaGerman.Entity.BusinessEntity.DepartmentEntity oldEntity = DepartmentList.FirstOrDefault<VinaGerman.Entity.BusinessEntity.DepartmentEntity>(p => p.DepartmentId == newEntity.DepartmentId);
+            VinaGerman.Entity.BusinessEntity.ContactEntity oldEntity = ContactList.FirstOrDefault<VinaGerman.Entity.BusinessEntity.ContactEntity>(p => p.ContactId == newEntity.ContactId);
 
             if (oldEntity == null)
             {
-                DepartmentList.Insert(0, newEntity);
+                ContactList.Insert(0, newEntity);
             }
             else
             {
-                int index = DepartmentList.IndexOf(oldEntity);
-                DepartmentList.Remove(oldEntity);
-                DepartmentList.Insert(index, newEntity);
+                int index = ContactList.IndexOf(oldEntity);
+                ContactList.Remove(oldEntity);
+                ContactList.Insert(index, newEntity);
             }
 
-            DepartmentList = new List<VinaGerman.Entity.BusinessEntity.DepartmentEntity>(_departmentList);
+            ContactList = new List<VinaGerman.Entity.BusinessEntity.ContactEntity>(_contactList);
         }
-        public void DeleteDepartment(VinaGerman.Entity.BusinessEntity.DepartmentEntity newEntity)
+        public void DeleteContact(VinaGerman.Entity.BusinessEntity.ContactEntity newEntity)
         {
-            VinaGerman.Entity.BusinessEntity.DepartmentEntity oldEntity = DepartmentList.FirstOrDefault<VinaGerman.Entity.BusinessEntity.DepartmentEntity>(p => p.DepartmentId == newEntity.DepartmentId);
+            VinaGerman.Entity.BusinessEntity.ContactEntity oldEntity = ContactList.FirstOrDefault<VinaGerman.Entity.BusinessEntity.ContactEntity>(p => p.ContactId == newEntity.ContactId);
 
             if (oldEntity != null)
             {
-                DepartmentList.Remove(oldEntity);
+                ContactList.Remove(oldEntity);
             }
 
-            DepartmentList = new List<VinaGerman.Entity.BusinessEntity.DepartmentEntity>(_departmentList);
+            ContactList = new List<VinaGerman.Entity.BusinessEntity.ContactEntity>(_contactList);
         }
         public void Add()
         {
-            var newEntity = new VinaGerman.Entity.BusinessEntity.DepartmentEntity()
+            var newEntity = new VinaGerman.Entity.BusinessEntity.ContactEntity()
             {
                 Deleted = false,
-                Description = "",
-                CompanyId=0
+                FullName="",
+                Email="",
+                Phone="",
+                Address="",
+                CompanyId=0,
+                UserAccountId=0,
+                Position="",
+                DepartmentId=0,
             };
-            SelectedDepartment = newEntity;
+            SelectedContact = newEntity;
         }
         public void Delete()
         {
@@ -183,15 +225,15 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().DeleteDepartment(SelectedDepartment);
+                        var updatedEntity = Factory.Resolve<IBaseDataDS>().DeleteContact(SelectedContact);
 
                         HideLoading();
 
                         //display to UI
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
-                            DeleteDepartment(SelectedDepartment);
-                            SelectedDepartment = null;
+                            DeleteContact(SelectedContact);
+                            SelectedContact = null;
                         }));
                     }
                     catch (Exception ex)
@@ -210,15 +252,15 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateDepartment(SelectedDepartment);
+                    var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateContact(SelectedContact);
 
                     HideLoading();
 
                     //display to UI
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        SelectedDepartment = updatedEntity;
-                        AddOrUpdateDepartment(SelectedDepartment);
+                        SelectedContact = updatedEntity;
+                        AddOrUpdateContact(SelectedContact);
                     }));
                 }
                 catch (Exception ex)
@@ -239,7 +281,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var list = Factory.Resolve<IBaseDataDS>().SearchDepartment(new DepartmentSearchEntity()
+                    var list = Factory.Resolve<IBaseDataDS>().SearchContact(new ContactSearchEntity()
                     {
                         SearchText = this.SearchText
                     });
@@ -249,7 +291,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     //display to UI
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        DepartmentList = list;
+                        ContactList = list;
                     }));                    
                 }
                 catch (Exception ex)
@@ -271,7 +313,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var list = Factory.Resolve<IBaseDataDS>().SearchDepartment(new DepartmentSearchEntity()
+                    var list = Factory.Resolve<IBaseDataDS>().SearchContact(new ContactSearchEntity()
                     {
                         SearchText = this.SearchText
                     });
@@ -281,13 +323,18 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         SearchText = ""
                     });
 
+                    var Departmentlist = Factory.Resolve<IBaseDataDS>().SearchDepartment(new DepartmentSearchEntity()
+                    {
+                        SearchText = ""
+                    });
                     HideLoading();
 
                     //display to UI
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        DepartmentList = list;
+                        ContactList = list;
                         CompanyList = Companylist;
+                        this.DepartmentList = Departmentlist;
                     }));
                 }
                 catch (Exception ex)
