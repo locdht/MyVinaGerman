@@ -5,7 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using VinaGerman.DataSource;
 using VinaGerman.DesktopApplication.Translations;
+using VinaGerman.Entity;
+using VinaGerman.Entity.BusinessEntity;
+using VinaGerman.Entity.SearchEntity;
 
 namespace VinaGerman.DesktopApplication.ViewModels.UserViews
 {
@@ -13,6 +17,21 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
     {
         //search customer model
         #region properties
+
+        private List<OrderEntity> _orderList = null;
+        public List<OrderEntity> OrderList
+        {
+            get
+            {
+                return _orderList;
+            }
+            set
+            {
+                _orderList = value;
+                RaisePropertyChanged("OrderList");
+            }
+        }
+
         private string _searchText;
         public string SearchText
         {
@@ -49,21 +68,18 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    //var list = Factory.Resolve<ICompanyDS>().SearchCompanies(new CompanySearchEntity()
-                    //{
-                    //    SearchText = this.SearchText,
-                    //    IsCustomer = this.IsCustomer,
-                    //    IsSupplier = this.IsSupplier,
-                    //    NotIncludedCompany = ApplicationHelper.CurrentUserProfile.CompanyId
-                    //});
+                    var list = Factory.Resolve<IBaseDataDS>().SearchOrder(new OrderSearchEntity()
+                    {
+                        SearchText = this.SearchText
+                    });
 
                     HideLoading();
 
                     //display to UI
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        //CompanyList = list;
-                    }));                    
+                        OrderList = list;
+                    }));                  
                 }
                 catch (Exception ex)
                 {

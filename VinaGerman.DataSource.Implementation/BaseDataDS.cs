@@ -209,5 +209,50 @@ namespace VinaGerman.DataSource.Implementation
             return result;
         }
         #endregion
+
+        #region Order
+        public List<OrderEntity> SearchOrder(OrderSearchEntity searchObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.SearchOrder(searchObject);
+            channel.Dispose();
+            return result;
+        }
+        public OrderEntity AddOrUpdateOrder(OrderEntity entityObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.AddOrUpdateOrder(entityObject);
+            channel.Dispose();
+            return result;
+        }
+        public bool DeleteOrder(OrderEntity entityObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.DeleteOrder(entityObject);
+            channel.Dispose();
+            return result;
+        }
+        public List<OrderlineEntity> GetOrderRelationsForOrder(OrderEntity searchObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.GetOrderRelationsForOrder(searchObject);
+            channel.Dispose();
+            return result;
+        }
+        public OrderlineEntity AddOrUpdateOrderRelation(OrderlineEntity entityObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.AddOrUpdateOrderRelation(entityObject);
+            channel.Dispose();
+            return result;
+        }
+        public bool DeleteOrderRelation(OrderlineEntity entityObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.DeleteOrderRelation(entityObject);
+            channel.Dispose();
+            return result;
+        }
+        #endregion
     }
 }

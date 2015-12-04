@@ -56,5 +56,15 @@ namespace VinaGerman.DataSource
         VinaGerman.Entity.BusinessEntity.ContactEntity AddOrUpdateContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject);
         bool DeleteContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject);
         #endregion
+
+        #region Order
+        List<OrderEntity> SearchOrder(OrderSearchEntity searchObject);
+        OrderEntity AddOrUpdateOrder(OrderEntity entityObject);
+        bool DeleteOrder(OrderEntity entityObject);
+        List<OrderlineEntity> GetOrderRelationsForOrder(OrderEntity searchObject);
+        OrderlineEntity AddOrUpdateOrderRelation(OrderlineEntity entityObject);
+        bool DeleteOrderRelation(OrderlineEntity entityObject);
+        #endregion
+    
     }
 }
