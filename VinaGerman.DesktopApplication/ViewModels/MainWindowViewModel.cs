@@ -18,6 +18,7 @@ namespace VinaGerman.DesktopApplication.ViewModels
     public class MainWindowViewModel : BaseViewModel
     {
         #region Properties
+        public uvBaseViewModel LocationManagementModel { get; set; }
         public uvBaseViewModel PurchaseOrderDetailModel { get; set; }
         public uvBaseViewModel PurchaseOrderManagementModel { get; set; }
         public uvBaseViewModel DepartmentManagementModel { get; set; }
@@ -95,6 +96,7 @@ namespace VinaGerman.DesktopApplication.ViewModels
             IndustryManagementModel = new uvIndustryManagementViewModel(this) { MessengerID = enumView.IndustryManagement.ToString() };
             ArticleManagementModel = new uvArticleManagementViewModel(this) { MessengerID = enumView.ArticleManagement.ToString() };
             DepartmentManagementModel = new uvDepartmentManagementViewModel(this) { MessengerID = enumView.DepartmentManagement.ToString() };
+            LocationManagementModel = new uvLocationManagementViewModel(this) { MessengerID = enumView.LocationManagement.ToString() };
             PurchaseOrderManagementModel = new uvPurchaseOrderManagementViewModel(this) { MessengerID = enumView.PurchaseOrderManagement.ToString() };
             PurchaseOrderDetailModel = new uvPurchaseOrderDetailViewModel(this) { MessengerID = enumView.PurchaseOrderDetail.ToString() };
             LogonModel = new uvLogonViewModel(this) { MessengerID = enumView.Logon.ToString() };
@@ -193,6 +195,10 @@ namespace VinaGerman.DesktopApplication.ViewModels
         {
             switch (view)
             {
+                case enumView.LocationManagement:
+                    CurrentModel = LocationManagementModel;
+                    SendMessage(MessageToken.ReloadMessage, null, enumView.LocationManagement.ToString());
+                    break;
                 case enumView.DepartmentManagement:
                     CurrentModel = DepartmentManagementModel;
                     SendMessage(MessageToken.ReloadMessage, null, enumView.DepartmentManagement.ToString());

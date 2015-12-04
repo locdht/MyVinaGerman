@@ -162,5 +162,28 @@ namespace VinaGerman.DataSource.Implementation
         }
         #endregion
 
+        #region Location
+        public List<LocationEntity> SearchLocation(LocationSearchEntity searchObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.SearchLocation(searchObject);
+            channel.Dispose();
+            return result;
+        }
+        public LocationEntity AddOrUpdateLocation(LocationEntity entityObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.AddOrUpdateLocation(entityObject);
+            channel.Dispose();
+            return result;
+        }
+        public bool DeleteLocation(LocationEntity entityObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.DeleteLocation(entityObject);
+            channel.Dispose();
+            return result;
+        }
+        #endregion
     }
 }
