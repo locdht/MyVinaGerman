@@ -145,6 +145,9 @@
     <Compile Include="Views\OpacityBox.xaml.cs">
       <DependentUpon>OpacityBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserViews\uvContactManagement.xaml.cs">
+      <DependentUpon>uvContactManagement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserViews\uvLocationManagement.xaml.cs">
       <DependentUpon>uvLocationManagement.xaml</DependentUpon>
     </Compile>
@@ -223,6 +226,10 @@
     <Page Include="Views\OpacityBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\uvContactManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\UserViews\uvLocationManagement.xaml">
       <Generator>MSBuild:Compile</Generator>

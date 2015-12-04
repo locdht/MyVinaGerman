@@ -168,6 +168,9 @@
   <data name="captionConfirm" xml:space="preserve">
     <value>Confirm</value>
   </data>
+  <data name="captionContactInfo" xml:space="preserve">
+    <value>Contact information</value>
+  </data>
   <data name="captionContactList" xml:space="preserve">
     <value>Contact List</value>
   </data>
@@ -240,6 +243,9 @@
   <data name="hintCompanySearch" xml:space="preserve">
     <value>Company name/Phone/Tax Code</value>
   </data>
+  <data name="hintContactSearch" xml:space="preserve">
+    <value>FullName/Email/Phone/Adress</value>
+  </data>
   <data name="hintDepartmentSearch" xml:space="preserve">
     <value>Phone/Description</value>
   </data>
@@ -279,14 +285,23 @@
   <data name="lblCustomer" xml:space="preserve">
     <value>Customer:</value>
   </data>
+  <data name="lblDepartment" xml:space="preserve">
+    <value>Department:</value>
+  </data>
   <data name="lblDescription" xml:space="preserve">
     <value>Description:</value>
+  </data>
+  <data name="lblEmail" xml:space="preserve">
+    <value>Email:</value>
   </data>
   <data name="lblEmployee" xml:space="preserve">
     <value>Employee:</value>
   </data>
   <data name="lblFreeTextSearch" xml:space="preserve">
     <value>Free text:</value>
+  </data>
+  <data name="lblFullName" xml:space="preserve">
+    <value>Full Name:</value>
   </data>
   <data name="lblIndustry" xml:space="preserve">
     <value>Industry:</value>
@@ -305,6 +320,9 @@
   </data>
   <data name="lblPort" xml:space="preserve">
     <value>Port:</value>
+  </data>
+  <data name="lblPosition" xml:space="preserve">
+    <value>Position:</value>
   </data>
   <data name="lblPrice" xml:space="preserve">
     <value>Price:</value>

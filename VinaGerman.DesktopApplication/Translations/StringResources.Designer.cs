@@ -214,6 +214,15 @@ namespace VinaGerman.DesktopApplication.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contact information.
+        /// </summary>
+        public static string captionContactInfo {
+            get {
+                return ResourceManager.GetString("captionContactInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact List.
         /// </summary>
         public static string captionContactList {
@@ -430,6 +439,15 @@ namespace VinaGerman.DesktopApplication.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FullName/Email/Phone/Adress.
+        /// </summary>
+        public static string hintContactSearch {
+            get {
+                return ResourceManager.GetString("hintContactSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Phone/Description.
         /// </summary>
         public static string hintDepartmentSearch {
@@ -547,11 +565,29 @@ namespace VinaGerman.DesktopApplication.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Department:.
+        /// </summary>
+        public static string lblDepartment {
+            get {
+                return ResourceManager.GetString("lblDepartment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description:.
         /// </summary>
         public static string lblDescription {
             get {
                 return ResourceManager.GetString("lblDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email:.
+        /// </summary>
+        public static string lblEmail {
+            get {
+                return ResourceManager.GetString("lblEmail", resourceCulture);
             }
         }
         
@@ -570,6 +606,15 @@ namespace VinaGerman.DesktopApplication.Translations {
         public static string lblFreeTextSearch {
             get {
                 return ResourceManager.GetString("lblFreeTextSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full Name:.
+        /// </summary>
+        public static string lblFullName {
+            get {
+                return ResourceManager.GetString("lblFullName", resourceCulture);
             }
         }
         
@@ -624,6 +669,15 @@ namespace VinaGerman.DesktopApplication.Translations {
         public static string lblPort {
             get {
                 return ResourceManager.GetString("lblPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Position:.
+        /// </summary>
+        public static string lblPosition {
+            get {
+                return ResourceManager.GetString("lblPosition", resourceCulture);
             }
         }
         
