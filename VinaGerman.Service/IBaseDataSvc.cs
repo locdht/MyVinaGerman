@@ -57,20 +57,51 @@ namespace VinaGerman.Service
 
         #region Department
         [OperationContract]
-        List<DepartmentEntity> SearchDepartment(DepartmentSearchEntity searchObject);
+        List<VinaGerman.Entity.BusinessEntity.DepartmentEntity> SearchDepartment(DepartmentSearchEntity searchObject);
         [OperationContract]
-        DepartmentEntity AddOrUpdateDepartment(DepartmentEntity entityObject);
+        VinaGerman.Entity.BusinessEntity.DepartmentEntity AddOrUpdateDepartment(VinaGerman.Entity.BusinessEntity.DepartmentEntity entityObject);
         [OperationContract]
-        bool DeleteDepartment(DepartmentEntity entityObject);
+        bool DeleteDepartment(VinaGerman.Entity.BusinessEntity.DepartmentEntity entityObject);
         #endregion
 
         #region Location
         [OperationContract]
-        List<LocationEntity> SearchLocation(LocationSearchEntity searchObject);
+        List<VinaGerman.Entity.BusinessEntity.LocationEntity> SearchLocation(LocationSearchEntity searchObject);
         [OperationContract]
-        LocationEntity AddOrUpdateLocation(LocationEntity entityObject);
+        VinaGerman.Entity.BusinessEntity.LocationEntity AddOrUpdateLocation(VinaGerman.Entity.BusinessEntity.LocationEntity entityObject);
         [OperationContract]
-        bool DeleteLocation(LocationEntity entityObject);
+        bool DeleteLocation(VinaGerman.Entity.BusinessEntity.LocationEntity entityObject);
         #endregion
+
+        #region Contact
+        [OperationContract]
+        List<VinaGerman.Entity.BusinessEntity.ContactEntity> SearchContact(ContactSearchEntity searchObject);
+        [OperationContract]
+        VinaGerman.Entity.BusinessEntity.ContactEntity AddOrUpdateContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject);
+        [OperationContract]
+        bool DeleteContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject);
+        #endregion
+
+        #region Order
+        [OperationContract]
+        List<OrderEntity> SearchOrder(OrderSearchEntity searchObject);
+        [OperationContract]
+        OrderEntity AddOrUpdateOrder(OrderEntity entityObject);
+        [OperationContract]
+        bool DeleteOrder(OrderEntity entityObject);
+        [OperationContract]
+        List<OrderlineEntity> GetOrderRelationsForOrder(OrderEntity searchObject);
+        [OperationContract]
+        OrderlineEntity AddOrUpdateOrderRelation(OrderlineEntity entityObject);
+        [OperationContract]
+        bool DeleteOrderRelation(OrderlineEntity entityObject);
+        [OperationContract]
+        List<LoanEntity> GetOrderRelationsLoanForOrder(OrderEntity searchObject);
+        [OperationContract]
+        LoanEntity AddOrUpdateOrderRelationLoan(LoanEntity entityObject);
+        [OperationContract]
+        bool DeleteOrderRelationLoan(LoanEntity entityObject);
+        #endregion
+    
     }
 }

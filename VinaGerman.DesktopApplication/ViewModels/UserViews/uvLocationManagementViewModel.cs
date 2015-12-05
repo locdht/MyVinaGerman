@@ -14,21 +14,21 @@ using VinaGerman.Entity.SearchEntity;
 
 namespace VinaGerman.DesktopApplication.ViewModels.UserViews
 {
-    public class uvDepartmentManagementViewModel : uvBaseViewModel
+    public class uvLocationManagementViewModel : uvBaseViewModel
     {
         //search customer model
         #region properties
-        private List<VinaGerman.Entity.BusinessEntity.DepartmentEntity> _departmentList = null;
-        public List<VinaGerman.Entity.BusinessEntity.DepartmentEntity> DepartmentList 
+        private List<VinaGerman.Entity.BusinessEntity.LocationEntity> _locationList = null;
+        public List<VinaGerman.Entity.BusinessEntity.LocationEntity> LocationList 
         {
             get
             {
-                return _departmentList;
+                return _locationList;
             }
             set
             {
-                _departmentList = value;
-                RaisePropertyChanged("DepartmentList");
+                _locationList = value;
+                RaisePropertyChanged("LocationList");
             }
         }
 
@@ -46,22 +46,22 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
 
-        private VinaGerman.Entity.BusinessEntity.DepartmentEntity _selectedDepartment;
-        public VinaGerman.Entity.BusinessEntity.DepartmentEntity SelectedDepartment
+        private VinaGerman.Entity.BusinessEntity.LocationEntity _selectedLocation;
+        public VinaGerman.Entity.BusinessEntity.LocationEntity SelectedLocation
         {
             get
             {
-                return _selectedDepartment;
+                return _selectedLocation;
             }
             set
             {
-                _selectedDepartment = value;
-                RaisePropertyChanged("SelectedDepartment");
+                _selectedLocation = value;
+                RaisePropertyChanged("SelectedLocation");
                 RaisePropertyChanged("CanSave");
                 RaisePropertyChanged("CanDelete");
-                if (SelectedDepartment != null)
+                if (SelectedLocation != null)
                 {
-                    SelectedCompany = CompanyList.FirstOrDefault(c => c.CompanyId == SelectedDepartment.CompanyId);
+                    SelectedCompany = CompanyList.FirstOrDefault(c => c.CompanyId == SelectedLocation.CompanyId);
                 }
             }
         }
@@ -92,9 +92,9 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 _selectedCompany = value;
                 RaisePropertyChanged("SelectedCompany");
 
-                if (SelectedDepartment != null && SelectedCompany != null)
+                if (SelectedLocation != null && SelectedCompany != null)
                 {
-                    SelectedDepartment.CompanyId = SelectedCompany.CompanyId;
+                    SelectedLocation.CompanyId = SelectedCompany.CompanyId;
                 }
 
             }
@@ -103,7 +103,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         {
             get
             {
-                return _selectedDepartment != null;
+                return _selectedLocation != null;
             }
         }
 
@@ -111,7 +111,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         {
             get
             {
-                return _selectedDepartment != null && _selectedDepartment.DepartmentId > 0;
+                return _selectedLocation != null && _selectedLocation.LocationId > 0;
             }
         }
 
@@ -124,7 +124,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         #endregion
 
 
-        public uvDepartmentManagementViewModel(MainWindowViewModel pMainWindowViewModel)
+        public uvLocationManagementViewModel(MainWindowViewModel pMainWindowViewModel)
             : base(pMainWindowViewModel)
         {
             ClearSearchCommand = new RelayCommand(ClearSearch);
@@ -135,43 +135,43 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             ClearSearch();
         }
         #region method
-        public void AddOrUpdateDepartment(VinaGerman.Entity.BusinessEntity.DepartmentEntity newEntity)
+        public void AddOrUpdateLocation(VinaGerman.Entity.BusinessEntity.LocationEntity newEntity)
         {
-            VinaGerman.Entity.BusinessEntity.DepartmentEntity oldEntity = DepartmentList.FirstOrDefault<VinaGerman.Entity.BusinessEntity.DepartmentEntity>(p => p.DepartmentId == newEntity.DepartmentId);
+            VinaGerman.Entity.BusinessEntity.LocationEntity oldEntity = LocationList.FirstOrDefault<VinaGerman.Entity.BusinessEntity.LocationEntity>(p => p.LocationId == newEntity.LocationId);
 
             if (oldEntity == null)
             {
-                DepartmentList.Insert(0, newEntity);
+                LocationList.Insert(0, newEntity);
             }
             else
             {
-                int index = DepartmentList.IndexOf(oldEntity);
-                DepartmentList.Remove(oldEntity);
-                DepartmentList.Insert(index, newEntity);
+                int index = LocationList.IndexOf(oldEntity);
+                LocationList.Remove(oldEntity);
+                LocationList.Insert(index, newEntity);
             }
 
-            DepartmentList = new List<VinaGerman.Entity.BusinessEntity.DepartmentEntity>(_departmentList);
+            LocationList = new List<VinaGerman.Entity.BusinessEntity.LocationEntity>(_locationList);
         }
-        public void DeleteDepartment(VinaGerman.Entity.BusinessEntity.DepartmentEntity newEntity)
+        public void DeleteLocation(VinaGerman.Entity.BusinessEntity.LocationEntity newEntity)
         {
-            VinaGerman.Entity.BusinessEntity.DepartmentEntity oldEntity = DepartmentList.FirstOrDefault<VinaGerman.Entity.BusinessEntity.DepartmentEntity>(p => p.DepartmentId == newEntity.DepartmentId);
+            VinaGerman.Entity.BusinessEntity.LocationEntity oldEntity = LocationList.FirstOrDefault<VinaGerman.Entity.BusinessEntity.LocationEntity>(p => p.LocationId == newEntity.LocationId);
 
             if (oldEntity != null)
             {
-                DepartmentList.Remove(oldEntity);
+                LocationList.Remove(oldEntity);
             }
 
-            DepartmentList = new List<VinaGerman.Entity.BusinessEntity.DepartmentEntity>(_departmentList);
+            LocationList = new List<VinaGerman.Entity.BusinessEntity.LocationEntity>(_locationList);
         }
         public void Add()
         {
-            var newEntity = new VinaGerman.Entity.BusinessEntity.DepartmentEntity()
+            var newEntity = new VinaGerman.Entity.BusinessEntity.LocationEntity()
             {
                 Deleted = false,
                 Description = "",
                 CompanyId=0
             };
-            SelectedDepartment = newEntity;
+            SelectedLocation = newEntity;
         }
         public void Delete()
         {
@@ -183,15 +183,15 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().DeleteDepartment(SelectedDepartment);
+                        var updatedEntity = Factory.Resolve<IBaseDataDS>().DeleteLocation(SelectedLocation);
 
                         HideLoading();
 
                         //display to UI
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
-                            DeleteDepartment(SelectedDepartment);
-                            SelectedDepartment = null;
+                            DeleteLocation(SelectedLocation);
+                            SelectedLocation = null;
                         }));
                     }
                     catch (Exception ex)
@@ -210,15 +210,15 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateDepartment(SelectedDepartment);
+                    var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateLocation(SelectedLocation);
 
                     HideLoading();
 
                     //display to UI
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        SelectedDepartment = updatedEntity;
-                        AddOrUpdateDepartment(SelectedDepartment);
+                        SelectedLocation = updatedEntity;
+                        AddOrUpdateLocation(SelectedLocation);
                     }));
                 }
                 catch (Exception ex)
@@ -239,7 +239,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var list = Factory.Resolve<IBaseDataDS>().SearchDepartment(new DepartmentSearchEntity()
+                    var list = Factory.Resolve<IBaseDataDS>().SearchLocation(new LocationSearchEntity()
                     {
                         SearchText = this.SearchText
                     });
@@ -249,7 +249,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     //display to UI
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        DepartmentList = list;
+                        LocationList = list;
                     }));                    
                 }
                 catch (Exception ex)
@@ -271,7 +271,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var list = Factory.Resolve<IBaseDataDS>().SearchDepartment(new DepartmentSearchEntity()
+                    var list = Factory.Resolve<IBaseDataDS>().SearchLocation(new LocationSearchEntity()
                     {
                         SearchText = this.SearchText
                     });
@@ -286,7 +286,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     //display to UI
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        DepartmentList = list;
+                        LocationList = list;
                         CompanyList = Companylist;
                     }));
                 }

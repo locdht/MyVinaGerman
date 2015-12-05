@@ -168,6 +168,9 @@
   <data name="captionConfirm" xml:space="preserve">
     <value>Xác nhận</value>
   </data>
+  <data name="captionContactInfo" xml:space="preserve">
+    <value>Thông tin nhân viên</value>
+  </data>
   <data name="captionContactList" xml:space="preserve">
     <value>Danh sách người liên hệ</value>
   </data>
@@ -197,6 +200,12 @@
   </data>
   <data name="captionInformation" xml:space="preserve">
     <value>Thông tin</value>
+  </data>
+  <data name="captionLocationInfo" xml:space="preserve">
+    <value>Thông tin chi nhánh</value>
+  </data>
+  <data name="captionLocationList" xml:space="preserve">
+    <value>Danh sách chi nhánh List</value>
   </data>
   <data name="captionLogon" xml:space="preserve">
     <value>Bảo mật</value>
@@ -234,8 +243,14 @@
   <data name="hintCompanySearch" xml:space="preserve">
     <value>Tên công ty/Điện thoại/Mã số thuế</value>
   </data>
+  <data name="hintContactSearch" xml:space="preserve">
+    <value>Tên/Email/Điện thoại/Địa chỉ</value>
+  </data>
   <data name="hintDepartmentSearch" xml:space="preserve">
     <value>Điện thoại/Mô tả</value>
+  </data>
+  <data name="hintLocationSearch" xml:space="preserve">
+    <value>Địa chỉ/Description</value>
   </data>
   <data name="lblAddress" xml:space="preserve">
     <value>Địa chỉ:</value>
@@ -270,14 +285,23 @@
   <data name="lblCustomer" xml:space="preserve">
     <value>Khách hàng:</value>
   </data>
+  <data name="lblDepartment" xml:space="preserve">
+    <value>Bộ phận:</value>
+  </data>
   <data name="lblDescription" xml:space="preserve">
     <value>Mô tả:</value>
+  </data>
+  <data name="lblEmail" xml:space="preserve">
+    <value>Email:</value>
   </data>
   <data name="lblEmployee" xml:space="preserve">
     <value>Nhân viên:</value>
   </data>
   <data name="lblFreeTextSearch" xml:space="preserve">
     <value>Nội dung:</value>
+  </data>
+  <data name="lblFullName" xml:space="preserve">
+    <value>Họ tên:</value>
   </data>
   <data name="lblIndustry" xml:space="preserve">
     <value>Ngành nghề:</value>
@@ -296,6 +320,9 @@
   </data>
   <data name="lblPort" xml:space="preserve">
     <value>Cổng:</value>
+  </data>
+  <data name="lblPosition" xml:space="preserve">
+    <value>Chức vụ:</value>
   </data>
   <data name="lblPrice" xml:space="preserve">
     <value>Giá:</value>
