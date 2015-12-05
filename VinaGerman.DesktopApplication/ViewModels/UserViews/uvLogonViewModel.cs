@@ -84,7 +84,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
 
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
-                            GoToView(enumView.PurchaseOrderManagement);
+                            GoToView(enumView.ArticleManagement);
                         }));
                     }
                 }

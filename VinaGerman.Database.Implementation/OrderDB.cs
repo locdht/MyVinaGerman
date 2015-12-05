@@ -16,27 +16,26 @@ namespace VinaGerman.Database.Implementation
         {
             List<OrderEntity> result = null;            
             string sqlStatement = "SELECT " + Environment.NewLine +
-                "Order.OrderId," + Environment.NewLine +
-                "Order.OrderType," + Environment.NewLine +
-                "Order.BusinessId," + Environment.NewLine +
-                "Order.IndustryId," + Environment.NewLine +
-                "Order.CreatedBy," + Environment.NewLine +
-                "Order.ResponsibleBy" + Environment.NewLine +
-                "Order.OrderDate," + Environment.NewLine +
-                "Order.CreatedDate," + Environment.NewLine +
-                "Order.CustomerCompanyId," + Environment.NewLine +
-                "Order.CustomerContactId," + Environment.NewLine +
-                "Order.OrderNumber," + Environment.NewLine +
+                "Orders.OrderId," + Environment.NewLine +
+                "Orders.OrderType," + Environment.NewLine +
+                "Orders.BusinessId," + Environment.NewLine +
+                "Orders.IndustryId," + Environment.NewLine +
+                "Orders.CreatedBy," + Environment.NewLine +
+                "Orders.ResponsibleBy," + Environment.NewLine +
+                "Orders.OrderDate," + Environment.NewLine +
+                "Orders.CreatedDate," + Environment.NewLine +
+                "Orders.CustomerCompanyId," + Environment.NewLine +
+                "Orders.CustomerContactId," + Environment.NewLine +
+                "Orders.OrderNumber," + Environment.NewLine +
 
-                "Co.Description as CompanyName," + Environment.NewLine +
-                "CT.Description as ContactName," + Environment.NewLine +
-
-                "Order.Description" + Environment.NewLine +
-                "FROM Order Or,Company Co, Contact CT" + Environment.NewLine +
-                "WHERE Or.CustomerCompanyId=Co.CompanyId AND Or.CustomerContactId=CT.ContactId " + Environment.NewLine;
+                "Company.Description as CompanyName," + Environment.NewLine +
+                "Contact.FullName as ContactName," + Environment.NewLine +
+                "Orders.Description" + Environment.NewLine +
+                "FROM Orders join Company on Orders.CustomerCompanyId = Company.CompanyId join Contact on Orders.CustomerContactId = Contact.ContactId" + Environment.NewLine +
+                "WHERE 1=1 " + Environment.NewLine;
             if (searchObject.SearchText != null && searchObject.SearchText.Length > 0)
             {
-                sqlStatement += "AND (OrderNumber LIKE N'%" + searchObject.SearchText + "%' OR Description LIKE N'%" + searchObject.SearchText + "%')" + Environment.NewLine;
+                sqlStatement += "AND (Order.OrderNumber LIKE N'%" + searchObject.SearchText + "%' OR Order.Description LIKE N'%" + searchObject.SearchText + "%')" + Environment.NewLine;
             }
             //execute
             var db = GetDatabaseInstance();
@@ -55,7 +54,7 @@ namespace VinaGerman.Database.Implementation
             //if insert
             if (entityObject.OrderId > 0)
             {
-                sqlStatement += "UPDATE Order SET  " + Environment.NewLine +
+                sqlStatement += "UPDATE Orders SET  " + Environment.NewLine +
                 "OrderType=@OrderType," + Environment.NewLine +
                 "BusinessId=@BusinessId," + Environment.NewLine +
                 "IndustryId=@IndustryId," + Environment.NewLine +
@@ -72,7 +71,7 @@ namespace VinaGerman.Database.Implementation
             }
             else
             {
-                sqlStatement += "INSERT INTO Order(  " + Environment.NewLine +
+                sqlStatement += "INSERT INTO Orders(  " + Environment.NewLine +
                 "Order.OrderType," + Environment.NewLine +
                 "Order.BusinessId," + Environment.NewLine +
                 "Order.IndustryId," + Environment.NewLine +
@@ -126,7 +125,7 @@ namespace VinaGerman.Database.Implementation
         }
         public bool DeleteOrder(OrderEntity entityObject)
         {
-            string sqlStatement = "UPDATE Order SET Deleted=1 WHERE OrderId=@OrderId  " + Environment.NewLine;
+            string sqlStatement = "UPDATE Orders SET Deleted=1 WHERE OrderId=@OrderId  " + Environment.NewLine;
 
             //execute
             var db = GetDatabaseInstance();

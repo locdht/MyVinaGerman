@@ -64,6 +64,9 @@ namespace VinaGerman.DataSource
         List<OrderlineEntity> GetOrderRelationsForOrder(OrderEntity searchObject);
         OrderlineEntity AddOrUpdateOrderRelation(OrderlineEntity entityObject);
         bool DeleteOrderRelation(OrderlineEntity entityObject);
+        List<LoanEntity> GetOrderRelationsLoanForOrder(OrderEntity searchObject);
+        LoanEntity AddOrUpdateOrderRelationLoan(LoanEntity entityObject);
+        bool DeleteOrderRelationLoan(LoanEntity entityObject);
         #endregion
     
     }

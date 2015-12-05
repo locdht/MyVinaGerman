@@ -358,6 +358,24 @@ namespace VinaGerman.DesktopApplication.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Order Info.
+        /// </summary>
+        public static string captionOrderInfo {
+            get {
+                return ResourceManager.GetString("captionOrderInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order list.
+        /// </summary>
+        public static string captionOrderList {
+            get {
+                return ResourceManager.GetString("captionOrderList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Related article list.
         /// </summary>
         public static string captionRelatedArticle {
@@ -462,6 +480,15 @@ namespace VinaGerman.DesktopApplication.Translations {
         public static string hintLocationSearch {
             get {
                 return ResourceManager.GetString("hintLocationSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OrderNumber/Description.
+        /// </summary>
+        public static string hintOrderSearch {
+            get {
+                return ResourceManager.GetString("hintOrderSearch", resourceCulture);
             }
         }
         

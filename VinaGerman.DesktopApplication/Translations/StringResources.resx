@@ -216,6 +216,12 @@
   <data name="captionOK" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="captionOrderInfo" xml:space="preserve">
+    <value>Order Info</value>
+  </data>
+  <data name="captionOrderList" xml:space="preserve">
+    <value>Order list</value>
+  </data>
   <data name="captionRelatedArticle" xml:space="preserve">
     <value>Related article list</value>
   </data>
@@ -251,6 +257,9 @@
   </data>
   <data name="hintLocationSearch" xml:space="preserve">
     <value>Address/Description</value>
+  </data>
+  <data name="hintOrderSearch" xml:space="preserve">
+    <value>OrderNumber/Description</value>
   </data>
   <data name="lblAddress" xml:space="preserve">
     <value>Address:</value>

@@ -253,6 +253,28 @@ namespace VinaGerman.DataSource.Implementation
             channel.Dispose();
             return result;
         }
+
+        public List<LoanEntity> GetOrderRelationsLoanForOrder(OrderEntity searchObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.GetOrderRelationsLoanForOrder(searchObject);
+            channel.Dispose();
+            return result;
+        }
+        public LoanEntity AddOrUpdateOrderRelationLoan(LoanEntity entityObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.AddOrUpdateOrderRelationLoan(entityObject);
+            channel.Dispose();
+            return result;
+        }
+        public bool DeleteOrderRelationLoan(LoanEntity entityObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.DeleteOrderRelationLoan(entityObject);
+            channel.Dispose();
+            return result;
+        }
         #endregion
     }
 }
