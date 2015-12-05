@@ -82,9 +82,9 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
 
                 if (SelectedOrder != null)
                 {
-                    SelectedCompany = CompanyList.FirstOrDefault(c => c.CompanyId == SelectedOrder.CustomerCompanyId);
+                    SelectedCustomer = CustomerList.FirstOrDefault(c => c.CompanyId == SelectedOrder.CustomerCompanyId);
                     SelectedContact = ContactList.FirstOrDefault(c => c.ContactId == SelectedOrder.CustomerContactId);
-                    SelectedUserAccount = UserAccounList.FirstOrDefault(c => c.UserAccountId == SelectedOrder.CreatedBy);
+                    SelectedEmployee = EmployeeList.FirstOrDefault(c => c.UserAccountId == SelectedOrder.CreatedBy);
                     SelectedBusiness = BusinessList.FirstOrDefault(c => c.BusinessId == SelectedOrder.BusinessId);
                     SelectedIndustry = IndustryList.FirstOrDefault(c => c.IndustryId == SelectedOrder.IndustryId);
                     LoadRelatedOrders();
