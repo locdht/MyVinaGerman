@@ -166,17 +166,30 @@ namespace VinaGerman.Service.Implementation
         {
             return Factory.Resolve<IOrderBL>().DeleteOrder(entityObject);
         }
-        public List<OrderlineEntity> GetArticleRelationsForArticle(OrderEntity searchObject)
+        public List<OrderlineEntity> GetOrderRelationsForOrder(OrderEntity searchObject)
         {
             return Factory.Resolve<IOrderBL>().GetOrderRelationsForOrder(searchObject);
         }
-        public OrderlineEntity AddOrUpdateArticleRelation(OrderlineEntity entityObject)
+        public OrderlineEntity AddOrUpdateOrderRelation(OrderlineEntity entityObject)
         {
             return Factory.Resolve<IOrderBL>().AddOrUpdateOrderRelation(entityObject);
         }
-        public bool DeleteArticleRelation(OrderlineEntity entityObject)
+        public bool DeleteOrderRelation(OrderlineEntity entityObject)
         {
             return Factory.Resolve<IOrderBL>().DeleteOrderRelation(entityObject);
+        }
+
+        public List<LoanEntity> GetOrderRelationsLoanForOrder(OrderEntity searchObject)
+        {
+            return Factory.Resolve<IOrderBL>().GetOrderRelationsLoanForOrder(searchObject);
+        }
+        public LoanEntity AddOrUpdateOrderRelationLoan(LoanEntity entityObject)
+        {
+            return Factory.Resolve<IOrderBL>().AddOrUpdateOrderRelationLoan(entityObject);
+        }
+        public bool DeleteOrderRelationLoan(LoanEntity entityObject)
+        {
+            return Factory.Resolve<IOrderBL>().DeleteOrderRelationLoan(entityObject);
         }
         #endregion
 

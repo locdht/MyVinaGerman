@@ -198,10 +198,10 @@ namespace VinaGerman.Database.Implementation
                 sqlStatement += "INSERT INTO Orderline(  " + Environment.NewLine +
                 "OrderId," + Environment.NewLine +
                 "Commission," + Environment.NewLine +
-                "ArticleId,)" + Environment.NewLine +
+                "ArticleId," + Environment.NewLine +
                 "Quantity," + Environment.NewLine +
                 "Price," + Environment.NewLine +
-                "CreatedBy,)" + Environment.NewLine +
+                "CreatedBy," + Environment.NewLine +
                 "CreatedDate," + Environment.NewLine +
                 "ModifiedBy," + Environment.NewLine +
                 "ModifiedDate)" + Environment.NewLine +
@@ -285,5 +285,116 @@ namespace VinaGerman.Database.Implementation
             }
             return true;
         }
+
+        public List<LoanEntity> GetOrderRelationsLoanForOrder(OrderEntity searchObject)
+        {
+            List<LoanEntity> result = null;
+            string sqlStatement = "SELECT " + Environment.NewLine +
+                "Loan.LoanId," + Environment.NewLine +
+                "Loan.OrderId," + Environment.NewLine +
+                "Loan.Quantity," + Environment.NewLine +
+                "Loan.ArticleId," + Environment.NewLine +
+                "Article.CategoryId," + Environment.NewLine +
+                "Article.ArticleNo," + Environment.NewLine +
+                "Article.Description," + Environment.NewLine +
+                "Article.Unit," + Environment.NewLine +
+                "Orderline.Deleted," + Environment.NewLine +
+
+                "FROM Loan JOIN Article ON Loan.ArticleId=Article.ArticleId " + Environment.NewLine +
+                "WHERE Loan.OrderId=@OrderId" + Environment.NewLine;
+
+            //execute
+            var db = GetDatabaseInstance();
+            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
+            // Call the ExecuteReader method with the command.                
+            using (IDbConnection conn = db.CreateConnection())
+            {
+                result = conn.Query<LoanEntity>(sqlStatement, new { OrderId = searchObject.OrderId }).ToList();
+            }
+            return result;
+        }
+        public LoanEntity AddOrUpdateOrderRelationLoan(LoanEntity entityObject)
+        {
+            string sqlStatement = "";
+
+            sqlStatement += "DECLARE @NewLoanId INT " + Environment.NewLine;
+            //if insert
+            if (entityObject.LoanId > 0)
+            {
+                sqlStatement += "UPDATE Loan SET  " + Environment.NewLine +
+                    //"OrderId=@OrderId" + Environment.NewLine +
+                "ArticleId=@ArticleId" + Environment.NewLine +
+                "Quantity=@Quantity" + Environment.NewLine +
+                "WHERE LoanId=@LoanId " + Environment.NewLine +
+                "SET @NewLoanId = @LoanId " + Environment.NewLine;
+            }
+            else
+            {
+                sqlStatement += "INSERT INTO Loan(  " + Environment.NewLine +
+                "OrderId," + Environment.NewLine +
+                "ArticleId," + Environment.NewLine +
+                "Quantity)" + Environment.NewLine +
+                "VALUES (" + Environment.NewLine +
+                "@OrderId," + Environment.NewLine +
+                "@ArticleId," + Environment.NewLine +
+                "@Quantity)" + Environment.NewLine +
+                "SET @NewLoanId = (SELECT SCOPE_IDENTITY()) " + Environment.NewLine;
+            }
+
+            sqlStatement += "SELECT " + Environment.NewLine +
+                "Loan.LoanId," + Environment.NewLine +
+                "Loan.OrderId," + Environment.NewLine +
+                "Loan.Quantity," + Environment.NewLine +
+                "Loan.ArticleId," + Environment.NewLine +
+                "Article.CategoryId," + Environment.NewLine +
+                "Article.ArticleNo," + Environment.NewLine +
+                "Article.Description," + Environment.NewLine +
+                "Article.Unit," + Environment.NewLine +
+                "Orderline.Deleted," + Environment.NewLine +
+
+                "FROM Loan JOIN Article ON Loan.ArticleId=Article.ArticleId " + Environment.NewLine +
+                "WHERE Loan.OrderId=@OrderId" + Environment.NewLine;
+
+            //execute
+            var db = GetDatabaseInstance();
+            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
+            // Call the ExecuteReader method with the command.                
+            using (IDbConnection conn = db.CreateConnection())
+            {
+                var result = conn.Query<LoanEntity>(sqlStatement, new
+                {
+                    OrderlineId = entityObject.OrderId,
+                    OrderId = entityObject.OrderId,
+                    ArticleId = entityObject.ArticleId,
+                    Quantity = entityObject.Quantity,
+                    CategoryId = entityObject.CategoryId,
+                    ArticleNo = entityObject.ArticleNo,
+                    Description = entityObject.Description,
+                    Unit = entityObject.Unit,
+                    Deleted = entityObject.Deleted,
+                }).ToList();
+
+                if (result.Count > 0)
+                    entityObject = result[0];
+                else
+                    entityObject = null;
+            }
+            return entityObject;
+        }
+        public bool DeleteOrderRelationLoan(LoanEntity entityObject)
+        {
+            string sqlStatement = "DELETE FROM Loan WHERE LoanId=@LoanId  " + Environment.NewLine;
+
+            //execute
+            var db = GetDatabaseInstance();
+            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
+            // Call the ExecuteReader method with the command.                
+            using (IDbConnection conn = db.CreateConnection())
+            {
+                conn.Execute(sqlStatement, new { OrderlineId = entityObject.LoanId });
+            }
+            return true;
+        }
+    
     }
 }

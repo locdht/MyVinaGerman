@@ -37,5 +37,18 @@ namespace VinaGerman.Business.Implementation
         {
             return Factory.Resolve<IOrderDB>().DeleteOrderRelation(entityObject);
         }
+
+        public List<LoanEntity> GetOrderRelationsLoanForOrder(OrderEntity searchObject)
+        {
+            return Factory.Resolve<IOrderDB>().GetOrderRelationsLoanForOrder(searchObject);
+        }
+        public LoanEntity AddOrUpdateOrderRelationLoan(LoanEntity entityObject)
+        {
+            return Factory.Resolve<IOrderDB>().AddOrUpdateOrderRelationLoan(entityObject);
+        }
+        public bool DeleteOrderRelationLoan(LoanEntity entityObject)
+        {
+            return Factory.Resolve<IOrderDB>().DeleteOrderRelationLoan(entityObject);
+        }
     }
 }

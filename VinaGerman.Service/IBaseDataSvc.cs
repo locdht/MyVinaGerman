@@ -95,6 +95,12 @@ namespace VinaGerman.Service
         OrderlineEntity AddOrUpdateOrderRelation(OrderlineEntity entityObject);
         [OperationContract]
         bool DeleteOrderRelation(OrderlineEntity entityObject);
+        [OperationContract]
+        List<LoanEntity> GetOrderRelationsLoanForOrder(OrderEntity searchObject);
+        [OperationContract]
+        LoanEntity AddOrUpdateOrderRelationLoan(LoanEntity entityObject);
+        [OperationContract]
+        bool DeleteOrderRelationLoan(LoanEntity entityObject);
         #endregion
     
     }
