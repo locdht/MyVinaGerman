@@ -283,7 +283,7 @@
                     </ComboBox>
                     
                     <StackPanel Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Name="btnDelete" Command="{Binding DeleteCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnDelete}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
+                        <Button Name="btnDelete" Command="{Binding ShowReportCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnDelete}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
                         <Button Name="btnSave" Command="{Binding SaveCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnSave}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
                     </StackPanel>
                 </Grid>

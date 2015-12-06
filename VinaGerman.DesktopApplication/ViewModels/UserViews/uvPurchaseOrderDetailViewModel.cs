@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Markup;
 using VinaGerman.DesktopApplication.Translations;
 using VinaGerman.DesktopApplication.Ultilities;
+using VinaGerman.DesktopApplication.ViewModels.ReportViews;
 using VinaGerman.Entity.BusinessEntity;
 
 namespace VinaGerman.DesktopApplication.ViewModels.UserViews
@@ -69,19 +70,18 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 RaisePropertyChanged("SearchText");
             }
         }
-
-        public RelayCommand ClearSearchCommand { get; set; }
+        
         public RelayCommand SearchCommand { get; set; }
+        public RelayCommand ShowReportCommand { get; set; }
+        
         #endregion
 
 
         public uvPurchaseOrderDetailViewModel(MainWindowViewModel pMainWindowViewModel)
             : base(pMainWindowViewModel)
-        {
-            ClearSearchCommand = new RelayCommand(ClearSearch);
-            SearchCommand = new RelayCommand(Search);            
-
-            ClearSearch();
+        {            
+            SearchCommand = new RelayCommand(Search);
+            ShowReportCommand = new RelayCommand(ShowReport);
         }
         #region method      
         public void Search()
@@ -175,13 +175,16 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             //    OriginalCompany = SelectCompany
             //});
         }
-        public void ClearSearch()
+        public void ShowReport()
         {
-            SearchText = "";
+            ShowDialog<rvPurchaseOrderDetail>(new rvPurchaseOrderDetail()
+            {
+                
+            });
         }
         #endregion
 
-        #region Message processing
+        #region Message processing        
         public override void Reset()
         {
             //reset left panel

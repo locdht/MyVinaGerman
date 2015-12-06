@@ -2,8 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:view="clr-namespace:VinaGerman.DesktopApplication.Views"
                     xmlns:userview="clr-namespace:VinaGerman.DesktopApplication.Views.UserViews"
+                    xmlns:reportview="clr-namespace:VinaGerman.DesktopApplication.Views.ReportViews"
                     xmlns:boxviewmodel="clr-namespace:VinaGerman.DesktopApplication.ViewModels"
-                    xmlns:viewmodel="clr-namespace:VinaGerman.DesktopApplication.ViewModels.UserViews">
+                    xmlns:reportviewmodel="clr-namespace:VinaGerman.DesktopApplication.ViewModels.ReportViews"
+                    xmlns:userviewmodel="clr-namespace:VinaGerman.DesktopApplication.ViewModels.UserViews">
     <DataTemplate DataType="{x:Type boxviewmodel:LoadingBoxViewModel}">
         <view:LoadingBox/>
     </DataTemplate>
@@ -11,35 +13,40 @@
         <view:MessageBox/>
     </DataTemplate>
 
-    <!-- Views -->
-    <DataTemplate DataType="{x:Type viewmodel:uvDepartmentManagementViewModel}">
+    <!-- Report Views -->
+    <DataTemplate DataType="{x:Type reportviewmodel:rvPurchaseOrderDetail}">
+        <reportview:rvPurchaseOrderDetail/>
+    </DataTemplate>
+    
+    <!-- User Views -->
+    <DataTemplate DataType="{x:Type userviewmodel:uvDepartmentManagementViewModel}">
         <userview:uvDepartmentManagement/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type viewmodel:uvPurchaseOrderDetailViewModel}">
+    <DataTemplate DataType="{x:Type userviewmodel:uvPurchaseOrderDetailViewModel}">
         <userview:uvPurchaseOrderDetail/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type viewmodel:uvPurchaseOrderManagementViewModel}">
+    <DataTemplate DataType="{x:Type userviewmodel:uvPurchaseOrderManagementViewModel}">
         <userview:uvPurchaseOrderManagement/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type viewmodel:uvArticleManagementViewModel}">
+    <DataTemplate DataType="{x:Type userviewmodel:uvArticleManagementViewModel}">
         <userview:uvArticleManagement/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type viewmodel:uvIndustryManagementViewModel}">
+    <DataTemplate DataType="{x:Type userviewmodel:uvIndustryManagementViewModel}">
         <userview:uvIndustryManagement/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type viewmodel:uvCategoryManagementViewModel}">
+    <DataTemplate DataType="{x:Type userviewmodel:uvCategoryManagementViewModel}">
         <userview:uvCategoryManagement/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type viewmodel:uvBusinessManagementViewModel}">
+    <DataTemplate DataType="{x:Type userviewmodel:uvBusinessManagementViewModel}">
         <userview:uvBusinessManagement/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type viewmodel:uvCompanyManagementViewModel}">
+    <DataTemplate DataType="{x:Type userviewmodel:uvCompanyManagementViewModel}">
         <userview:uvCompanyManagement/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type viewmodel:uvCompanyDetailViewModel}">
+    <DataTemplate DataType="{x:Type userviewmodel:uvCompanyDetailViewModel}">
         <userview:uvCompanyDetail/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type viewmodel:uvLogonViewModel}">
+    <DataTemplate DataType="{x:Type userviewmodel:uvLogonViewModel}">
         <userview:uvLogon/>
     </DataTemplate>
 </ResourceDictionary>

@@ -174,9 +174,10 @@ namespace VinaGerman.DesktopApplication.ViewModels
         
         public void RegisterImplementation()
         {
+            VinaGerman.Entity.Factory.Register<VinaGerman.DataSource.IReportDS, VinaGerman.DataSource.Implementation.ReportDS>();
             VinaGerman.Entity.Factory.Register<VinaGerman.DataSource.ICommonDS, VinaGerman.DataSource.Implementation.CommonDS>();
             VinaGerman.Entity.Factory.Register<VinaGerman.DataSource.ICompanyDS, VinaGerman.DataSource.Implementation.CompanyDS>();
-            VinaGerman.Entity.Factory.Register<VinaGerman.DataSource.IBaseDataDS, VinaGerman.DataSource.Implementation.BaseDataDS>();
+            VinaGerman.Entity.Factory.Register<VinaGerman.DataSource.IBaseDataDS, VinaGerman.DataSource.Implementation.BaseDataDS>();            
         }       
         #endregion
 

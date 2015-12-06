@@ -44,6 +44,9 @@
     <Compile Include="IBaseDataSvc.cs" />
     <Compile Include="ICommonSvc.cs" />
     <Compile Include="ICompanySvc.cs" />
+    <Compile Include="IReportSvc.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

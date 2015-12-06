@@ -42,6 +42,7 @@
     <Compile Include="IBaseDataDS.cs" />
     <Compile Include="ICommonDS.cs" />
     <Compile Include="ICompanyDS.cs" />
+    <Compile Include="IReportDS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

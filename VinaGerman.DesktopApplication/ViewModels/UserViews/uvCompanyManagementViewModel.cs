@@ -224,10 +224,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     HideLoading();
                     ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
                 }
-            });
-            //ShowDialog<uvCompanyDetailViewModel>(new uvCompanyDetailViewModel() { 
-            //    OriginalCompany = SelectCompany
-            //});
+            });            
         }
         public void Search()
         {

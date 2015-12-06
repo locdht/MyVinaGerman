@@ -11,6 +11,28 @@ namespace VinaGerman.Database.Implementation
 {
     public class LocationDB : BaseDB, ILocationDB
     {
+        public LocationEntity GetLocationById(int locationId)
+        {
+            LocationEntity result = null;
+            string sqlStatement = "SELECT " + Environment.NewLine +
+                "Location.LocationId," + Environment.NewLine +
+                "Location.Address," + Environment.NewLine +
+                "Location.Description," + Environment.NewLine +
+                "Location.CompanyId," + Environment.NewLine +
+                "Location.Deleted" + Environment.NewLine +
+                "FROM Location " + Environment.NewLine +
+                "WHERE LocationId=@LocationId " + Environment.NewLine;
+        
+            //execute
+            var db = GetDatabaseInstance();
+            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
+            // Call the ExecuteReader method with the command.                
+            using (IDbConnection conn = db.CreateConnection())
+            {
+                result = conn.Query<LocationEntity>(sqlStatement, new { LocationId = locationId }).FirstOrDefault();
+            }
+            return result;
+        }
         public List<LocationEntity> SearchLocation(LocationSearchEntity searchObject)
         {
             List<LocationEntity> result = null;            
