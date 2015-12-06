@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VinaGerman.Entity.DatabaseEntity
+namespace VinaGerman.Entity.BusinessEntity
 {
     public class ContactEntity : BaseEntity
     {
@@ -131,6 +131,7 @@ namespace VinaGerman.Entity.DatabaseEntity
                 _sPhone = value;
             }
         }
+
         public string Position
         {
             get

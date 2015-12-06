@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VinaGerman.Entity.DatabaseEntity;
+using VinaGerman.Entity.BusinessEntity;
 using VinaGerman.Entity.SearchEntity;
 using Dapper;
 namespace VinaGerman.Database.Implementation
@@ -18,9 +18,10 @@ namespace VinaGerman.Database.Implementation
                 "Department.DepartmentId," + Environment.NewLine +
                 "Department.Phone," + Environment.NewLine +
                 "Department.Description," + Environment.NewLine +
+                "Company.Description as CompanyName," + Environment.NewLine +
                 "Department.CompanyId," + Environment.NewLine +
                 "Department.Deleted" + Environment.NewLine +
-                "FROM Department " + Environment.NewLine +
+                "FROM Department JOIN Company ON Department.CompanyId=Company.CompanyId " + Environment.NewLine +
                 "WHERE Deleted=0 " + Environment.NewLine;
             if (searchObject.SearchText != null && searchObject.SearchText.Length > 0)
             {

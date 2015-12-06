@@ -168,6 +168,9 @@
   <data name="captionConfirm" xml:space="preserve">
     <value>Confirm</value>
   </data>
+  <data name="captionContactInfo" xml:space="preserve">
+    <value>Contact information</value>
+  </data>
   <data name="captionContactList" xml:space="preserve">
     <value>Contact List</value>
   </data>
@@ -198,6 +201,12 @@
   <data name="captionInformation" xml:space="preserve">
     <value>Information</value>
   </data>
+  <data name="captionLocationInfo" xml:space="preserve">
+    <value>Location information</value>
+  </data>
+  <data name="captionLocationList" xml:space="preserve">
+    <value>Location List</value>
+  </data>
   <data name="captionLogon" xml:space="preserve">
     <value>Security</value>
   </data>
@@ -206,6 +215,12 @@
   </data>
   <data name="captionOK" xml:space="preserve">
     <value>OK</value>
+  </data>
+  <data name="captionOrderInfo" xml:space="preserve">
+    <value>Order Info</value>
+  </data>
+  <data name="captionOrderList" xml:space="preserve">
+    <value>Order list</value>
   </data>
   <data name="captionRelatedArticle" xml:space="preserve">
     <value>Related article list</value>
@@ -234,8 +249,17 @@
   <data name="hintCompanySearch" xml:space="preserve">
     <value>Company name/Phone/Tax Code</value>
   </data>
+  <data name="hintContactSearch" xml:space="preserve">
+    <value>FullName/Email/Phone/Adress</value>
+  </data>
   <data name="hintDepartmentSearch" xml:space="preserve">
     <value>Phone/Description</value>
+  </data>
+  <data name="hintLocationSearch" xml:space="preserve">
+    <value>Address/Description</value>
+  </data>
+  <data name="hintOrderSearch" xml:space="preserve">
+    <value>OrderNumber/Description</value>
   </data>
   <data name="lblAddress" xml:space="preserve">
     <value>Address:</value>
@@ -270,14 +294,23 @@
   <data name="lblCustomer" xml:space="preserve">
     <value>Customer:</value>
   </data>
+  <data name="lblDepartment" xml:space="preserve">
+    <value>Department:</value>
+  </data>
   <data name="lblDescription" xml:space="preserve">
     <value>Description:</value>
+  </data>
+  <data name="lblEmail" xml:space="preserve">
+    <value>Email:</value>
   </data>
   <data name="lblEmployee" xml:space="preserve">
     <value>Employee:</value>
   </data>
   <data name="lblFreeTextSearch" xml:space="preserve">
     <value>Free text:</value>
+  </data>
+  <data name="lblFullName" xml:space="preserve">
+    <value>Full Name:</value>
   </data>
   <data name="lblIndustry" xml:space="preserve">
     <value>Industry:</value>
@@ -296,6 +329,9 @@
   </data>
   <data name="lblPort" xml:space="preserve">
     <value>Port:</value>
+  </data>
+  <data name="lblPosition" xml:space="preserve">
+    <value>Position:</value>
   </data>
   <data name="lblPrice" xml:space="preserve">
     <value>Price:</value>

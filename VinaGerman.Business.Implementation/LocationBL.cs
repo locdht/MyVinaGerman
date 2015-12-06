@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VinaGerman.Database;
 using VinaGerman.Entity;
-using VinaGerman.Entity.DatabaseEntity;
+using VinaGerman.Entity.BusinessEntity;
 using VinaGerman.Entity.SearchEntity;
 
 namespace VinaGerman.Business.Implementation

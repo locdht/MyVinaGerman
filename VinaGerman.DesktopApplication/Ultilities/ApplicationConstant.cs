@@ -16,6 +16,8 @@ namespace VinaGerman.DesktopApplication.Ultilities
         ArticleManagement,
         DepartmentManagement,   
         PurchaseOrderManagement,
-        PurchaseOrderDetail
+        PurchaseOrderDetail,
+        LocationManagement,
+        ContactManagement
     }
 }

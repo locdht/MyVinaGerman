@@ -42,10 +42,6 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="35"/>
                         <RowDefinition Height="5"/>
-                        <RowDefinition Height="35"/>
-                        <RowDefinition Height="5"/>
-                        <RowDefinition Height="35"/>
-                        <RowDefinition Height="5"/>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Column="0" Grid.Row="0" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblFreeTextSearch}" Style="{DynamicResource BaseLabel}"/>
@@ -53,22 +49,19 @@
                         <TextBox Name="txtSearchId" Text="{Binding SearchText}" MaxLength="50" Style="{DynamicResource BaseTextBox}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="GotFocus">
-                                    <i:InvokeCommandAction Command="{Binding ControlGotFocusCommand}" CommandParameter="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.hintCompanySearch}" />
+                                    <i:InvokeCommandAction Command="{Binding ControlGotFocusCommand}" CommandParameter="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.hintOrderSearch}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <wm:WatermarkService.Watermark>
-                                <TextBlock FontSize="13" Foreground="#C2C5D7" Padding="3,0,0,0" VerticalAlignment="Center" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.hintCompanySearch}"></TextBlock>
+                                <TextBlock FontSize="13" Foreground="#C2C5D7" Padding="3,0,0,0" VerticalAlignment="Center" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.hintOrderSearch}"></TextBlock>
                             </wm:WatermarkService.Watermark>
                         </TextBox>
                     </AdornerDecorator>
 
-                    <CheckBox Name="chkSearchOwner" Grid.Column="1" Grid.Row="2" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.captionCustomer}" IsChecked="{Binding IsCustomer}" Style="{DynamicResource BaseCheckBox}"></CheckBox>
-
-                    <CheckBox Name="chkSearchSupplier" Grid.Column="1" Grid.Row="4" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.captionSupplier}" IsChecked="{Binding IsSupplier}" Style="{DynamicResource BaseCheckBox}"></CheckBox>
-
                     <StackPanel Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Name="btnClearSearch" Command="{Binding ClearSearchCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnClearSearch}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
                         <Button Name="btnSearch" Command="{Binding SearchCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnSearch}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
+                        <Button Name="btnAdd" Command="{Binding AddCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnAdd}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
                     </StackPanel>
                 </Grid>
             </Border>
@@ -82,12 +75,12 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <!--header block-->
-                <Grid Grid.Row="0" Background="{DynamicResource BorderBrush}" >                    
-                    <Label Style="{DynamicResource LabelBarCaption}" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.captionCustomerList}" Margin="4,0,0,0"/>
+                <Grid Grid.Row="0" Background="{DynamicResource BorderBrush}" >
+                    <Label Style="{DynamicResource LabelBarCaption}" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.captionOrderList}" Margin="4,0,0,0"/>
                 </Grid>
                 <!--content block-->
                 <Grid Grid.Column="0" Grid.Row="1">
-                    <DataGrid Name="gridData" Grid.Column="0" Grid.Row="0" ColumnHeaderHeight="42" ItemsSource="{Binding CompanyList}" SelectedItem="{Binding SelectedCompany}"
+                    <DataGrid Name="gridData" Grid.Column="0" Grid.Row="0" ColumnHeaderHeight="42" ItemsSource="{Binding OrderList}" SelectedItem="{Binding SelectedOrder}"
                       SelectionMode="Single" HeadersVisibility="None" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" RowHeaderWidth="0" IsReadOnly="True">
                         <DataGrid.Resources>
                             <helper:BindingProxy x:Key="proxy" Data="{Binding}" />
@@ -128,14 +121,14 @@
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
-                                            <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="0" Text="{Binding Description}" FontWeight="Bold" VerticalAlignment="Top"  TextWrapping="Wrap" />
-                                            <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="0" Text="{Binding Address}" VerticalAlignment="Top" TextWrapping="Wrap"/>
+                                            <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="0" Text="{Binding OrderNumber}" FontWeight="Bold" VerticalAlignment="Top"  TextWrapping="Wrap" />
+                                            <!--<TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="0" Text="{Binding Address}" VerticalAlignment="Top" TextWrapping="Wrap"/>-->
 
                                             <TextBlock Grid.Column="0" Grid.Row="2" Margin="0" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblCompanyCode}" VerticalAlignment="Top" TextWrapping="Wrap"/>
-                                            <TextBlock Grid.Column="1" Grid.Row="2" Margin="0" Text="{Binding CompanyCode}" VerticalAlignment="Top" TextWrapping="Wrap"/>
+                                            <TextBlock Grid.Column="1" Grid.Row="2" Margin="0" Text="{Binding OrderDate}" VerticalAlignment="Top" TextWrapping="Wrap"/>
 
                                             <TextBlock Grid.Column="0" Grid.Row="3" Margin="0" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblPhone}" VerticalAlignment="Top" TextWrapping="Wrap"/>
-                                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="0" Text="{Binding Phone}" VerticalAlignment="Top" TextWrapping="Wrap"/>
+                                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="0" Text="{Binding CompanyName}" VerticalAlignment="Top" TextWrapping="Wrap"/>
                                         </Grid>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -149,7 +142,6 @@
                                                 <RowDefinition Height="35"/>
                                                 <RowDefinition Height="35"/>                                                
                                             </Grid.RowDefinitions>
-                                            <Image Grid.Row="0" Visibility="{Binding IsSupplier, Converter={StaticResource boolToVisibilityConverter}}" Source="/VinaGerman.DesktopApplication;component/Images/supplier.png" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                             <Image Grid.Row="1" Visibility="{Binding IsCustomer, Converter={StaticResource boolToVisibilityConverter}}" Source="/VinaGerman.DesktopApplication;component/Images/customer.png" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         </Grid>
                                     </DataTemplate>
