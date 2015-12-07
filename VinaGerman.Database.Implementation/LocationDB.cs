@@ -44,7 +44,7 @@ namespace VinaGerman.Database.Implementation
                 "Location.CompanyId," + Environment.NewLine +
                 "Location.Deleted" + Environment.NewLine +
                 "FROM Location JOIN Company ON Location.CompanyId=Company.CompanyId " + Environment.NewLine +
-                "WHERE Deleted=0 " + Environment.NewLine;
+                "WHERE Location.Deleted=0 " + Environment.NewLine;
             if (searchObject.SearchText != null && searchObject.SearchText.Length > 0)
             {
                 sqlStatement += "AND (Description LIKE N'%" + searchObject.SearchText + "%' OR Address LIKE N'%" + searchObject.SearchText + "%')" + Environment.NewLine;
@@ -101,6 +101,7 @@ namespace VinaGerman.Database.Implementation
                     Phone = entityObject.Address,
                     Description = entityObject.Description,
                     CompanyId = entityObject.CompanyId,
+                    Address = entityObject.Address,
                     Deleted = (entityObject.Deleted ? 1 : 0)
                 });
             }

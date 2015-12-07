@@ -4,6 +4,7 @@
                       GlowBrush="{DynamicResource AccentColorBrush}" Icon="Images\logo.ico"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"                      
                       Title="VinaGerman TNHH Thiên Phú" WindowState="Maximized"
+                      xmlns:helper="clr-namespace:VinaGerman.DesktopApplication.Utilities" 
                       Height="600" Width="1024" ShowMinButton="False" ShowMaxRestoreButton="False">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -13,12 +14,34 @@
                 <Separator />
                 <MenuItem Header="_Thoát" />
             </MenuItem>
+            <MenuItem Header="_Công ty">
+                <MenuItem Header="_Danh sách phòng ban" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.DepartmentManagement}" />
+                <MenuItem Header="_Danh sách chi nhánh" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.LocationManagement}" />
+                <MenuItem Header="_Danh sách nhân viên" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.ContactManagement}" />
+            </MenuItem>
             <MenuItem Header="_Quản lý danh mục">
-                <MenuItem Header="_Danh sách khách hàng" />
-                <MenuItem Header="_Danh sách nhà cung cấp" />                
+                <MenuItem Header="_Danh sách khách hàng-nhà cung cấp" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.CompanyManagement}" />
+                <MenuItem Header="_Danh sách ngành nghề" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.IndustryManagement}" />
+                <MenuItem Header="_Danh sách lĩnh vực" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.BusinessManagement}" />
                 <Separator />
-                <MenuItem Header="_Danh sách loại hàng hóa" />
-                <MenuItem Header="_Danh sách loại ngành nghề" />
+                <MenuItem Header="_Danh sách loại hàng hóa" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.CategoryManagement}" />
+                <MenuItem Header="_Danh sách hàng hóa" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.ArticleManagement}" />
+                <MenuItem Header="_Danh mục định lượng sản xuất" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.CompanyManagement}" />
+            </MenuItem>
+            <MenuItem Header="_Xuất nhập kho">
+                <MenuItem Header="_Lập phiếu nhập hàng" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.PurchaseOrderDetail}" />                
+                <MenuItem Header="_Tra cứu phiếu nhập hàng" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.PurchaseOrderManagement}" />                
+                <Separator />
+                <MenuItem Header="_Lập phiếu bán hàng" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.IndustryManagement}" />
+                <MenuItem Header="_Tra cứu phiếu bán hàng" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.BusinessManagement}" />
+            </MenuItem>
+            <MenuItem Header="_Sản xuất">                
+                <MenuItem Header="_Lập lệnh sản xuất" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.IndustryManagement}" />
+                <MenuItem Header="_Tra cứu lệnh sản xuất" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.BusinessManagement}" />
+            </MenuItem>
+            <MenuItem Header="_Báo cáo">
+                <MenuItem Header="_Báo cáo hàng tồn kho" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.CompanyManagement}" />
+                <MenuItem Header="_Báo cáo lãi lỗ" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.IndustryManagement}" />
             </MenuItem>
         </Menu>
         <ContentControl Name="mainControl" Content="{Binding CurrentModel}">

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace VinaGerman.DesktopApplication.ViewModels.ReportViews
 {
-    public class rvPurchaseOrderDetail : DialogViewModel
+    public class rvPurchaseOrderDetailViewModel : DialogViewModel
     {              
-        public rvPurchaseOrderDetail()
+        public rvPurchaseOrderDetailViewModel()
         {
             
         }

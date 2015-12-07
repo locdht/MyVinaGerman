@@ -39,8 +39,8 @@ namespace VinaGerman.DesktopApplication.Views.ReportViews
                 List<HeaderReportEntity> headerList = new List<HeaderReportEntity>();
                 headerList.Add(new HeaderReportEntity()
                 {
-                    Description = "header aaa",
-                    Address = "header address"
+                    Description = "Công ty TNHH VinaGerman Thiên phú",
+                    Address = "Tổ 3, ấp 1, Xã Thạnh Phú, Vĩnh Cửu, Đồng Nai"
                 });               
 
                 var OrderlineList = new List<OrderlineEntity>();

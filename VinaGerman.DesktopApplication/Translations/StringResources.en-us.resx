@@ -132,6 +132,9 @@
   <data name="btnLogon" xml:space="preserve">
     <value>Logon</value>
   </data>
+  <data name="btnPrint" xml:space="preserve">
+    <value>Print</value>
+  </data>
   <data name="btnSave" xml:space="preserve">
     <value>Save</value>
   </data>

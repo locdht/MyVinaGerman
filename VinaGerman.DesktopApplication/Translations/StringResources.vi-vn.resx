@@ -132,6 +132,9 @@
   <data name="btnLogon" xml:space="preserve">
     <value>Đăng nhập</value>
   </data>
+  <data name="btnPrint" xml:space="preserve">
+    <value>In ấn</value>
+  </data>
   <data name="btnSave" xml:space="preserve">
     <value>Lưu</value>
   </data>

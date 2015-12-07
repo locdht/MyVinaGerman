@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VinaGerman.Database;
 using VinaGerman.Entity;
-using VinaGerman.Entity.DatabaseEntity;
+using VinaGerman.Entity.BusinessEntity;
 using VinaGerman.Entity.ReportEntity;
 
 namespace VinaGerman.Business.Implementation
@@ -16,7 +16,7 @@ namespace VinaGerman.Business.Implementation
         {
             HeaderReportEntity result = new HeaderReportEntity();
             //get company information
-            CompanyEntity objCompany = Factory.Resolve<ICompanyDB>().GetCompanyById(companyId);
+            VinaGerman.Entity.DatabaseEntity.CompanyEntity objCompany = Factory.Resolve<ICompanyDB>().GetCompanyById(companyId);
             //get location information
             LocationEntity objLocation = null;
             if (locationId > 0)
@@ -34,7 +34,7 @@ namespace VinaGerman.Business.Implementation
                 result.Address = objCompany.Address;
             }
             //get official note
-            OfficialNoteEntity note = Factory.Resolve<IReportDB>().GetOfficialNoteByReportName(reportName);
+            VinaGerman.Entity.DatabaseEntity.OfficialNoteEntity note = Factory.Resolve<IReportDB>().GetOfficialNoteByReportName(reportName);
             if (note != null)
             {
                 result.OfficialNoteCode = note.Code;

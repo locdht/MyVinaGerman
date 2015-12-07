@@ -128,6 +128,15 @@
         <Setter Property="Foreground" Value="White" />
     </Style>
 
+    <Style x:Key="BaseHeaderTextBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="Microsoft Sans Serif"/>
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Background" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+
     <Style x:Key="TooltipLabel" TargetType="{x:Type Label}">
         <Setter Property="FontFamily" Value="Microsoft Sans Serif"/>
         <Setter Property="FontSize" Value="13" />

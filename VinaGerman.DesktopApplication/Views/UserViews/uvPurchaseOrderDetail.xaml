@@ -64,7 +64,7 @@
                                 <Setter Property="Control.Template">
                                     <Setter.Value>
                                         <ControlTemplate>
-                                            <TextBox x:Name="PART_TextBox" Text="{Binding ViewData.JobDate,Converter={StaticResource dateFormatConverter},ConverterParameter=dd.MM.yyyy}" Style="{StaticResource BaseTextBox}" BorderThickness="0" />
+                                            <TextBox x:Name="PART_TextBox" Text="{Binding SelectedOrder.OrderDate,Converter={StaticResource dateFormatConverter},ConverterParameter=dd.MM.yyyy}" Style="{StaticResource BaseTextBox}" BorderThickness="0" />
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
@@ -283,8 +283,8 @@
                     </ComboBox>
                     
                     <StackPanel Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Name="btnDelete" Command="{Binding ShowReportCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnDelete}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
-                        <Button Name="btnSave" Command="{Binding SaveCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnSave}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
+                        <Button Command="{Binding ShowReportCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnPrint}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
+                        <Button Command="{Binding SaveCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnSave}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
                     </StackPanel>
                 </Grid>
             </Border>
@@ -321,7 +321,7 @@
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.Row="0" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblArticle}" Style="{DynamicResource BaseLabel}"/>
-                        <ComboBox Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" ItemsSource="{Binding ArticleList}" SelectedItem="{Binding RelatedArticle}" Style="{StaticResource BaseComboBox}">
+                        <ComboBox Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" ItemsSource="{Binding ArticleList}" SelectedItem="{Binding SelectedArticle}" Style="{StaticResource BaseComboBox}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <ContentControl Content="{Binding}">
@@ -361,10 +361,10 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <Button Command="{Binding SaveOrderRelationCommand}" Grid.Column="2" Grid.Row="0" Width="50" Style="{DynamicResource BaseImageButton}">
+                        <Button Command="{Binding SaveOrderRelationCommand}" Grid.Column="2" Grid.Row="0" Width="50" Style="{DynamicResource BaseImageButton}" IsEnabled="{Binding CanDelete}">
                             <Image Source="/VinaGerman.DesktopApplication;component/Images/add.png"/>
                         </Button>
-                        <Border Style="{DynamicResource BorderGrid}" Padding="0" Grid.Row="1" Grid.ColumnSpan="3">
+                        <Border Style="{DynamicResource BorderGrid}" Padding="0" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,0,0,0">
                             <DataGrid ColumnHeaderHeight="42" ItemsSource="{Binding OrderlineList}" SelectedItem="{Binding SelectedOrderline}"
                                 SelectionMode="Single" HeadersVisibility="None" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" RowHeaderWidth="0" IsReadOnly="True">
                                 <DataGrid.Resources>
@@ -524,7 +524,7 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <Button Command="{Binding SaveOrderRelationLoanCommand}" Grid.Column="2" Grid.Row="0" Width="50" Style="{DynamicResource BaseImageButton}">
+                        <Button Command="{Binding SaveOrderRelationLoanCommand}" Grid.Column="2" Grid.Row="0" Width="50" Style="{DynamicResource BaseImageButton}" IsEnabled="{Binding CanDelete}">
                             <Image Source="/VinaGerman.DesktopApplication;component/Images/add.png"/>
                         </Button>
                         <Border Style="{DynamicResource BorderGrid}" Padding="0" Grid.Row="1" Grid.ColumnSpan="3">

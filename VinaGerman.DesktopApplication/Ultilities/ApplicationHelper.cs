@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VinaGerman.Entity.BusinessEntity;
 
-namespace VinaGerman.DesktopApplication.Ultilities
+namespace VinaGerman.DesktopApplication.Utilities
 {
     public static class ApplicationHelper
     {

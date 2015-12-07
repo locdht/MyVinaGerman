@@ -14,11 +14,17 @@
     </DataTemplate>
 
     <!-- Report Views -->
-    <DataTemplate DataType="{x:Type reportviewmodel:rvPurchaseOrderDetail}">
+    <DataTemplate DataType="{x:Type reportviewmodel:rvPurchaseOrderDetailViewModel}">
         <reportview:rvPurchaseOrderDetail/>
     </DataTemplate>
     
     <!-- User Views -->
+    <DataTemplate DataType="{x:Type userviewmodel:uvContactManagementViewModel}">
+        <userview:uvContactManagement/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type userviewmodel:uvLocationManagementViewModel}">
+        <userview:uvLocationManagement/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type userviewmodel:uvDepartmentManagementViewModel}">
         <userview:uvDepartmentManagement/>
     </DataTemplate>

@@ -22,7 +22,7 @@ namespace VinaGerman.Database.Implementation
                 "Department.CompanyId," + Environment.NewLine +
                 "Department.Deleted" + Environment.NewLine +
                 "FROM Department JOIN Company ON Department.CompanyId=Company.CompanyId " + Environment.NewLine +
-                "WHERE Deleted=0 " + Environment.NewLine;
+                "WHERE Department.Deleted=0 " + Environment.NewLine;
             if (searchObject.SearchText != null && searchObject.SearchText.Length > 0)
             {
                 sqlStatement += "AND (Description LIKE N'%" + searchObject.SearchText + "%' OR Phone LIKE N'%" + searchObject.SearchText + "%')" + Environment.NewLine;
