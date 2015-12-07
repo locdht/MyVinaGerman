@@ -237,7 +237,7 @@ namespace VinaGerman.DesktopApplication.ViewModels
                     break;
                 case enumView.CompanyManagement:
                     CurrentModel = CompanyManagementModel;
-                    SendMessage(MessageToken.ReloadMessage, null, enumView.CategoryManagement.ToString());
+                    SendMessage(MessageToken.ReloadMessage, null, enumView.CompanyManagement.ToString());
                     break;
                 case enumView.Logon:
                     CurrentModel = LogonModel;

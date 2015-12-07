@@ -271,7 +271,7 @@
     <value>Mặt hàng:</value>
   </data>
   <data name="lblArticleNo" xml:space="preserve">
-    <value>Mã mặt hàng:</value>
+    <value>Mã hàng:</value>
   </data>
   <data name="lblArticleUnit" xml:space="preserve">
     <value>Đơn vị:</value>

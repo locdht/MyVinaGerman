@@ -753,7 +753,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         SelectedOrder = order;
 
                         var list = new List<OrderlineEntity>();
-                        for (int i = 0; i < 10; i++)
+                        for (int i = 0; i < 10000; i++)
                         {
                             list.Add(new OrderlineEntity()
                             {
@@ -761,7 +761,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                                 RemainingQuantity = i + 1,
                                 Price = 300000,
                                 Commission = 100000,
-                                Description = "hang hoa 1" + i.ToString(),
+                                Description = "hang hoa 1 da dda adasd sadsasadas asd asdaaasddadda sada dada dad asdasd a a dad adada da dada da  adda dad as dasd adad aas dasd asd as dadaada dad a dasdasd das aas ad asdasd" + i.ToString(),
                                 Unit = "kg" + i.ToString(),
                                 ArticleNo = "hh" + i.ToString()
                             });

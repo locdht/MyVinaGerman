@@ -7,4 +7,5 @@
     <BitmapImage x:Key="iconDelete" UriSource="..\Images\delete.png"></BitmapImage>
     <!-- INSPECTION STATUS COLORS -->
     <BitmapImage x:Key="iconCompany" UriSource="..\Images\company.png"></BitmapImage>
+    <BitmapImage x:Key="iconGoods" UriSource="..\Images\goods.png"></BitmapImage>
 </ResourceDictionary>
