@@ -22,7 +22,7 @@
         <!--search panel-->
         <Grid Name="SearchPanel" Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="42"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!--header block-->
@@ -67,7 +67,6 @@
                     <CheckBox Name="chkSearchSupplier" Grid.Column="1" Grid.Row="4" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.captionSupplier}" IsChecked="{Binding IsSupplier}" Style="{DynamicResource BaseCheckBox}"></CheckBox>
 
                     <StackPanel Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Name="btnClearSearch" Command="{Binding ClearSearchCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnClearSearch}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
                         <Button Name="btnSearch" Command="{Binding SearchCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnSearch}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
                     </StackPanel>
                 </Grid>
@@ -87,15 +86,10 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridHeaderSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
-                        <DataGridTemplateColumn.Header>
-                            <ContentControl>
-                                <Image Source="/VinaGerman.DesktopApplication;component/Images/company.png" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            </ContentControl>
-                        </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridHeaderSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">                        
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Grid.Column="0" Grid.Row="0" Source="/VinaGerman.DesktopApplication;component/Images/company.png" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                                <Image Grid.Column="0" Grid.Row="0" Source="{StaticResource iconCompany}" VerticalAlignment="Center" Margin="0,0,0,0"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -205,15 +199,10 @@
                     </DataGridTemplateColumn>
                     <!--Show description-->
                     <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
-                        <DataGridTemplateColumn.Header>
-                            <ContentControl>
-                                <Image Source="/VinaGerman.DesktopApplication;component/Images/save.png" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            </ContentControl>
-                        </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button CommandParameter="{Binding}" Command="{Binding Path=DataContext.SaveCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" Style="{DynamicResource BaseImageButton}">
-                                    <Image Source="/VinaGerman.DesktopApplication;component/Images/save.png" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <Image Source="{StaticResource iconSave}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -222,13 +211,15 @@
                     <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
                         <DataGridTemplateColumn.Header>
                             <ContentControl>
-                                <Image Source="/VinaGerman.DesktopApplication;component/Images/delete.png" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <Button Command="{Binding Path=DataContext.AddCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" Style="{DynamicResource BaseImageButton}">
+                                    <Image Source="{StaticResource iconAdd}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Button>
                             </ContentControl>
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button CommandParameter="{Binding}" Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" Style="{DynamicResource BaseImageButton}">
-                                    <Image Source="/VinaGerman.DesktopApplication;component/Images/delete.png" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    <Image Source="{StaticResource iconDelete}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

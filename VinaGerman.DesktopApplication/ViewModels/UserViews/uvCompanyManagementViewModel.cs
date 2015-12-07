@@ -96,7 +96,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         #region method
         public void AddOrUpdateCompany(CompanyEntity newEntity)
         {
-            CompanyEntity oldEntity = CompanyList.FirstOrDefault<CompanyEntity>(p => p.CompanyId == newEntity.CompanyId);
+            CompanyEntity oldEntity = CompanyList.FirstOrDefault<CompanyEntity>(p => p.CompanyCode == newEntity.CompanyCode);
 
             if (oldEntity == null)
             {
@@ -232,6 +232,22 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             SearchText = "";
             IsCustomer = false;
             IsSupplier = false;
+        }
+        #endregion
+
+        #region Message processing
+        public override void Reset()
+        {
+            ClearSearch();
+            //reload view
+            Search();
+        }
+        protected override void MessageHandler(BaseMessage pMessage)
+        {
+            if (pMessage.Token == MessageToken.ReloadMessage)
+            {
+                Reset();
+            }
         }
         #endregion
     }

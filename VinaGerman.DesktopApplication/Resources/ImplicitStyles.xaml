@@ -655,12 +655,10 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!--Grid style-->
-    <Style TargetType="GridViewColumnHeader">
-        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-    </Style>
+    <!--Grid style-->       
     <Style TargetType="DataGridColumnHeader">
         <Setter Property="Background" Value="{DynamicResource GridHeaderColor}"/>
+        <Setter Property="Height" Value="40"/>
     </Style>
     <Style TargetType="DataGrid">
         <Setter Property="BorderThickness" Value="0"/>

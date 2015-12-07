@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- COMMON    -->
+    <BitmapImage x:Key="iconSave" UriSource="..\Images\save.png"></BitmapImage>
+    <BitmapImage x:Key="iconAdd" UriSource="..\Images\add.png"></BitmapImage>
+    <BitmapImage x:Key="iconDelete" UriSource="..\Images\delete.png"></BitmapImage>
+    <!-- INSPECTION STATUS COLORS -->
+    <BitmapImage x:Key="iconCompany" UriSource="..\Images\company.png"></BitmapImage>
+</ResourceDictionary>
