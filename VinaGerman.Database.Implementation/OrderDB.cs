@@ -16,19 +16,19 @@ namespace VinaGerman.Database.Implementation
         {
             List<OrderEntity> result = null;            
             string sqlStatement = "SELECT " + Environment.NewLine +
-                "Order.OrderId," + Environment.NewLine +
-                "Order.OrderType," + Environment.NewLine +
-                "Order.BusinessId," + Environment.NewLine +
-                "Order.IndustryId," + Environment.NewLine +
-                "Order.CreatedBy," + Environment.NewLine +
-                "Order.ResponsibleBy," + Environment.NewLine +
-                "Order.OrderDate," + Environment.NewLine +
-                "Order.CreatedDate," + Environment.NewLine +
-                "Order.CompanyId," + Environment.NewLine +
-                "Order.CustomerCompanyId," + Environment.NewLine +
-                "Order.CustomerContactId," + Environment.NewLine +
-                "Order.OrderNumber," + Environment.NewLine +
-                "Order.Description," + Environment.NewLine +
+                "[Order].OrderId," + Environment.NewLine +
+                "[Order].OrderType," + Environment.NewLine +
+                "[Order].BusinessId," + Environment.NewLine +
+                "[Order].IndustryId," + Environment.NewLine +
+                "[Order].CreatedBy," + Environment.NewLine +
+                "[Order].ResponsibleBy," + Environment.NewLine +
+                "[Order].OrderDate," + Environment.NewLine +
+                "[Order].CreatedDate," + Environment.NewLine +
+                "[Order].CompanyId," + Environment.NewLine +
+                "[Order].CustomerCompanyId," + Environment.NewLine +
+                "[Order].CustomerContactId," + Environment.NewLine +
+                "[Order].OrderNumber," + Environment.NewLine +
+                "[Order].Description," + Environment.NewLine +
                 "Company.Description as CompanyName," + Environment.NewLine +
                 "Contact.FullName as ContactName" + Environment.NewLine +                
                 "FROM [Order] join Company on [Order].CustomerCompanyId = Company.CompanyId join Contact on [Order].CustomerContactId = Contact.ContactId" + Environment.NewLine +
@@ -52,6 +52,8 @@ namespace VinaGerman.Database.Implementation
         {
             string sqlStatement = "";
             entityObject.CreatedDate = DateTime.Now;
+
+            sqlStatement += "DECLARE @NewOrderId INT " + Environment.NewLine;
             //if insert
             if (entityObject.OrderId > 0)
             {
@@ -69,7 +71,7 @@ namespace VinaGerman.Database.Implementation
                 "OrderNumber=@OrderNumber," + Environment.NewLine +
                 "Description=@Description" + Environment.NewLine +
                 "WHERE OrderId=@OrderId " + Environment.NewLine +
-                "SELECT @OrderId AS OrderId " + Environment.NewLine;
+                "SET @NewOrderId=@OrderId " + Environment.NewLine;
             }
             else
             {
@@ -99,8 +101,29 @@ namespace VinaGerman.Database.Implementation
                 "@CustomerContactId," + Environment.NewLine +
                 "@OrderNumber," + Environment.NewLine +
                 "@Description)" + Environment.NewLine +
-                "SELECT SCOPE_IDENTITY() AS OrderId" + Environment.NewLine;
+                "SET @NewOrderId = (SELECT SCOPE_IDENTITY() AS OrderId) " + Environment.NewLine;
+
+                sqlStatement += "UPDATE [Order] Set OrderNumber=(SELECT dbo.BuildOrderNumberForOrder(@NewOrderId)) WHERE OrderId=@NewOrderId " + Environment.NewLine;
             }
+
+            sqlStatement += "SELECT " + Environment.NewLine +
+                "[Order].OrderId," + Environment.NewLine +
+                "[Order].OrderType," + Environment.NewLine +
+                "[Order].BusinessId," + Environment.NewLine +
+                "[Order].IndustryId," + Environment.NewLine +
+                "[Order].CreatedBy," + Environment.NewLine +
+                "[Order].ResponsibleBy," + Environment.NewLine +
+                "[Order].OrderDate," + Environment.NewLine +
+                "[Order].CreatedDate," + Environment.NewLine +
+                "[Order].CompanyId," + Environment.NewLine +
+                "[Order].CustomerCompanyId," + Environment.NewLine +
+                "[Order].CustomerContactId," + Environment.NewLine +
+                "[Order].OrderNumber," + Environment.NewLine +
+                "[Order].Description," + Environment.NewLine +
+                "Company.Description as CompanyName," + Environment.NewLine +
+                "Contact.FullName as ContactName" + Environment.NewLine +
+                "FROM [Order] join Company on [Order].CustomerCompanyId = Company.CompanyId join Contact on [Order].CustomerContactId = Contact.ContactId" + Environment.NewLine +
+                "WHERE OrderId=@NewOrderId " + Environment.NewLine;
 
             //execute
             var db = GetDatabaseInstance();
@@ -108,7 +131,7 @@ namespace VinaGerman.Database.Implementation
             // Call the ExecuteReader method with the command.                
             using (IDbConnection conn = db.CreateConnection())
             {
-                entityObject.OrderId = conn.ExecuteScalar<int>(sqlStatement, new
+                var result = conn.Query<OrderEntity>(sqlStatement, new
                 {
                     OrderId = entityObject.OrderId,
                     OrderType = entityObject.OrderType,
@@ -124,7 +147,12 @@ namespace VinaGerman.Database.Implementation
                     CustomerContactId = entityObject.CustomerContactId,
                     OrderNumber = entityObject.OrderNumber,
                     Description = entityObject.Description
-                });
+                }).ToList();
+
+                if (result.Count > 0)
+                    entityObject = result[0];
+                else
+                    entityObject = null;
             }
             return entityObject;
         }
@@ -142,7 +170,7 @@ namespace VinaGerman.Database.Implementation
             }
             return true;
         }
-        public List<OrderlineEntity> GetOrderRelationsForOrder(OrderEntity searchObject)
+        public List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity searchObject)
         {
             List<OrderlineEntity> result = null;
             string sqlStatement = "SELECT " + Environment.NewLine +
@@ -176,7 +204,7 @@ namespace VinaGerman.Database.Implementation
             }
             return result;
         }
-        public OrderlineEntity AddOrUpdateOrderRelation(OrderlineEntity entityObject)
+        public OrderlineEntity AddOrUpdateOrderline(OrderlineEntity entityObject)
         {
             string sqlStatement = "";
 
@@ -184,21 +212,26 @@ namespace VinaGerman.Database.Implementation
             //if insert
             if (entityObject.OrderlineId > 0)
             {
+                entityObject.ModifiedDate = DateTime.Now;
+
                 sqlStatement += "UPDATE Orderline SET  " + Environment.NewLine +
                 //"OrderId=@OrderId" + Environment.NewLine +
-                "Commission=@Commission" + Environment.NewLine +
-                "ArticleId=@ArticleId" + Environment.NewLine +
-                "Quantity=@Quantity" + Environment.NewLine +
-                "Price=@Price" + Environment.NewLine +
-                "CreatedBy=@CreatedBy" + Environment.NewLine +
-                "CreatedDate=@CreatedDate" + Environment.NewLine +
-                "ModifiedBy=@ModifiedBy" + Environment.NewLine +
-                "ModifiedDate=@ModifiedDate" + Environment.NewLine +
+                "Commission=@Commission, " + Environment.NewLine +
+                "ArticleId=@ArticleId, " + Environment.NewLine +
+                "Quantity=@Quantity, " + Environment.NewLine +
+                "Price=@Price, " + Environment.NewLine +
+                "CreatedBy=@CreatedBy, " + Environment.NewLine +
+                "CreatedDate=@CreatedDate, " + Environment.NewLine +
+                "ModifiedBy=@ModifiedBy, " + Environment.NewLine +
+                "ModifiedDate=@ModifiedDate " + Environment.NewLine +
                 "WHERE OrderlineId=@OrderlineId " + Environment.NewLine +
                 "SET @NewOrderlineId = @OrderlineId " + Environment.NewLine;
             }
             else
             {
+                entityObject.CreatedDate = DateTime.Now;
+                entityObject.ModifiedDate = DateTime.Now;
+
                 sqlStatement += "INSERT INTO Orderline(  " + Environment.NewLine +
                 "OrderId," + Environment.NewLine +
                 "Commission," + Environment.NewLine +
@@ -220,6 +253,10 @@ namespace VinaGerman.Database.Implementation
                 "@ModifiedBy," + Environment.NewLine +
                 "@ModifiedDate)" + Environment.NewLine +
                 "SET @NewOrderlineId = (SELECT SCOPE_IDENTITY()) " + Environment.NewLine;
+
+                //also insert default loans if needed
+                sqlStatement += "INSERT INTO Loan(OrderlineId,ArticleId,Quantity)" + Environment.NewLine;
+                sqlStatement += "SELECT OrderlineId,RelatedArticleId,0 AS Quantity FROM Orderline JOIN ArticleRelation ON Orderline.ArticleId=ArticleRelation.ArticleId WHERE OrderlineId=@NewOrderlineId " + Environment.NewLine;
             }
 
             sqlStatement += "SELECT " + Environment.NewLine +
@@ -236,10 +273,9 @@ namespace VinaGerman.Database.Implementation
                 "Article.CategoryId," + Environment.NewLine +
                 "Article.ArticleNo," + Environment.NewLine +
                 "Article.Description," + Environment.NewLine +
-                "Article.Unit," + Environment.NewLine +
-                "Orderline.Deleted," + Environment.NewLine +
+                "Article.Unit" + Environment.NewLine +                
                 "FROM Orderline JOIN Article ON Orderline.ArticleId=Article.ArticleId " + Environment.NewLine +
-                "WHERE Deleted=0 AND Orderline.OrderId=@NewOrderlineId" + Environment.NewLine;
+                "WHERE Orderline.OrderlineId=@NewOrderlineId" + Environment.NewLine;
 
             //execute
             var db = GetDatabaseInstance();
@@ -249,7 +285,7 @@ namespace VinaGerman.Database.Implementation
             {
                 var result = conn.Query<OrderlineEntity>(sqlStatement, new
                 {
-                    OrderlineId = entityObject.OrderId,
+                    OrderlineId = entityObject.OrderlineId,
                     OrderId = entityObject.OrderId,
                     Commission = entityObject.Commission,
                     ArticleId = entityObject.ArticleId,
@@ -275,7 +311,7 @@ namespace VinaGerman.Database.Implementation
             }
             return entityObject;
         }
-        public bool DeleteOrderRelation(OrderlineEntity entityObject)
+        public bool DeleteOrderline(OrderlineEntity entityObject)
         {
             string sqlStatement = "DELETE FROM Orderline WHERE OrderlineId=@OrderlineId  " + Environment.NewLine;
 
@@ -290,22 +326,20 @@ namespace VinaGerman.Database.Implementation
             return true;
         }
 
-        public List<LoanEntity> GetOrderRelationsLoanForOrder(OrderEntity searchObject)
+        public List<LoanEntity> GetLoansForOrderline(OrderlineEntity searchObject)
         {
             List<LoanEntity> result = null;
             string sqlStatement = "SELECT " + Environment.NewLine +
                 "Loan.LoanId," + Environment.NewLine +
-                "Loan.OrderId," + Environment.NewLine +
+                "Loan.OrderlineId," + Environment.NewLine +
                 "Loan.Quantity," + Environment.NewLine +
                 "Loan.ArticleId," + Environment.NewLine +
                 "Article.CategoryId," + Environment.NewLine +
                 "Article.ArticleNo," + Environment.NewLine +
                 "Article.Description," + Environment.NewLine +
-                "Article.Unit," + Environment.NewLine +
-                "Orderline.Deleted," + Environment.NewLine +
-
+                "Article.Unit " + Environment.NewLine +                
                 "FROM Loan JOIN Article ON Loan.ArticleId=Article.ArticleId " + Environment.NewLine +
-                "WHERE Loan.OrderId=@OrderId" + Environment.NewLine;
+                "WHERE Loan.OrderlineId=@OrderlineId" + Environment.NewLine;
 
             //execute
             var db = GetDatabaseInstance();
@@ -313,11 +347,11 @@ namespace VinaGerman.Database.Implementation
             // Call the ExecuteReader method with the command.                
             using (IDbConnection conn = db.CreateConnection())
             {
-                result = conn.Query<LoanEntity>(sqlStatement, new { OrderId = searchObject.OrderId }).ToList();
+                result = conn.Query<LoanEntity>(sqlStatement, new { OrderlineId = searchObject.OrderlineId }).ToList();
             }
             return result;
         }
-        public LoanEntity AddOrUpdateOrderRelationLoan(LoanEntity entityObject)
+        public LoanEntity AddOrUpdateLoan(LoanEntity entityObject)
         {
             string sqlStatement = "";
 
@@ -327,7 +361,7 @@ namespace VinaGerman.Database.Implementation
             {
                 sqlStatement += "UPDATE Loan SET  " + Environment.NewLine +
                     //"OrderId=@OrderId" + Environment.NewLine +
-                "ArticleId=@ArticleId" + Environment.NewLine +
+                "ArticleId=@ArticleId," + Environment.NewLine +
                 "Quantity=@Quantity" + Environment.NewLine +
                 "WHERE LoanId=@LoanId " + Environment.NewLine +
                 "SET @NewLoanId = @LoanId " + Environment.NewLine;
@@ -335,11 +369,11 @@ namespace VinaGerman.Database.Implementation
             else
             {
                 sqlStatement += "INSERT INTO Loan(  " + Environment.NewLine +
-                "OrderId," + Environment.NewLine +
+                "OrderlineId," + Environment.NewLine +
                 "ArticleId," + Environment.NewLine +
                 "Quantity)" + Environment.NewLine +
                 "VALUES (" + Environment.NewLine +
-                "@OrderId," + Environment.NewLine +
+                "@OrderlineId," + Environment.NewLine +
                 "@ArticleId," + Environment.NewLine +
                 "@Quantity)" + Environment.NewLine +
                 "SET @NewLoanId = (SELECT SCOPE_IDENTITY()) " + Environment.NewLine;
@@ -347,17 +381,14 @@ namespace VinaGerman.Database.Implementation
 
             sqlStatement += "SELECT " + Environment.NewLine +
                 "Loan.LoanId," + Environment.NewLine +
-                "Loan.OrderId," + Environment.NewLine +
                 "Loan.Quantity," + Environment.NewLine +
                 "Loan.ArticleId," + Environment.NewLine +
                 "Article.CategoryId," + Environment.NewLine +
                 "Article.ArticleNo," + Environment.NewLine +
                 "Article.Description," + Environment.NewLine +
-                "Article.Unit," + Environment.NewLine +
-                "Orderline.Deleted," + Environment.NewLine +
-
+                "Article.Unit " + Environment.NewLine +
                 "FROM Loan JOIN Article ON Loan.ArticleId=Article.ArticleId " + Environment.NewLine +
-                "WHERE Loan.OrderId=@OrderId" + Environment.NewLine;
+                "WHERE Loan.LoanId=@NewLoanId" + Environment.NewLine;
 
             //execute
             var db = GetDatabaseInstance();
@@ -367,15 +398,10 @@ namespace VinaGerman.Database.Implementation
             {
                 var result = conn.Query<LoanEntity>(sqlStatement, new
                 {
-                    OrderlineId = entityObject.OrderId,
-                    OrderId = entityObject.OrderId,
+                    OrderlineId = entityObject.OrderlineId,
                     ArticleId = entityObject.ArticleId,
                     Quantity = entityObject.Quantity,
-                    CategoryId = entityObject.CategoryId,
-                    ArticleNo = entityObject.ArticleNo,
-                    Description = entityObject.Description,
-                    Unit = entityObject.Unit,
-                    Deleted = entityObject.Deleted,
+                    LoanId = entityObject.LoanId
                 }).ToList();
 
                 if (result.Count > 0)
@@ -385,7 +411,7 @@ namespace VinaGerman.Database.Implementation
             }
             return entityObject;
         }
-        public bool DeleteOrderRelationLoan(LoanEntity entityObject)
+        public bool DeleteLoan(LoanEntity entityObject)
         {
             string sqlStatement = "DELETE FROM Loan WHERE LoanId=@LoanId  " + Environment.NewLine;
 
@@ -395,7 +421,7 @@ namespace VinaGerman.Database.Implementation
             // Call the ExecuteReader method with the command.                
             using (IDbConnection conn = db.CreateConnection())
             {
-                conn.Execute(sqlStatement, new { OrderlineId = entityObject.LoanId });
+                conn.Execute(sqlStatement, new { LoanId = entityObject.LoanId });
             }
             return true;
         }

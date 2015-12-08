@@ -327,6 +327,9 @@
   <data name="lblPassword" xml:space="preserve">
     <value>Password:</value>
   </data>
+  <data name="lblPayDate" xml:space="preserve">
+    <value>Pay date:</value>
+  </data>
   <data name="lblPhone" xml:space="preserve">
     <value>Phone:</value>
   </data>

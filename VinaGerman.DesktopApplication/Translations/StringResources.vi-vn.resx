@@ -327,6 +327,9 @@
   <data name="lblPassword" xml:space="preserve">
     <value>Mật khẩu:</value>
   </data>
+  <data name="lblPayDate" xml:space="preserve">
+    <value>Ngày thanh toán:</value>
+  </data>
   <data name="lblPhone" xml:space="preserve">
     <value>Điện thoại:</value>
   </data>
