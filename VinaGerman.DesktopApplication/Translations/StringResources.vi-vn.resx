@@ -247,7 +247,7 @@
     <value>Mã mặt hàng</value>
   </data>
   <data name="hintCategorySearch" xml:space="preserve">
-    <value>Description</value>
+    <value>Mô tả</value>
   </data>
   <data name="hintCompanySearch" xml:space="preserve">
     <value>Tên công ty/Điện thoại/Mã số thuế</value>
