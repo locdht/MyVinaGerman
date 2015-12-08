@@ -50,9 +50,12 @@
     <Compile Include="CompanyBL.cs" />
     <Compile Include="ContactBL.cs" />
     <Compile Include="DepartmentBL.cs" />
-    <Compile Include="IndustryBL.cs" />
-    <Compile Include="LocationBL.cs" />
+    <Compile Include="IndustryBL.cs" />        
+    <Compile Include="LocationBL.cs" />    
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportBL.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="UserBL.cs" />
   </ItemGroup>
   <ItemGroup>

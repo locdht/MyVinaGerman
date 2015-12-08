@@ -7,7 +7,7 @@
              xmlns:wm="clr-namespace:VinaGerman.DesktopApplication.Utilities.Watermark" 
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"              
              mc:Ignorable="d" Width="500" Height="320" Background="White">
-    <Grid Name="DetailPanel" Grid.Column="4">
+    <Grid Name="DetailPanel">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>            

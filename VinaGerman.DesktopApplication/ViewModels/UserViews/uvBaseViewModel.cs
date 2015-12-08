@@ -9,7 +9,7 @@ using System.Threading;
 using GalaSoft.MvvmLight.Command;
 using System.Drawing;
 using VinaGerman.DesktopApplication.Translations;
-using VinaGerman.DesktopApplication.Ultilities;
+using VinaGerman.DesktopApplication.Utilities;
 
 namespace VinaGerman.DesktopApplication.ViewModels.UserViews
 {

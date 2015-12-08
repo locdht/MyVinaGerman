@@ -8,7 +8,8 @@ using System.Windows;
 using System.Windows.Markup;
 using VinaGerman.DataSource;
 using VinaGerman.DesktopApplication.Translations;
-using VinaGerman.DesktopApplication.Ultilities;
+using VinaGerman.DesktopApplication.Utilities;
+using VinaGerman.DesktopApplication.ViewModels.ReportViews;
 using VinaGerman.Entity;
 using VinaGerman.Entity.BusinessEntity;
 using VinaGerman.Entity.DatabaseEntity;
@@ -357,18 +358,17 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 RaisePropertyChanged("SearchText");
             }
         }
-
-        public RelayCommand ClearSearchCommand { get; set; }
-        public RelayCommand SearchCommand { get; set; }
+        
         public RelayCommand SaveCommand { get; set; }
         public RelayCommand AddCommand { get; set; }
         public RelayCommand CreateCommand { get; set; }
         public RelayCommand DeleteCommand { get; set; }
+        public RelayCommand ShowReportCommand { get; set; }
 
         public RelayCommand SaveOrderRelationCommand { get; set; }
         public RelayCommand<OrderlineEntity> DeleteOrderRelationCommand { get; set; }
 
-        public RelayCommand SaveOrderRelationLoanCommand { get; set; }
+        public RelayCommand SaveOrderRelationLoanCommand { get; set; }        
         public RelayCommand<LoanEntity> DeleteOrderRelationLoanCommand { get; set; }
         #endregion
 
@@ -376,24 +376,26 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         public uvPurchaseOrderDetailViewModel(MainWindowViewModel pMainWindowViewModel)
             : base(pMainWindowViewModel)
         {
-            ClearSearchCommand = new RelayCommand(ClearSearch);
-            SearchCommand = new RelayCommand(Search);
             SaveCommand = new RelayCommand(Save);
             DeleteCommand = new RelayCommand(Delete);
             AddCommand = new RelayCommand(Add);
+            ShowReportCommand = new RelayCommand(ShowReport);
 
             SaveOrderRelationCommand = new RelayCommand(SaveOrderRelation);
             DeleteOrderRelationCommand = new RelayCommand<OrderlineEntity>(DeleteOrderRelation);
 
             SaveOrderRelationLoanCommand = new RelayCommand(SaveOrderRelationLoan);
-            DeleteOrderRelationLoanCommand = new RelayCommand<LoanEntity>(DeleteOrderRelationLoan);
-
-            ClearSearch();
+            DeleteOrderRelationLoanCommand = new RelayCommand<LoanEntity>(DeleteOrderRelationLoan);            
         }
         #region method      
         
         
-
+        public void ShowReport()
+        {
+            ShowDialog<rvPurchaseOrderDetailViewModel>(new rvPurchaseOrderDetailViewModel() 
+            { 
+            });
+        }
 
         public void Add()
         {
@@ -662,36 +664,35 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         
         public void LoadRelatedOrders()
         {
-            System.Threading.ThreadPool.QueueUserWorkItem(delegate
+            if (SelectedOrder != null && SelectedOrder.OrderId > 0)
             {
-                try
+                System.Threading.ThreadPool.QueueUserWorkItem(delegate
                 {
-                    ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
-
-                    var _oOrderlineList = Factory.Resolve<IBaseDataDS>().GetOrderRelationsForOrder(SelectedOrder);
-                    var _oLoanList = Factory.Resolve<IBaseDataDS>().GetOrderRelationsLoanForOrder(SelectedOrder);
-                    HideLoading();
-
-                    //display to UI
-                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    try
                     {
-                        OrderlineList = _oOrderlineList;
-                        LoanList = _oLoanList;
-                    }));
-                }
-                catch (Exception ex)
-                {
-                    HideLoading();
-                    ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
-                }
-            });
-            //ShowDialog<uvCompanyDetailViewModel>(new uvCompanyDetailViewModel() { 
-            //    OriginalCompany = SelectCompany
-            //});
+                        ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
+
+                        var _oOrderlineList = Factory.Resolve<IBaseDataDS>().GetOrderRelationsForOrder(SelectedOrder);
+                        var _oLoanList = Factory.Resolve<IBaseDataDS>().GetOrderRelationsLoanForOrder(SelectedOrder);
+                        HideLoading();
+
+                        //display to UI
+                        Application.Current.Dispatcher.Invoke(new Action(() =>
+                        {
+                            OrderlineList = _oOrderlineList;
+                            LoanList = _oLoanList;
+                        }));
+                    }
+                    catch (Exception ex)
+                    {
+                        HideLoading();
+                        ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
+                    }
+                });
+            }
         }
 
-
-        public void Search()
+        public void Reload(OrderEntity order)
         {
             System.Threading.ThreadPool.QueueUserWorkItem(delegate
             {
@@ -699,105 +700,12 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    OrderlineList = new List<OrderlineEntity>();
-                    OrderlineList.Add(new OrderlineEntity() 
-                    { 
-                        Quantity=5,
-                        RemainingQuantity=6,
-                        Price=300000,
-                        Commission=100000,
-                        Description="hang hoa 1",
-                        Unit="kg",
-                        ArticleNo="hh1"
-                    });
-                    OrderlineList.Add(new OrderlineEntity()
-                    {
-                        Quantity = 5,
-                        RemainingQuantity = 6,
-                        Price = 300000,
-                        Commission = 100000,
-                        Description = "hang hoa 2",
-                        Unit = "kg",
-                        ArticleNo = "hh2"
-                    });
-                    OrderlineList.Add(new OrderlineEntity()
-                    {
-                        Quantity = 5,
-                        RemainingQuantity = 6,
-                        Price = 300000,
-                        Commission = 100000,
-                        Description = "hang hoa 3",
-                        Unit = "kg",
-                        ArticleNo = "hh3"
-                    });
-
-                    LoanList = new List<LoanEntity>();
-                    LoanList.Add(new LoanEntity()
-                    {
-                        Quantity = 5,
-                        RemainingQuantity = 6,                        
-                        Description = "hang hoa 1",
-                        Unit = "kg",
-                        ArticleNo = "hh1"
-                    });
-                    LoanList.Add(new LoanEntity()
-                    {
-                        Quantity = 5,
-                        RemainingQuantity = 6,
-                        Description = "hang hoa 2",
-                        Unit = "kg",
-                        ArticleNo = "hh2"
-                    });
-                    LoanList.Add(new LoanEntity()
-                    {
-                        Quantity = 5,
-                        RemainingQuantity = 6,
-                        Description = "hang hoa 3",
-                        Unit = "kg",
-                        ArticleNo = "hh3"
-                    });
-                    //var list = Factory.Resolve<ICompanyDS>().SearchCompanies(new CompanySearchEntity()
-                    //{
-                    //    SearchText = this.SearchText,
-                    //    IsCustomer = this.IsCustomer,
-                    //    IsSupplier = this.IsSupplier,
-                    //    NotIncludedCompany = ApplicationHelper.CurrentUserProfile.CompanyId
-                    //});
-
-                    HideLoading();
-
-                    //display to UI
-                    Application.Current.Dispatcher.Invoke(new Action(() =>
-                    {
-                        //CompanyList = list;
-                    }));                    
-                }
-                catch (Exception ex)
-                {
-                    HideLoading();
-                    ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
-                }
-            });            
-            //ShowDialog<uvCompanyDetailViewModel>(new uvCompanyDetailViewModel() { 
-            //    OriginalCompany = SelectCompany
-            //});
-        }
-        public void ClearSearch()
-        {
-            SearchText = "";
-        }
-
-        public void Reload()
-        {
-            System.Threading.ThreadPool.QueueUserWorkItem(delegate
-            {
-                try
-                {
-                    ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
+                    _employeeList = new List<UserProfileEntity>();
 
                     var _ocompanyList = Factory.Resolve<ICompanyDS>().SearchCompanies(new CompanySearchEntity()
                     {
-                        SearchText = ""
+                        SearchText = "",
+                        IsSupplier = true
                     });
 
                     var _ocontactList = Factory.Resolve<IBaseDataDS>().SearchContact(new ContactSearchEntity()
@@ -819,7 +727,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     var _oArticleList = Factory.Resolve<IBaseDataDS>().SearchArticle(new ArticleSearchEntity()
                     {
                         SearchText = ""
-                    });
+                    });                   
                     HideLoading();
 
                     //display to UI UserProfileEntity
@@ -832,6 +740,34 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         BusinessList = _obusinessList;
                         IndustryList = _oindustryList;
                         ArticleList = _oArticleList;
+
+                        //load order information
+                        if (order == null) order = new OrderEntity() 
+                        { 
+                            OrderDate = DateTime.Now,
+                            OrderNumber = "",
+                            CompanyId = ApplicationHelper.CurrentUserProfile.CompanyId,
+                            CreatedBy = ApplicationHelper.CurrentUserProfile.ContactId,
+                            ResponsibleBy = ApplicationHelper.CurrentUserProfile.ContactId
+                        };
+                        SelectedOrder = order;
+
+                        var list = new List<OrderlineEntity>();
+                        for (int i = 0; i < 10000; i++)
+                        {
+                            list.Add(new OrderlineEntity()
+                            {
+                                Quantity = i + 1,
+                                RemainingQuantity = i + 1,
+                                Price = 300000,
+                                Commission = 100000,
+                                Description = "hang hoa 1 da dda adasd sadsasadas asd asdaaasddadda sada dada dad asdasd a a dad adada da dada da  adda dad as dasd adad aas dasd asd as dadaada dad a dasdasd das aas ad asdasd" + i.ToString(),
+                                Unit = "kg" + i.ToString(),
+                                ArticleNo = "hh" + i.ToString()
+                            });
+                        }
+
+                        OrderlineList = list;
                     }));
                 }
                 catch (Exception ex)
@@ -844,18 +780,19 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         #endregion
 
         #region Message processing
-        public override void Reset()
-        {
-            //reset left panel
-            SearchText = "";
-            //reload view
-            Reload();
-        }
         protected override void MessageHandler(BaseMessage pMessage)
         {
             if (pMessage.Token == MessageToken.ReloadMessage)
             {
-                Reset();
+                OrderEntity order = null;
+                if (pMessage.Parameters != null && pMessage.Parameters.ContainsKey("Order"))
+                {
+                    order = (OrderEntity)pMessage.Parameters["Order"];                    
+                }
+                //reset left panel
+                SearchText = "";
+                //reload view
+                Reload(order);
             }
         }
         #endregion

@@ -16,22 +16,22 @@ namespace VinaGerman.Database.Implementation
         {
             List<OrderEntity> result = null;            
             string sqlStatement = "SELECT " + Environment.NewLine +
-                "Orders.OrderId," + Environment.NewLine +
-                "Orders.OrderType," + Environment.NewLine +
-                "Orders.BusinessId," + Environment.NewLine +
-                "Orders.IndustryId," + Environment.NewLine +
-                "Orders.CreatedBy," + Environment.NewLine +
-                "Orders.ResponsibleBy," + Environment.NewLine +
-                "Orders.OrderDate," + Environment.NewLine +
-                "Orders.CreatedDate," + Environment.NewLine +
-                "Orders.CustomerCompanyId," + Environment.NewLine +
-                "Orders.CustomerContactId," + Environment.NewLine +
-                "Orders.OrderNumber," + Environment.NewLine +
-
+                "Order.OrderId," + Environment.NewLine +
+                "Order.OrderType," + Environment.NewLine +
+                "Order.BusinessId," + Environment.NewLine +
+                "Order.IndustryId," + Environment.NewLine +
+                "Order.CreatedBy," + Environment.NewLine +
+                "Order.ResponsibleBy," + Environment.NewLine +
+                "Order.OrderDate," + Environment.NewLine +
+                "Order.CreatedDate," + Environment.NewLine +
+                "Order.CompanyId," + Environment.NewLine +
+                "Order.CustomerCompanyId," + Environment.NewLine +
+                "Order.CustomerContactId," + Environment.NewLine +
+                "Order.OrderNumber," + Environment.NewLine +
+                "Order.Description," + Environment.NewLine +
                 "Company.Description as CompanyName," + Environment.NewLine +
-                "Contact.FullName as ContactName," + Environment.NewLine +
-                "Orders.Description" + Environment.NewLine +
-                "FROM Orders join Company on Orders.CustomerCompanyId = Company.CompanyId join Contact on Orders.CustomerContactId = Contact.ContactId" + Environment.NewLine +
+                "Contact.FullName as ContactName" + Environment.NewLine +                
+                "FROM [Order] join Company on [Order].CustomerCompanyId = Company.CompanyId join Contact on [Order].CustomerContactId = Contact.ContactId" + Environment.NewLine +
                 "WHERE 1=1 " + Environment.NewLine;
             if (searchObject.SearchText != null && searchObject.SearchText.Length > 0)
             {
@@ -51,17 +51,19 @@ namespace VinaGerman.Database.Implementation
         public OrderEntity AddOrUpdateOrder(OrderEntity entityObject)
         {
             string sqlStatement = "";
+            entityObject.CreatedDate = DateTime.Now;
             //if insert
             if (entityObject.OrderId > 0)
             {
-                sqlStatement += "UPDATE Orders SET  " + Environment.NewLine +
+                sqlStatement += "UPDATE [Order] SET  " + Environment.NewLine +
                 "OrderType=@OrderType," + Environment.NewLine +
                 "BusinessId=@BusinessId," + Environment.NewLine +
                 "IndustryId=@IndustryId," + Environment.NewLine +
                 "CreatedBy=@CreatedBy," + Environment.NewLine +
-                "ResponsibleBy=@ResponsibleBy" + Environment.NewLine +
+                "ResponsibleBy=@ResponsibleBy," + Environment.NewLine +
                 "OrderDate=@OrderDate," + Environment.NewLine +
                 "CreatedDate=@CreatedDate," + Environment.NewLine +
+                "CompanyId=@CompanyId," + Environment.NewLine +
                 "CustomerCompanyId=@CustomerCompanyId," + Environment.NewLine +
                 "CustomerContactId=@CustomerContactId," + Environment.NewLine +
                 "OrderNumber=@OrderNumber," + Environment.NewLine +
@@ -71,30 +73,32 @@ namespace VinaGerman.Database.Implementation
             }
             else
             {
-                sqlStatement += "INSERT INTO Orders(  " + Environment.NewLine +
-                "Order.OrderType," + Environment.NewLine +
-                "Order.BusinessId," + Environment.NewLine +
-                "Order.IndustryId," + Environment.NewLine +
-                "Order.CreatedBy," + Environment.NewLine +
-                "Order.ResponsibleBy" + Environment.NewLine +
-                "Order.OrderDate," + Environment.NewLine +
-                "Order.CreatedDate," + Environment.NewLine +
-                "Order.CustomerCompanyId," + Environment.NewLine +
-                "Order.CustomerContactId," + Environment.NewLine +
-                "Order.OrderNumber," + Environment.NewLine +
-                "Order.Description)" + Environment.NewLine +
+                sqlStatement += "INSERT INTO [Order](  " + Environment.NewLine +
+                "OrderType," + Environment.NewLine +
+                "BusinessId," + Environment.NewLine +
+                "IndustryId," + Environment.NewLine +
+                "CreatedBy," + Environment.NewLine +
+                "ResponsibleBy, " + Environment.NewLine +
+                "OrderDate," + Environment.NewLine +
+                "CreatedDate," + Environment.NewLine +
+                "CompanyId," + Environment.NewLine +
+                "CustomerCompanyId," + Environment.NewLine +
+                "CustomerContactId," + Environment.NewLine +
+                "OrderNumber," + Environment.NewLine +
+                "Description)" + Environment.NewLine +
                 "VALUES (" + Environment.NewLine +
                 "@OrderType," + Environment.NewLine +
                 "@BusinessId," + Environment.NewLine +
                 "@IndustryId," + Environment.NewLine +
                 "@CreatedBy," + Environment.NewLine +
-                "@ResponsibleBy" + Environment.NewLine +
+                "@ResponsibleBy," + Environment.NewLine +
                 "@OrderDate," + Environment.NewLine +
                 "@CreatedDate," + Environment.NewLine +
+                "@CompanyId," + Environment.NewLine +
                 "@CustomerCompanyId," + Environment.NewLine +
-                "Order.CustomerContactId," + Environment.NewLine +
-                "Order.OrderNumber," + Environment.NewLine +
-                "Order.Description)" + Environment.NewLine +
+                "@CustomerContactId," + Environment.NewLine +
+                "@OrderNumber," + Environment.NewLine +
+                "@Description)" + Environment.NewLine +
                 "SELECT SCOPE_IDENTITY() AS OrderId" + Environment.NewLine;
             }
 
@@ -115,6 +119,7 @@ namespace VinaGerman.Database.Implementation
 
                     OrderDate = entityObject.OrderDate,
                     CreatedDate = entityObject.CreatedDate,
+                    CompanyId = entityObject.CompanyId,
                     CustomerCompanyId = entityObject.CustomerCompanyId,
                     CustomerContactId = entityObject.CustomerContactId,
                     OrderNumber = entityObject.OrderNumber,
@@ -125,7 +130,7 @@ namespace VinaGerman.Database.Implementation
         }
         public bool DeleteOrder(OrderEntity entityObject)
         {
-            string sqlStatement = "UPDATE Orders SET Deleted=1 WHERE OrderId=@OrderId  " + Environment.NewLine;
+            string sqlStatement = "UPDATE Order SET Deleted=1 WHERE OrderId=@OrderId  " + Environment.NewLine;
 
             //execute
             var db = GetDatabaseInstance();
@@ -156,7 +161,7 @@ namespace VinaGerman.Database.Implementation
                 "Article.ArticleNo," + Environment.NewLine +
                 "Article.Description," + Environment.NewLine +
                 "Article.Unit," + Environment.NewLine +
-                "Orderline.Deleted," + Environment.NewLine +
+                "Orderline.Deleted" + Environment.NewLine +
 
                 "FROM Orderline JOIN Article ON Orderline.ArticleId=Article.ArticleId " + Environment.NewLine +
                 "WHERE Deleted=0 AND Orderline.OrderId=@OrderId" + Environment.NewLine;
