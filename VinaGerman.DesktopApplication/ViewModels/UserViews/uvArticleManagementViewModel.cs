@@ -169,10 +169,9 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
 
         public RelayCommand ClearSearchCommand { get; set; }
         public RelayCommand SearchCommand { get; set; }
-        public RelayCommand SaveCommand { get; set; }
+        public RelayCommand<ArticleEntity> SaveCommand { get; set; }
         public RelayCommand AddCommand { get; set; }
-        public RelayCommand CreateCommand { get; set; }
-        public RelayCommand DeleteCommand { get; set; }
+        public RelayCommand<ArticleEntity> DeleteCommand { get; set; }
 
         public RelayCommand SaveArticleRelationCommand { get; set; }
         public RelayCommand<ArticleRelationEntity> DeleteArticleRelationCommand { get; set; }
@@ -184,8 +183,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         {
             ClearSearchCommand = new RelayCommand(ClearSearch);
             SearchCommand = new RelayCommand(Search);
-            SaveCommand = new RelayCommand(Save);
-            DeleteCommand = new RelayCommand(Delete);
+            SaveCommand = new RelayCommand<ArticleEntity>(Save);
+            DeleteCommand = new RelayCommand<ArticleEntity>(Delete);
             AddCommand = new RelayCommand(Add);
 
             SaveArticleRelationCommand = new RelayCommand(SaveArticleRelation);
@@ -291,11 +290,16 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             var newEntity = new ArticleEntity()
             {
                 Deleted = false,
-                Description = ""
+                Description = "",
+                ArticleNo="",
+                ArticleId=-1
             };
             SelectedArticle = newEntity;
+            ArticleList.Add(newEntity);
+            ArticleList = new List<ArticleEntity>(_articleList);
         }
-        public void Delete()
+
+        public void Delete(ArticleEntity entityObject)
         {
             if (ShowMessageBox(StringResources.captionConfirm, StringResources.msgConfirmDelete, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
@@ -305,14 +309,14 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().DeleteArticle(SelectedArticle);
+                        var updatedEntity = Factory.Resolve<IBaseDataDS>().DeleteArticle(entityObject);
 
                         HideLoading();
 
                         //display to UI
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
-                            DeleteArticleFromList(SelectedArticle);
+                            DeleteArticleFromList(entityObject);
                             SelectedArticle = null;
                         }));
                     }
@@ -324,7 +328,38 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 });
             }
         }
-        public void Save()
+
+        //public void Delete()
+        //{
+        //    if (ShowMessageBox(StringResources.captionConfirm, StringResources.msgConfirmDelete, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+        //    {
+        //        System.Threading.ThreadPool.QueueUserWorkItem(delegate
+        //        {
+        //            try
+        //            {
+        //                ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
+
+        //                var updatedEntity = Factory.Resolve<IBaseDataDS>().DeleteArticle(SelectedArticle);
+
+        //                HideLoading();
+
+        //                //display to UI
+        //                Application.Current.Dispatcher.Invoke(new Action(() =>
+        //                {
+        //                    DeleteArticleFromList(SelectedArticle);
+        //                    SelectedArticle = null;
+        //                }));
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                HideLoading();
+        //                ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
+        //            }
+        //        });
+        //    }
+        //}
+
+        public void Save(ArticleEntity entityObject)
         {
             System.Threading.ThreadPool.QueueUserWorkItem(delegate
             {
@@ -332,7 +367,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateArticle(SelectedArticle);
+                    var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateArticle(entityObject);
 
                     HideLoading();
 
@@ -349,10 +384,36 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
                 }
             });
-            //ShowDialog<uvCompanyDetailViewModel>(new uvCompanyDetailViewModel() { 
-            //    OriginalCompany = SelectCompany
-            //});
         }
+        //public void Save()
+        //{
+        //    System.Threading.ThreadPool.QueueUserWorkItem(delegate
+        //    {
+        //        try
+        //        {
+        //            ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
+
+        //            var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateArticle(SelectedArticle);
+
+        //            HideLoading();
+
+        //            //display to UI
+        //            Application.Current.Dispatcher.Invoke(new Action(() =>
+        //            {
+        //                SelectedArticle = updatedEntity;
+        //                AddOrUpdateArticle(SelectedArticle);
+        //            }));
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            HideLoading();
+        //            ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
+        //        }
+        //    });
+        //    //ShowDialog<uvCompanyDetailViewModel>(new uvCompanyDetailViewModel() { 
+        //    //    OriginalCompany = SelectCompany
+        //    //});
+        //}
         public void SaveArticleRelation()
         {
             if (SelectedArticle != null && SelectedArticle.ArticleId > 0 && RelatedArticle != null && RelatedArticle.ArticleId > 0)
