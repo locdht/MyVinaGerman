@@ -232,24 +232,46 @@ namespace VinaGerman.DataSource.Implementation
             channel.Dispose();
             return result;
         }
-        public List<OrderlineEntity> GetOrderRelationsForOrder(OrderEntity searchObject)
+        public List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity searchObject)
         {
             IBaseDataSvc channel = CreateChannel();
-            var result = channel.GetOrderRelationsForOrder(searchObject);
+            var result = channel.GetOrderlinesForOrder(searchObject);
             channel.Dispose();
             return result;
         }
-        public OrderlineEntity AddOrUpdateOrderRelation(OrderlineEntity entityObject)
+        public OrderlineEntity AddOrUpdateOrderline(OrderlineEntity entityObject)
         {
             IBaseDataSvc channel = CreateChannel();
-            var result = channel.AddOrUpdateOrderRelation(entityObject);
+            var result = channel.AddOrUpdateOrderline(entityObject);
             channel.Dispose();
             return result;
         }
-        public bool DeleteOrderRelation(OrderlineEntity entityObject)
+        public bool DeleteOrderline(OrderlineEntity entityObject)
         {
             IBaseDataSvc channel = CreateChannel();
-            var result = channel.DeleteOrderRelation(entityObject);
+            var result = channel.DeleteOrderline(entityObject);
+            channel.Dispose();
+            return result;
+        }
+
+        public List<LoanEntity> GetLoansForOrderline(OrderlineEntity searchObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.GetLoansForOrderline(searchObject);
+            channel.Dispose();
+            return result;
+        }
+        public LoanEntity AddOrUpdateLoan(LoanEntity entityObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.AddOrUpdateLoan(entityObject);
+            channel.Dispose();
+            return result;
+        }
+        public bool DeleteLoan(LoanEntity entityObject)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.DeleteLoan(entityObject);
             channel.Dispose();
             return result;
         }

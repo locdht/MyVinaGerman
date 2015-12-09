@@ -46,6 +46,21 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
 
+        private OrderEntity _selectedOrder;
+        public OrderEntity SelectedOrder
+        {
+            get
+            {
+                return _selectedOrder;
+            }
+            set
+            {
+                _selectedOrder = OrderList.FirstOrDefault();
+                RaisePropertyChanged("SelectedOrder");
+                
+            }
+        }
+
         public RelayCommand ClearSearchCommand { get; set; }
         public RelayCommand SearchCommand { get; set; }
         #endregion
@@ -94,6 +109,23 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         public void ClearSearch()
         {
             SearchText = "";
+        }
+        #endregion
+
+        #region Message processing
+        public override void Reset()
+        {
+            //reset left panel
+            SearchText = "";
+            //reload view
+            Search();
+        }
+        protected override void MessageHandler(BaseMessage pMessage)
+        {
+            if (pMessage.Token == MessageToken.ReloadMessage)
+            {
+                Reset();
+            }
         }
         #endregion
     }

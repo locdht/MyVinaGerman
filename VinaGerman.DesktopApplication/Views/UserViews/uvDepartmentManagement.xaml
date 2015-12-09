@@ -92,18 +92,10 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn CellStyle="{DynamicResource GridHeaderSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False" >
+                            <DataGridTemplateColumn Width="60" CellStyle="{DynamicResource GridHeaderSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="60"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="60"/>
-                                            </Grid.RowDefinitions>
-                                            <Image Grid.Column="0" Grid.Row="0" Source="/VinaGerman.DesktopApplication;component/Images/company.png" Height="60" Width="60" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                                        </Grid>
+                                        <Image Grid.Column="0" Grid.Row="0" Source="/VinaGerman.DesktopApplication;component/Images/department.png" VerticalAlignment="Center" Margin="0,0,0,0"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

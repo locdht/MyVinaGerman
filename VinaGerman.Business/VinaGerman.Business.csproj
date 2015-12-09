@@ -53,6 +53,9 @@
     <Compile Include="IBusinessBL.cs" />
     <Compile Include="ICategoryBL.cs" />
     <Compile Include="ICompanyBL.cs" />
+    <Compile Include="IReportBL.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="IUserBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

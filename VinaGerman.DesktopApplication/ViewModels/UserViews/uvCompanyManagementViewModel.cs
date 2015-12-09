@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using VinaGerman.DataSource;
 using VinaGerman.DesktopApplication.Translations;
-using VinaGerman.DesktopApplication.Ultilities;
+using VinaGerman.DesktopApplication.Utilities;
 using VinaGerman.Entity;
 using VinaGerman.Entity.DatabaseEntity;
 using VinaGerman.Entity.SearchEntity;
@@ -74,44 +74,11 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
 
-        private CompanyEntity _selectedCompany;
-        public CompanyEntity SelectedCompany
-        {
-            get
-            {
-                return _selectedCompany;
-            }
-            set
-            {
-                _selectedCompany = value;
-                RaisePropertyChanged("SelectedCompany");
-                RaisePropertyChanged("CanSave");
-                RaisePropertyChanged("CanDelete");
-            }
-        }
-
-        public bool CanSave
-        {
-            get
-            {
-                return _selectedCompany != null;
-            }
-        }
-
-        public bool CanDelete
-        {
-            get
-            {
-                return _selectedCompany != null && _selectedCompany.CompanyId > 0;
-            }
-        }
-
         public RelayCommand ClearSearchCommand { get; set; }
         public RelayCommand SearchCommand { get; set; }
-        public RelayCommand SaveCommand { get; set; }
+        public RelayCommand<CompanyEntity> SaveCommand { get; set; }
         public RelayCommand AddCommand { get; set; }
-        public RelayCommand CreateCommand { get; set; }
-        public RelayCommand DeleteCommand { get; set; }
+        public RelayCommand<CompanyEntity> DeleteCommand { get; set; }
         #endregion
 
 
@@ -120,8 +87,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         {
             ClearSearchCommand = new RelayCommand(ClearSearch);
             SearchCommand = new RelayCommand(Search);
-            SaveCommand = new RelayCommand(Save);
-            DeleteCommand = new RelayCommand(Delete);
+            SaveCommand = new RelayCommand<CompanyEntity>(Save);
+            DeleteCommand = new RelayCommand<CompanyEntity>(Delete);
             AddCommand = new RelayCommand(Add);
 
             ClearSearch();
@@ -129,7 +96,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         #region method
         public void AddOrUpdateCompany(CompanyEntity newEntity)
         {
-            CompanyEntity oldEntity = CompanyList.FirstOrDefault<CompanyEntity>(p => p.CompanyId == newEntity.CompanyId);
+            CompanyEntity oldEntity = CompanyList.FirstOrDefault<CompanyEntity>(p => p.CompanyCode == newEntity.CompanyCode);
 
             if (oldEntity == null)
             {
@@ -169,9 +136,11 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 Phone = "",
                 Website = ""
             };
-            SelectedCompany = newEntity;
+
+            CompanyList.Add(newEntity);
+            CompanyList = new List<CompanyEntity>(_companyList);
         }
-        public void Delete()
+        public void Delete(CompanyEntity entityObject)
         {
             if (ShowMessageBox(StringResources.captionConfirm, StringResources.msgConfirmDelete, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
@@ -181,15 +150,14 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var updatedEntity = Factory.Resolve<ICompanyDS>().DeleteCompany(SelectedCompany);
+                        var updatedEntity = Factory.Resolve<ICompanyDS>().DeleteCompany(entityObject);
 
                         HideLoading();
 
                         //display to UI
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
-                            DeleteCompany(SelectedCompany);
-                            SelectedCompany = null;
+                            DeleteCompany(entityObject);
                         }));
                     }
                     catch (Exception ex)
@@ -200,7 +168,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 });
             }
         }
-        public void Save()
+        public void Save(CompanyEntity entityObject)
         {
             System.Threading.ThreadPool.QueueUserWorkItem(delegate
             {
@@ -208,15 +176,14 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var updatedEntity = Factory.Resolve<ICompanyDS>().AddOrUpdateCompany(SelectedCompany);
+                    var updatedEntity = Factory.Resolve<ICompanyDS>().AddOrUpdateCompany(entityObject);
 
                     HideLoading();
 
                     //display to UI
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        SelectedCompany = updatedEntity;
-                        AddOrUpdateCompany(SelectedCompany);
+                        AddOrUpdateCompany(updatedEntity);
                     }));
                 }
                 catch (Exception ex)
@@ -224,10 +191,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     HideLoading();
                     ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
                 }
-            });
-            //ShowDialog<uvCompanyDetailViewModel>(new uvCompanyDetailViewModel() { 
-            //    OriginalCompany = SelectCompany
-            //});
+            });            
         }
         public void Search()
         {
@@ -268,6 +232,22 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             SearchText = "";
             IsCustomer = false;
             IsSupplier = false;
+        }
+        #endregion
+
+        #region Message processing
+        public override void Reset()
+        {
+            ClearSearch();
+            //reload view
+            Search();
+        }
+        protected override void MessageHandler(BaseMessage pMessage)
+        {
+            if (pMessage.Token == MessageToken.ReloadMessage)
+            {
+                Reset();
+            }
         }
         #endregion
     }

@@ -73,7 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BaseData.svc" />
-    <Content Include="Company.svc" />        
+    <Content Include="Common.svc" />
+    <Content Include="Company.svc" />
+    <Content Include="Report.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

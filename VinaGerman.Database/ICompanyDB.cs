@@ -10,6 +10,7 @@ namespace VinaGerman.Database
 {
     public interface ICompanyDB
     {
+        CompanyEntity GetCompanyById(int companyId);
         List<CompanyEntity> SearchCompanies(CompanySearchEntity searchObject);
         CompanyEntity AddOrUpdateCompany(CompanyEntity entityObject);
         bool DeleteCompany(CompanyEntity entityObject);

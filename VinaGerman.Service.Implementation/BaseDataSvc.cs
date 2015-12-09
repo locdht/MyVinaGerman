@@ -166,30 +166,30 @@ namespace VinaGerman.Service.Implementation
         {
             return Factory.Resolve<IOrderBL>().DeleteOrder(entityObject);
         }
-        public List<OrderlineEntity> GetOrderRelationsForOrder(OrderEntity searchObject)
+        public List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity searchObject)
         {
-            return Factory.Resolve<IOrderBL>().GetOrderRelationsForOrder(searchObject);
+            return Factory.Resolve<IOrderBL>().GetOrderlinesForOrder(searchObject);
         }
-        public OrderlineEntity AddOrUpdateOrderRelation(OrderlineEntity entityObject)
+        public OrderlineEntity AddOrUpdateOrderline(OrderlineEntity entityObject)
         {
-            return Factory.Resolve<IOrderBL>().AddOrUpdateOrderRelation(entityObject);
+            return Factory.Resolve<IOrderBL>().AddOrUpdateOrderline(entityObject);
         }
-        public bool DeleteOrderRelation(OrderlineEntity entityObject)
+        public bool DeleteOrderline(OrderlineEntity entityObject)
         {
-            return Factory.Resolve<IOrderBL>().DeleteOrderRelation(entityObject);
+            return Factory.Resolve<IOrderBL>().DeleteOrderline(entityObject);
         }
 
-        public List<LoanEntity> GetOrderRelationsLoanForOrder(OrderEntity searchObject)
+        public List<LoanEntity> GetLoansForOrderline(OrderlineEntity searchObject)
         {
-            return Factory.Resolve<IOrderBL>().GetOrderRelationsLoanForOrder(searchObject);
+            return Factory.Resolve<IOrderBL>().GetLoansForOrderline(searchObject);
         }
-        public LoanEntity AddOrUpdateOrderRelationLoan(LoanEntity entityObject)
+        public LoanEntity AddOrUpdateLoan(LoanEntity entityObject)
         {
-            return Factory.Resolve<IOrderBL>().AddOrUpdateOrderRelationLoan(entityObject);
+            return Factory.Resolve<IOrderBL>().AddOrUpdateLoan(entityObject);
         }
-        public bool DeleteOrderRelationLoan(LoanEntity entityObject)
+        public bool DeleteLoan(LoanEntity entityObject)
         {
-            return Factory.Resolve<IOrderBL>().DeleteOrderRelationLoan(entityObject);
+            return Factory.Resolve<IOrderBL>().DeleteLoan(entityObject);
         }
         #endregion
 

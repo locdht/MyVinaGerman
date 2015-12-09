@@ -50,7 +50,10 @@
     <Compile Include="IIndustryDB.cs" />
     <Compile Include="IBusinessDB.cs" />
     <Compile Include="ICategoryDB.cs" />
-    <Compile Include="ICompanyDB.cs" />
+    <Compile Include="ICompanyDB.cs" />    
+    <Compile Include="IReportDB.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="IUserDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

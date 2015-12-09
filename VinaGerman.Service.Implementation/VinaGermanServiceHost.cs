@@ -43,6 +43,7 @@ namespace VinaGerman.Service.Implementation
             Factory.Register<ILocationBL, LocationBL>();
             Factory.Register<IContactBL, ContactBL>();
             Factory.Register<IOrderBL, OrderBL>();
+            Factory.Register<IReportBL, ReportBL>();
             //database layer
             Factory.Register<IUserDB, UserDB>();
             Factory.Register<ICompanyDB, CompanyDB>();
@@ -54,6 +55,7 @@ namespace VinaGerman.Service.Implementation
             Factory.Register<ILocationDB, LocationDB>();
             Factory.Register<IContactDB, ContactDB>();
             Factory.Register<IOrderDB, OrderDB>();
+            Factory.Register<IReportDB, ReportDB>();
             //EntityHelper.GetFactoryInstance().Register<ICategoryTypeDB, CategoryTypeDB>();
             //EntityHelper.GetFactoryInstance().Register<IPersonnelDB, PersonnelDB>();
         }      

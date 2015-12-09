@@ -59,7 +59,34 @@ namespace VinaGerman.Database.Implementation
             }
             return result;
         }
+        public CompanyEntity GetCompanyById(int companyId)
+        {
+            CompanyEntity result = null;
+            string sqlStatement = "SELECT TOP 100  " + Environment.NewLine +
+                "Company.CompanyId," + Environment.NewLine +
+                "Company.CompanyOwner," + Environment.NewLine +
+                "Company.Description," + Environment.NewLine +
+                "Company.Deleted," + Environment.NewLine +
+                "Company.Address," + Environment.NewLine +
+                "Company.CompanyCode," + Environment.NewLine +
+                "Company.TaxCode," + Environment.NewLine +
+                "Company.Website," + Environment.NewLine +
+                "Company.Phone," + Environment.NewLine +
+                "Company.IsSupplier," + Environment.NewLine +
+                "Company.IsCustomer" + Environment.NewLine +
+                "FROM Company " + Environment.NewLine +
+                "WHERE CompanyId=@CompanyId" + Environment.NewLine;
 
+            //execute
+            var db = GetDatabaseInstance();
+            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
+            // Call the ExecuteReader method with the command.                
+            using (IDbConnection conn = db.CreateConnection())
+            {
+                result = conn.Query<CompanyEntity>(sqlStatement, new { CompanyId = companyId }).FirstOrDefault();
+            }
+            return result;
+        }
         public CompanyEntity AddOrUpdateCompany(CompanyEntity entityObject)
         {
             string sqlStatement = "";

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VinaGerman.DesktopApplication.Ultilities
+namespace VinaGerman.DesktopApplication.Utilities
 {
     public enum enumView
     {

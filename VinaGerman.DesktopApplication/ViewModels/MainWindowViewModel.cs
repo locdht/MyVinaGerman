@@ -11,7 +11,6 @@ using System.ComponentModel;
 using System.IO;
 using VinaGerman.DesktopApplication.ViewModels.UserViews;
 using VinaGerman.DesktopApplication.Translations;
-using VinaGerman.DesktopApplication.Ultilities;
 
 namespace VinaGerman.DesktopApplication.ViewModels
 {
@@ -60,7 +59,7 @@ namespace VinaGerman.DesktopApplication.ViewModels
         }
        
         public List<uvBaseViewModel> ModelQueue { get; set; }
-       
+        public RelayCommand<enumView> GoToViewCommand { get; set; }
         #endregion   
  
         #region Constructors
@@ -90,6 +89,7 @@ namespace VinaGerman.DesktopApplication.ViewModels
 
             // Init all module
             ModelQueue = new List<uvBaseViewModel>();
+            GoToViewCommand = new RelayCommand<enumView>(GoToView);
 
             CompanyManagementModel = new uvCompanyManagementViewModel(this) { MessengerID = enumView.CompanyManagement.ToString() };
             CategoryManagementModel = new uvCategoryManagementViewModel(this) { MessengerID = enumView.CategoryManagement.ToString() };
@@ -178,9 +178,10 @@ namespace VinaGerman.DesktopApplication.ViewModels
         
         public void RegisterImplementation()
         {
+            VinaGerman.Entity.Factory.Register<VinaGerman.DataSource.IReportDS, VinaGerman.DataSource.Implementation.ReportDS>();
             VinaGerman.Entity.Factory.Register<VinaGerman.DataSource.ICommonDS, VinaGerman.DataSource.Implementation.CommonDS>();
             VinaGerman.Entity.Factory.Register<VinaGerman.DataSource.ICompanyDS, VinaGerman.DataSource.Implementation.CompanyDS>();
-            VinaGerman.Entity.Factory.Register<VinaGerman.DataSource.IBaseDataDS, VinaGerman.DataSource.Implementation.BaseDataDS>();
+            VinaGerman.Entity.Factory.Register<VinaGerman.DataSource.IBaseDataDS, VinaGerman.DataSource.Implementation.BaseDataDS>();            
         }       
         #endregion
 
@@ -236,7 +237,7 @@ namespace VinaGerman.DesktopApplication.ViewModels
                     break;
                 case enumView.CompanyManagement:
                     CurrentModel = CompanyManagementModel;
-                    SendMessage(MessageToken.ReloadMessage, null, enumView.CategoryManagement.ToString());
+                    SendMessage(MessageToken.ReloadMessage, null, enumView.CompanyManagement.ToString());
                     break;
                 case enumView.Logon:
                     CurrentModel = LogonModel;

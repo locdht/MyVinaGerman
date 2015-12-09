@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using VinaGerman.DesktopApplication.Translations;
-using VinaGerman.DesktopApplication.Ultilities;
+using VinaGerman.DesktopApplication.Utilities;
 
 namespace VinaGerman.DesktopApplication.ViewModels.UserViews
 {
@@ -84,7 +84,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
 
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
-                            GoToView(enumView.PurchaseOrderManagement);
+                            GoToView(enumView.PurchaseOrderDetail);
                         }));
                     }
                 }

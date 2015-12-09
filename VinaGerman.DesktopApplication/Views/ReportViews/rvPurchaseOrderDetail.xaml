@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="VinaGerman.DesktopApplication.Views.ReportViews.rvPurchaseOrderDetail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms" 
+              Width="1024" Height="600" Background="White">
+    <Grid>
+        <Grid Name="DetailPanel">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <!--header block-->
+            <Grid Grid.Row="0" Background="{DynamicResource BorderBrush}" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="1" Style="{DynamicResource LabelBarCaption}" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.captionCompanyInfo}" Margin="4,0,0,0"/>
+            </Grid>
+            <!--content block-->
+            <Border Grid.Column="0" Grid.Row="1" Style="{DynamicResource BorderGrid}">
+                <WindowsFormsHost>
+                    <rv:ReportViewer x:Name="_reportViewer"/>
+                </WindowsFormsHost>
+            </Border>
+            
+            <!--Bottom block-->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="5"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnClose}" Background="{StaticResource BackColor}" Command="{Binding CloseCommand}" Style="{StaticResource DialogButton}" Margin="5,5,5,5"></Button>
+            </Grid>
+        </Grid>        
+    </Grid>
+</UserControl>

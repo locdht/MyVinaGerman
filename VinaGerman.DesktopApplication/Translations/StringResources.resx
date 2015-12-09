@@ -132,6 +132,9 @@
   <data name="btnLogon" xml:space="preserve">
     <value>Logon</value>
   </data>
+  <data name="btnPrint" xml:space="preserve">
+    <value>Print</value>
+  </data>
   <data name="btnSave" xml:space="preserve">
     <value>Save</value>
   </data>
@@ -216,6 +219,12 @@
   <data name="captionOK" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="captionOrderInfo" xml:space="preserve">
+    <value>Order Info</value>
+  </data>
+  <data name="captionOrderList" xml:space="preserve">
+    <value>Order list</value>
+  </data>
   <data name="captionRelatedArticle" xml:space="preserve">
     <value>Related article list</value>
   </data>
@@ -251,6 +260,9 @@
   </data>
   <data name="hintLocationSearch" xml:space="preserve">
     <value>Address/Description</value>
+  </data>
+  <data name="hintOrderSearch" xml:space="preserve">
+    <value>OrderNumber/Description</value>
   </data>
   <data name="lblAddress" xml:space="preserve">
     <value>Address:</value>
@@ -314,6 +326,9 @@
   </data>
   <data name="lblPassword" xml:space="preserve">
     <value>Password:</value>
+  </data>
+  <data name="lblPayDate" xml:space="preserve">
+    <value>Pay date:</value>
   </data>
   <data name="lblPhone" xml:space="preserve">
     <value>Phone:</value>

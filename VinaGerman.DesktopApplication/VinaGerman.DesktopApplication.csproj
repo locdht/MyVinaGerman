@@ -62,6 +62,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Portable.CommonServiceLocator.1.2.2\lib\portable-net4+sl4+wp7+win8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="PortableIoC, Version=1.0.4662.28127, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PortableIoC.1.0.0\lib\net45\PortableIoC.dll</HintPath>
@@ -74,6 +75,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Printing" />
     <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Unofficial.Blend.Interactivity.1.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -91,6 +93,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -119,6 +122,7 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\MessageBoxViewModel.cs" />
     <Compile Include="ViewModels\MessageToken.cs" />
+    <Compile Include="ViewModels\ReportViews\rvPurchaseOrderDetailViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvArticleManagementViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvContactManagementViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvLocationManagementViewModel.cs" />
@@ -150,6 +154,10 @@
     </Compile>
     <Compile Include="Views\UserViews\uvLocationManagement.xaml.cs">
       <DependentUpon>uvLocationManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportViews\rvPurchaseOrderDetail.xaml.cs">
+      <DependentUpon>rvPurchaseOrderDetail.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Views\UserViews\uvDepartmentManagement.xaml.cs">
       <DependentUpon>uvDepartmentManagement.xaml</DependentUpon>
@@ -207,6 +215,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\ImplicitStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -234,6 +246,10 @@
     <Page Include="Views\UserViews\uvLocationManagement.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ReportViews\rvPurchaseOrderDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserViews\uvDepartmentManagement.xaml">
       <SubType>Designer</SubType>
@@ -294,6 +310,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptPurchaseOrderDetail.rdlc" />
     <EmbeddedResource Include="Translations\StringResources.en-us.resx">
       <LastGenOutput>StringResources.vi-VN.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -305,6 +322,8 @@
       <LastGenOutput>StringResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\VinaGerman.Entity.BusinessEntity.OrderlineEntity.datasource" />
+    <None Include="Properties\DataSources\VinaGerman.Entity.ReportEntity.HeaderReportEntity.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -315,7 +334,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\UserComponents\" />
+    <Folder Include="ViewModels\DialogViews\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VinaGerman.DataSource.Implementation\VinaGerman.DataSource.Implementation.csproj">
@@ -340,6 +359,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\business.png" />
     <Resource Include="Images\company.png" />
   </ItemGroup>
   <ItemGroup>
@@ -351,6 +371,12 @@
     <Resource Include="Images\contact.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\department.png" />
+    <Resource Include="Images\goods.png" />
+    <Resource Include="Images\industry.png" />
+    <Resource Include="Images\location.png" />
+    <Resource Include="Images\purchase_order.png" />
+    <Resource Include="Images\sale_order.PNG" />
     <Resource Include="Images\supplier.png" />
   </ItemGroup>
   <ItemGroup>
@@ -380,6 +406,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\save.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
