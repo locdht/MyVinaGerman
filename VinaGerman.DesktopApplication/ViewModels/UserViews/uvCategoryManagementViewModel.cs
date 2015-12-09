@@ -67,7 +67,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         #region method
         public void AddOrUpdateCategory(CategoryEntity newEntity)
         {
-            CategoryEntity oldEntity = CategoryList.FirstOrDefault<CategoryEntity>(p => p.CategoryId == newEntity.CategoryId);
+            CategoryEntity oldEntity = CategoryList.FirstOrDefault<CategoryEntity>(p => p.Description == newEntity.Description);
 
             if (oldEntity == null)
             {

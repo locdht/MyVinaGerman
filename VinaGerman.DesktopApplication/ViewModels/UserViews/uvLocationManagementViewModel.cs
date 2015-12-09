@@ -68,7 +68,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         #region method
         public void AddOrUpdateLocation(VinaGerman.Entity.BusinessEntity.LocationEntity newEntity)
         {
-            VinaGerman.Entity.BusinessEntity.LocationEntity oldEntity = LocationList.FirstOrDefault<VinaGerman.Entity.BusinessEntity.LocationEntity>(p => p.LocationId == newEntity.LocationId);
+            VinaGerman.Entity.BusinessEntity.LocationEntity oldEntity = LocationList.FirstOrDefault<VinaGerman.Entity.BusinessEntity.LocationEntity>(p => p.Description == newEntity.Description);
 
             if (oldEntity == null)
             {

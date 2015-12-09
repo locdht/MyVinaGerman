@@ -66,7 +66,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         #region method
         public void AddOrUpdateDepartment(VinaGerman.Entity.BusinessEntity.DepartmentEntity newEntity)
         {
-            VinaGerman.Entity.BusinessEntity.DepartmentEntity oldEntity = DepartmentList.FirstOrDefault<VinaGerman.Entity.BusinessEntity.DepartmentEntity>(p => p.DepartmentId == newEntity.DepartmentId);
+            VinaGerman.Entity.BusinessEntity.DepartmentEntity oldEntity = DepartmentList.FirstOrDefault<VinaGerman.Entity.BusinessEntity.DepartmentEntity>(p => p.Description == newEntity.Description);
 
             if (oldEntity == null)
             {
