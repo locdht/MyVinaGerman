@@ -88,7 +88,6 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     SelectedEmployee = EmployeeList.FirstOrDefault(c => c.UserAccountId == SelectedOrder.CreatedBy);
                     SelectedBusiness = BusinessList.FirstOrDefault(c => c.BusinessId == SelectedOrder.BusinessId);
                     SelectedIndustry = IndustryList.FirstOrDefault(c => c.IndustryId == SelectedOrder.IndustryId);
-                    LoadRelatedOrders();
                 }
             }
         }
@@ -258,19 +257,18 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
 
-
-        private OrderEntity _relatedOrder;
-        public OrderEntity RelatedOrder
+        private ArticleEntity _selectedArticle;
+        public ArticleEntity SelectedArticle
         {
             get
             {
-                return _relatedOrder;
+                return _selectedArticle;
             }
             set
             {
-                _relatedOrder = value;
-                RaisePropertyChanged("SelectedOrder");
-                RaisePropertyChanged("CanAddRelatedOrder");
+                _selectedArticle = value;
+                RaisePropertyChanged("SelectedArticle");
+                RaisePropertyChanged("CanAddOrderline");
             }
         }
 
@@ -284,8 +282,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             set
             {
                 _relatedArticle = value;
-                RaisePropertyChanged("SelectedOrder");
-                RaisePropertyChanged("CanAddRelatedArticle");
+                RaisePropertyChanged("RelatedArticle");
+                RaisePropertyChanged("CanAddLoan");
             }
         }
 
@@ -300,6 +298,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             {
                 _selectedOrderline = value;
                 RaisePropertyChanged("SelectedOrderline");//SelectedOrderRelation
+
+                LoadLoans();
             }
         }
 
@@ -317,15 +317,23 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
 
-        public bool CanSave
+        public bool CanAddOrderline
         {
             get
             {
-                return _selectedOrder != null;
+                return _selectedOrder != null && _selectedOrder.OrderId > 0 && _selectedArticle != null && _selectedArticle.ArticleId > 0;
             }
         }
 
-        public bool CanDelete
+        public bool CanAddLoan
+        {
+            get
+            {
+                return _selectedOrderline != null && _selectedOrderline.OrderId > 0 && _relatedArticle != null && _relatedArticle.ArticleId > 0;
+            }
+        }
+
+        public bool CanDeleteOrder
         {
             get
             {
@@ -359,63 +367,45 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
         
-        public RelayCommand SaveCommand { get; set; }
-        public RelayCommand AddCommand { get; set; }
-        public RelayCommand CreateCommand { get; set; }
-        public RelayCommand DeleteCommand { get; set; }
+        public RelayCommand SaveOrderCommand { get; set; }
+        public RelayCommand DeleteOrderCommand { get; set; }
         public RelayCommand ShowReportCommand { get; set; }
 
-        public RelayCommand SaveOrderRelationCommand { get; set; }
-        public RelayCommand<OrderlineEntity> DeleteOrderRelationCommand { get; set; }
+        public RelayCommand AddOrderlineCommand { get; set; }
+        public RelayCommand<OrderlineEntity> SaveOrderlineCommand { get; set; }
+        public RelayCommand<OrderlineEntity> DeleteOrderlineCommand { get; set; }
 
-        public RelayCommand SaveOrderRelationLoanCommand { get; set; }        
-        public RelayCommand<LoanEntity> DeleteOrderRelationLoanCommand { get; set; }
+        public RelayCommand AddLoanCommand { get; set; }
+        public RelayCommand<LoanEntity> SaveLoanCommand { get; set; }        
+        public RelayCommand<LoanEntity> DeleteLoanCommand { get; set; }
         #endregion
 
 
         public uvPurchaseOrderDetailViewModel(MainWindowViewModel pMainWindowViewModel)
             : base(pMainWindowViewModel)
         {
-            SaveCommand = new RelayCommand(Save);
-            DeleteCommand = new RelayCommand(Delete);
-            AddCommand = new RelayCommand(Add);
+            SaveOrderCommand = new RelayCommand(SaveOrder);
+            DeleteOrderCommand = new RelayCommand(DeleteOrder);
             ShowReportCommand = new RelayCommand(ShowReport);
 
-            SaveOrderRelationCommand = new RelayCommand(SaveOrderRelation);
-            DeleteOrderRelationCommand = new RelayCommand<OrderlineEntity>(DeleteOrderRelation);
+            AddOrderlineCommand = new RelayCommand(AddOrderline);
+            SaveOrderlineCommand = new RelayCommand<OrderlineEntity>(SaveOrderline);
+            DeleteOrderlineCommand = new RelayCommand<OrderlineEntity>(DeleteOrderline);
 
-            SaveOrderRelationLoanCommand = new RelayCommand(SaveOrderRelationLoan);
-            DeleteOrderRelationLoanCommand = new RelayCommand<LoanEntity>(DeleteOrderRelationLoan);            
+            AddLoanCommand = new RelayCommand(AddLoan);
+            SaveLoanCommand = new RelayCommand<LoanEntity>(SaveLoan);
+            DeleteLoanCommand = new RelayCommand<LoanEntity>(DeleteLoan);            
         }
         #region method      
         
-        
+        #region order
         public void ShowReport()
         {
             ShowDialog<rvPurchaseOrderDetailViewModel>(new rvPurchaseOrderDetailViewModel() 
             { 
             });
-        }
-
-        public void Add()
-        {
-            var newEntity = new OrderEntity()
-            {
-                OrderType = 0,
-                BusinessId=0,
-                IndustryId=0,
-                CreatedBy=0,
-                ResponsibleBy=0,
-                OrderDate=DateTime.Today,
-                CreatedDate=DateTime.Today,
-                CustomerCompanyId=0,
-                CustomerContactId=0,
-                OrderNumber="",
-                Description = ""
-            };
-            SelectedOrder = newEntity;
-        }
-        public void Delete()
+        }        
+        public void DeleteOrder()
         {
             if (ShowMessageBox(StringResources.captionConfirm, StringResources.msgConfirmDelete, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
@@ -432,7 +422,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         //display to UI
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
-                            SelectedOrder = null;
+                            GoToView(enumView.PurchaseOrderManagement);
                         }));
                     }
                     catch (Exception ex)
@@ -443,7 +433,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 });
             }
         }
-        public void Save()
+        public void SaveOrder()
         {
             System.Threading.ThreadPool.QueueUserWorkItem(delegate
             {
@@ -471,9 +461,12 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             //    OriginalCompany = SelectCompany
             //});
         }
-        public void SaveOrderRelation()
+        #endregion
+
+        #region orderline
+        public void LoadOrderlines()
         {
-            if (SelectedOrder != null && SelectedOrder.OrderId > 0 && RelatedOrder != null && RelatedOrder.OrderId > 0)
+            if (SelectedOrder != null && SelectedOrder.OrderId > 0)
             {
                 System.Threading.ThreadPool.QueueUserWorkItem(delegate
                 {
@@ -481,19 +474,14 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        OrderlineEntity newEntity = new OrderlineEntity()
-                        {
-                            OrderId = SelectedOrder.OrderId,
-                            ArticleId = RelatedArticle.ArticleId,
-                        };
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateOrderRelation(newEntity);
+                        var _oOrderlineList = Factory.Resolve<IBaseDataDS>().GetOrderlinesForOrder(SelectedOrder);
 
                         HideLoading();
 
                         //display to UI
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
-                            AddOrUpdateOrderRelation(updatedEntity);
+                            OrderlineList = _oOrderlineList;
                         }));
                     }
                     catch (Exception ex)
@@ -504,7 +492,44 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 });
             }
         }
-        public void AddOrUpdateOrderRelation(OrderlineEntity newEntity)
+        public void AddOrderline()
+        {
+            if (SelectedOrder != null && SelectedOrder.OrderId > 0 && SelectedArticle != null && SelectedArticle.ArticleId > 0)
+            {
+                System.Threading.ThreadPool.QueueUserWorkItem(delegate
+                {
+                    try
+                    {
+                        ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
+
+                        OrderlineEntity newEntity = new OrderlineEntity()
+                        {
+                            OrderId = SelectedOrder.OrderId,
+                            ArticleId = SelectedArticle.ArticleId,
+                            Quantity = 0,
+                            RemainingQuantity = 0,
+                            Price = 0
+                        };
+
+                        var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateOrderline(newEntity);
+
+                        HideLoading();
+
+                        //display to UI
+                        Application.Current.Dispatcher.Invoke(new Action(() =>
+                        {
+                            AddOrUpdateOrderlineToList(updatedEntity);
+                        }));
+                    }
+                    catch (Exception ex)
+                    {
+                        HideLoading();
+                        ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
+                    }
+                });
+            }
+        }        
+        public void AddOrUpdateOrderlineToList(OrderlineEntity newEntity)
         {
             if (OrderlineList == null) OrderlineList = new List<OrderlineEntity>();
 
@@ -522,8 +547,32 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
 
             OrderlineList = new List<OrderlineEntity>(_orderlineList);
+
+            SelectedOrderline = newEntity;
         }
-        public void DeleteOrderRelation(OrderlineEntity relationEntity)
+        public void SaveOrderline(OrderlineEntity entityObject)
+        {
+            if (entityObject != null && entityObject.OrderlineId > 0)
+            {
+                System.Threading.ThreadPool.QueueUserWorkItem(delegate
+                {
+                    try
+                    {
+                        ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
+
+                        var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateOrderline(entityObject);
+
+                        HideLoading();
+                    }
+                    catch (Exception ex)
+                    {
+                        HideLoading();
+                        ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
+                    }
+                });
+            }
+        }
+        public void DeleteOrderline(OrderlineEntity entityObject)
         {
             if (ShowMessageBox(StringResources.captionConfirm, StringResources.msgConfirmDelete, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
@@ -533,7 +582,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var isSuccess = Factory.Resolve<IBaseDataDS>().DeleteOrderRelation(relationEntity);
+                        var isSuccess = Factory.Resolve<IBaseDataDS>().DeleteOrderline(entityObject);
 
                         HideLoading();
 
@@ -542,7 +591,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         {
                             if (isSuccess)
                             {
-                                DeleteOrderRelationFromList(relationEntity);
+                                DeleteOrderlineFromList(entityObject);
                             }
                         }));
                     }
@@ -554,7 +603,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 });
             }
         }
-        public void DeleteOrderRelationFromList(OrderlineEntity newEntity)
+        public void DeleteOrderlineFromList(OrderlineEntity newEntity)
         {
             OrderlineEntity oldEntity = OrderlineList.FirstOrDefault<OrderlineEntity>(p => p.OrderlineId == newEntity.OrderlineId);
 
@@ -565,10 +614,12 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
 
             OrderlineList = new List<OrderlineEntity>(_orderlineList);
         }
+        #endregion
 
-        public void SaveOrderRelationLoan()
+        #region loan
+        public void LoadLoans()
         {
-            if (SelectedOrder != null && SelectedOrder.OrderId > 0 && RelatedOrder != null && RelatedOrder.OrderId > 0)
+            if (SelectedOrderline != null && SelectedOrderline.OrderlineId > 0)
             {
                 System.Threading.ThreadPool.QueueUserWorkItem(delegate
                 {
@@ -576,19 +627,14 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        LoanEntity newEntity = new LoanEntity()
-                        {
-                            OrderId = SelectedOrder.OrderId,
-                            ArticleId = RelatedArticle.ArticleId,
-                        };
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateOrderRelationLoan(newEntity);
+                        var _oLoanList = Factory.Resolve<IBaseDataDS>().GetLoansForOrderline(SelectedOrderline);
 
                         HideLoading();
 
                         //display to UI
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
-                            AddOrUpdateOrderRelationLoan(updatedEntity);
+                            LoanList = _oLoanList;
                         }));
                     }
                     catch (Exception ex)
@@ -599,7 +645,42 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 });
             }
         }
-        public void AddOrUpdateOrderRelationLoan(LoanEntity newEntity)
+        public void AddLoan()
+        {
+            if (SelectedOrderline != null && SelectedOrderline.OrderId > 0 && RelatedArticle != null && RelatedArticle.ArticleId > 0)
+            {
+                System.Threading.ThreadPool.QueueUserWorkItem(delegate
+                {
+                    try
+                    {
+                        ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
+
+                        LoanEntity newEntity = new LoanEntity()
+                        {
+                            OrderlineId = SelectedOrderline.OrderlineId,
+                            ArticleId = RelatedArticle.ArticleId,
+                            Quantity = 0,
+                            RemainingQuantity = 0
+                        };
+                        var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateLoan(newEntity);
+
+                        HideLoading();
+
+                        //display to UI
+                        Application.Current.Dispatcher.Invoke(new Action(() =>
+                        {
+                            AddOrUpdateLoanToList(updatedEntity);
+                        }));
+                    }
+                    catch (Exception ex)
+                    {
+                        HideLoading();
+                        ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
+                    }
+                });
+            }
+        }
+        public void AddOrUpdateLoanToList(LoanEntity newEntity)
         {
             if (LoanList == null) LoanList = new List<LoanEntity>();
 
@@ -616,10 +697,31 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 LoanList.Insert(index, newEntity);
             }
 
-            OrderlineList = new List<OrderlineEntity>(_orderlineList);
+            LoanList = new List<LoanEntity>(_loanList);
         }
+        public void SaveLoan(LoanEntity entityObject)
+        {
+            if (entityObject != null && entityObject.LoanId > 0)
+            {
+                System.Threading.ThreadPool.QueueUserWorkItem(delegate
+                {
+                    try
+                    {
+                        ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-        public void DeleteOrderRelationLoan(LoanEntity relationEntity)
+                        var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateLoan(entityObject);
+
+                        HideLoading();
+                    }
+                    catch (Exception ex)
+                    {
+                        HideLoading();
+                        ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
+                    }
+                });
+            }
+        }
+        public void DeleteLoan(LoanEntity entityObject)
         {
             if (ShowMessageBox(StringResources.captionConfirm, StringResources.msgConfirmDelete, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
@@ -629,7 +731,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var isSuccess = Factory.Resolve<IBaseDataDS>().DeleteOrderRelationLoan(relationEntity);
+                        var isSuccess = Factory.Resolve<IBaseDataDS>().DeleteLoan(entityObject);
 
                         HideLoading();
 
@@ -638,7 +740,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         {
                             if (isSuccess)
                             {
-                                DeleteOrderRelationLoanFromList(relationEntity);
+                                DeleteLoanFromList(entityObject);
                             }
                         }));
                     }
@@ -650,7 +752,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 });
             }
         }
-        public void DeleteOrderRelationLoanFromList(LoanEntity newEntity)
+        public void DeleteLoanFromList(LoanEntity newEntity)
         {
             LoanEntity oldEntity = LoanList.FirstOrDefault<LoanEntity>(p => p.LoanId == newEntity.LoanId);
 
@@ -660,38 +762,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
 
             LoanList = new List<LoanEntity>(_loanList);
-        }
-        
-        public void LoadRelatedOrders()
-        {
-            if (SelectedOrder != null && SelectedOrder.OrderId > 0)
-            {
-                System.Threading.ThreadPool.QueueUserWorkItem(delegate
-                {
-                    try
-                    {
-                        ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
-
-                        var _oOrderlineList = Factory.Resolve<IBaseDataDS>().GetOrderRelationsForOrder(SelectedOrder);
-                        var _oLoanList = Factory.Resolve<IBaseDataDS>().GetOrderRelationsLoanForOrder(SelectedOrder);
-                        HideLoading();
-
-                        //display to UI
-                        Application.Current.Dispatcher.Invoke(new Action(() =>
-                        {
-                            OrderlineList = _oOrderlineList;
-                            LoanList = _oLoanList;
-                        }));
-                    }
-                    catch (Exception ex)
-                    {
-                        HideLoading();
-                        ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
-                    }
-                });
-            }
-        }
-
+        }                
+        #endregion
         public void Reload(OrderEntity order)
         {
             System.Threading.ThreadPool.QueueUserWorkItem(delegate
@@ -752,22 +824,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         };
                         SelectedOrder = order;
 
-                        var list = new List<OrderlineEntity>();
-                        for (int i = 0; i < 10000; i++)
-                        {
-                            list.Add(new OrderlineEntity()
-                            {
-                                Quantity = i + 1,
-                                RemainingQuantity = i + 1,
-                                Price = 300000,
-                                Commission = 100000,
-                                Description = "hang hoa 1 da dda adasd sadsasadas asd asdaaasddadda sada dada dad asdasd a a dad adada da dada da  adda dad as dasd adad aas dasd asd as dadaada dad a dasdasd das aas ad asdasd" + i.ToString(),
-                                Unit = "kg" + i.ToString(),
-                                ArticleNo = "hh" + i.ToString()
-                            });
-                        }
-
-                        OrderlineList = list;
+                        LoadOrderlines();
                     }));
                 }
                 catch (Exception ex)

@@ -12,7 +12,7 @@ namespace VinaGerman.Entity.BusinessEntity
         [DataMember]
         public int LoanId { get; set; }
         [DataMember]
-        public int OrderId { get; set; }
+        public int OrderlineId { get; set; }
         [DataMember]
         public int Quantity { get; set; }
         [DataMember]

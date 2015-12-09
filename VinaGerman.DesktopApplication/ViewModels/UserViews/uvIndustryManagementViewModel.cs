@@ -46,44 +46,11 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
 
-        private IndustryEntity _selectedIndustry;
-        public IndustryEntity SelectedIndustry
-        {
-            get
-            {
-                return _selectedIndustry;
-            }
-            set
-            {
-                _selectedIndustry = value;
-                RaisePropertyChanged("SelectedIndustry");
-                RaisePropertyChanged("CanSave");
-                RaisePropertyChanged("CanDelete");
-            }
-        }
-
-        public bool CanSave
-        {
-            get
-            {
-                return _selectedIndustry != null;
-            }
-        }
-
-        public bool CanDelete
-        {
-            get
-            {
-                return _selectedIndustry != null && _selectedIndustry.IndustryId > 0;
-            }
-        }
-
         public RelayCommand ClearSearchCommand { get; set; }
         public RelayCommand SearchCommand { get; set; }
-        public RelayCommand SaveCommand { get; set; }
+        public RelayCommand<IndustryEntity> SaveCommand { get; set; }
         public RelayCommand AddCommand { get; set; }
-        public RelayCommand CreateCommand { get; set; }
-        public RelayCommand DeleteCommand { get; set; }
+        public RelayCommand<IndustryEntity> DeleteCommand { get; set; }
         #endregion
 
 
@@ -92,8 +59,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         {
             ClearSearchCommand = new RelayCommand(ClearSearch);
             SearchCommand = new RelayCommand(Search);
-            SaveCommand = new RelayCommand(Save);
-            DeleteCommand = new RelayCommand(Delete);
+            SaveCommand = new RelayCommand<IndustryEntity>(Save);
+            DeleteCommand = new RelayCommand<IndustryEntity>(Delete);
             AddCommand = new RelayCommand(Add);
 
             ClearSearch();
@@ -132,11 +99,14 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             var newEntity = new IndustryEntity()
             {
                 Deleted = false,
-                Description = ""
+                Description = "",
+                IndustryId=-1
             };
-            SelectedIndustry = newEntity;
+            IndustryList.Add(newEntity);
+            IndustryList = new List<IndustryEntity>(_industryList);
         }
-        public void Delete()
+
+        public void Delete(IndustryEntity entityObject)
         {
             if (ShowMessageBox(StringResources.captionConfirm, StringResources.msgConfirmDelete, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
@@ -146,15 +116,14 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().DeleteIndustry(SelectedIndustry);
+                        var updatedEntity = Factory.Resolve<IBaseDataDS>().DeleteIndustry(entityObject);
 
                         HideLoading();
 
                         //display to UI
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
-                            DeleteIndustry(SelectedIndustry);
-                            SelectedIndustry = null;
+                            DeleteIndustry(entityObject);
                         }));
                     }
                     catch (Exception ex)
@@ -165,7 +134,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 });
             }
         }
-        public void Save()
+
+        public void Save(IndustryEntity entityObject)
         {
             System.Threading.ThreadPool.QueueUserWorkItem(delegate
             {
@@ -173,15 +143,14 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateIndustry(SelectedIndustry);
+                    var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateIndustry(entityObject);
 
                     HideLoading();
 
                     //display to UI
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        SelectedIndustry = updatedEntity;
-                        AddOrUpdateIndustry(SelectedIndustry);
+                        AddOrUpdateIndustry(updatedEntity);
                     }));
                 }
                 catch (Exception ex)
@@ -190,10 +159,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
                 }
             });
-            //ShowDialog<uvCompanyDetailViewModel>(new uvCompanyDetailViewModel() { 
-            //    OriginalCompany = SelectCompany
-            //});
         }
+        
         public void Search()
         {
             System.Threading.ThreadPool.QueueUserWorkItem(delegate

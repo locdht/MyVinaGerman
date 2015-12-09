@@ -45,82 +45,11 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 RaisePropertyChanged("SearchText");
             }
         }
-
-        private VinaGerman.Entity.BusinessEntity.DepartmentEntity _selectedDepartment;
-        public VinaGerman.Entity.BusinessEntity.DepartmentEntity SelectedDepartment
-        {
-            get
-            {
-                return _selectedDepartment;
-            }
-            set
-            {
-                _selectedDepartment = value;
-                RaisePropertyChanged("SelectedDepartment");
-                RaisePropertyChanged("CanSave");
-                RaisePropertyChanged("CanDelete");
-                if (SelectedDepartment != null)
-                {
-                    SelectedCompany = CompanyList.FirstOrDefault(c => c.CompanyId == SelectedDepartment.CompanyId);
-                }
-            }
-        }
-
-        private List<CompanyEntity> _companyList = null;
-        public List<CompanyEntity> CompanyList
-        {
-            get
-            {
-                return _companyList;
-            }
-            set
-            {
-                _companyList = value;
-                RaisePropertyChanged("CompanyList");
-            }
-        }
-
-        private CompanyEntity _selectedCompany;
-        public CompanyEntity SelectedCompany
-        {
-            get
-            {
-                return _selectedCompany;
-            }
-            set
-            {
-                _selectedCompany = value;
-                RaisePropertyChanged("SelectedCompany");
-
-                if (SelectedDepartment != null && SelectedCompany != null)
-                {
-                    SelectedDepartment.CompanyId = SelectedCompany.CompanyId;
-                }
-
-            }
-        }
-        public bool CanSave
-        {
-            get
-            {
-                return _selectedDepartment != null;
-            }
-        }
-
-        public bool CanDelete
-        {
-            get
-            {
-                return _selectedDepartment != null && _selectedDepartment.DepartmentId > 0;
-            }
-        }
-
         public RelayCommand ClearSearchCommand { get; set; }
         public RelayCommand SearchCommand { get; set; }
-        public RelayCommand SaveCommand { get; set; }
+        public RelayCommand<VinaGerman.Entity.BusinessEntity.DepartmentEntity> SaveCommand { get; set; }
         public RelayCommand AddCommand { get; set; }
-        public RelayCommand CreateCommand { get; set; }
-        public RelayCommand DeleteCommand { get; set; }
+        public RelayCommand<VinaGerman.Entity.BusinessEntity.DepartmentEntity> DeleteCommand { get; set; }
         #endregion
 
 
@@ -129,8 +58,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         {
             ClearSearchCommand = new RelayCommand(ClearSearch);
             SearchCommand = new RelayCommand(Search);
-            SaveCommand = new RelayCommand(Save);
-            DeleteCommand = new RelayCommand(Delete);
+            SaveCommand = new RelayCommand<VinaGerman.Entity.BusinessEntity.DepartmentEntity>(Save);
+            DeleteCommand = new RelayCommand<VinaGerman.Entity.BusinessEntity.DepartmentEntity>(Delete);
             AddCommand = new RelayCommand(Add);
             ClearSearch();
         }
@@ -169,11 +98,15 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             {
                 Deleted = false,
                 Description = "",
-                CompanyId=0
+                Phone="",
+                DepartmentId=-1,
+                CompanyId= ApplicationHelper.CurrentUserProfile.CompanyId
             };
-            SelectedDepartment = newEntity;
+            DepartmentList.Add(newEntity);
+            DepartmentList = new List<VinaGerman.Entity.BusinessEntity.DepartmentEntity>(_departmentList);
         }
-        public void Delete()
+
+        public void Delete(VinaGerman.Entity.BusinessEntity.DepartmentEntity entityObject)
         {
             if (ShowMessageBox(StringResources.captionConfirm, StringResources.msgConfirmDelete, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
@@ -183,15 +116,14 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().DeleteDepartment(SelectedDepartment);
+                        var updatedEntity = Factory.Resolve<IBaseDataDS>().DeleteDepartment(entityObject);
 
                         HideLoading();
 
                         //display to UI
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
-                            DeleteDepartment(SelectedDepartment);
-                            SelectedDepartment = null;
+                            DeleteDepartment(entityObject);
                         }));
                     }
                     catch (Exception ex)
@@ -202,7 +134,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 });
             }
         }
-        public void Save()
+
+        public void Save(VinaGerman.Entity.BusinessEntity.DepartmentEntity entityObject)
         {
             System.Threading.ThreadPool.QueueUserWorkItem(delegate
             {
@@ -210,15 +143,14 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateDepartment(SelectedDepartment);
+                    var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateDepartment(entityObject);
 
                     HideLoading();
 
                     //display to UI
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        SelectedDepartment = updatedEntity;
-                        AddOrUpdateDepartment(SelectedDepartment);
+                        AddOrUpdateDepartment(updatedEntity);
                     }));
                 }
                 catch (Exception ex)
@@ -227,10 +159,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
                 }
             });
-            //ShowDialog<uvCompanyDetailViewModel>(new uvCompanyDetailViewModel() { 
-            //    OriginalCompany = SelectCompany
-            //});
         }
+        
         public void Search()
         {
             System.Threading.ThreadPool.QueueUserWorkItem(delegate
@@ -276,18 +206,12 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         SearchText = this.SearchText
                     });
 
-                    var Companylist = Factory.Resolve<ICompanyDS>().SearchCompanies(new CompanySearchEntity()
-                    {
-                        SearchText = ""
-                    });
-
                     HideLoading();
 
                     //display to UI
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
                         DepartmentList = list;
-                        CompanyList = Companylist;
                     }));
                 }
                 catch (Exception ex)

@@ -691,6 +691,15 @@ namespace VinaGerman.DesktopApplication.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pay date:.
+        /// </summary>
+        public static string lblPayDate {
+            get {
+                return ResourceManager.GetString("lblPayDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Phone:.
         /// </summary>
         public static string lblPhone {
