@@ -46,60 +46,6 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
 
-        private VinaGerman.Entity.BusinessEntity.ContactEntity _selectedContact;
-        public VinaGerman.Entity.BusinessEntity.ContactEntity SelectedContact
-        {
-            get
-            {
-                return _selectedContact;
-            }
-            set
-            {
-                _selectedContact = value;
-                RaisePropertyChanged("SelectedContact");
-                RaisePropertyChanged("CanSave");
-                RaisePropertyChanged("CanDelete");
-                if (SelectedContact != null)
-                {
-                    SelectedCompany = CompanyList.FirstOrDefault(c => c.CompanyId == SelectedContact.CompanyId);
-                }
-            }
-        }
-
-        private List<CompanyEntity> _companyList = null;
-        public List<CompanyEntity> CompanyList
-        {
-            get
-            {
-                return _companyList;
-            }
-            set
-            {
-                _companyList = value;
-                RaisePropertyChanged("CompanyList");
-            }
-        }
-
-        private CompanyEntity _selectedCompany;
-        public CompanyEntity SelectedCompany
-        {
-            get
-            {
-                return _selectedCompany;
-            }
-            set
-            {
-                _selectedCompany = value;
-                RaisePropertyChanged("SelectedCompany");
-
-                if (SelectedContact != null && SelectedCompany != null)
-                {
-                    SelectedContact.CompanyId = SelectedCompany.CompanyId;
-                }
-
-            }
-        }
-
         private List<VinaGerman.Entity.BusinessEntity.DepartmentEntity> _departmentList = null;
         public List<VinaGerman.Entity.BusinessEntity.DepartmentEntity> DepartmentList
         {
@@ -114,49 +60,11 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
 
-        private VinaGerman.Entity.BusinessEntity.DepartmentEntity _selectedDepartment;
-        public VinaGerman.Entity.BusinessEntity.DepartmentEntity SelectedDepartment
-        {
-            get
-            {
-                return _selectedDepartment;
-            }
-            set
-            {
-                _selectedDepartment = value;
-                RaisePropertyChanged("SelectedDepartment");
-
-                if (SelectedContact != null && SelectedCompany != null && SelectedDepartment != null)
-                {
-                    SelectedContact.CompanyId = SelectedCompany.CompanyId;
-                    SelectedContact.DepartmentId = SelectedDepartment.DepartmentId;
-                }
-
-            }
-        }
-        
-        public bool CanSave
-        {
-            get
-            {
-                return _selectedContact != null;
-            }
-        }
-
-        public bool CanDelete
-        {
-            get
-            {
-                return _selectedContact != null && _selectedContact.ContactId > 0;
-            }
-        }
-
         public RelayCommand ClearSearchCommand { get; set; }
         public RelayCommand SearchCommand { get; set; }
-        public RelayCommand SaveCommand { get; set; }
+        public RelayCommand<VinaGerman.Entity.BusinessEntity.ContactEntity> SaveCommand { get; set; }
         public RelayCommand AddCommand { get; set; }
-        public RelayCommand CreateCommand { get; set; }
-        public RelayCommand DeleteCommand { get; set; }
+        public RelayCommand<VinaGerman.Entity.BusinessEntity.ContactEntity> DeleteCommand { get; set; }
         #endregion
 
 
@@ -165,8 +73,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         {
             ClearSearchCommand = new RelayCommand(ClearSearch);
             SearchCommand = new RelayCommand(Search);
-            SaveCommand = new RelayCommand(Save);
-            DeleteCommand = new RelayCommand(Delete);
+            SaveCommand = new RelayCommand<VinaGerman.Entity.BusinessEntity.ContactEntity>(Save);
+            DeleteCommand = new RelayCommand<VinaGerman.Entity.BusinessEntity.ContactEntity>(Delete);
             AddCommand = new RelayCommand(Add);
             ClearSearch();
         }
@@ -208,14 +116,17 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 Email="",
                 Phone="",
                 Address="",
-                CompanyId=0,
-                UserAccountId=0,
+                CompanyId = ApplicationHelper.CurrentUserProfile.CompanyId,
+                UserAccountId = ApplicationHelper.CurrentUserProfile.UserAccountId,
                 Position="",
-                DepartmentId=0,
+                DepartmentId=-1,
+                ContactId=-1
             };
-            SelectedContact = newEntity;
+            ContactList.Add(newEntity);
+            ContactList = new List<VinaGerman.Entity.BusinessEntity.ContactEntity>(_contactList);
         }
-        public void Delete()
+
+        public void Delete(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject)
         {
             if (ShowMessageBox(StringResources.captionConfirm, StringResources.msgConfirmDelete, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
@@ -225,15 +136,14 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().DeleteContact(SelectedContact);
+                        var updatedEntity = Factory.Resolve<IBaseDataDS>().DeleteContact(entityObject);
 
                         HideLoading();
 
                         //display to UI
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
-                            DeleteContact(SelectedContact);
-                            SelectedContact = null;
+                            DeleteContact(entityObject);
                         }));
                     }
                     catch (Exception ex)
@@ -244,7 +154,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 });
             }
         }
-        public void Save()
+
+        public void Save(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject)
         {
             System.Threading.ThreadPool.QueueUserWorkItem(delegate
             {
@@ -252,15 +163,14 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateContact(SelectedContact);
+                    var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateContact(entityObject);
 
                     HideLoading();
 
                     //display to UI
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        SelectedContact = updatedEntity;
-                        AddOrUpdateContact(SelectedContact);
+                        AddOrUpdateContact(updatedEntity);
                     }));
                 }
                 catch (Exception ex)
@@ -269,10 +179,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
                 }
             });
-            //ShowDialog<uvCompanyDetailViewModel>(new uvCompanyDetailViewModel() { 
-            //    OriginalCompany = SelectCompany
-            //});
         }
+        
         public void Search()
         {
             System.Threading.ThreadPool.QueueUserWorkItem(delegate
@@ -318,11 +226,6 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         SearchText = this.SearchText
                     });
 
-                    var Companylist = Factory.Resolve<ICompanyDS>().SearchCompanies(new CompanySearchEntity()
-                    {
-                        SearchText = ""
-                    });
-
                     var Departmentlist = Factory.Resolve<IBaseDataDS>().SearchDepartment(new DepartmentSearchEntity()
                     {
                         SearchText = ""
@@ -333,7 +236,6 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
                         ContactList = list;
-                        CompanyList = Companylist;
                         this.DepartmentList = Departmentlist;
                     }));
                 }
