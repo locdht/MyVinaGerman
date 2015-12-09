@@ -38,10 +38,10 @@ namespace VinaGerman.Entity.BusinessEntity
         public int CompanyId { get; set; }
 
         [DataMember]
-        public int CustomerCompanyId { get; set; }
+        public int LocationId { get; set; }
 
         [DataMember]
-        public string CustomerCompanyName { get; set; }
+        public int CustomerCompanyId { get; set; }       
 
         [DataMember]
         public int CustomerContactId { get; set; }
@@ -50,9 +50,27 @@ namespace VinaGerman.Entity.BusinessEntity
         public string OrderNumber { get; set; }
 
         [DataMember]
-        public string Description { get; set; }        
+        public int OrderStatus { get; set; }
 
         [DataMember]
-        public string ContactName { get; set; }
+        public string Description { get; set; }
+
+        [DataMember]
+        public string CustomerCompanyName { get; set; }        
+
+        [DataMember]
+        public string CustomerContactName { get; set; }        
+
+        [DataMember]
+        public string LocationName { get; set; }
+
+        [DataMember]
+        public string ResponsibleContactName { get; set; }
+
+        [DataMember]
+        public string BusinessName { get; set; }
+
+        [DataMember]
+        public string IndustryName { get; set; }
     }
 }

@@ -279,6 +279,9 @@
   <data name="lblBusiness" xml:space="preserve">
     <value>Business:</value>
   </data>
+  <data name="lblBusinessName" xml:space="preserve">
+    <value>Business:</value>
+  </data>
   <data name="lblCategory" xml:space="preserve">
     <value>Category:</value>
   </data>
@@ -318,6 +321,12 @@
   <data name="lblIndustry" xml:space="preserve">
     <value>Industry:</value>
   </data>
+  <data name="lblIndustryName" xml:space="preserve">
+    <value>Industry:</value>
+  </data>
+  <data name="lblLocationName" xml:space="preserve">
+    <value>Location:</value>
+  </data>
   <data name="lblOrderDate" xml:space="preserve">
     <value>Order date:</value>
   </data>
@@ -350,6 +359,9 @@
   </data>
   <data name="lblServer" xml:space="preserve">
     <value>Server:</value>
+  </data>
+  <data name="lblStatus" xml:space="preserve">
+    <value>Status:</value>
   </data>
   <data name="lblSupplier" xml:space="preserve">
     <value>Supplier:</value>

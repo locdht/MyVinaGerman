@@ -22,6 +22,10 @@ namespace VinaGerman.Entity.BusinessEntity
         public float Commission { get; set; }
         [DataMember]
         public int RemainingQuantity { get; set; }
+        [DataMember]
+        public DateTime PayDate { get; set; }
+        [DataMember]
+        public DateTime PaidDate { get; set; }
 
         [DataMember]
         public int ArticleId { get; set; }

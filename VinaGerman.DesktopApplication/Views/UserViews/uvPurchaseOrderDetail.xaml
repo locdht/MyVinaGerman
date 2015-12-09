@@ -50,6 +50,7 @@
                         <RowDefinition Height="35"/>
                         <RowDefinition Height="35"/>
                         <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
                         <RowDefinition Height="5"/>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
@@ -281,8 +282,50 @@
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
+
+                    <Label Grid.Column="0" Grid.Row="7" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblLocationName}" Style="{DynamicResource BaseLabel}"/>
+                    <ComboBox Grid.Column="1" Grid.Row="7" Margin="5,2,5,2" ItemsSource="{Binding LocationList}" SelectedItem="{Binding SelectedLocation}" Style="{StaticResource BaseComboBox}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <ContentControl Content="{Binding}">
+                                    <ContentControl.Style>
+                                        <Style TargetType="{x:Type ContentControl}">
+                                            <!-- Complex default template -->
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="40"/>
+                                                            </Grid.RowDefinitions>
+                                                            <TextBlock Margin="6,0,3,0" Text="{Binding Description}" VerticalAlignment="Center" TextWrapping="Wrap" Style="{StaticResource BaseTextBlock}"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <!-- Simple selection box template -->
+                                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="{x:Null}">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource BaseTextBlock}" Text="{Binding Description}"></TextBlock>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                     
-                    <StackPanel Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <StackPanel Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="9" Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Command="{Binding ShowReportCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnPrint}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
                         <Button Command="{Binding SaveOrderCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnSave}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
                     </StackPanel>

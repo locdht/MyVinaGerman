@@ -279,6 +279,9 @@
   <data name="lblBusiness" xml:space="preserve">
     <value>Lĩnh vực:</value>
   </data>
+  <data name="lblBusinessName" xml:space="preserve">
+    <value>Lĩnh vực:</value>
+  </data>
   <data name="lblCategory" xml:space="preserve">
     <value>Loại mặt hàng:</value>
   </data>
@@ -318,6 +321,12 @@
   <data name="lblIndustry" xml:space="preserve">
     <value>Ngành nghề:</value>
   </data>
+  <data name="lblIndustryName" xml:space="preserve">
+    <value>Ngành nghề:</value>
+  </data>
+  <data name="lblLocationName" xml:space="preserve">
+    <value>Chi nhánh:</value>
+  </data>
   <data name="lblOrderDate" xml:space="preserve">
     <value>Ngày đặt hàng:</value>
   </data>
@@ -350,6 +359,9 @@
   </data>
   <data name="lblServer" xml:space="preserve">
     <value>Máy chủ:</value>
+  </data>
+  <data name="lblStatus" xml:space="preserve">
+    <value>Status:</value>
   </data>
   <data name="lblSupplier" xml:space="preserve">
     <value>Nhà cung cấp:</value>
