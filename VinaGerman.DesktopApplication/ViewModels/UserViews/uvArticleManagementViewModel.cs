@@ -13,6 +13,8 @@ using VinaGerman.Entity.BusinessEntity;
 using VinaGerman.Entity.DatabaseEntity;
 using VinaGerman.Entity.SearchEntity;
 
+
+
 namespace VinaGerman.DesktopApplication.ViewModels.UserViews
 {
     public class uvArticleManagementViewModel : uvBaseViewModel
