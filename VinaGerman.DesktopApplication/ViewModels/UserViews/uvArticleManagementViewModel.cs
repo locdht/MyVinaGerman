@@ -31,7 +31,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 _articleList = value;
                 RaisePropertyChanged("ArticleList");
 
-                SelectedArticle = null;
+                //SelectedArticle = null;
                 ArticleRelationList = null;
                 RelatedArticle = null;
             }
@@ -115,7 +115,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
 
                 if (SelectedArticle != null)
                 {
-                    SelectedCategory = CategoryList.FirstOrDefault(c => c.CategoryId == SelectedArticle.CategoryId);
+                    //SelectedCategory = CategoryList.FirstOrDefault(c => c.CategoryId == SelectedArticle.CategoryId);
 
                     LoadRelatedArticles();
                 }
@@ -238,7 +238,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
 
         public void AddOrUpdateArticle(ArticleEntity newEntity)
         {
-            ArticleEntity oldEntity = ArticleList.FirstOrDefault<ArticleEntity>(p => p.ArticleId == newEntity.ArticleId);
+            ArticleEntity oldEntity = ArticleList.FirstOrDefault<ArticleEntity>(p => p.ArticleNo == newEntity.ArticleNo);
 
             if (oldEntity == null)
             {
@@ -250,7 +250,6 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 ArticleList.Remove(oldEntity);
                 ArticleList.Insert(index, newEntity);
             }
-
             ArticleList = new List<ArticleEntity>(_articleList);
         }
         public void AddOrUpdateArticleRelation(ArticleRelationEntity newEntity)
@@ -368,7 +367,6 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
                     var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateArticle(entityObject);
-
                     HideLoading();
 
                     //display to UI
@@ -531,6 +529,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
                         ArticleList = articleList;
+                        SelectedArticle = ArticleList.FirstOrDefault();
                         CategoryList = categoryList;
                     }));
                 }

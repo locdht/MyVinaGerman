@@ -166,10 +166,12 @@
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ComboBox ItemsSource="{Binding DataContext.DepartmentList , 
-                                RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                                DisplayMemberPath="Description" SelectedValuePath="DepartmentId" 
-                                      SelectedValue="{Binding DepartmentId}" />
+                                <ComboBox
+                                    ItemsSource="{Binding DepartmentList, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                    DisplayMemberPath="Description"
+                                    SelectedItem="{Binding SelectedContact, Mode=TwoWay}"
+                                    SelectedValue="{Binding SelectedContact.DepartmentId}"
+                                    SelectedValuePath="DepartmentId"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

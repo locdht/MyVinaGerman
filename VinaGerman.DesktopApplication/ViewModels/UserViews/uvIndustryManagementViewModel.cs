@@ -68,7 +68,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         #region method
         public void AddOrUpdateIndustry(IndustryEntity newEntity)
         {
-            IndustryEntity oldEntity = IndustryList.FirstOrDefault<IndustryEntity>(p => p.IndustryId == newEntity.IndustryId);
+            IndustryEntity oldEntity = IndustryList.FirstOrDefault<IndustryEntity>(p => p.Description == newEntity.Description);
 
             if (oldEntity == null)
             {
