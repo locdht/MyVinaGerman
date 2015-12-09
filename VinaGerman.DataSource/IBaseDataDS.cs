@@ -10,6 +10,7 @@ using VinaGerman.Entity.SearchEntity;
 
 namespace VinaGerman.DataSource
 {
+
     public interface IBaseDataDS
     {
         #region Category
