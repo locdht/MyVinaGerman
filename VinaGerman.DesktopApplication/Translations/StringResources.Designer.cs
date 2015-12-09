@@ -547,6 +547,15 @@ namespace VinaGerman.DesktopApplication.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Business name:.
+        /// </summary>
+        public static string lblBusinessName {
+            get {
+                return ResourceManager.GetString("lblBusinessName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Category:.
         /// </summary>
         public static string lblCategory {
@@ -664,6 +673,24 @@ namespace VinaGerman.DesktopApplication.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Industry name:.
+        /// </summary>
+        public static string lblIndustryName {
+            get {
+                return ResourceManager.GetString("lblIndustryName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location name:.
+        /// </summary>
+        public static string lblLocationName {
+            get {
+                return ResourceManager.GetString("lblLocationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Order date:.
         /// </summary>
         public static string lblOrderDate {
@@ -759,6 +786,15 @@ namespace VinaGerman.DesktopApplication.Translations {
         public static string lblServer {
             get {
                 return ResourceManager.GetString("lblServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status:.
+        /// </summary>
+        public static string lblStatus {
+            get {
+                return ResourceManager.GetString("lblStatus", resourceCulture);
             }
         }
         

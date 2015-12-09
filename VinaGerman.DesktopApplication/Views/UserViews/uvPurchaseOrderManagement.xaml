@@ -59,9 +59,7 @@
                     </AdornerDecorator>
 
                     <StackPanel Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Name="btnClearSearch" Command="{Binding ClearSearchCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnClearSearch}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
                         <Button Name="btnSearch" Command="{Binding SearchCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnSearch}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
-                        <Button Name="btnAdd" Command="{Binding AddCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnAdd}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
                     </StackPanel>
                 </Grid>
             </Border>
@@ -81,7 +79,7 @@
                 <!--content block-->
                 <Grid Grid.Column="0" Grid.Row="1">
                     <DataGrid Name="gridData" Grid.Column="0" Grid.Row="0" ColumnHeaderHeight="42" ItemsSource="{Binding OrderList}" SelectedItem="{Binding SelectedOrder}"
-                      SelectionMode="Single" HeadersVisibility="None" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" RowHeaderWidth="0" IsReadOnly="True">
+                      SelectionMode="Single" HeadersVisibility="All" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" RowHeaderWidth="0" IsReadOnly="True">
                         <DataGrid.Resources>
                             <helper:BindingProxy x:Key="proxy" Data="{Binding}" />
                         </DataGrid.Resources>
@@ -91,59 +89,98 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Width="60" CellStyle="{DynamicResource GridHeaderSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False" >
+                            <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridHeaderSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="60"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="60"/>
-                                            </Grid.RowDefinitions>
-                                            <Image Grid.Column="0" Grid.Row="0" Source="/VinaGerman.DesktopApplication;component/Images/company.png" Height="60" Width="60" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                                        </Grid>
+                                        <Image Grid.Column="0" Grid.Row="0" Source="{StaticResource iconPurchaseOrder}" VerticalAlignment="Center" Margin="0,0,0,0"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <!--Show description-->
                             <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                <DataGridTemplateColumn.Header>
+                                    <ContentControl>
+                                        <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblOrderNumber}" />
+                                    </ContentControl>
+                                </DataGridTemplateColumn.Header>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Grid Margin="3,3,3,3">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="80"/>
-                                                <ColumnDefinition Width="*"/>                                                
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-                                            <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="0" Text="{Binding OrderNumber}" FontWeight="Bold" VerticalAlignment="Top"  TextWrapping="Wrap" />
-                                            <!--<TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="0" Text="{Binding Address}" VerticalAlignment="Top" TextWrapping="Wrap"/>-->
-
-                                            <TextBlock Grid.Column="0" Grid.Row="2" Margin="0" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblCompanyCode}" VerticalAlignment="Top" TextWrapping="Wrap"/>
-                                            <TextBlock Grid.Column="1" Grid.Row="2" Margin="0" Text="{Binding OrderDate}" VerticalAlignment="Top" TextWrapping="Wrap"/>
-
-                                            <TextBlock Grid.Column="0" Grid.Row="3" Margin="0" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblPhone}" VerticalAlignment="Top" TextWrapping="Wrap"/>
-                                            <TextBlock Grid.Column="1" Grid.Row="3" Margin="0" Text="{Binding CompanyName}" VerticalAlignment="Top" TextWrapping="Wrap"/>
-                                        </Grid>
+                                        <TextBlock Text="{Binding OrderNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBlock}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <!--Show icon-->
+                            <!--Show description-->
+                            <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                <DataGridTemplateColumn.Header>
+                                    <ContentControl>
+                                        <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblCompanyName}" />
+                                    </ContentControl>
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding CustomerCompanyName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBlock}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <!--Show description-->
+                            <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                <DataGridTemplateColumn.Header>
+                                    <ContentControl>
+                                        <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblLocationName}" />
+                                    </ContentControl>
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding LocationName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBlock}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <!--Show description-->
+                            <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                <DataGridTemplateColumn.Header>
+                                    <ContentControl>
+                                        <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblBusinessName}" />
+                                    </ContentControl>
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding BusinessName}" Style="{DynamicResource BaseTextBlock}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <!--Show description-->
+                            <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                <DataGridTemplateColumn.Header>
+                                    <ContentControl>
+                                        <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblIndustryName}" />
+                                    </ContentControl>
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding IndustryName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBlock}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <!--Show description-->
+                            <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                <DataGridTemplateColumn.Header>
+                                    <ContentControl>
+                                        <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblStatus}" />
+                                    </ContentControl>
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBlock}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>                          
+                            <!--Show description-->
                             <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Grid Margin="0,0,0,0">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="35"/>
-                                                <RowDefinition Height="35"/>                                                
-                                            </Grid.RowDefinitions>
-                                            <Image Grid.Row="1" Visibility="{Binding IsCustomer, Converter={StaticResource boolToVisibilityConverter}}" Source="/VinaGerman.DesktopApplication;component/Images/customer.png" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </Grid>
+                                        <Button CommandParameter="{Binding}" Command="{Binding Path=DataContext.OpenOrderCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" Style="{DynamicResource BaseImageButton}">
+                                            <Image Source="{StaticResource iconOpen}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

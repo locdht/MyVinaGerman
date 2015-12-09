@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using VinaGerman.DataSource;
 using VinaGerman.DesktopApplication.Translations;
+using VinaGerman.DesktopApplication.Utilities;
 using VinaGerman.Entity;
 using VinaGerman.Entity.BusinessEntity;
 using VinaGerman.Entity.SearchEntity;
@@ -46,22 +47,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
 
-        private OrderEntity _selectedOrder;
-        public OrderEntity SelectedOrder
-        {
-            get
-            {
-                return _selectedOrder;
-            }
-            set
-            {
-                _selectedOrder = OrderList.FirstOrDefault();
-                RaisePropertyChanged("SelectedOrder");
-                
-            }
-        }
-
-        public RelayCommand ClearSearchCommand { get; set; }
+        public RelayCommand<OrderEntity> OpenOrderCommand { get; set; }
         public RelayCommand SearchCommand { get; set; }
         #endregion
 
@@ -69,12 +55,21 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         public uvPurchaseOrderManagementViewModel(MainWindowViewModel pMainWindowViewModel)
             : base(pMainWindowViewModel)
         {
-            ClearSearchCommand = new RelayCommand(ClearSearch);
-            SearchCommand = new RelayCommand(Search);            
-
+            SearchCommand = new RelayCommand(Search);
+            OpenOrderCommand = new RelayCommand<OrderEntity>(OpenOrder);
             ClearSearch();
         }
         #region method      
+        public void OpenOrder(OrderEntity entityObject)
+        {
+            if (entityObject != null && entityObject.OrderId > 0)
+            {
+                Dictionary<string, object> dicParams = new Dictionary<string, object>();
+                dicParams.Add("Order", entityObject);
+                SendMessage(MessageToken.ReloadMessage, dicParams, enumView.PurchaseOrderDetail.ToString());
+                GoToView(enumView.PurchaseOrderDetail);
+            }
+        }
         public void Search()
         {
             System.Threading.ThreadPool.QueueUserWorkItem(delegate

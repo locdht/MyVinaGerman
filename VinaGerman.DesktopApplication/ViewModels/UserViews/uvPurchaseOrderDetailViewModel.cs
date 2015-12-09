@@ -21,6 +21,20 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
     {
         //search customer model
         #region properties
+        private List<VinaGerman.Entity.BusinessEntity.LocationEntity> _locationList = null;
+        public List<VinaGerman.Entity.BusinessEntity.LocationEntity> LocationList
+        {
+            get
+            {
+                return _locationList;
+            }
+            set
+            {
+                _locationList = value;
+                RaisePropertyChanged("LocationList");
+            }
+        }
+
         private List<ArticleEntity> _articleList = null;
         public List<ArticleEntity> ArticleList
         {
@@ -88,6 +102,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     SelectedEmployee = EmployeeList.FirstOrDefault(c => c.UserAccountId == SelectedOrder.CreatedBy);
                     SelectedBusiness = BusinessList.FirstOrDefault(c => c.BusinessId == SelectedOrder.BusinessId);
                     SelectedIndustry = IndustryList.FirstOrDefault(c => c.IndustryId == SelectedOrder.IndustryId);
+                    SelectedLocation = LocationList.FirstOrDefault(c => c.LocationId == SelectedOrder.LocationId);
                 }
             }
         }
@@ -118,9 +133,9 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 _selectedCustomer = value;
                 RaisePropertyChanged("SelectedCustomer");
 
-                if (SelectedOrder != null && SelectedCustomer != null)
+                if (SelectedOrder != null && _selectedCustomer != null)
                 {
-                    SelectedOrder.CustomerCompanyId = SelectedCustomer.CompanyId;
+                    SelectedOrder.CustomerCompanyId = _selectedCustomer.CompanyId;
                 }
             }
         }
@@ -151,9 +166,9 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 _selectedContact = value;
                 RaisePropertyChanged("SelectedContact");
 
-                if (SelectedOrder != null && SelectedContact != null)
+                if (SelectedOrder != null && _selectedContact != null)
                 {
-                    SelectedOrder.CustomerContactId = SelectedContact.ContactId;
+                    SelectedOrder.CustomerContactId = _selectedContact.ContactId;
                 }
             }
         }
@@ -184,9 +199,9 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 _selectedEmployee = value;
                 RaisePropertyChanged("SelectedEmployee");
 
-                if (SelectedOrder != null && SelectedEmployee != null)
+                if (SelectedOrder != null && _selectedEmployee != null)
                 {
-                    SelectedOrder.CreatedBy = SelectedEmployee.UserAccountId;
+                    SelectedOrder.CreatedBy = _selectedEmployee.ContactId;
                 }
             }
         }
@@ -217,9 +232,9 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 _selectedBusiness = value;
                 RaisePropertyChanged("SelectedBusiness");
 
-                if (SelectedOrder != null && SelectedBusiness != null)
+                if (SelectedOrder != null && _selectedBusiness != null)
                 {
-                    SelectedOrder.BusinessId = SelectedBusiness.BusinessId;
+                    SelectedOrder.BusinessId = _selectedBusiness.BusinessId;
                 }
             }
         }
@@ -250,9 +265,28 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 _selectedIndustry = value;
                 RaisePropertyChanged("SelectedIndustry");
 
-                if (SelectedOrder != null && SelectedIndustry != null)
+                if (SelectedOrder != null && _selectedIndustry != null)
                 {
-                    SelectedOrder.IndustryId = SelectedIndustry.IndustryId;
+                    SelectedOrder.IndustryId = _selectedIndustry.IndustryId;
+                }
+            }
+        }
+
+        private VinaGerman.Entity.BusinessEntity.LocationEntity _selectedLocation;
+        public VinaGerman.Entity.BusinessEntity.LocationEntity SelectedLocation
+        {
+            get
+            {
+                return _selectedLocation;
+            }
+            set
+            {
+                _selectedLocation = value;
+                RaisePropertyChanged("SelectedLocation");
+
+                if (SelectedOrder != null && _selectedLocation != null)
+                {
+                    SelectedOrder.LocationId = _selectedLocation.LocationId;
                 }
             }
         }
@@ -508,7 +542,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                             ArticleId = SelectedArticle.ArticleId,
                             Quantity = 0,
                             RemainingQuantity = 0,
-                            Price = 0
+                            Price = 0,
+                            PayDate = DateTime.Now.AddDays(7)
                         };
 
                         var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateOrderline(newEntity);
@@ -783,9 +818,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     var _ocontactList = Factory.Resolve<IBaseDataDS>().SearchContact(new ContactSearchEntity()
                     {
                         SearchText = ""
-                    });
-
-                    var _oUserProfileList = Factory.Resolve<ICommonDS>().GetUserProfile("admin", "123456");
+                    });                    
 
                     var _obusinessList = Factory.Resolve<IBaseDataDS>().SearchBusiness(new BusinessSearchEntity()
                     {
@@ -796,10 +829,20 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         SearchText = ""
                     });
+
                     var _oArticleList = Factory.Resolve<IBaseDataDS>().SearchArticle(new ArticleSearchEntity()
                     {
                         SearchText = ""
-                    });                   
+                    });
+
+                    var _oLocationList = Factory.Resolve<IBaseDataDS>().SearchLocation(new LocationSearchEntity()
+                    {
+                        SearchText = ""
+                    });
+
+                    List<UserProfileEntity> _oEmployeeList = new List<UserProfileEntity>();
+                    _oEmployeeList.Add(ApplicationHelper.CurrentUserProfile);
+
                     HideLoading();
 
                     //display to UI UserProfileEntity
@@ -807,11 +850,14 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         CustomerList = _ocompanyList;
                         ContactList = _ocontactList;
-                        EmployeeList.Clear();
-                        EmployeeList.Add(_oUserProfileList);
+                        EmployeeList = _oEmployeeList;
                         BusinessList = _obusinessList;
                         IndustryList = _oindustryList;
                         ArticleList = _oArticleList;
+                        LocationList = _oLocationList;
+
+                        OrderlineList = new List<OrderlineEntity>();
+                        LoanList = new List<LoanEntity>();
 
                         //load order information
                         if (order == null) order = new OrderEntity() 
@@ -822,6 +868,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                             CreatedBy = ApplicationHelper.CurrentUserProfile.ContactId,
                             ResponsibleBy = ApplicationHelper.CurrentUserProfile.ContactId
                         };
+
                         SelectedOrder = order;
 
                         LoadOrderlines();

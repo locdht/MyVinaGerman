@@ -89,7 +89,7 @@ namespace VinaGerman.DesktopApplication.ViewModels
 
             // Init all module
             ModelQueue = new List<uvBaseViewModel>();
-            GoToViewCommand = new RelayCommand<enumView>(GoToView);
+            GoToViewCommand = new RelayCommand<enumView>(GoToViewAndReload);
 
             CompanyManagementModel = new uvCompanyManagementViewModel(this) { MessengerID = enumView.CompanyManagement.ToString() };
             CategoryManagementModel = new uvCategoryManagementViewModel(this) { MessengerID = enumView.CategoryManagement.ToString() };
@@ -193,7 +193,11 @@ namespace VinaGerman.DesktopApplication.ViewModels
                 e.Cancel = true;
             }
         }
-
+        public void GoToViewAndReload(enumView view)
+        {
+            SendMessage(MessageToken.ReloadMessage, null, view.ToString());
+            GoToView(view);
+        }
         public void GoToView(enumView view)
         {
             switch (view)
@@ -201,43 +205,33 @@ namespace VinaGerman.DesktopApplication.ViewModels
                 //
                 case enumView.ContactManagement:
                     CurrentModel = ContactManagementModel;
-                    SendMessage(MessageToken.ReloadMessage, null, enumView.ContactManagement.ToString());
                     break;
                 case enumView.LocationManagement:
                     CurrentModel = LocationManagementModel;
-                    SendMessage(MessageToken.ReloadMessage, null, enumView.LocationManagement.ToString());
                     break;
                 case enumView.DepartmentManagement:
                     CurrentModel = DepartmentManagementModel;
-                    SendMessage(MessageToken.ReloadMessage, null, enumView.DepartmentManagement.ToString());
                     break;
                 case enumView.PurchaseOrderDetail:
                     CurrentModel = PurchaseOrderDetailModel;
-                    SendMessage(MessageToken.ReloadMessage, null, enumView.PurchaseOrderDetail.ToString());
                     break;
                 case enumView.PurchaseOrderManagement:
                     CurrentModel = PurchaseOrderManagementModel;
-                    SendMessage(MessageToken.ReloadMessage, null, enumView.PurchaseOrderManagement.ToString());
                     break;
                 case enumView.ArticleManagement:
                     CurrentModel = ArticleManagementModel;
-                    SendMessage(MessageToken.ReloadMessage, null, enumView.ArticleManagement.ToString());
                     break;
                 case enumView.IndustryManagement:
                     CurrentModel = IndustryManagementModel;
-                    SendMessage(MessageToken.ReloadMessage, null, enumView.IndustryManagement.ToString());
                     break;
                 case enumView.BusinessManagement:
                     CurrentModel = BusinessManagementModel;
-                    SendMessage(MessageToken.ReloadMessage, null, enumView.BusinessManagement.ToString());
                     break;
                 case enumView.CategoryManagement:
                     CurrentModel = CategoryManagementModel;
-                    SendMessage(MessageToken.ReloadMessage, null, enumView.CategoryManagement.ToString());
                     break;
                 case enumView.CompanyManagement:
                     CurrentModel = CompanyManagementModel;
-                    SendMessage(MessageToken.ReloadMessage, null, enumView.CompanyManagement.ToString());
                     break;
                 case enumView.Logon:
                     CurrentModel = LogonModel;
