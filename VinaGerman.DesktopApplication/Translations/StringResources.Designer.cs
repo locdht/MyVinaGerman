@@ -878,5 +878,32 @@ namespace VinaGerman.DesktopApplication.Translations {
                 return ResourceManager.GetString("msgSaving", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Approved.
+        /// </summary>
+        public static string ORDERSTATUS_APPROVED {
+            get {
+                return ResourceManager.GetString("ORDERSTATUS_APPROVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processed.
+        /// </summary>
+        public static string ORDERSTATUS_PROCESSED {
+            get {
+                return ResourceManager.GetString("ORDERSTATUS_PROCESSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready.
+        /// </summary>
+        public static string ORDERSTATUS_READY {
+            get {
+                return ResourceManager.GetString("ORDERSTATUS_READY", resourceCulture);
+            }
+        }
     }
 }

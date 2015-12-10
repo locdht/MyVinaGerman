@@ -103,6 +103,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     SelectedBusiness = BusinessList.FirstOrDefault(c => c.BusinessId == SelectedOrder.BusinessId);
                     SelectedIndustry = IndustryList.FirstOrDefault(c => c.IndustryId == SelectedOrder.IndustryId);
                     SelectedLocation = LocationList.FirstOrDefault(c => c.LocationId == SelectedOrder.LocationId);
+                    SelectedStatus = StatusList.FirstOrDefault(c => c.Key == SelectedOrder.OrderStatus);
                 }
             }
         }
@@ -351,6 +352,25 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
 
+        private KeyValuePair<int, string> _SelectedStatus;
+        public KeyValuePair<int, string> SelectedStatus
+        {
+            get
+            {
+                return _SelectedStatus;
+            }
+            set
+            {
+                _SelectedStatus = value;
+                RaisePropertyChanged("SelectedStatus");
+
+                if (SelectedOrder != null)
+                {
+                    SelectedOrder.OrderStatus = _SelectedStatus.Key;
+                }
+            }
+        }
+
         public bool CanAddOrderline
         {
             get
@@ -398,6 +418,20 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             {
                 _searchText = value;
                 RaisePropertyChanged("SearchText");
+            }
+        }
+
+        private List<KeyValuePair<int, string>> _StatusList;
+        public List<KeyValuePair<int,string>> StatusList
+        {
+            get
+            {
+                return _StatusList;
+            }
+            set
+            {
+                _StatusList = value;
+                RaisePropertyChanged("StatusList");
             }
         }
         
@@ -843,6 +877,25 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     List<UserProfileEntity> _oEmployeeList = new List<UserProfileEntity>();
                     _oEmployeeList.Add(ApplicationHelper.CurrentUserProfile);
 
+                    List<KeyValuePair<int, string>> _oStatusList = new List<KeyValuePair<int, string>>();
+                    if (order.OrderStatus == (int)enumOrderStatus.Ready)
+                    {
+                        _oStatusList.Add(new KeyValuePair<int,string>((int)enumOrderStatus.Ready, StringResources.ORDERSTATUS_READY));
+                        _oStatusList.Add(new KeyValuePair<int, string>((int)enumOrderStatus.Approved, StringResources.ORDERSTATUS_APPROVED));
+                    }
+                    else if (order.OrderStatus == (int)enumOrderStatus.Approved)
+                    {
+                        _oStatusList.Add(new KeyValuePair<int, string>((int)enumOrderStatus.Approved, StringResources.ORDERSTATUS_APPROVED));
+                        _oStatusList.Add(new KeyValuePair<int, string>((int)enumOrderStatus.Processed, StringResources.ORDERSTATUS_PROCESSED));
+                    }
+                    else if (order.OrderStatus == (int)enumOrderStatus.Approved)
+                    {
+                        _oStatusList.Add(new KeyValuePair<int, string>((int)enumOrderStatus.Processed, StringResources.ORDERSTATUS_PROCESSED));
+                    }
+                    else
+                    {
+                        _oStatusList.Add(new KeyValuePair<int, string>((int)enumOrderStatus.Ready, StringResources.ORDERSTATUS_READY));
+                    }
                     HideLoading();
 
                     //display to UI UserProfileEntity
@@ -855,6 +908,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         IndustryList = _oindustryList;
                         ArticleList = _oArticleList;
                         LocationList = _oLocationList;
+                        StatusList = _oStatusList;
 
                         OrderlineList = new List<OrderlineEntity>();
                         LoanList = new List<LoanEntity>();
@@ -866,7 +920,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                             OrderNumber = "",
                             CompanyId = ApplicationHelper.CurrentUserProfile.CompanyId,
                             CreatedBy = ApplicationHelper.CurrentUserProfile.ContactId,
-                            ResponsibleBy = ApplicationHelper.CurrentUserProfile.ContactId
+                            ResponsibleBy = ApplicationHelper.CurrentUserProfile.ContactId,
+                            OrderStatus = (int)enumOrderStatus.Ready
                         };
 
                         SelectedOrder = order;

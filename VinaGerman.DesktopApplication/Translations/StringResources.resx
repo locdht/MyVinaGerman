@@ -390,4 +390,13 @@
   <data name="msgSaving" xml:space="preserve">
     <value>Saving...</value>
   </data>
+  <data name="ORDERSTATUS_APPROVED" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="ORDERSTATUS_PROCESSED" xml:space="preserve">
+    <value>Processed</value>
+  </data>
+  <data name="ORDERSTATUS_READY" xml:space="preserve">
+    <value>Ready</value>
+  </data>
 </root>

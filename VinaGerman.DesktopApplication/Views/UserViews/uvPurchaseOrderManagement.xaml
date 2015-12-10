@@ -68,14 +68,9 @@
         <!--list panel-->        
         <Border Name="DataPanel" Style="{DynamicResource BorderGrid}" Padding="0" Grid.Column="2">
             <Grid Grid.Column="0" Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
+                <Grid.RowDefinitions>                    
                     <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <!--header block-->
-                <Grid Grid.Row="0" Background="{DynamicResource BorderBrush}" >
-                    <Label Style="{DynamicResource LabelBarCaption}" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.captionOrderList}" Margin="4,0,0,0"/>
-                </Grid>
+                </Grid.RowDefinitions>                
                 <!--content block-->
                 <Grid Grid.Column="0" Grid.Row="1">
                     <DataGrid Name="gridData" Grid.Column="0" Grid.Row="0" ColumnHeaderHeight="42" ItemsSource="{Binding OrderList}" SelectedItem="{Binding SelectedOrder}"

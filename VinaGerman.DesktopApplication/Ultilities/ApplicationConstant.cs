@@ -20,4 +20,10 @@ namespace VinaGerman.DesktopApplication.Utilities
         LocationManagement,
         ContactManagement
     }
+    public enum enumOrderStatus
+    {
+        Ready = 1,
+        Approved = 2,
+        Processed = 3
+    }
 }
