@@ -149,6 +149,10 @@ namespace VinaGerman.Service.Implementation
         {
             return Factory.Resolve<IContactBL>().DeleteContact(entityObject);
         }
+        public List<VinaGerman.Entity.BusinessEntity.ContactEntity> GetContactForCompany(CompanyEntity Object)
+        {
+            return Factory.Resolve<IContactBL>().GetContactForCompany(Object);
+        }
         #endregion
 
         #region Order

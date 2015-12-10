@@ -208,6 +208,14 @@ namespace VinaGerman.DataSource.Implementation
             channel.Dispose();
             return result;
         }
+
+        public List<VinaGerman.Entity.BusinessEntity.ContactEntity> GetContactForCompany(CompanyEntity Object)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.GetContactForCompany(Object);
+            channel.Dispose();
+            return result;
+        }
         #endregion
 
         #region Order

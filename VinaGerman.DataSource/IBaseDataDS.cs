@@ -56,6 +56,7 @@ namespace VinaGerman.DataSource
         List<VinaGerman.Entity.BusinessEntity.ContactEntity> SearchContact(ContactSearchEntity searchObject);
         VinaGerman.Entity.BusinessEntity.ContactEntity AddOrUpdateContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject);
         bool DeleteContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject);
+        List<VinaGerman.Entity.BusinessEntity.ContactEntity> GetContactForCompany(CompanyEntity Object);
         #endregion
 
         #region Order

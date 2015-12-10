@@ -137,6 +137,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 if (SelectedOrder != null && _selectedCustomer != null)
                 {
                     SelectedOrder.CustomerCompanyId = _selectedCustomer.CompanyId;
+                    LoadContactForCompany();
                 }
             }
         }
@@ -833,6 +834,34 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             LoanList = new List<LoanEntity>(_loanList);
         }                
         #endregion
+
+        public void LoadContactForCompany()
+        {
+            System.Threading.ThreadPool.QueueUserWorkItem(delegate
+            {
+                try
+                {
+                    ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
+
+                    var list = Factory.Resolve<IBaseDataDS>().GetContactForCompany(SelectedCustomer);
+
+                    HideLoading();
+
+                    //display to UI
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        ContactList = list;
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    HideLoading();
+                    ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
+                }
+            });
+        }
+
+
         public void Reload(OrderEntity order)
         {
             System.Threading.ThreadPool.QueueUserWorkItem(delegate
@@ -936,6 +965,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 }
             });
         }
+        
+        
         #endregion
 
         #region Message processing

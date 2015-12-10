@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using VinaGerman.Entity.BusinessEntity;
 using VinaGerman.Entity.SearchEntity;
 using Dapper;
+using VinaGerman.Entity.DatabaseEntity;
 namespace VinaGerman.Database.Implementation
 {
     public class ContactDB : BaseDB, IContactDB
     {
-        public List<ContactEntity> SearchContact(ContactSearchEntity searchObject)
+        public List<VinaGerman.Entity.BusinessEntity.ContactEntity> SearchContact(ContactSearchEntity searchObject)
         {
-            List<ContactEntity> result = null;            
+            List<VinaGerman.Entity.BusinessEntity.ContactEntity> result = null;            
             string sqlStatement = "SELECT " + Environment.NewLine +
                 "Contact.ContactId," + Environment.NewLine +
                 "Contact.FullName," + Environment.NewLine +
@@ -37,12 +38,12 @@ namespace VinaGerman.Database.Implementation
             // Call the ExecuteReader method with the command.                
             using (IDbConnection conn = db.CreateConnection())
             {
-                result = conn.Query<ContactEntity>(sqlStatement).ToList();
+                result = conn.Query<VinaGerman.Entity.BusinessEntity.ContactEntity>(sqlStatement).ToList();
             }
             return result;
         }
 
-        public ContactEntity AddOrUpdateContact(ContactEntity entityObject)
+        public VinaGerman.Entity.BusinessEntity.ContactEntity AddOrUpdateContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject)
         {
             string sqlStatement = "";
             //if insert
@@ -108,7 +109,8 @@ namespace VinaGerman.Database.Implementation
             }
             return entityObject;
         }
-        public bool DeleteContact(ContactEntity entityObject)
+
+        public bool DeleteContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject)
         {
             string sqlStatement = "UPDATE Contact SET Deleted=1 WHERE ContactId=@ContactId  " + Environment.NewLine;
 
@@ -121,6 +123,33 @@ namespace VinaGerman.Database.Implementation
                 conn.Execute(sqlStatement, new { ContactId = entityObject.ContactId });
             }
             return true;
+        }
+
+        public List<VinaGerman.Entity.BusinessEntity.ContactEntity> GetContactForCompany(CompanyEntity hObject)
+        {
+            List<VinaGerman.Entity.BusinessEntity.ContactEntity> result = null;
+            string sqlStatement = "SELECT " + Environment.NewLine +
+                "Contact.ContactId," + Environment.NewLine +
+                "Contact.FullName," + Environment.NewLine +
+                "Contact.Email," + Environment.NewLine +
+                "Contact.Phone," + Environment.NewLine +
+                "Contact.Address," + Environment.NewLine +
+                "Contact.CompanyId," + Environment.NewLine +
+                "Contact.UserAccountId," + Environment.NewLine +
+                "Contact.Position," + Environment.NewLine +
+                "Contact.DepartmentId," + Environment.NewLine +
+                "Contact.Deleted" + Environment.NewLine +
+                "FROM Contact join Company on Contact.CompanyId= Company.CompanyId" + Environment.NewLine +
+                "WHERE Deleted=0 and Contact.CompanyId=@CompanyId" + Environment.NewLine;
+            //execute
+            var db = GetDatabaseInstance();
+            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
+            // Call the ExecuteReader method with the command.                
+            using (IDbConnection conn = db.CreateConnection())
+            {
+                result = conn.Query<VinaGerman.Entity.BusinessEntity.ContactEntity>(sqlStatement).ToList();
+            }
+            return result;
         }
     }
 }
