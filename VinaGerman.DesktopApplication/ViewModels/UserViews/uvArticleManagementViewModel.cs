@@ -81,25 +81,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
 
-        private CategoryEntity _selectedCategory;
-        public CategoryEntity SelectedCategory
-        {
-            get
-            {
-                return _selectedCategory;
-            }
-            set
-            {
-                _selectedCategory = value;
-                RaisePropertyChanged("SelectedCategory");
-
-                if (SelectedArticle != null && SelectedCategory != null)
-                {
-                    SelectedArticle.CategoryId = SelectedCategory.CategoryId;
-                }
-
-            }
-        }
+        
 
         private ArticleEntity _selectedArticle;
         public ArticleEntity SelectedArticle
@@ -117,8 +99,6 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
 
                 if (SelectedArticle != null)
                 {
-                    //SelectedCategory = CategoryList.FirstOrDefault(c => c.CategoryId == SelectedArticle.CategoryId);
-
                     LoadRelatedArticles();
                 }
             }
@@ -293,6 +273,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 Deleted = false,
                 Description = "",
                 ArticleNo="",
+                CategoryId=-1,
                 ArticleId=-1
             };
             SelectedArticle = newEntity;
