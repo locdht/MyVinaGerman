@@ -32,5 +32,9 @@ namespace VinaGerman.Entity.BusinessEntity
 
         [DataMember]
         public bool Deleted { get; set; }
+
+        //
+        [DataMember]
+        public int CategoryId { get; set; }
     }
 }

@@ -28,7 +28,6 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             set
             {
                 _contactList = value;
-                SelectedContact = null;
                 RaisePropertyChanged("ContactList");
             }
         }
@@ -47,36 +46,6 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
 
-        private VinaGerman.Entity.BusinessEntity.ContactEntity _selectedContact;
-        public VinaGerman.Entity.BusinessEntity.ContactEntity SelectedContact
-        {
-            get
-            {
-                return _selectedContact;
-            }
-            set
-            {
-                _selectedContact = value;
-                RaisePropertyChanged("SelectedContact");
-                RaisePropertyChanged("CanSave");
-                RaisePropertyChanged("CanDelete");
-            }
-        }
-        public bool CanSave
-        {
-            get
-            {
-                return _selectedContact != null;
-            }
-        }
-
-        public bool CanDelete
-        {
-            get
-            {
-                return _selectedContact != null && _selectedContact.ContactId > 0;
-            }
-        }
         private List<VinaGerman.Entity.BusinessEntity.DepartmentEntity> _departmentList = null;
         public List<VinaGerman.Entity.BusinessEntity.DepartmentEntity> DepartmentList
         {
@@ -153,7 +122,6 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 DepartmentId=-1,
                 ContactId=-1
             };
-            SelectedContact = newEntity;
             ContactList.Add(newEntity);
             ContactList = new List<VinaGerman.Entity.BusinessEntity.ContactEntity>(_contactList);
         }
@@ -176,7 +144,6 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
                             DeleteContact(entityObject);
-                            SelectedContact = null;
                         }));
                     }
                     catch (Exception ex)
@@ -203,8 +170,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     //display to UI
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        SelectedContact = updatedEntity;
-                        AddOrUpdateContact(SelectedContact);
+                        AddOrUpdateContact(updatedEntity);
                     }));
                 }
                 catch (Exception ex)
