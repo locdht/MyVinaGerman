@@ -11,6 +11,7 @@
     <UserControl.Resources>
         <helper:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" />
         <helper:BoolNotToVisibilityConverter x:Key="boolNotToVisibilityConverter" />
+        <helper:OrderStatusToDescriptionConverter x:Key="orderStatusConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -165,7 +166,7 @@
                                 </DataGridTemplateColumn.Header>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBlock}"/>
+                                        <TextBlock Text="{Binding OrderStatus, Converter={StaticResource orderStatusConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBlock}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>                          

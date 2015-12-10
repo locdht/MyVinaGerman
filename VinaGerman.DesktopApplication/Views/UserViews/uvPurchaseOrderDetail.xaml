@@ -13,7 +13,7 @@
         <helper:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" />
         <helper:BoolNotToVisibilityConverter x:Key="boolNotToVisibilityConverter" />
         <helper:Language2FirstDayOfWeek x:Key="convLanguage2FirstDayOfWeek" />
-        <helper:DateTimeFormatConverter x:Key="dateFormatConverter" />
+        <helper:DateTimeFormatConverter x:Key="dateFormatConverter" />        
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
