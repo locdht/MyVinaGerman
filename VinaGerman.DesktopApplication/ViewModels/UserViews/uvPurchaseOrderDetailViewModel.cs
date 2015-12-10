@@ -841,6 +841,17 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
+                    //load order information
+                    if (order == null) order = new OrderEntity()
+                    {
+                        OrderDate = DateTime.Now,
+                        OrderNumber = "",
+                        CompanyId = ApplicationHelper.CurrentUserProfile.CompanyId,
+                        CreatedBy = ApplicationHelper.CurrentUserProfile.ContactId,
+                        ResponsibleBy = ApplicationHelper.CurrentUserProfile.ContactId,
+                        OrderStatus = (int)enumOrderStatus.Ready
+                    };
+
                     _employeeList = new List<UserProfileEntity>();
 
                     var _ocompanyList = Factory.Resolve<ICompanyDS>().SearchCompanies(new CompanySearchEntity()
@@ -911,18 +922,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         StatusList = _oStatusList;
 
                         OrderlineList = new List<OrderlineEntity>();
-                        LoanList = new List<LoanEntity>();
-
-                        //load order information
-                        if (order == null) order = new OrderEntity() 
-                        { 
-                            OrderDate = DateTime.Now,
-                            OrderNumber = "",
-                            CompanyId = ApplicationHelper.CurrentUserProfile.CompanyId,
-                            CreatedBy = ApplicationHelper.CurrentUserProfile.ContactId,
-                            ResponsibleBy = ApplicationHelper.CurrentUserProfile.ContactId,
-                            OrderStatus = (int)enumOrderStatus.Ready
-                        };
+                        LoanList = new List<LoanEntity>();                        
 
                         SelectedOrder = order;
 
