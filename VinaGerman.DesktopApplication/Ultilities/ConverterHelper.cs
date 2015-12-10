@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Markup;
 using VinaGerman.Entity;
+using VinaGerman.DesktopApplication.Translations;
 
 
 namespace VinaGerman.DesktopApplication.Utilities
@@ -100,7 +101,7 @@ namespace VinaGerman.DesktopApplication.Utilities
                 }
             }
             return result;
-        }
+        }        
 
         public object ConvertBack(object value, Type targetTypes, object parameter,
             System.Globalization.CultureInfo culture)
@@ -115,6 +116,29 @@ namespace VinaGerman.DesktopApplication.Utilities
                 }
             }
             return result;
+        }
+    }
+    
+    public class OrderStatusToDescriptionConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType,
+          object parameter, System.Globalization.CultureInfo culture)
+        {
+            int val = (int)value;
+
+            switch (val)
+            {
+                case (int)enumOrderStatus.Ready: return StringResources.ORDERSTATUS_READY;
+                case (int)enumOrderStatus.Approved: return StringResources.ORDERSTATUS_APPROVED;
+                case (int)enumOrderStatus.Processed: return StringResources.ORDERSTATUS_PROCESSED;
+                default: return StringResources.ORDERSTATUS_READY;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType,
+          object parameter, System.Globalization.CultureInfo culture)
+        {
+            return value;
         }
     }
 

@@ -30,6 +30,7 @@ namespace VinaGerman.Database.Implementation
                 "[Order].CustomerContactId," + Environment.NewLine +
                 "[Order].OrderNumber," + Environment.NewLine +
                 "[Order].Description," + Environment.NewLine +
+                "[Order].OrderStatus," + Environment.NewLine +
                 "Company.Description as CustomerCompanyName," + Environment.NewLine +
                 "Location.Description as LocationName," + Environment.NewLine +
                 "Business.Description as BusinessName," + Environment.NewLine +
@@ -76,6 +77,7 @@ namespace VinaGerman.Database.Implementation
                 "CreatedDate=@CreatedDate," + Environment.NewLine +
                 "CompanyId=@CompanyId," + Environment.NewLine +
                 "LocationId=@LocationId," + Environment.NewLine +
+                "OrderStatus=@OrderStatus," + Environment.NewLine +
                 "CustomerCompanyId=@CustomerCompanyId," + Environment.NewLine +
                 "CustomerContactId=@CustomerContactId," + Environment.NewLine +
                 "OrderNumber=@OrderNumber," + Environment.NewLine +
@@ -97,6 +99,7 @@ namespace VinaGerman.Database.Implementation
                 "LocationId," + Environment.NewLine +
                 "CustomerCompanyId," + Environment.NewLine +
                 "CustomerContactId," + Environment.NewLine +
+                "OrderStatus," + Environment.NewLine +
                 "OrderNumber," + Environment.NewLine +
                 "Description)" + Environment.NewLine +
                 "VALUES (" + Environment.NewLine +
@@ -111,6 +114,7 @@ namespace VinaGerman.Database.Implementation
                 "@LocationId," + Environment.NewLine +
                 "@CustomerCompanyId," + Environment.NewLine +
                 "@CustomerContactId," + Environment.NewLine +
+                "@OrderStatus," + Environment.NewLine +
                 "@OrderNumber," + Environment.NewLine +
                 "@Description)" + Environment.NewLine +
                 "SET @NewOrderId = (SELECT SCOPE_IDENTITY() AS OrderId) " + Environment.NewLine;
@@ -131,6 +135,7 @@ namespace VinaGerman.Database.Implementation
                 "[Order].LocationId," + Environment.NewLine +
                 "[Order].CustomerCompanyId," + Environment.NewLine +
                 "[Order].CustomerContactId," + Environment.NewLine +
+                "[Order].OrderStatus," + Environment.NewLine +
                 "[Order].OrderNumber," + Environment.NewLine +
                 "[Order].Description" + Environment.NewLine +
                 "FROM [Order] " + Environment.NewLine +
@@ -150,7 +155,7 @@ namespace VinaGerman.Database.Implementation
                     IndustryId = entityObject.IndustryId,
                     CreatedBy = entityObject.CreatedBy,
                     ResponsibleBy = entityObject.ResponsibleBy,
-
+                    OrderStatus = entityObject.OrderStatus,
                     OrderDate = entityObject.OrderDate,
                     CreatedDate = entityObject.CreatedDate,
                     CompanyId = entityObject.CompanyId,
