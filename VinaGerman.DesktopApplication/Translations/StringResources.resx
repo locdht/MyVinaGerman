@@ -399,4 +399,7 @@
   <data name="ORDERSTATUS_READY" xml:space="preserve">
     <value>Ready</value>
   </data>
+  <data name="captionContactListForCompany" xml:space="preserve">
+    <value>Contact list</value>
+  </data>
 </root>

@@ -73,159 +73,308 @@
             </Border>
         </Grid>
         <!--<GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"></GridSplitter>-->
-        <!--list panel-->        
-        <Border Name="DataPanel" Style="{DynamicResource BorderGrid}" Padding="0" Grid.Column="2">
-            <DataGrid Name="gridData" Grid.Column="0" Grid.Row="0" ColumnHeaderHeight="42" ItemsSource="{Binding CompanyList}" SelectedItem="{Binding SelectedCompany}"
+        <!--list panel-->
+        <Grid Name="DetailPanel" Grid.Column="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" Name="DataPanel" Style="{DynamicResource BorderGrid}" Padding="0" Grid.Column="2">
+                <DataGrid Name="gridData" Grid.Column="0" Grid.Row="0" ColumnHeaderHeight="42" ItemsSource="{Binding CompanyList}" SelectedItem="{Binding SelectedCompany}"
                       SelectionMode="Single" HeadersVisibility="All" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" RowHeaderWidth="0" IsReadOnly="True">
-                <DataGrid.Resources>
-                    <helper:BindingProxy x:Key="proxy" Data="{Binding}" />
-                </DataGrid.Resources>
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding ItemDoubleCommand}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridHeaderSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">                        
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image Grid.Column="0" Grid.Row="0" Source="{StaticResource iconCompany}" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <!--Show description-->
-                    <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
-                        <DataGridTemplateColumn.Header>
-                            <ContentControl>
-                                <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblCompanyCode}" />
-                            </ContentControl>
-                        </DataGridTemplateColumn.Header>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding CompanyCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <!--Show description-->
-                    <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
-                        <DataGridTemplateColumn.Header>
-                            <ContentControl>
-                                <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblDescription}" />
-                            </ContentControl>
-                        </DataGridTemplateColumn.Header>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <!--Show description-->
-                    <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
-                        <DataGridTemplateColumn.Header>
-                            <ContentControl>
-                                <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblTaxCode}" />
-                            </ContentControl>
-                        </DataGridTemplateColumn.Header>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding TaxCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <!--Show description-->
-                    <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
-                        <DataGridTemplateColumn.Header>
-                            <ContentControl>
-                                <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblAddress}" />
-                            </ContentControl>
-                        </DataGridTemplateColumn.Header>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Grid.Column="1" Grid.Row="2" Margin="0" Text="{Binding Address}" Style="{DynamicResource BaseTextBox}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <!--Show description-->
-                    <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
-                        <DataGridTemplateColumn.Header>
-                            <ContentControl>
-                                <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblPhone}" />
-                            </ContentControl>
-                        </DataGridTemplateColumn.Header>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Grid.Column="1" Grid.Row="2" Margin="0" Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <!--Show description-->
-                    <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
-                        <DataGridTemplateColumn.Header>
-                            <ContentControl>
-                                <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblWebsite}" />
-                            </ContentControl>
-                        </DataGridTemplateColumn.Header>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Grid.Column="1" Grid.Row="2" Margin="0" Text="{Binding Website, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <!--Show description-->
-                    <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
-                        <DataGridTemplateColumn.Header>
-                            <ContentControl>
-                                <Image Source="/VinaGerman.DesktopApplication;component/Images/customer.png" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            </ContentControl>
-                        </DataGridTemplateColumn.Header>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsCustomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseCheckBox}" HorizontalAlignment="Center"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <!--Show description-->
-                    <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
-                        <DataGridTemplateColumn.Header>
-                            <ContentControl>
-                                <Image Source="/VinaGerman.DesktopApplication;component/Images/supplier.png" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            </ContentControl>
-                        </DataGridTemplateColumn.Header>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsSupplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseCheckBox}" HorizontalAlignment="Center"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <!--Show description-->
-                    <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button CommandParameter="{Binding}" Command="{Binding Path=DataContext.SaveCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" Style="{DynamicResource BaseImageButton}">
-                                    <Image Source="{StaticResource iconSave}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                </Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <!--Show description-->
-                    <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
-                        <DataGridTemplateColumn.Header>
-                            <ContentControl>
-                                <Button Command="{Binding Path=DataContext.AddCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" Style="{DynamicResource BaseImageButton}">
-                                    <Image Source="{StaticResource iconAdd}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                </Button>
-                            </ContentControl>
-                        </DataGridTemplateColumn.Header>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button CommandParameter="{Binding}" Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" Style="{DynamicResource BaseImageButton}">
-                                    <Image Source="{StaticResource iconDelete}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                </Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Border>
+                    <DataGrid.Resources>
+                        <helper:BindingProxy x:Key="proxy" Data="{Binding}" />
+                    </DataGrid.Resources>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding ItemDoubleCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridHeaderSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Grid.Column="0" Grid.Row="0" Source="{StaticResource iconCompany}" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--Show description-->
+                        <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.Header>
+                                <ContentControl>
+                                    <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblCompanyCode}" />
+                                </ContentControl>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding CompanyCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--Show description-->
+                        <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.Header>
+                                <ContentControl>
+                                    <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblDescription}" />
+                                </ContentControl>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--Show description-->
+                        <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.Header>
+                                <ContentControl>
+                                    <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblTaxCode}" />
+                                </ContentControl>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding TaxCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--Show description-->
+                        <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.Header>
+                                <ContentControl>
+                                    <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblAddress}" />
+                                </ContentControl>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Grid.Column="1" Grid.Row="2" Margin="0" Text="{Binding Address}" Style="{DynamicResource BaseTextBox}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--Show description-->
+                        <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.Header>
+                                <ContentControl>
+                                    <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblPhone}" />
+                                </ContentControl>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Grid.Column="1" Grid.Row="2" Margin="0" Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--Show description-->
+                        <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.Header>
+                                <ContentControl>
+                                    <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblWebsite}" />
+                                </ContentControl>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Grid.Column="1" Grid.Row="2" Margin="0" Text="{Binding Website, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--Show description-->
+                        <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.Header>
+                                <ContentControl>
+                                    <Image Source="/VinaGerman.DesktopApplication;component/Images/customer.png" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </ContentControl>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsCustomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseCheckBox}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--Show description-->
+                        <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.Header>
+                                <ContentControl>
+                                    <Image Source="/VinaGerman.DesktopApplication;component/Images/supplier.png" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </ContentControl>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsSupplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseCheckBox}" HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--Show description-->
+                        <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button CommandParameter="{Binding}" Command="{Binding Path=DataContext.SaveCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" Style="{DynamicResource BaseImageButton}">
+                                        <Image Source="{StaticResource iconSave}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--Show description-->
+                        <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.Header>
+                                <ContentControl>
+                                    <Button Command="{Binding Path=DataContext.AddCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" Style="{DynamicResource BaseImageButton}">
+                                        <Image Source="{StaticResource iconAdd}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Button>
+                                </ContentControl>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button CommandParameter="{Binding}" Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" Style="{DynamicResource BaseImageButton}">
+                                        <Image Source="{StaticResource iconDelete}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+
+            <Grid Grid.Row="1" Background="{DynamicResource BorderBrush}" >
+                <Label Style="{DynamicResource LabelBarCaption}" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.captionContactListForCompany}" Margin="4,0,0,0"/>
+            </Grid>
+
+            <Border Grid.Row="2" Name="DataPanelContact" Style="{DynamicResource BorderGrid}" Padding="0" Grid.Column="2">
+                <DataGrid Name="gridDataContact" Grid.Column="0" Grid.Row="0" ColumnHeaderHeight="42" ItemsSource="{Binding ContactList}" SelectedItem="{Binding SelectedContact}"
+                      SelectionMode="Single" HeadersVisibility="All" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" RowHeaderWidth="0" IsReadOnly="True">
+                    <DataGrid.Resources>
+                        <helper:BindingProxy x:Key="proxy" Data="{Binding}" />
+                    </DataGrid.Resources>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding ItemDoubleCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridHeaderSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Grid.Column="0" Grid.Row="0" Source="{StaticResource iconContact}" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!--Show FullName-->
+                        <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.Header>
+                                <ContentControl>
+                                    <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblFullName}" />
+                                </ContentControl>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!--Show Email-->
+                        <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.Header>
+                                <ContentControl>
+                                    <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblEmail}" />
+                                </ContentControl>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!--Show Phone-->
+                        <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.Header>
+                                <ContentControl>
+                                    <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblPhone}" />
+                                </ContentControl>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!--Show Address-->
+                        <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.Header>
+                                <ContentControl>
+                                    <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblAddress}" />
+                                </ContentControl>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!--Show Position-->
+                        <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.Header>
+                                <ContentControl>
+                                    <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblPosition}" />
+                                </ContentControl>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Position, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!--Show Department-->
+                        <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.Header>
+                                <ContentControl>
+                                    <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblDepartment}" />
+                                </ContentControl>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox ItemsSource="{Binding ElementName=gridDataContact, Path=DataContext.DepartmentList}"
+                                DisplayMemberPath="Description" SelectedValuePath="DepartmentId" SelectedValue="{Binding DepartmentId,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+
+                        <!--Show description-->
+                        <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button CommandParameter="{Binding}" Command="{Binding Path=DataContext.SaveContactCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" Style="{DynamicResource BaseImageButton}">
+                                        <Image Source="{StaticResource iconSave}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--Show description-->
+                        <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                            <DataGridTemplateColumn.Header>
+                                <ContentControl>
+                                    <Button Command="{Binding Path=DataContext.AddContactCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" Style="{DynamicResource BaseImageButton}">
+                                        <Image Source="{StaticResource iconAdd}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Button>
+                                </ContentControl>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button CommandParameter="{Binding}" Command="{Binding Path=DataContext.DeleteContactCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" Style="{DynamicResource BaseImageButton}">
+                                        <Image Source="{StaticResource iconDelete}" Height="30" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

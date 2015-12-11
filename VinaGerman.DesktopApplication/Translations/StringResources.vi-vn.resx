@@ -399,4 +399,7 @@
   <data name="ORDERSTATUS_READY" xml:space="preserve">
     <value>Sẵn sàng</value>
   </data>
+  <data name="captionContactListForCompany" xml:space="preserve">
+    <value>Danh sách người liên hệ</value>
+  </data>
 </root>

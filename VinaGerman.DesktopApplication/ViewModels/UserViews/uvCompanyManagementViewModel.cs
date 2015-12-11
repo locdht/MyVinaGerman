@@ -29,9 +29,46 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             {
                 _companyList = value;
                 RaisePropertyChanged("CompanyList");
+                ContactList = null;
             }
         }
 
+        private CompanyEntity _selectedCompany;
+        public CompanyEntity SelectedCompany
+        {
+            get
+            {
+                return _selectedCompany;
+            }
+            set
+            {
+                _selectedCompany = value;
+                RaisePropertyChanged("SelectedCompany");
+                RaisePropertyChanged("CanSave");
+                RaisePropertyChanged("CanDelete");
+
+                if (SelectedCompany != null)
+                {
+                    LoadContactForCompany();
+                }
+            }
+        }
+
+        private CompanyEntity _relatedCompany;
+        public CompanyEntity RelatedCompany
+        {
+            get
+            {
+                return _relatedCompany;
+            }
+            set
+            {
+                _relatedCompany = value;
+                RaisePropertyChanged("SelectedCompany");
+                RaisePropertyChanged("CanAddRelatedCompany");
+            }
+        }
+        
         private string _searchText;
         public string SearchText
         {
@@ -74,6 +111,63 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
 
+        private List<VinaGerman.Entity.BusinessEntity.ContactEntity> _contactList = null;
+        public List<VinaGerman.Entity.BusinessEntity.ContactEntity> ContactList
+        {
+            get
+            {
+                return _contactList;
+            }
+            set
+            {
+                _contactList = value;
+                RaisePropertyChanged("ContactList");
+            }
+        }
+
+        private VinaGerman.Entity.BusinessEntity.ContactEntity _selectedContact;
+        public VinaGerman.Entity.BusinessEntity.ContactEntity SelectedContact
+        {
+            get
+            {
+                return _selectedContact;
+            }
+            set
+            {
+                _selectedContact = value;
+                RaisePropertyChanged("SelectedContact");
+            }
+        }
+
+        private List<VinaGerman.Entity.BusinessEntity.DepartmentEntity> _departmentList = null;
+        public List<VinaGerman.Entity.BusinessEntity.DepartmentEntity> DepartmentList
+        {
+            get
+            {
+                return _departmentList;
+            }
+            set
+            {
+                _departmentList = value;
+                RaisePropertyChanged("DepartmentList");
+            }
+        }
+        public bool CanSave
+        {
+            get
+            {
+                return _selectedCompany != null;
+            }
+        }
+
+        public bool CanDelete
+        {
+            get
+            {
+                return _selectedCompany != null && _selectedCompany.CompanyId > 0;
+            }
+        }
+
         public RelayCommand ClearSearchCommand { get; set; }
         public RelayCommand SearchCommand { get; set; }
         public RelayCommand<CompanyEntity> SaveCommand { get; set; }
@@ -81,6 +175,9 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         public RelayCommand<CompanyEntity> DeleteCommand { get; set; }
         #endregion
 
+        public RelayCommand<VinaGerman.Entity.BusinessEntity.ContactEntity> SaveContactCommand { get; set; }
+        public RelayCommand AddContactCommand { get; set; }
+        public RelayCommand<VinaGerman.Entity.BusinessEntity.ContactEntity> DeleteContactCommand { get; set; }
 
         public uvCompanyManagementViewModel(MainWindowViewModel pMainWindowViewModel)
             : base(pMainWindowViewModel)
@@ -90,6 +187,10 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             SaveCommand = new RelayCommand<CompanyEntity>(Save);
             DeleteCommand = new RelayCommand<CompanyEntity>(Delete);
             AddCommand = new RelayCommand(Add);
+
+            SaveContactCommand = new RelayCommand<VinaGerman.Entity.BusinessEntity.ContactEntity>(SaveContact);
+            DeleteContactCommand = new RelayCommand<VinaGerman.Entity.BusinessEntity.ContactEntity>(DeleteContact);
+            AddContactCommand = new RelayCommand(AddContact);
 
             ClearSearch();
         }
@@ -136,7 +237,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 Phone = "",
                 Website = ""
             };
-
+            SelectedCompany = newEntity;
             CompanyList.Add(newEntity);
             CompanyList = new List<CompanyEntity>(_companyList);
         }
@@ -158,6 +259,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
                             DeleteCompany(entityObject);
+                            SelectedCompany = null;
                         }));
                     }
                     catch (Exception ex)
@@ -183,7 +285,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     //display to UI
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
-                        AddOrUpdateCompany(updatedEntity);
+                        SelectedCompany = updatedEntity;
+                        AddOrUpdateCompany(SelectedCompany);
                     }));
                 }
                 catch (Exception ex)
@@ -209,12 +312,18 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         NotIncludedCompany = ApplicationHelper.CurrentUserProfile.CompanyId
                     });
 
+                    var _Departmentlist = Factory.Resolve<IBaseDataDS>().SearchDepartment(new DepartmentSearchEntity()
+                    {
+                        SearchText = ""
+                    });
                     HideLoading();
 
                     //display to UI
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
                         CompanyList = list;
+                        DepartmentList = _Departmentlist;
+                        SelectedCompany = CompanyList.FirstOrDefault();
                     }));                    
                 }
                 catch (Exception ex)
@@ -232,6 +341,136 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             SearchText = "";
             IsCustomer = false;
             IsSupplier = false;
+        }
+
+        public void LoadContactForCompany()
+        {
+            System.Threading.ThreadPool.QueueUserWorkItem(delegate
+            {
+                try
+                {
+                    ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
+
+                    var list = Factory.Resolve<IBaseDataDS>().GetContactForCompany(SelectedCompany);
+
+                    HideLoading();
+
+                    //display to UI
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        ContactList = list;
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    HideLoading();
+                    ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
+                }
+            });
+        }
+
+        public void SaveContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject)
+        {
+            System.Threading.ThreadPool.QueueUserWorkItem(delegate
+            {
+                try
+                {
+                    ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
+
+                    var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateContact(entityObject);
+
+                    HideLoading();
+
+                    //display to UI
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        AddOrUpdateContact(updatedEntity);
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    HideLoading();
+                    ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
+                }
+            });
+        }
+
+        public void AddOrUpdateContact(VinaGerman.Entity.BusinessEntity.ContactEntity newEntity)
+        {
+            VinaGerman.Entity.BusinessEntity.ContactEntity oldEntity = ContactList.FirstOrDefault<VinaGerman.Entity.BusinessEntity.ContactEntity>(p => p.FullName == newEntity.FullName);
+
+            if (oldEntity == null)
+            {
+                ContactList.Insert(0, newEntity);
+            }
+            else
+            {
+                int index = ContactList.IndexOf(oldEntity);
+                ContactList.Remove(oldEntity);
+                ContactList.Insert(index, newEntity);
+            }
+
+            ContactList = new List<VinaGerman.Entity.BusinessEntity.ContactEntity>(_contactList);
+        }
+
+        public void DeleteContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject)
+        {
+            if (ShowMessageBox(StringResources.captionConfirm, StringResources.msgConfirmDelete, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                System.Threading.ThreadPool.QueueUserWorkItem(delegate
+                {
+                    try
+                    {
+                        ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
+
+                        var updatedEntity = Factory.Resolve<IBaseDataDS>().DeleteContact(entityObject);
+
+                        HideLoading();
+
+                        //display to UI
+                        Application.Current.Dispatcher.Invoke(new Action(() =>
+                        {
+                            DeleteContactForCompany(entityObject);
+                        }));
+                    }
+                    catch (Exception ex)
+                    {
+                        HideLoading();
+                        ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
+                    }
+                });
+            }
+        }
+
+        public void DeleteContactForCompany(VinaGerman.Entity.BusinessEntity.ContactEntity newEntity)
+        {
+            VinaGerman.Entity.BusinessEntity.ContactEntity oldEntity = ContactList.FirstOrDefault<VinaGerman.Entity.BusinessEntity.ContactEntity>(p => p.ContactId == newEntity.ContactId);
+
+            if (oldEntity != null)
+            {
+                ContactList.Remove(oldEntity);
+            }
+
+            ContactList = new List<VinaGerman.Entity.BusinessEntity.ContactEntity>(_contactList);
+        }
+
+        public void AddContact()
+        {
+            var newEntity = new VinaGerman.Entity.BusinessEntity.ContactEntity()
+            {
+                Deleted = false,
+                FullName = "",
+                Email = "",
+                Phone = "",
+                Address = "",
+                CompanyId = SelectedCompany.CompanyId,
+                UserAccountId = ApplicationHelper.CurrentUserProfile.UserAccountId,
+                Position = "",
+                DepartmentId = -1,
+                ContactId = -1
+            };
+            ContactList.Add(newEntity);
+            ContactList = new List<VinaGerman.Entity.BusinessEntity.ContactEntity>(_contactList);
         }
         #endregion
 
