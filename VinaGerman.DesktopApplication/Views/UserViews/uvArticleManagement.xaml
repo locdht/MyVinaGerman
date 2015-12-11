@@ -140,8 +140,39 @@
                             </DataGridTemplateColumn.Header>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <ComboBox ItemsSource="{Binding ElementName=gridData, Path=DataContext.CategoryList}"
-                                DisplayMemberPath="Description" SelectedValuePath="CategoryId" SelectedValue="{Binding CategoryId,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ComboBox Style="{DynamicResource BaseComboBox}" ItemsSource="{Binding ElementName=gridData, Path=DataContext.CategoryList}"
+                                        DisplayMemberPath="Description" SelectedValuePath="CategoryId" SelectedValue="{Binding CategoryId,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <ContentControl Content="{Binding}">
+                                                    <ContentControl.Style>
+                                                        <Style TargetType="{x:Type ContentControl}">
+                                                            <!-- Complex default template -->
+                                                            <Setter Property="ContentTemplate">
+                                                                <Setter.Value>
+                                                                    <DataTemplate>
+                                                                        <TextBlock Margin="6,0,3,0" Text="{Binding Description}" VerticalAlignment="Center" TextWrapping="Wrap" Style="{StaticResource BaseTextBlock}"/>
+                                                                    </DataTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                            <Style.Triggers>
+                                                                <!-- Simple selection box template -->
+                                                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="{x:Null}">
+                                                                    <Setter Property="ContentTemplate">
+                                                                        <Setter.Value>
+                                                                            <DataTemplate>
+                                                                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource BaseTextBlock}" Text="{Binding Description}"></TextBlock>
+                                                                            </DataTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </ContentControl.Style>
+                                                </ContentControl>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -236,9 +267,6 @@
                     <Image Source="/VinaGerman.DesktopApplication;component/Images/add.png"/>
                 </Button>
                 <Border Style="{DynamicResource BorderGrid}" Padding="0" Grid.Row="1" Grid.ColumnSpan="3">
-                    <!--<DataGrid Name="gridRelatedData" ColumnHeaderHeight="42" ItemsSource="{Binding ArticleRelationList}" SelectedItem="{Binding SelectedArticleRelation}"
-                                SelectionMode="Single" HeadersVisibility="None" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" RowHeaderWidth="0" IsReadOnly="True">-->
-
                     <DataGrid Name="gridRelatedData" Grid.Column="0" Grid.Row="0" ColumnHeaderHeight="42" ItemsSource="{Binding ArticleRelationList}" SelectedItem="{Binding SelectedArticleRelation}"
                       SelectionMode="Single" HeadersVisibility="All" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" RowHeaderWidth="0" IsReadOnly="True">
                             <DataGrid.Resources>
@@ -257,7 +285,6 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-
                             <!--Show ArticleNo-->
                             <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
                                 <DataGridTemplateColumn.Header>
@@ -267,11 +294,10 @@
                                 </DataGridTemplateColumn.Header>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding ArticleNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                        <TextBlock Text="{Binding ArticleNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBlock}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-
                             <!--Show Description-->
                             <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
                                 <DataGridTemplateColumn.Header>
@@ -281,11 +307,10 @@
                                 </DataGridTemplateColumn.Header>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                        <TextBlock Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBlock}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-
                             <!--Show Unit-->
                             <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
                                 <DataGridTemplateColumn.Header>
@@ -295,27 +320,10 @@
                                 </DataGridTemplateColumn.Header>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding Unit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                        <TextBlock Text="{Binding Unit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBlock}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-
-                            <!--Show Category-->
-                            <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
-                                <DataGridTemplateColumn.Header>
-                                    <ContentControl>
-                                        <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblCategory}" />
-                                    </ContentControl>
-                                </DataGridTemplateColumn.Header>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <ComboBox ItemsSource="{Binding ElementName=gridData, Path=DataContext.CategoryList}"
-                                DisplayMemberPath="Description" SelectedValuePath="CategoryId" SelectedValue="{Binding CategoryId,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-
-
                             <DataGridTemplateColumn Width="40" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

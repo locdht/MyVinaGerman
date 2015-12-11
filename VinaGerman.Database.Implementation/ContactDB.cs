@@ -137,17 +137,16 @@ namespace VinaGerman.Database.Implementation
                 "Contact.CompanyId," + Environment.NewLine +
                 "Contact.UserAccountId," + Environment.NewLine +
                 "Contact.Position," + Environment.NewLine +
-                "Contact.DepartmentId," + Environment.NewLine +
-                "Contact.Deleted" + Environment.NewLine +
+                "Contact.DepartmentId" + Environment.NewLine +
                 "FROM Contact join Company on Contact.CompanyId= Company.CompanyId" + Environment.NewLine +
-                "WHERE Deleted=0 and Contact.CompanyId=@CompanyId" + Environment.NewLine;
+                "WHERE Contact.Deleted=0 and Contact.CompanyId=@CompanyId" + Environment.NewLine;
             //execute
             var db = GetDatabaseInstance();
             // Get a GetSqlStringCommandWrapper to specify the query and parameters                
             // Call the ExecuteReader method with the command.                
             using (IDbConnection conn = db.CreateConnection())
             {
-                result = conn.Query<VinaGerman.Entity.BusinessEntity.ContactEntity>(sqlStatement).ToList();
+                result = conn.Query<VinaGerman.Entity.BusinessEntity.ContactEntity>(sqlStatement, new { CompanyId = hObject.CompanyId }).ToList();
             }
             return result;
         }

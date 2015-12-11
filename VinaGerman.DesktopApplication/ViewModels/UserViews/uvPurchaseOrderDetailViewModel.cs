@@ -875,6 +875,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         OrderDate = DateTime.Now,
                         OrderNumber = "",
+                        OrderType = (int)enumOrderType.Purchase,
                         CompanyId = ApplicationHelper.CurrentUserProfile.CompanyId,
                         CreatedBy = ApplicationHelper.CurrentUserProfile.ContactId,
                         ResponsibleBy = ApplicationHelper.CurrentUserProfile.ContactId,

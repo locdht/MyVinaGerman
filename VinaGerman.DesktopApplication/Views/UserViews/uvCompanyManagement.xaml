@@ -327,24 +327,6 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
-                        <!--Show Department-->
-                        <DataGridTemplateColumn Width="*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
-                            <DataGridTemplateColumn.Header>
-                                <ContentControl>
-                                    <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblDepartment}" />
-                                </ContentControl>
-                            </DataGridTemplateColumn.Header>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <ComboBox ItemsSource="{Binding ElementName=gridDataContact, Path=DataContext.DepartmentList}"
-                                DisplayMemberPath="Description" SelectedValuePath="DepartmentId" SelectedValue="{Binding DepartmentId,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-
-
                         <!--Show description-->
                         <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
                             <DataGridTemplateColumn.CellTemplate>

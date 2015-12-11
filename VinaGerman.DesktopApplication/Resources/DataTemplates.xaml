@@ -19,6 +19,12 @@
     </DataTemplate>
     
     <!-- User Views -->
+    <DataTemplate DataType="{x:Type userviewmodel:uvSaleOrderDetailViewModel}">
+        <userview:uvPurchaseOrderDetail/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type userviewmodel:uvSaleOrderManagementViewModel}">
+        <userview:uvPurchaseOrderManagement/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type userviewmodel:uvContactManagementViewModel}">
         <userview:uvContactManagement/>
     </DataTemplate>

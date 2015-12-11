@@ -32,8 +32,8 @@
                 <MenuItem Header="_Lập phiếu nhập hàng" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.PurchaseOrderDetail}" />                
                 <MenuItem Header="_Tra cứu phiếu nhập hàng" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.PurchaseOrderManagement}" />                
                 <Separator />
-                <MenuItem Header="_Lập phiếu bán hàng" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.IndustryManagement}" />
-                <MenuItem Header="_Tra cứu phiếu bán hàng" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.BusinessManagement}" />
+                <MenuItem Header="_Lập phiếu bán hàng" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.SaleOrderDetail}" />
+                <MenuItem Header="_Tra cứu phiếu bán hàng" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.SaleOrderManagement}" />
             </MenuItem>
             <MenuItem Header="_Sản xuất">                
                 <MenuItem Header="_Lập lệnh sản xuất" Command="{Binding GoToViewCommand}" CommandParameter="{x:Static helper:enumView.IndustryManagement}" />

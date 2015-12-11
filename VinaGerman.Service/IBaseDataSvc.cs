@@ -80,6 +80,7 @@ namespace VinaGerman.Service
         VinaGerman.Entity.BusinessEntity.ContactEntity AddOrUpdateContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject);
         [OperationContract]
         bool DeleteContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject);
+        [OperationContract]
         List<VinaGerman.Entity.BusinessEntity.ContactEntity> GetContactForCompany(CompanyEntity hObject);
         #endregion
 
