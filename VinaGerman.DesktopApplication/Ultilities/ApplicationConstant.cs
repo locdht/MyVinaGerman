@@ -17,6 +17,8 @@ namespace VinaGerman.DesktopApplication.Utilities
         DepartmentManagement,   
         PurchaseOrderManagement,
         PurchaseOrderDetail,
+        SaleOrderManagement,
+        SaleOrderDetail,
         LocationManagement,
         ContactManagement
     }
@@ -25,5 +27,11 @@ namespace VinaGerman.DesktopApplication.Utilities
         Ready = 1,
         Approved = 2,
         Processed = 3
+    }
+
+    public enum enumOrderType
+    {
+        Purchase=1,
+        Sale=2
     }
 }

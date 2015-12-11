@@ -134,9 +134,11 @@
     <Compile Include="ViewModels\UserViews\uvCompanyDetailViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvCompanyManagementViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvLogonViewModel.cs" />
+    <Compile Include="ViewModels\UserViews\uvSaleOrderDetailViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvPurchaseOrderDetailViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\UserViews\uvSaleOrderManagementViewModel.cs" />
     <Compile Include="ViewModels\UserViews\uvPurchaseOrderManagementViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -162,6 +164,9 @@
     <Compile Include="Views\UserViews\uvDepartmentManagement.xaml.cs">
       <DependentUpon>uvDepartmentManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserViews\uvSaleOrderDetail.xaml.cs">
+      <DependentUpon>uvSaleOrderDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserViews\uvPurchaseOrderDetail.xaml.cs">
       <DependentUpon>uvPurchaseOrderDetail.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -186,6 +191,9 @@
     </Compile>
     <Compile Include="Views\UserViews\uvLogon.xaml.cs">
       <DependentUpon>uvLogon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\uvSaleOrderManagement.xaml.cs">
+      <DependentUpon>uvSaleOrderManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserViews\uvPurchaseOrderManagement.xaml.cs">
       <DependentUpon>uvPurchaseOrderManagement.xaml</DependentUpon>
@@ -255,6 +263,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserViews\uvSaleOrderDetail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\UserViews\uvPurchaseOrderDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -286,6 +298,10 @@
     <Page Include="Views\UserViews\uvLogon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\uvSaleOrderManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\UserViews\uvPurchaseOrderManagement.xaml">
       <SubType>Designer</SubType>

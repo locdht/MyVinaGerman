@@ -21,6 +21,10 @@ namespace VinaGerman.DesktopApplication.ViewModels
         public uvBaseViewModel LocationManagementModel { get; set; }
         public uvBaseViewModel PurchaseOrderDetailModel { get; set; }
         public uvBaseViewModel PurchaseOrderManagementModel { get; set; }
+
+        public uvBaseViewModel SaleOrderDetailModel { get; set; }
+        public uvBaseViewModel SaleOrderManagementModel { get; set; }
+
         public uvBaseViewModel DepartmentManagementModel { get; set; }
         public uvBaseViewModel ArticleManagementModel { get; set; }
         public uvBaseViewModel IndustryManagementModel { get; set; }
@@ -101,6 +105,8 @@ namespace VinaGerman.DesktopApplication.ViewModels
             ContactManagementModel = new uvContactManagementViewModel(this) { MessengerID = enumView.ContactManagement.ToString() };
             PurchaseOrderManagementModel = new uvPurchaseOrderManagementViewModel(this) { MessengerID = enumView.PurchaseOrderManagement.ToString() };
             PurchaseOrderDetailModel = new uvPurchaseOrderDetailViewModel(this) { MessengerID = enumView.PurchaseOrderDetail.ToString() };
+            SaleOrderManagementModel = new uvSaleOrderManagementViewModel(this) { MessengerID = enumView.SaleOrderManagement.ToString() };
+            SaleOrderDetailModel = new uvSaleOrderDetailViewModel(this) { MessengerID = enumView.SaleOrderDetail.ToString() };
             LogonModel = new uvLogonViewModel(this) { MessengerID = enumView.Logon.ToString() };
             //check if user is authorized or not
             if (!ApplicationHelper.IsAuthenticated)
@@ -217,6 +223,12 @@ namespace VinaGerman.DesktopApplication.ViewModels
                     break;
                 case enumView.PurchaseOrderManagement:
                     CurrentModel = PurchaseOrderManagementModel;
+                    break;
+                case enumView.SaleOrderDetail:
+                    CurrentModel = SaleOrderDetailModel;
+                    break;
+                case enumView.SaleOrderManagement:
+                    CurrentModel = SaleOrderManagementModel;
                     break;
                 case enumView.ArticleManagement:
                     CurrentModel = ArticleManagementModel;

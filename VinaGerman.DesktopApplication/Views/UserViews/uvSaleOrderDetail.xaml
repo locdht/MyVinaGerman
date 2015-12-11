@@ -1,0 +1,724 @@
+﻿<UserControl x:Class="VinaGerman.DesktopApplication.Views.UserViews.uvSaleOrderDetail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             Template="{DynamicResource BaseView}" Margin="5,5,5,5"
+             xmlns:helper="clr-namespace:VinaGerman.DesktopApplication.Utilities" 
+             xmlns:wm="clr-namespace:VinaGerman.DesktopApplication.Utilities.Watermark" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+             mc:Ignorable="d" d:DesignHeight="600" d:DesignWidth="1000">
+    <UserControl.Resources>
+        <helper:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" />
+        <helper:BoolNotToVisibilityConverter x:Key="boolNotToVisibilityConverter" />
+        <helper:Language2FirstDayOfWeek x:Key="convLanguage2FirstDayOfWeek" />
+        <helper:DateTimeFormatConverter x:Key="dateFormatConverter" />        
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--search panel-->
+        <Grid Name="SearchPanel" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--header block-->
+            <Grid Grid.Row="0" Background="{DynamicResource BorderBrush}" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="1" Style="{DynamicResource LabelBarCaption}" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.captionOrderInfo}" Margin="4,0,0,0"/>
+            </Grid>
+            <!--content block-->
+            <Border Grid.Column="0" Grid.Row="1" Style="{DynamicResource BorderGrid}">
+                <Grid Grid.Column="0" Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblOrderNumber}" Style="{DynamicResource BaseLabel}"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" Text="{Binding SelectedOrder.OrderNumber}" Style="{DynamicResource BaseTextBox}" MaxLength="50" IsReadOnly="True"/>
+
+                    <Label Grid.Column="0" Grid.Row="1" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblOrderDate}" Style="{DynamicResource BaseLabel}"/>
+                    <DatePicker Grid.Column="1" Grid.Row="1" Margin="5,2,5,2" FirstDayOfWeek="{Binding CurrentLanguage,Converter={StaticResource convLanguage2FirstDayOfWeek}}" Language="{Binding CurrentLanguage}" DisplayDateEnd="{x:Static sys:DateTime.Now}" Style="{StaticResource BaseDatePicker}" SelectedDate="{Binding SelectedOrder.OrderDate}">
+                        <DatePicker.Resources>
+                            <Style TargetType="{x:Type DatePickerTextBox}">
+                                <Setter Property="Control.Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <TextBox x:Name="PART_TextBox" Text="{Binding SelectedOrder.OrderDate,Converter={StaticResource dateFormatConverter},ConverterParameter=dd.MM.yyyy}" Style="{StaticResource BaseTextBox}" BorderThickness="0" />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DatePicker.Resources>
+                    </DatePicker>
+
+                    <Label Grid.Column="0" Grid.Row="2" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblCustomer}" Style="{DynamicResource BaseLabel}"/>
+                    <ComboBox Grid.Column="1" Grid.Row="2" Margin="5,2,5,2" ItemsSource="{Binding CustomerList}" SelectedItem="{Binding SelectedCustomer}" Style="{StaticResource BaseComboBox}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <ContentControl Content="{Binding}">
+                                    <ContentControl.Style>
+                                        <Style TargetType="{x:Type ContentControl}">
+                                            <!-- Complex default template -->
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="40"/>
+                                                            </Grid.RowDefinitions>
+                                                            <TextBlock Margin="6,0,3,0" Text="{Binding Description}" VerticalAlignment="Center" TextWrapping="Wrap" Style="{StaticResource BaseTextBlock}"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <!-- Simple selection box template -->
+                                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="{x:Null}">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource BaseTextBlock}" Text="{Binding Description}"></TextBlock>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <Label Grid.Column="0" Grid.Row="3" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblContact}" Style="{DynamicResource BaseLabel}"/>
+                    <ComboBox Grid.Column="1" Grid.Row="3" Margin="5,2,5,2" ItemsSource="{Binding ContactList}" SelectedItem="{Binding SelectedContact}" Style="{StaticResource BaseComboBox}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <ContentControl Content="{Binding}">
+                                    <ContentControl.Style>
+                                        <Style TargetType="{x:Type ContentControl}">
+                                            <!-- Complex default template -->
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="40"/>
+                                                            </Grid.RowDefinitions>
+                                                            <TextBlock Margin="6,0,3,0" Text="{Binding FullName}" VerticalAlignment="Center" TextWrapping="Wrap" Style="{StaticResource BaseTextBlock}"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <!-- Simple selection box template -->
+                                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="{x:Null}">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource BaseTextBlock}" Text="{Binding FullName}"></TextBlock>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <Label Grid.Column="0" Grid.Row="4" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblEmployee}" Style="{DynamicResource BaseLabel}"/>
+                    <ComboBox Grid.Column="1" Grid.Row="4" Margin="5,2,5,2" ItemsSource="{Binding EmployeeList}" SelectedItem="{Binding SelectedEmployee}" Style="{StaticResource BaseComboBox}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <ContentControl Content="{Binding}">
+                                    <ContentControl.Style>
+                                        <Style TargetType="{x:Type ContentControl}">
+                                            <!-- Complex default template -->
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="40"/>
+                                                            </Grid.RowDefinitions>
+                                                            <TextBlock Margin="6,0,3,0" Text="{Binding FullName}" VerticalAlignment="Center" TextWrapping="Wrap" Style="{StaticResource BaseTextBlock}"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <!-- Simple selection box template -->
+                                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="{x:Null}">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource BaseTextBlock}" Text="{Binding FullName}"></TextBlock>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <Label Grid.Column="0" Grid.Row="5" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblBusiness}" Style="{DynamicResource BaseLabel}"/>
+                    <ComboBox Grid.Column="1" Grid.Row="5" Margin="5,2,5,2" ItemsSource="{Binding BusinessList}" SelectedItem="{Binding SelectedBusiness}" Style="{StaticResource BaseComboBox}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <ContentControl Content="{Binding}">
+                                    <ContentControl.Style>
+                                        <Style TargetType="{x:Type ContentControl}">
+                                            <!-- Complex default template -->
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="40"/>
+                                                            </Grid.RowDefinitions>
+                                                            <TextBlock Margin="6,0,3,0" Text="{Binding Description}" VerticalAlignment="Center" TextWrapping="Wrap" Style="{StaticResource BaseTextBlock}"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <!-- Simple selection box template -->
+                                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="{x:Null}">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource BaseTextBlock}" Text="{Binding Description}"></TextBlock>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <Label Grid.Column="0" Grid.Row="6" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblIndustry}" Style="{DynamicResource BaseLabel}"/>
+                    <ComboBox Grid.Column="1" Grid.Row="6" Margin="5,2,5,2" ItemsSource="{Binding IndustryList}" SelectedItem="{Binding SelectedIndustry}" Style="{StaticResource BaseComboBox}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <ContentControl Content="{Binding}">
+                                    <ContentControl.Style>
+                                        <Style TargetType="{x:Type ContentControl}">
+                                            <!-- Complex default template -->
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="40"/>
+                                                            </Grid.RowDefinitions>
+                                                            <TextBlock Margin="6,0,3,0" Text="{Binding Description}" VerticalAlignment="Center" TextWrapping="Wrap" Style="{StaticResource BaseTextBlock}"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <!-- Simple selection box template -->
+                                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="{x:Null}">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource BaseTextBlock}" Text="{Binding Description}"></TextBlock>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <Label Grid.Column="0" Grid.Row="7" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblLocationName}" Style="{DynamicResource BaseLabel}"/>
+                    <ComboBox Grid.Column="1" Grid.Row="7" Margin="5,2,5,2" ItemsSource="{Binding LocationList}" SelectedItem="{Binding SelectedLocation}" Style="{StaticResource BaseComboBox}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <ContentControl Content="{Binding}">
+                                    <ContentControl.Style>
+                                        <Style TargetType="{x:Type ContentControl}">
+                                            <!-- Complex default template -->
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="40"/>
+                                                            </Grid.RowDefinitions>
+                                                            <TextBlock Margin="6,0,3,0" Text="{Binding Description}" VerticalAlignment="Center" TextWrapping="Wrap" Style="{StaticResource BaseTextBlock}"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <!-- Simple selection box template -->
+                                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="{x:Null}">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource BaseTextBlock}" Text="{Binding Description}"></TextBlock>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <Label Grid.Column="0" Grid.Row="8" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblStatus}" Style="{DynamicResource BaseLabel}"/>
+                    <ComboBox Grid.Column="1" Grid.Row="8" Margin="5,2,5,2" ItemsSource="{Binding StatusList}" SelectedItem="{Binding SelectedStatus}" Style="{StaticResource BaseComboBox}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <ContentControl Content="{Binding}">
+                                    <ContentControl.Style>
+                                        <Style TargetType="{x:Type ContentControl}">
+                                            <!-- Complex default template -->
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <TextBlock Margin="6,0,3,0" Text="{Binding Value}" VerticalAlignment="Center" TextWrapping="Wrap" Style="{StaticResource BaseTextBlock}"/>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <!-- Simple selection box template -->
+                                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="{x:Null}">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource BaseTextBlock}" Text="{Binding Value}"></TextBlock>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    
+                    <StackPanel Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Command="{Binding ShowReportCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnPrint}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
+                        <Button Command="{Binding SaveOrderCommand}" Width="100" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.btnSave}" Margin="0,2,5,0" Cursor="Hand" Style="{DynamicResource BaseButton}" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+        <!--<GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"></GridSplitter>-->
+        <!--list panel-->
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <!--Order line grid-->
+            <Border Style="{DynamicResource BorderGrid}" Padding="0" Grid.Row="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--header block-->
+                    <Grid Grid.Row="0" Background="{DynamicResource BorderBrush}" >
+                        <Label Style="{DynamicResource LabelBarCaption}" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.captionArticleList}" Margin="4,0,0,0"/>
+                    </Grid>
+                    <!--content block-->
+                    <Grid Grid.Column="0" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="0" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblArticle}" Style="{DynamicResource BaseLabel}"/>
+                        <ComboBox Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" ItemsSource="{Binding ArticleList}" SelectedItem="{Binding SelectedArticle}" Style="{StaticResource BaseComboBox}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentControl Content="{Binding}">
+                                        <ContentControl.Style>
+                                            <Style TargetType="{x:Type ContentControl}">
+                                                <!-- Complex default template -->
+                                                <Setter Property="ContentTemplate">
+                                                    <Setter.Value>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="40"/>
+                                                                </Grid.RowDefinitions>
+                                                                <TextBlock Margin="6,0,3,0" Text="{Binding Description}" VerticalAlignment="Center" TextWrapping="Wrap" Style="{StaticResource BaseTextBlock}"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <!-- Simple selection box template -->
+                                                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="{x:Null}">
+                                                        <Setter Property="ContentTemplate">
+                                                            <Setter.Value>
+                                                                <DataTemplate>
+                                                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource BaseTextBlock}" Text="{Binding Description}"></TextBlock>
+                                                                </DataTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ContentControl.Style>
+                                    </ContentControl>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button Command="{Binding AddOrderlineCommand}" Grid.Column="2" Grid.Row="0" Width="50" Style="{DynamicResource BaseImageButton}" IsEnabled="{Binding CanAddOrderline}">
+                            <Image Source="/VinaGerman.DesktopApplication;component/Images/add.png"/>
+                        </Button>
+                        <Border Style="{DynamicResource BorderGrid}" Padding="0" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,0,0,0">
+                            <DataGrid ItemsSource="{Binding OrderlineList}" SelectedItem="{Binding SelectedOrderline}"
+                                SelectionMode="Single" HeadersVisibility="All" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" RowHeaderWidth="0" IsReadOnly="True">
+                                <DataGrid.Resources>
+                                    <helper:BindingProxy x:Key="proxy" Data="{Binding}" />
+                                </DataGrid.Resources>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDoubleClick">
+                                        <i:InvokeCommandAction Command="{Binding ItemDoubleCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridHeaderSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Grid.Column="0" Grid.Row="0" Source="{StaticResource iconGoods}" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--Show description-->
+                                    <DataGridTemplateColumn Width="3*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                        <DataGridTemplateColumn.Header>
+                                            <ContentControl>
+                                                <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblArticleNo}" />
+                                            </ContentControl>
+                                        </DataGridTemplateColumn.Header>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding ArticleNo}" Style="{DynamicResource BaseTextBlock}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--Show description-->
+                                    <DataGridTemplateColumn Width="7*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                        <DataGridTemplateColumn.Header>
+                                            <ContentControl>
+                                                <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblDescription}" />
+                                            </ContentControl>
+                                        </DataGridTemplateColumn.Header>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Description}" Style="{DynamicResource BaseTextBlock}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--Show description-->
+                                    <DataGridTemplateColumn Width="80" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                        <DataGridTemplateColumn.Header>
+                                            <ContentControl>
+                                                <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblQuantity}" />
+                                            </ContentControl>
+                                        </DataGridTemplateColumn.Header>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Height="35" Text="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--Show description-->
+                                    <DataGridTemplateColumn Width="80" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                        <DataGridTemplateColumn.Header>
+                                            <ContentControl>
+                                                <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblPrice}" />
+                                            </ContentControl>
+                                        </DataGridTemplateColumn.Header>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Height="35" Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--Show description-->
+                                    <DataGridTemplateColumn Width="80" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                        <DataGridTemplateColumn.Header>
+                                            <ContentControl>
+                                                <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblCommission}" />
+                                            </ContentControl>
+                                        </DataGridTemplateColumn.Header>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Height="35" Text="{Binding Commission, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--Show description-->
+                                    <DataGridTemplateColumn Width="120" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                        <DataGridTemplateColumn.Header>
+                                            <ContentControl>
+                                                <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblPayDate}" />
+                                            </ContentControl>
+                                        </DataGridTemplateColumn.Header>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <DatePicker Height="35" FirstDayOfWeek="{Binding CurrentLanguage,Converter={StaticResource convLanguage2FirstDayOfWeek}}" Language="{Binding CurrentLanguage}" DisplayDateEnd="{x:Static sys:DateTime.Now}" Style="{StaticResource BaseDatePicker}" SelectedDate="{Binding PayDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                </DatePicker>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--Show description-->
+                                    <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button CommandParameter="{Binding}" Command="{Binding Path=DataContext.SaveOrderlineCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" Style="{DynamicResource BaseImageButton}">
+                                                    <Image Source="{StaticResource iconSave}" Height="35" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--Show description-->
+                                    <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button CommandParameter="{Binding}" Command="{Binding Path=DataContext.DeleteOrderlineCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" Style="{DynamicResource BaseImageButton}">
+                                                    <Image Source="{StaticResource iconDelete}" Height="35" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Border>
+            <!--loan grid-->
+            <Border Style="{DynamicResource BorderGrid}" Padding="0" Grid.Row="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--header block-->
+                    <Grid Grid.Row="0" Background="{DynamicResource BorderBrush}" >
+                        <Label Style="{DynamicResource LabelBarCaption}" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.captionRelatedArticle}" Margin="4,0,0,0"/>
+                    </Grid>
+                    <!--content block-->
+                    <Grid Grid.Column="0" Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="0" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblArticle}" Style="{DynamicResource BaseLabel}"/>
+                        <ComboBox Grid.Column="1" Grid.Row="0" Margin="5,2,5,2" ItemsSource="{Binding ArticleList}" SelectedItem="{Binding RelatedArticle}" Style="{StaticResource BaseComboBox}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <ContentControl Content="{Binding}">
+                                        <ContentControl.Style>
+                                            <Style TargetType="{x:Type ContentControl}">
+                                                <!-- Complex default template -->
+                                                <Setter Property="ContentTemplate">
+                                                    <Setter.Value>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="40"/>
+                                                                </Grid.RowDefinitions>
+                                                                <TextBlock Margin="6,0,3,0" Text="{Binding Description}" VerticalAlignment="Center" TextWrapping="Wrap" Style="{StaticResource BaseTextBlock}"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <!-- Simple selection box template -->
+                                                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ComboBoxItem}}" Value="{x:Null}">
+                                                        <Setter Property="ContentTemplate">
+                                                            <Setter.Value>
+                                                                <DataTemplate>
+                                                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource BaseTextBlock}" Text="{Binding Description}"></TextBlock>
+                                                                </DataTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ContentControl.Style>
+                                    </ContentControl>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button Command="{Binding AddLoanCommand}" Grid.Column="2" Grid.Row="0" Width="50" Style="{DynamicResource BaseImageButton}" IsEnabled="{Binding CanAddLoan}">
+                            <Image Source="/VinaGerman.DesktopApplication;component/Images/add.png"/>
+                        </Button>
+                        <Border Style="{DynamicResource BorderGrid}" Padding="0" Grid.Row="1" Grid.ColumnSpan="3">
+                            <DataGrid ItemsSource="{Binding LoanList}" SelectedItem="{Binding SelectedLoan}"
+                                SelectionMode="Single" HeadersVisibility="All" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" RowHeaderWidth="0" IsReadOnly="True">
+                                <DataGrid.Resources>
+                                    <helper:BindingProxy x:Key="proxy" Data="{Binding}" />
+                                </DataGrid.Resources>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseDoubleClick">
+                                        <i:InvokeCommandAction Command="{Binding ItemDoubleCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridHeaderSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Grid.Column="0" Grid.Row="0" Source="{StaticResource iconGoods}" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--Show description-->
+                                    <DataGridTemplateColumn Width="3*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                        <DataGridTemplateColumn.Header>
+                                            <ContentControl>
+                                                <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblArticleNo}" />
+                                            </ContentControl>
+                                        </DataGridTemplateColumn.Header>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding ArticleNo}" Style="{DynamicResource BaseTextBlock}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--Show description-->
+                                    <DataGridTemplateColumn Width="7*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                        <DataGridTemplateColumn.Header>
+                                            <ContentControl>
+                                                <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblDescription}" />
+                                            </ContentControl>
+                                        </DataGridTemplateColumn.Header>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Description}" Style="{DynamicResource BaseTextBlock}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--Show description-->
+                                    <DataGridTemplateColumn Width="80" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                        <DataGridTemplateColumn.Header>
+                                            <ContentControl>
+                                                <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblQuantity}" />
+                                            </ContentControl>
+                                        </DataGridTemplateColumn.Header>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Height="35" Text="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--Show description-->
+                                    <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button CommandParameter="{Binding}" Command="{Binding Path=DataContext.SaveLoanCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" Style="{DynamicResource BaseImageButton}">
+                                                    <Image Source="{StaticResource iconSave}" Height="35" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--Show description-->
+                                    <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button CommandParameter="{Binding}" Command="{Binding Path=DataContext.DeleteLoanCommand, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}" Style="{DynamicResource BaseImageButton}">
+                                                    <Image Source="{StaticResource iconDelete}" Height="35" Width="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
