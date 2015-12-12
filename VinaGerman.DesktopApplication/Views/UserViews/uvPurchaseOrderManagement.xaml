@@ -63,8 +63,8 @@
                         </TextBox>
                     </AdornerDecorator>
 
-                    <Label Grid.Column="0" Grid.Row="1" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblBusiness}" Style="{DynamicResource BaseLabel}"/>
-                    <ComboBox Grid.Column="1" Grid.Row="1" Margin="5,2,5,2" ItemsSource="{Binding BusinessList}" SelectedItem="{Binding SelectedBusiness}" Style="{StaticResource BaseComboBox}">
+                    <Label Grid.Column="0" Grid.Row="2" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblBusiness}" Style="{DynamicResource BaseLabel}"/>
+                    <ComboBox Grid.Column="1" Grid.Row="2" Margin="5,2,5,2" ItemsSource="{Binding BusinessList}" SelectedItem="{Binding SelectedBusiness}" Style="{StaticResource BaseComboBox}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <ContentControl Content="{Binding}">
@@ -105,8 +105,8 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
 
-                    <Label Grid.Column="0" Grid.Row="2" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblIndustry}" Style="{DynamicResource BaseLabel}"/>
-                    <ComboBox Grid.Column="1" Grid.Row="2" Margin="5,2,5,2" ItemsSource="{Binding IndustryList}" SelectedItem="{Binding SelectedIndustry}" Style="{StaticResource BaseComboBox}">
+                    <Label Grid.Column="0" Grid.Row="4" Margin="3,0,0,0" Content="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblIndustry}" Style="{DynamicResource BaseLabel}"/>
+                    <ComboBox Grid.Column="1" Grid.Row="4" Margin="5,2,5,2" ItemsSource="{Binding IndustryList}" SelectedItem="{Binding SelectedIndustry}" Style="{StaticResource BaseComboBox}">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <ContentControl Content="{Binding}">

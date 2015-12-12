@@ -19,6 +19,9 @@ namespace VinaGerman.Entity.SearchEntity
         public int IndustryId { get; set; }
 
         [DataMember]
+        public int OrderType { get; set; }
+
+        [DataMember]
         public DateTime FromOrderDate { get; set; }
 
         [DataMember]

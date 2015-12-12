@@ -10,6 +10,7 @@ using VinaGerman.DesktopApplication.Translations;
 using VinaGerman.DesktopApplication.Utilities;
 using VinaGerman.Entity;
 using VinaGerman.Entity.BusinessEntity;
+using VinaGerman.Entity.DatabaseEntity;
 using VinaGerman.Entity.SearchEntity;
 
 namespace VinaGerman.DesktopApplication.ViewModels.UserViews
@@ -30,6 +31,75 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             {
                 _orderList = value;
                 RaisePropertyChanged("OrderList");
+            }
+        }
+
+        private int _industryId;
+        public int IndustryId
+        {
+            get { return _industryId; }
+            set { _industryId = value; RaisePropertyChanged("IndustryId"); }
+        }
+        private int _businessId;
+        public int BusinessId
+        {
+            get { return _businessId; }
+            set { _businessId = value; RaisePropertyChanged("BusinessId"); }
+        }
+
+        private List<BusinessEntity> _businessList = null;
+        public List<BusinessEntity> BusinessList
+        {
+            get
+            {
+                return _businessList;
+            }
+            set
+            {
+                _businessList = value;
+                RaisePropertyChanged("BusinessList");
+            }
+        }
+
+        private BusinessEntity _selectedBusiness;
+        public BusinessEntity SelectedBusiness
+        {
+            get
+            {
+                return _selectedBusiness;
+            }
+            set
+            {
+                _selectedBusiness = value;
+                RaisePropertyChanged("SelectedBusiness");
+            }
+        }
+
+        private List<IndustryEntity> _industryList = null;
+        public List<IndustryEntity> IndustryList
+        {
+            get
+            {
+                return _industryList;
+            }
+            set
+            {
+                _industryList = value;
+                RaisePropertyChanged("IndustryList");
+            }
+        }
+
+        private IndustryEntity _selectedIndustry;
+        public IndustryEntity SelectedIndustry
+        {
+            get
+            {
+                return _selectedIndustry;
+            }
+            set
+            {
+                _selectedIndustry = value;
+                RaisePropertyChanged("SelectedIndustry");
             }
         }
 
@@ -72,6 +142,10 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         }
         public void Search()
         {
+            if (SelectedBusiness != null)
+                BusinessId = SelectedBusiness.BusinessId;
+            if (SelectedIndustry != null)
+                IndustryId = SelectedIndustry.IndustryId;
             System.Threading.ThreadPool.QueueUserWorkItem(delegate
             {
                 try
@@ -80,15 +154,34 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
 
                     var list = Factory.Resolve<IBaseDataDS>().SearchOrder(new OrderSearchEntity()
                     {
-                        SearchText = this.SearchText
+                        SearchText = this.SearchText,
+                        BusinessId = this.BusinessId,
+                        IndustryId = this.IndustryId,
+                        OrderType = (int)enumOrderType.Sale
+                    });
+                    var _obusinessList = Factory.Resolve<IBaseDataDS>().SearchBusiness(new BusinessSearchEntity()
+                    {
+                        SearchText = ""
                     });
 
+                    var _oindustryList = Factory.Resolve<IBaseDataDS>().SearchIndustry(new IndustrySearchEntity()
+                    {
+                        SearchText = ""
+                    });
                     HideLoading();
 
                     //display to UI
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
                         OrderList = list.Where(c=>c.OrderType==(int)enumOrderType.Sale).ToList();
+                        BusinessEntity itbs = new BusinessEntity() { BusinessId = 0, Description = "" };
+                        BusinessList = _obusinessList;
+                        BusinessList.Insert(0, itbs);
+                        SelectedBusiness = BusinessList.FirstOrDefault();
+                        IndustryEntity itin = new IndustryEntity() { IndustryId = 0, Description = "" };
+                        IndustryList = _oindustryList;
+                        IndustryList.Insert(0, itin);
+                        SelectedIndustry = IndustryList.FirstOrDefault();
                     }));                  
                 }
                 catch (Exception ex)
