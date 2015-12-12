@@ -17,6 +17,9 @@
     <DataTemplate DataType="{x:Type reportviewmodel:rvPurchaseOrderDetailViewModel}">
         <reportview:rvPurchaseOrderDetail/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type reportviewmodel:rvSaleOrderDetailViewModel}">
+        <reportview:rvSaleOrderDetail/>
+    </DataTemplate>
     
     <!-- User Views -->
     <DataTemplate DataType="{x:Type userviewmodel:uvSaleOrderDetailViewModel}">

@@ -470,7 +470,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         #region order
         public void ShowReport()
         {
-            ShowDialog<rvPurchaseOrderDetailViewModel>(new rvPurchaseOrderDetailViewModel() 
+            ShowDialog<rvSaleOrderDetailViewModel>(new rvSaleOrderDetailViewModel() 
             { 
             });
         }        
