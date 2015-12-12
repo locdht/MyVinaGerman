@@ -11,5 +11,17 @@ namespace VinaGerman.Entity.SearchEntity
     {
         [DataMember]
         public string SearchText { get; set; }
+
+        [DataMember]
+        public int BusinessId { get; set; }
+
+        [DataMember]
+        public int IndustryId { get; set; }
+
+        [DataMember]
+        public DateTime FromOrderDate { get; set; }
+
+        [DataMember]
+        public DateTime ToOrderDate { get; set; }
     }
 }

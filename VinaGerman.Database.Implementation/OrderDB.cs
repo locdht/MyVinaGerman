@@ -47,6 +47,22 @@ namespace VinaGerman.Database.Implementation
             {
                 sqlStatement += "AND (Order.OrderNumber LIKE N'%" + searchObject.SearchText + "%' OR Order.Description LIKE N'%" + searchObject.SearchText + "%')" + Environment.NewLine;
             }
+            if (searchObject.BusinessId > 0)
+            {
+                sqlStatement += "AND Order.BusinessId=" + searchObject.BusinessId + Environment.NewLine;
+            }
+            if (searchObject.IndustryId > 0)
+            {
+                sqlStatement += "AND Order.IndustryId=" + searchObject.IndustryId + Environment.NewLine;
+            }
+            if (searchObject.FromOrderDate != null)
+            {
+                sqlStatement += "AND Order.OrderDate>=" + searchObject.FromOrderDate + Environment.NewLine;
+            }
+            if (searchObject.ToOrderDate != null)
+            {
+                sqlStatement += "AND Order.OrderDate<=" + searchObject.ToOrderDate + Environment.NewLine;
+            }
             //execute
             var db = GetDatabaseInstance();
             // Get a GetSqlStringCommandWrapper to specify the query and parameters                
