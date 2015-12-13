@@ -34,18 +34,6 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             }
         }
 
-        private int _industryId;
-        public int IndustryId
-        {
-            get { return _industryId; }
-            set { _industryId = value; RaisePropertyChanged("IndustryId"); }
-        }
-        private int _businessId;
-        public int BusinessId
-        {
-            get { return _businessId; }
-            set { _businessId = value; RaisePropertyChanged("BusinessId"); }
-        }
         private string _searchText;
         public string SearchText
         {
@@ -140,10 +128,6 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         }
         public void Search()
         {
-            if (SelectedBusiness != null)
-                BusinessId = SelectedBusiness.BusinessId;
-            if (SelectedIndustry != null)
-                IndustryId = SelectedIndustry.IndustryId;
             System.Threading.ThreadPool.QueueUserWorkItem(delegate
             {
                 try
@@ -153,8 +137,8 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     var list = Factory.Resolve<IBaseDataDS>().SearchOrder(new OrderSearchEntity()
                     {
                         SearchText = this.SearchText,
-                        BusinessId=this.BusinessId,
-                        IndustryId=this.IndustryId,
+                        BusinessId = SelectedBusiness!=null?SelectedBusiness.BusinessId:0,
+                        IndustryId = SelectedIndustry != null?SelectedIndustry.IndustryId:0,
                         OrderType=(int)enumOrderType.Purchase
                     });
                     var _obusinessList = Factory.Resolve<IBaseDataDS>().SearchBusiness(new BusinessSearchEntity()

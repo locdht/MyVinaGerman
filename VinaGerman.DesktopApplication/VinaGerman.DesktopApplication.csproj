@@ -335,6 +335,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptPurchaseOrderDetail.rdlc" />
+    <EmbeddedResource Include="Reports\rptSaleOrderDetail.rdlc" />
     <EmbeddedResource Include="Translations\StringResources.en-us.resx">
       <LastGenOutput>StringResources.vi-VN.Designer.cs</LastGenOutput>
     </EmbeddedResource>

@@ -551,6 +551,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         Application.Current.Dispatcher.Invoke(new Action(() =>
                         {
                             OrderlineList = _oOrderlineList;
+                            SelectedOrderline = OrderlineList.FirstOrDefault();
                         }));
                     }
                     catch (Exception ex)
