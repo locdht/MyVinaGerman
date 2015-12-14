@@ -40,21 +40,24 @@ namespace VinaGerman.DesktopApplication.Views.ReportViews
                 headerList.Add(new HeaderReportEntity()
                 {
                     Description = "Công ty TNHH VinaGerman Thiên phú",
-                    Address = "Tổ 3, ấp 1, Xã Thạnh Phú, Vĩnh Cửu, Đồng Nai"
-                });               
+                    Address = "Tổ 3, ấp 1, Xã Thạnh Phú, Vĩnh Cửu, Đồng Nai",
+                    OfficialNoteCode = "01-VT",
+                    OfficialNoteDescription = "(Ban hành theo thông tư số 200/2014/TT-BTC Ngày 22/12/2014 của Bộ Tài Chính"
+                });
 
                 var OrderlineList = new List<OrderlineEntity>();
                 for (int i = 0; i < 1000; i++)
                 {
                     OrderlineList.Add(new OrderlineEntity()
                     {
-                        Quantity = i+1,
-                        RemainingQuantity = i+1,
-                        Price = 300000,
-                        Commission = 100000,
-                        Description = "hang hoa 1" + i.ToString(),
-                        Unit = "kg" + i.ToString(),
-                        ArticleNo = "hh" + i.ToString()
+                        ArticleId = i + 1,
+                        ArticleNo = "hang hoa 1" + i.ToString(),
+                        Description = "hh" + i.ToString(),
+                        Unit = "kg",
+                        OrderId = i + 1,
+                        OrderlineId = i + 1,
+                        Price = (i + 1) * 1000,
+                        Quantity = (i + 1) * 1000
                     });
                 }             
 
