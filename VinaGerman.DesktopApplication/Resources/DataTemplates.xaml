@@ -23,9 +23,15 @@
     
     <!-- User Views -->
     <DataTemplate DataType="{x:Type userviewmodel:uvSaleOrderDetailViewModel}">
-        <userview:uvPurchaseOrderDetail/>
+        <userview:uvSaleOrderDetail/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type userviewmodel:uvSaleOrderManagementViewModel}">
+        <userview:uvSaleOrderManagement/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type userviewmodel:uvPurchaseOrderDetailViewModel}">
+        <userview:uvPurchaseOrderDetail/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type userviewmodel:uvPurchaseOrderManagementViewModel}">
         <userview:uvPurchaseOrderManagement/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type userviewmodel:uvContactManagementViewModel}">
@@ -36,13 +42,7 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type userviewmodel:uvDepartmentManagementViewModel}">
         <userview:uvDepartmentManagement/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type userviewmodel:uvPurchaseOrderDetailViewModel}">
-        <userview:uvPurchaseOrderDetail/>
-    </DataTemplate>
-    <DataTemplate DataType="{x:Type userviewmodel:uvPurchaseOrderManagementViewModel}">
-        <userview:uvPurchaseOrderManagement/>
-    </DataTemplate>
+    </DataTemplate>   
     <DataTemplate DataType="{x:Type userviewmodel:uvArticleManagementViewModel}">
         <userview:uvArticleManagement/>
     </DataTemplate>

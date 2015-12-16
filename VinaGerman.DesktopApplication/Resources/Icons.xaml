@@ -10,6 +10,7 @@
     <BitmapImage x:Key="iconCompany" UriSource="..\Images\company.png"></BitmapImage>
     <BitmapImage x:Key="iconGoods" UriSource="..\Images\goods.png"></BitmapImage>
     <BitmapImage x:Key="iconPurchaseOrder" UriSource="..\Images\purchase_order.png"></BitmapImage>
+    <BitmapImage x:Key="iconSaleOrder" UriSource="..\Images\sale_order.png"></BitmapImage>
     <BitmapImage x:Key="iconDepartment" UriSource="..\Images\department.png"></BitmapImage>
     <BitmapImage x:Key="iconLocation" UriSource="..\Images\location.png"></BitmapImage>
     <BitmapImage x:Key="iconContact" UriSource="..\Images\contact.png"></BitmapImage>

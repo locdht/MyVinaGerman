@@ -127,6 +127,47 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 GoToView(enumView.SaleOrderDetail);
             }
         }
+        public void Reload()
+        {
+            System.Threading.ThreadPool.QueueUserWorkItem(delegate
+            {
+                try
+                {
+                    ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
+                    var _obusinessList = Factory.Resolve<IBaseDataDS>().SearchBusiness(new BusinessSearchEntity()
+                    {
+                        SearchText = ""
+                    });
+
+                    var _oindustryList = Factory.Resolve<IBaseDataDS>().SearchIndustry(new IndustrySearchEntity()
+                    {
+                        SearchText = ""
+                    });
+                    HideLoading();
+
+                    //display to UI
+                    Application.Current.Dispatcher.Invoke(new Action(() =>
+                    {
+                        BusinessEntity itbs = new BusinessEntity() { BusinessId = 0, Description = "" };
+                        BusinessList = _obusinessList;
+                        BusinessList.Insert(0, itbs);
+                        SelectedBusiness = BusinessList.FirstOrDefault();
+                        IndustryEntity itin = new IndustryEntity() { IndustryId = 0, Description = "" };
+                        IndustryList = _oindustryList;
+                        IndustryList.Insert(0, itin);
+                        SelectedIndustry = IndustryList.FirstOrDefault();
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    HideLoading();
+                    ShowMessageBox(StringResources.captionError, ex.ToString(), MessageBoxButton.OK);
+                }
+            });
+            //ShowDialog<uvCompanyDetailViewModel>(new uvCompanyDetailViewModel() { 
+            //    OriginalCompany = SelectCompany
+            //});
+        }
         public void Search()
         {
             System.Threading.ThreadPool.QueueUserWorkItem(delegate
@@ -157,14 +198,6 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     Application.Current.Dispatcher.Invoke(new Action(() =>
                     {
                         OrderList = list.Where(c=>c.OrderType==(int)enumOrderType.Sale).ToList();
-                        BusinessEntity itbs = new BusinessEntity() { BusinessId = 0, Description = "" };
-                        BusinessList = _obusinessList;
-                        BusinessList.Insert(0, itbs);
-                        SelectedBusiness = BusinessList.FirstOrDefault();
-                        IndustryEntity itin = new IndustryEntity() { IndustryId = 0, Description = "" };
-                        IndustryList = _oindustryList;
-                        IndustryList.Insert(0, itin);
-                        SelectedIndustry = IndustryList.FirstOrDefault();
                     }));                  
                 }
                 catch (Exception ex)
@@ -189,7 +222,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
             //reset left panel
             SearchText = "";
             //reload view
-            Search();
+            Reload();
         }
         protected override void MessageHandler(BaseMessage pMessage)
         {

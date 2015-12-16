@@ -177,7 +177,7 @@
                             <DataGridTemplateColumn Width="30" CellStyle="{DynamicResource GridHeaderSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Image Grid.Column="0" Grid.Row="0" Source="{StaticResource iconPurchaseOrder}" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                                        <Image Grid.Column="0" Grid.Row="0" Source="{StaticResource iconSaleOrder}" VerticalAlignment="Center" Margin="0,0,0,0"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

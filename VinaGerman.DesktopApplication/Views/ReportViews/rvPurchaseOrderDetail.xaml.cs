@@ -46,7 +46,7 @@ namespace VinaGerman.DesktopApplication.Views.ReportViews
                 });
 
                 var OrderlineList = new List<OrderlineEntity>();
-                for (int i = 0; i < 1000; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     OrderlineList.Add(new OrderlineEntity()
                     {

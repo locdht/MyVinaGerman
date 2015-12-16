@@ -514,19 +514,6 @@
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
                                     <!--Show description-->
-                                    <DataGridTemplateColumn Width="80" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
-                                        <DataGridTemplateColumn.Header>
-                                            <ContentControl>
-                                                <TextBlock Style="{DynamicResource BaseHeaderTextBlock}" Text="{Binding Source={StaticResource TranslatedStrings}, Path=LocalizedResources.lblCommission}" />
-                                            </ContentControl>
-                                        </DataGridTemplateColumn.Header>
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBox Height="35" Text="{Binding Commission, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <!--Show description-->
                                     <DataGridTemplateColumn Width="120" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
                                         <DataGridTemplateColumn.Header>
                                             <ContentControl>
