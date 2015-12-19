@@ -443,7 +443,8 @@
                             <Image Source="/VinaGerman.DesktopApplication;component/Images/add.png"/>
                         </Button>
                         <Border Style="{DynamicResource BorderGrid}" Padding="0" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,0,0,0">
-                            <DataGrid ItemsSource="{Binding OrderlineList}" SelectedItem="{Binding SelectedOrderline}"
+                            <DataGrid Name="OrderlineGrid" PreviewKeyDown="OrderlineGrid_PreviewKeyDown" PreviewMouseDown="OrderlineGrid_PreviewMouseDown" IsSynchronizedWithCurrentItem="True"  
+                                ItemsSource="{Binding OrderlineList}" SelectedItem="{Binding SelectedOrderline}"
                                 SelectionMode="Single" HeadersVisibility="All" AutoGenerateColumns="False" HorizontalAlignment="Left" VerticalAlignment="Top" RowHeaderWidth="0" IsReadOnly="True">
                                 <DataGrid.Resources>
                                     <helper:BindingProxy x:Key="proxy" Data="{Binding}" />
@@ -461,7 +462,7 @@
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
-                                    <!--Show description-->
+                                    <!--Show ArticleNo-->
                                     <DataGridTemplateColumn Width="3*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
                                         <DataGridTemplateColumn.Header>
                                             <ContentControl>
@@ -470,11 +471,11 @@
                                         </DataGridTemplateColumn.Header>
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Text="{Binding ArticleNo}" Style="{DynamicResource BaseTextBlock}"/>
+                                                <TextBox Uid="txtArticleNo" Text="{Binding ArticleNo}" Style="{DynamicResource BaseTextBox}"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
-                                    <!--Show description-->
+                                    <!--Show article's description-->
                                     <DataGridTemplateColumn Width="7*" CellStyle="{DynamicResource GridSelectetdStyle}" CanUserResize="False" CanUserSort="False" CanUserReorder="False">
                                         <DataGridTemplateColumn.Header>
                                             <ContentControl>
@@ -496,7 +497,7 @@
                                         </DataGridTemplateColumn.Header>
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBox Height="35" Text="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                                <TextBox Uid="txtQuantity" Height="35" Text="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -509,7 +510,7 @@
                                         </DataGridTemplateColumn.Header>
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBox Height="35" Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
+                                                <TextBox Uid="txtPrice" Height="35" Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource BaseTextBox}"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -523,7 +524,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <Grid>
-                                                    <DatePicker Height="35" FirstDayOfWeek="{Binding CurrentLanguage,Converter={StaticResource convLanguage2FirstDayOfWeek}}" Language="{Binding CurrentLanguage}" DisplayDateEnd="{x:Static sys:DateTime.Now}" Style="{StaticResource BaseDatePicker}" SelectedDate="{Binding PayDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                                    <DatePicker Uid="txtPayDate" Height="35" FirstDayOfWeek="{Binding CurrentLanguage,Converter={StaticResource convLanguage2FirstDayOfWeek}}" Language="{Binding CurrentLanguage}" DisplayDateEnd="{x:Static sys:DateTime.Now}" Style="{StaticResource BaseDatePicker}" SelectedDate="{Binding PayDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                                 </DatePicker>
                                                 </Grid>
                                             </DataTemplate>

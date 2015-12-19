@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinaGerman.Entity", "VinaGerman.Entity\VinaGerman.Entity.csproj", "{964DF490-2F97-4E7D-865C-58ECB8C03F18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinaGerman.DesktopApplication", "VinaGerman.DesktopApplication\VinaGerman.DesktopApplication.csproj", "{C99D5D08-D5FB-4007-B99C-F5E32B9C79F0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinaGerman.DataSource", "VinaGerman.DataSource\VinaGerman.DataSource.csproj", "{C151C0A9-8316-4B1F-A72E-7B9181C8BD9D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinaGerman.DataSource.Implementation", "VinaGerman.DataSource.Implementation\VinaGerman.DataSource.Implementation.csproj", "{65EA2E0D-6D52-4520-A44E-3E2F19273148}"
@@ -12,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinaGerman.Wcf.Security", "VinaGerman.Wcf.Security\VinaGerman.Wcf.Security.csproj", "{0D9AFFAF-F005-4766-833D-7C829BE6D8A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinaGerman.Service", "VinaGerman.Service\VinaGerman.Service.csproj", "{7E1B0B11-E899-4495-97F9-A1C63959309A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinaGerman.WinForm", "VinaGerman.WinForm\VinaGerman.WinForm.csproj", "{ECF9C8D6-EC60-48D8-899E-1445BB6AB42E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		{964DF490-2F97-4E7D-865C-58ECB8C03F18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{964DF490-2F97-4E7D-865C-58ECB8C03F18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{964DF490-2F97-4E7D-865C-58ECB8C03F18}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C99D5D08-D5FB-4007-B99C-F5E32B9C79F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C99D5D08-D5FB-4007-B99C-F5E32B9C79F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C99D5D08-D5FB-4007-B99C-F5E32B9C79F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C99D5D08-D5FB-4007-B99C-F5E32B9C79F0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C151C0A9-8316-4B1F-A72E-7B9181C8BD9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C151C0A9-8316-4B1F-A72E-7B9181C8BD9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C151C0A9-8316-4B1F-A72E-7B9181C8BD9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -43,6 +39,10 @@ Global
 		{7E1B0B11-E899-4495-97F9-A1C63959309A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E1B0B11-E899-4495-97F9-A1C63959309A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E1B0B11-E899-4495-97F9-A1C63959309A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECF9C8D6-EC60-48D8-899E-1445BB6AB42E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECF9C8D6-EC60-48D8-899E-1445BB6AB42E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECF9C8D6-EC60-48D8-899E-1445BB6AB42E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECF9C8D6-EC60-48D8-899E-1445BB6AB42E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

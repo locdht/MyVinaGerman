@@ -564,6 +564,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
         }
         public void AddOrderline()
         {
+            if (SelectedArticle == null) SelectedArticle = ArticleList.FirstOrDefault();
             if (SelectedOrder != null && SelectedOrder.OrderId > 0 && SelectedArticle != null && SelectedArticle.ArticleId > 0)
             {
                 System.Threading.ThreadPool.QueueUserWorkItem(delegate
