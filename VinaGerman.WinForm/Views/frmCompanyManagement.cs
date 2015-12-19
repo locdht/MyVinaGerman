@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,11 +11,12 @@ using DevExpress.XtraEditors;
 
 namespace VinaGerman.Views
 {
-    public partial class uvCompanyManagement : uvBaseView
+    public partial class frmCompanyManagement : DevExpress.XtraEditors.XtraForm
     {
-        public uvCompanyManagement()
+        public frmCompanyManagement()
         {
             InitializeComponent();
+            System.Threading.Thread.Sleep(5000);
         }
     }
 }

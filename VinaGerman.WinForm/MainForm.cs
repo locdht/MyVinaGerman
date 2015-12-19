@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraSplashScreen;
 using VinaGerman.WinForm.Utilities;
+using VinaGerman.Views;
 
 namespace VinaGerman
 {
@@ -28,6 +29,7 @@ namespace VinaGerman
         private int Method1(string sParam)
         {
             Console.WriteLine(sParam);
+            GoToView(enumView.CompanyManagement);
             System.Threading.Thread.Sleep(5000);
             return 1;
         }
@@ -63,7 +65,15 @@ namespace VinaGerman
 
         public void GoToView(enumView view)
         {
-            
+            switch (view)
+            {
+                case enumView.CompanyManagement:
+                    var child = new frmCompanyManagement();
+                    child.MdiParent = this;
+                    child.Show();
+                    break;
+                default: break;
+            }
         }
     }
 }
