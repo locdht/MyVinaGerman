@@ -28,18 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.btnDong = new DevExpress.XtraEditors.SimpleButton();
             this.btnLuu = new DevExpress.XtraEditors.SimpleButton();
             this.xtraScrollableControl1 = new DevExpress.XtraEditors.XtraScrollableControl();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.GridContact = new DevExpress.XtraGrid.GridControl();
-            this.rpsDepartment = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
-            this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gvContact = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.bandedGridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bandedGridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -48,40 +42,20 @@
             this.bandedGridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bandedGridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bandedGridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
+            this.rpsDepartment = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
+            this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
             this.xtraScrollableControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridContact)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvContact)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rpsDepartment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvContact)).BeginInit();
             this.SuspendLayout();
-            // 
-            // panelControl1
-            // 
-            this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl1.Controls.Add(this.labelControl1);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl1.Location = new System.Drawing.Point(0, 0);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1010, 55);
-            this.panelControl1.TabIndex = 1;
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Bold);
-            this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControl1.Location = new System.Drawing.Point(391, 12);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(269, 27);
-            this.labelControl1.TabIndex = 0;
-            this.labelControl1.Text = "Danh sách phòng ban";
             // 
             // panelControl3
             // 
@@ -117,9 +91,9 @@
             // 
             this.xtraScrollableControl1.Controls.Add(this.groupControl1);
             this.xtraScrollableControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraScrollableControl1.Location = new System.Drawing.Point(0, 55);
+            this.xtraScrollableControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraScrollableControl1.Name = "xtraScrollableControl1";
-            this.xtraScrollableControl1.Size = new System.Drawing.Size(1010, 344);
+            this.xtraScrollableControl1.Size = new System.Drawing.Size(1010, 399);
             this.xtraScrollableControl1.TabIndex = 3;
             // 
             // groupControl1
@@ -130,7 +104,7 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1010, 344);
+            this.groupControl1.Size = new System.Drawing.Size(1010, 399);
             this.groupControl1.TabIndex = 1;
             this.groupControl1.Text = "F2: Copy dòng, F3: Xóa dòng";
             // 
@@ -142,45 +116,10 @@
             this.GridContact.Name = "GridContact";
             this.GridContact.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rpsDepartment});
-            this.GridContact.Size = new System.Drawing.Size(1006, 322);
+            this.GridContact.Size = new System.Drawing.Size(1006, 377);
             this.GridContact.TabIndex = 0;
             this.GridContact.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvContact});
-            // 
-            // rpsDepartment
-            // 
-            this.rpsDepartment.AutoHeight = false;
-            this.rpsDepartment.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.rpsDepartment.DisplayMember = "Description";
-            this.rpsDepartment.Name = "rpsDepartment";
-            this.rpsDepartment.NullText = "";
-            this.rpsDepartment.ValueMember = "DepartmentId";
-            this.rpsDepartment.View = this.repositoryItemSearchLookUpEdit1View;
-            // 
-            // repositoryItemSearchLookUpEdit1View
-            // 
-            this.repositoryItemSearchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn1,
-            this.gridColumn2});
-            this.repositoryItemSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.repositoryItemSearchLookUpEdit1View.Name = "repositoryItemSearchLookUpEdit1View";
-            this.repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.repositoryItemSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "Phòng ban";
-            this.gridColumn1.FieldName = "Description";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "ID";
-            this.gridColumn2.FieldName = "DepartmentId";
-            this.gridColumn2.Name = "gridColumn2";
             // 
             // gvContact
             // 
@@ -285,6 +224,41 @@
             this.bandedGridColumn7.VisibleIndex = 5;
             this.bandedGridColumn7.Width = 99;
             // 
+            // rpsDepartment
+            // 
+            this.rpsDepartment.AutoHeight = false;
+            this.rpsDepartment.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.rpsDepartment.DisplayMember = "Description";
+            this.rpsDepartment.Name = "rpsDepartment";
+            this.rpsDepartment.NullText = "";
+            this.rpsDepartment.ValueMember = "DepartmentId";
+            this.rpsDepartment.View = this.repositoryItemSearchLookUpEdit1View;
+            // 
+            // repositoryItemSearchLookUpEdit1View
+            // 
+            this.repositoryItemSearchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2});
+            this.repositoryItemSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.repositoryItemSearchLookUpEdit1View.Name = "repositoryItemSearchLookUpEdit1View";
+            this.repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.repositoryItemSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "Phòng ban";
+            this.gridColumn1.FieldName = "Description";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "ID";
+            this.gridColumn2.FieldName = "DepartmentId";
+            this.gridColumn2.Name = "gridColumn2";
+            // 
             // frmContactManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -292,29 +266,24 @@
             this.ClientSize = new System.Drawing.Size(1010, 450);
             this.Controls.Add(this.xtraScrollableControl1);
             this.Controls.Add(this.panelControl3);
-            this.Controls.Add(this.panelControl1);
             this.Name = "frmContactManagement";
             this.Text = "Danh sách nhân viên";
             this.Load += new System.EventHandler(this.frmContactManagement_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
             this.xtraScrollableControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GridContact)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvContact)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rpsDepartment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvContact)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevExpress.XtraEditors.PanelControl panelControl1;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraEditors.SimpleButton btnDong;
         private DevExpress.XtraEditors.SimpleButton btnLuu;

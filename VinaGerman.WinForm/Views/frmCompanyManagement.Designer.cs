@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.btnDong = new DevExpress.XtraEditors.SimpleButton();
             this.btnLuu = new DevExpress.XtraEditors.SimpleButton();
@@ -47,8 +45,6 @@
             this.bandedGridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.rspCheck = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.bandedGridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
-            this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
             this.xtraScrollableControl1.SuspendLayout();
@@ -58,28 +54,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvCompany)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rspCheck)).BeginInit();
             this.SuspendLayout();
-            // 
-            // panelControl1
-            // 
-            this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.panelControl1.Controls.Add(this.labelControl1);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl1.Location = new System.Drawing.Point(0, 0);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(946, 55);
-            this.panelControl1.TabIndex = 1;
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Bold);
-            this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControl1.Location = new System.Drawing.Point(296, 12);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(347, 27);
-            this.labelControl1.TabIndex = 0;
-            this.labelControl1.Text = "Danh sách khách hàng - nhà cung cấp";
             // 
             // panelControl3
             // 
@@ -115,9 +89,9 @@
             // 
             this.xtraScrollableControl1.Controls.Add(this.groupControl1);
             this.xtraScrollableControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraScrollableControl1.Location = new System.Drawing.Point(0, 55);
+            this.xtraScrollableControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraScrollableControl1.Name = "xtraScrollableControl1";
-            this.xtraScrollableControl1.Size = new System.Drawing.Size(946, 300);
+            this.xtraScrollableControl1.Size = new System.Drawing.Size(946, 355);
             this.xtraScrollableControl1.TabIndex = 3;
             // 
             // groupControl1
@@ -128,7 +102,7 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(946, 300);
+            this.groupControl1.Size = new System.Drawing.Size(946, 355);
             this.groupControl1.TabIndex = 1;
             this.groupControl1.Text = "F2: Copy dòng, F3: Xóa dòng";
             // 
@@ -140,7 +114,7 @@
             this.GridCompany.Name = "GridCompany";
             this.GridCompany.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rspCheck});
-            this.GridCompany.Size = new System.Drawing.Size(942, 278);
+            this.GridCompany.Size = new System.Drawing.Size(942, 333);
             this.GridCompany.TabIndex = 0;
             this.GridCompany.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvCompany});
@@ -267,12 +241,9 @@
             this.ClientSize = new System.Drawing.Size(946, 406);
             this.Controls.Add(this.xtraScrollableControl1);
             this.Controls.Add(this.panelControl3);
-            this.Controls.Add(this.panelControl1);
             this.Name = "frmCompanyManagement";
             this.Text = "Danh sách khách hàng - nhà cung cấp";
             this.Load += new System.EventHandler(this.frmCompanyManagement_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
-            this.panelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
             this.xtraScrollableControl1.ResumeLayout(false);
@@ -287,8 +258,6 @@
 
         #endregion
 
-        private DevExpress.XtraEditors.PanelControl panelControl1;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraEditors.SimpleButton btnDong;
         private DevExpress.XtraEditors.SimpleButton btnLuu;

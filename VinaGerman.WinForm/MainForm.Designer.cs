@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barButtonQuanLyNguoiDung = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonPhanQuyen = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonThoat = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonDSPhongBan = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonDSChiNhanh = new DevExpress.XtraBars.BarButtonItem();
@@ -71,12 +70,11 @@
             // 
             // ribbon
             // 
-            this.ribbon.ApplicationIcon = global::VinaGerman.Properties.Resources.logo;
+            this.ribbon.ApplicationIcon = ((System.Drawing.Bitmap)(resources.GetObject("ribbon.ApplicationIcon")));
             this.ribbon.ExpandCollapseItem.Id = 0;
             this.ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbon.ExpandCollapseItem,
             this.barButtonQuanLyNguoiDung,
-            this.barButtonPhanQuyen,
             this.barButtonThoat,
             this.barButtonDSPhongBan,
             this.barButtonDSChiNhanh,
@@ -111,106 +109,130 @@
             // barButtonQuanLyNguoiDung
             // 
             this.barButtonQuanLyNguoiDung.Caption = "Quản lý người dùng";
+            this.barButtonQuanLyNguoiDung.Glyph = global::VinaGerman.Properties.Resources.contact;
             this.barButtonQuanLyNguoiDung.Id = 1;
+            this.barButtonQuanLyNguoiDung.LargeGlyph = global::VinaGerman.Properties.Resources.contact;
             this.barButtonQuanLyNguoiDung.Name = "barButtonQuanLyNguoiDung";
-            // 
-            // barButtonPhanQuyen
-            // 
-            this.barButtonPhanQuyen.Caption = "Phân quyền";
-            this.barButtonPhanQuyen.Id = 2;
-            this.barButtonPhanQuyen.Name = "barButtonPhanQuyen";
             // 
             // barButtonThoat
             // 
             this.barButtonThoat.Caption = "Thoát";
+            this.barButtonThoat.Glyph = global::VinaGerman.Properties.Resources.remove;
             this.barButtonThoat.Id = 3;
+            this.barButtonThoat.LargeGlyph = global::VinaGerman.Properties.Resources.remove;
             this.barButtonThoat.Name = "barButtonThoat";
             // 
             // barButtonDSPhongBan
             // 
             this.barButtonDSPhongBan.Caption = "Danh sách phòng ban";
+            this.barButtonDSPhongBan.Glyph = global::VinaGerman.Properties.Resources.department;
             this.barButtonDSPhongBan.Id = 4;
+            this.barButtonDSPhongBan.LargeGlyph = global::VinaGerman.Properties.Resources.department;
             this.barButtonDSPhongBan.Name = "barButtonDSPhongBan";
             this.barButtonDSPhongBan.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonDSPhongBan_ItemClick);
             // 
             // barButtonDSChiNhanh
             // 
             this.barButtonDSChiNhanh.Caption = "Danh sách chi nhánh";
+            this.barButtonDSChiNhanh.Glyph = global::VinaGerman.Properties.Resources.location;
             this.barButtonDSChiNhanh.Id = 5;
+            this.barButtonDSChiNhanh.LargeGlyph = global::VinaGerman.Properties.Resources.location;
             this.barButtonDSChiNhanh.Name = "barButtonDSChiNhanh";
             this.barButtonDSChiNhanh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonDSPhongBan_ItemClick);
             // 
             // barButtonDSNhanVien
             // 
             this.barButtonDSNhanVien.Caption = "Danh sách nhân viên";
+            this.barButtonDSNhanVien.Glyph = global::VinaGerman.Properties.Resources.contact;
             this.barButtonDSNhanVien.Id = 6;
+            this.barButtonDSNhanVien.LargeGlyph = global::VinaGerman.Properties.Resources.contact;
             this.barButtonDSNhanVien.Name = "barButtonDSNhanVien";
             this.barButtonDSNhanVien.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonDSPhongBan_ItemClick);
             // 
             // barButtonDSKhachHangNCC
             // 
             this.barButtonDSKhachHangNCC.Caption = "Danh sách khách hàng - Nhà cung cấp";
+            this.barButtonDSKhachHangNCC.Glyph = global::VinaGerman.Properties.Resources.company;
             this.barButtonDSKhachHangNCC.Id = 7;
+            this.barButtonDSKhachHangNCC.LargeGlyph = global::VinaGerman.Properties.Resources.company;
             this.barButtonDSKhachHangNCC.Name = "barButtonDSKhachHangNCC";
             this.barButtonDSKhachHangNCC.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonDSPhongBan_ItemClick);
             // 
             // barButtonDSNganhNghe
             // 
             this.barButtonDSNganhNghe.Caption = "Danh sách ngành nghề";
+            this.barButtonDSNganhNghe.Glyph = global::VinaGerman.Properties.Resources.industry;
             this.barButtonDSNganhNghe.Id = 8;
+            this.barButtonDSNganhNghe.LargeGlyph = global::VinaGerman.Properties.Resources.industry;
             this.barButtonDSNganhNghe.Name = "barButtonDSNganhNghe";
             this.barButtonDSNganhNghe.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonDSPhongBan_ItemClick);
             // 
             // barButtonDSLinhVuc
             // 
             this.barButtonDSLinhVuc.Caption = "Danh sách lĩnh vực";
+            this.barButtonDSLinhVuc.Glyph = global::VinaGerman.Properties.Resources.business;
             this.barButtonDSLinhVuc.Id = 9;
+            this.barButtonDSLinhVuc.LargeGlyph = global::VinaGerman.Properties.Resources.business;
             this.barButtonDSLinhVuc.Name = "barButtonDSLinhVuc";
             this.barButtonDSLinhVuc.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonDSPhongBan_ItemClick);
             // 
             // barButtonLoaiHangHoa
             // 
             this.barButtonLoaiHangHoa.Caption = "Danh sách loại hàng hóa";
+            this.barButtonLoaiHangHoa.Glyph = global::VinaGerman.Properties.Resources.category;
             this.barButtonLoaiHangHoa.Id = 10;
+            this.barButtonLoaiHangHoa.LargeGlyph = global::VinaGerman.Properties.Resources.category;
             this.barButtonLoaiHangHoa.Name = "barButtonLoaiHangHoa";
             this.barButtonLoaiHangHoa.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonDSPhongBan_ItemClick);
             // 
             // barButtonDSHangHoa
             // 
             this.barButtonDSHangHoa.Caption = "Danh sách hàng hóa";
+            this.barButtonDSHangHoa.Glyph = global::VinaGerman.Properties.Resources.goods;
             this.barButtonDSHangHoa.Id = 11;
+            this.barButtonDSHangHoa.LargeGlyph = global::VinaGerman.Properties.Resources.goods;
             this.barButtonDSHangHoa.Name = "barButtonDSHangHoa";
             this.barButtonDSHangHoa.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonDSPhongBan_ItemClick);
             // 
             // barButtonDanhMucDinhLuongSX
             // 
             this.barButtonDanhMucDinhLuongSX.Caption = "Danh mục định lượng sản xuất";
+            this.barButtonDanhMucDinhLuongSX.Glyph = global::VinaGerman.Properties.Resources.goods;
             this.barButtonDanhMucDinhLuongSX.Id = 12;
+            this.barButtonDanhMucDinhLuongSX.LargeGlyph = global::VinaGerman.Properties.Resources.goods;
             this.barButtonDanhMucDinhLuongSX.Name = "barButtonDanhMucDinhLuongSX";
             this.barButtonDanhMucDinhLuongSX.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonDSPhongBan_ItemClick);
             // 
             // barButtonLapPhieuNhapHang
             // 
             this.barButtonLapPhieuNhapHang.Caption = "Lập phiếu nhập hàng";
+            this.barButtonLapPhieuNhapHang.Glyph = global::VinaGerman.Properties.Resources.purchase_order;
             this.barButtonLapPhieuNhapHang.Id = 13;
+            this.barButtonLapPhieuNhapHang.LargeGlyph = global::VinaGerman.Properties.Resources.purchase_order;
             this.barButtonLapPhieuNhapHang.Name = "barButtonLapPhieuNhapHang";
             // 
             // barButtonTraCuuPhieuNhapHang
             // 
             this.barButtonTraCuuPhieuNhapHang.Caption = "Tra cứu phiếu nhập hàng";
+            this.barButtonTraCuuPhieuNhapHang.Glyph = global::VinaGerman.Properties.Resources.purchase_order;
             this.barButtonTraCuuPhieuNhapHang.Id = 14;
+            this.barButtonTraCuuPhieuNhapHang.LargeGlyph = global::VinaGerman.Properties.Resources.purchase_order;
             this.barButtonTraCuuPhieuNhapHang.Name = "barButtonTraCuuPhieuNhapHang";
             // 
             // barButtonLapPhieuBan
             // 
             this.barButtonLapPhieuBan.Caption = "Lập phiếu bán";
+            this.barButtonLapPhieuBan.Glyph = global::VinaGerman.Properties.Resources.sale_order;
             this.barButtonLapPhieuBan.Id = 15;
+            this.barButtonLapPhieuBan.LargeGlyph = global::VinaGerman.Properties.Resources.sale_order;
             this.barButtonLapPhieuBan.Name = "barButtonLapPhieuBan";
             // 
             // barButtonTraCuuPhieuBanHang
             // 
             this.barButtonTraCuuPhieuBanHang.Caption = "Tra cứu phiếu bán hàng";
+            this.barButtonTraCuuPhieuBanHang.Glyph = global::VinaGerman.Properties.Resources.sale_order;
             this.barButtonTraCuuPhieuBanHang.Id = 16;
+            this.barButtonTraCuuPhieuBanHang.LargeGlyph = global::VinaGerman.Properties.Resources.sale_order;
             this.barButtonTraCuuPhieuBanHang.Name = "barButtonTraCuuPhieuBanHang";
             // 
             // barButtonLenhSX
@@ -247,7 +269,6 @@
             // ribbonPageGroup1
             // 
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonQuanLyNguoiDung);
-            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonPhanQuyen, true);
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonThoat, true);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
@@ -363,7 +384,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar;
         private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager xtraTabbedMdiManager1;
         private DevExpress.XtraBars.BarButtonItem barButtonQuanLyNguoiDung;
-        private DevExpress.XtraBars.BarButtonItem barButtonPhanQuyen;
         private DevExpress.XtraBars.BarButtonItem barButtonThoat;
         private DevExpress.XtraBars.BarButtonItem barButtonDSPhongBan;
         private DevExpress.XtraBars.BarButtonItem barButtonDSChiNhanh;

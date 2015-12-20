@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>logo.ico</ApplicationIcon>
+    <ApplicationIcon>system.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Charts.v15.1.Core, Version=15.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -230,7 +230,31 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="logo.ico" />
+    <Content Include="Images\add.png" />
+    <Content Include="Images\background.jpg" />
+    <Content Include="Images\background_1.jpg" />
+    <Content Include="Images\background_2.jpg" />
+    <Content Include="Images\btn_delete_60x60.png" />
+    <Content Include="Images\btn_save_60x60.png" />
+    <Content Include="Images\btn_switch_60x60.png" />
+    <Content Include="Images\business.png" />
+    <Content Include="Images\category.png" />
+    <Content Include="Images\company.png" />
+    <Content Include="Images\contact.png" />
+    <Content Include="Images\customer.png" />
+    <Content Include="Images\delete.png" />
+    <Content Include="Images\department.png" />
+    <Content Include="Images\goods.png" />
+    <Content Include="Images\industry.png" />
+    <Content Include="Images\Info_50.png" />
+    <Content Include="Images\location.png" />
+    <Content Include="Images\open.png" />
+    <Content Include="Images\purchase_order.png" />
+    <Content Include="Images\remove.png" />
+    <Content Include="Images\sale_order.PNG" />
+    <Content Include="Images\save.png" />
+    <Content Include="Images\supplier.png" />
+    <Content Include="system.ico" />
     <None Include="Report\PurchaseOrderDetail.xsc">
       <DependentUpon>PurchaseOrderDetail.xsd</DependentUpon>
     </None>
