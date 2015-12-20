@@ -105,6 +105,12 @@
     <Compile Include="Utilities\ApplicationConstant.cs" />
     <Compile Include="Utilities\ApplicationHelper.cs" />
     <Compile Include="Utilities\Log.cs" />
+    <Compile Include="Views\frmArticleManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmArticleManagement.Designer.cs">
+      <DependentUpon>frmArticleManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\frmBusinessManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptPurchaseOrderDetail.resx">
       <DependentUpon>rptPurchaseOrderDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frmArticleManagement.resx">
+      <DependentUpon>frmArticleManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frmBusinessManagement.resx">
       <DependentUpon>frmBusinessManagement.cs</DependentUpon>
