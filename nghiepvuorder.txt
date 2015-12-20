@@ -1,0 +1,36 @@
+﻿Purchase Order:
+Show len nhung thong tin sau trong list:
+OrderNumber, OrderDate, Ten khach hang(join Order.CompanyCustomerId=Company.CompanyId),
+Ten nguoi lien he(join Order.ContactCustomerId=Contact.ContactId)
+
+Ong thiet ke nút open order o dau do cung duoc, khi click vo nut do: GoToView(enumView.PurchaseOrderDetail)
+khi user click open order
+thi no show cai detail len giong vay
+tui có chuan bi datetimepicker
+cho ông lun rùi
+mã đơn ddat hàng
+la order number
+ngay dat hang: orderdate
+khach hang minh load từ company
+những thằng IsCustomer=1
+ng lien he
+la những Contact.Company=Customer chọn tu combobox ở trên
+nhan vien: mac định add thằng logon vô
+chỉ co duy nhất 1 record
+lĩnh vực
+ngành nghề
+la load het vo
+//chat ben day de chut luu file lai L :)
+//cai nay la view detail ha?uh
+//1 order dat nhieu mat hang
+//con cai dấu + mau xanh khi click vo thi co nhiem vu j? add vo nhu cai viewh oi nay tui demo
+//chi la add vo table khac, cai view hoi na~y add vo ArticleRelation
+
+//con cai nay la order, add vo Orderline
+//commission = chiết khấu, hoa hồng cho t hằng giới thiệu
+//cái danh sách mặt hàng: tạo hàm GetOrderlineForOrder(OrderEntity entityObject) ong join Order.OrderId=Orderline.OrderId
+//dong thoi ong join wa Orderline.ArticleId=Article.ArticleId de lay thong tin ve ten mat hang, don vi
+
+//dong thoi ong cũng lay lun danh sách các mat hàng lien wa
+// Order.OrderId=Loan.OrderId
+// join Article.ArticleId=Loan.ArticleId del ay thong tin mat hang

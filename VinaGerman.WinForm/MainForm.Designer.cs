@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barButtonQuanLyNguoiDung = new DevExpress.XtraBars.BarButtonItem();
@@ -63,7 +62,7 @@
             this.rbBaoCao = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             this.SuspendLayout();
@@ -252,6 +251,7 @@
             this.barButtonBCHangTonKho.Caption = "Báo cáo hàng tồn kho";
             this.barButtonBCHangTonKho.Id = 19;
             this.barButtonBCHangTonKho.Name = "barButtonBCHangTonKho";
+            this.barButtonBCHangTonKho.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonDSPhongBan_ItemClick);
             // 
             // barButtonBCLaiLo
             // 

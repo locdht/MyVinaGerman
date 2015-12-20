@@ -12,6 +12,7 @@ using DevExpress.XtraSplashScreen;
 using VinaGerman.WinForm.Utilities;
 using VinaGerman.Views;
 using DevExpress.XtraEditors;
+using VinaGerman.Report;
 
 namespace VinaGerman
 {
@@ -200,9 +201,9 @@ namespace VinaGerman
                 case "barButtonLoaiHangHoa":
                     fncCallFormInTab(new frmCategoryManagement());
                     break;
-                //case "barButtonDSKhachHangNCC":
-                //    fncCallFormInTab(new frmCompanyManagement());
-                //    break;
+                case "barButtonBCHangTonKho":
+                    fncCallFormInTab(new frmRPTPurchaseOrder() { _type=1});
+                    break;
                 //case "barButtonDSKhachHangNCC":
                 //    fncCallFormInTab(new frmCompanyManagement());
                 //    break;
