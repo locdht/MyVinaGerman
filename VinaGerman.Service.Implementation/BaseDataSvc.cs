@@ -77,6 +77,11 @@ namespace VinaGerman.Service.Implementation
             return Factory.Resolve<IArticleBL>().SearchArticle(searchObject);
         }
 
+        public ArticleEntity GetArticleByID(int ID)
+        {
+            return Factory.Resolve<IArticleBL>().GetArticleByID(ID);
+        }
+
         public ArticleEntity AddOrUpdateArticle(ArticleEntity entityObject)
         {
             return Factory.Resolve<IArticleBL>().AddOrUpdateArticle(entityObject);

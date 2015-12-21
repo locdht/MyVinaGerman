@@ -101,6 +101,15 @@ namespace VinaGerman.DataSource.Implementation
             channel.Dispose();
             return result;
         }
+
+        public ArticleEntity GetArticleByID(int ID)
+        {
+            IBaseDataSvc channel = CreateChannel();
+            var result = channel.GetArticleByID(ID);
+            channel.Dispose();
+            return result;
+        }
+
         public ArticleEntity AddOrUpdateArticle(ArticleEntity entityObject)
         {
             IBaseDataSvc channel = CreateChannel();

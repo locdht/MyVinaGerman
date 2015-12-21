@@ -12,6 +12,7 @@ namespace VinaGerman.Database
     public interface IArticleDB
     {
         List<ArticleEntity> SearchArticle(ArticleSearchEntity searchObject);
+        ArticleEntity GetArticleByID(int ID);
         ArticleEntity AddOrUpdateArticle(ArticleEntity entityObject);
         bool DeleteArticle(ArticleEntity entityObject);
         List<ArticleRelationEntity> GetArticleRelationsForArticle(ArticleEntity searchObject);

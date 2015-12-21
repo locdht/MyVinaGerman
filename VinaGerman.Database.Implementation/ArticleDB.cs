@@ -39,6 +39,29 @@ namespace VinaGerman.Database.Implementation
             return result;
         }
 
+        public ArticleEntity GetArticleByID(int ID)
+        {
+            ArticleEntity result = null;
+            string sqlStatement = "SELECT " + Environment.NewLine +
+                "Article.ArticleId," + Environment.NewLine +
+                "Article.CategoryId," + Environment.NewLine +
+                "Article.ArticleNo," + Environment.NewLine +
+                "Article.Description," + Environment.NewLine +
+                "Article.Unit," + Environment.NewLine +
+                "Article.Deleted" + Environment.NewLine +
+                "FROM Article " + Environment.NewLine +
+                "WHERE Deleted=0 and ArticleId=@ID" + Environment.NewLine;
+            //execute
+            var db = GetDatabaseInstance();
+            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
+            // Call the ExecuteReader method with the command.                
+            using (IDbConnection conn = db.CreateConnection())
+            {
+                result = conn.Query<ArticleEntity>(sqlStatement, new {ID = ID }).FirstOrDefault();
+            }
+            return result;
+        }
+
         public ArticleEntity AddOrUpdateArticle(ArticleEntity entityObject)
         {
             string sqlStatement = "";

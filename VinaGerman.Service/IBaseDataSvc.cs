@@ -44,6 +44,8 @@ namespace VinaGerman.Service
         [OperationContract]
         List<ArticleEntity> SearchArticle(ArticleSearchEntity searchObject);
         [OperationContract]
+        ArticleEntity GetArticleByID(int ID);
+        [OperationContract]
         ArticleEntity AddOrUpdateArticle(ArticleEntity entityObject);
         [OperationContract]
         bool DeleteArticle(ArticleEntity entityObject);
