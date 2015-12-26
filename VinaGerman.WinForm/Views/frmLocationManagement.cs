@@ -14,6 +14,7 @@ using VinaGerman.DataSource;
 using System.Reflection;
 using VinaGerman.Utilities;
 using VinaGerman.WinForm.Utilities;
+using DevExpress.XtraSplashScreen;
 
 namespace VinaGerman.Views
 {
@@ -23,6 +24,7 @@ namespace VinaGerman.Views
         public BindingSource source = new BindingSource();
         public List<VinaGerman.Entity.BusinessEntity.LocationEntity> listDeleteDK;
         #endregion
+
         public frmLocationManagement()
         {
             InitializeComponent();
@@ -176,11 +178,12 @@ namespace VinaGerman.Views
                 }
                 DeleteList();
                 LoadData();
-                XtraMessageBox.Show("Lưu thành công ", "Thông báo");
+                CustomMessageBox.ShowError("Lưu thành công", "Thông báo", null);
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show("Lưu thất bại ", "Thông báo");
+                CustomMessageBox.ShowError("Lưu thất bại ", "Thông báo", ex);
                 Log.WriteLog(this, MethodBase.GetCurrentMethod().Name, ex.Message);
             }
         }

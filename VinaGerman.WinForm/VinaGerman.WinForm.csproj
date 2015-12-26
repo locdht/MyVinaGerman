@@ -104,7 +104,19 @@
     </Compile>
     <Compile Include="Utilities\ApplicationConstant.cs" />
     <Compile Include="Utilities\ApplicationHelper.cs" />
+    <Compile Include="Utilities\CustomMessageBox.cs" />
+    <Compile Include="Utilities\CustomMessageBoxForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Utilities\CustomMessageBoxForm.Designer.cs">
+      <DependentUpon>CustomMessageBoxForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\Global.cs" />
+    <Compile Include="Utilities\ImageHelper.cs" />
     <Compile Include="Utilities\Log.cs" />
+    <Compile Include="Utilities\PathProvider.cs" />
+    <Compile Include="Utilities\Utils.cs" />
+    <Compile Include="Utilities\WaitHelper.cs" />
     <Compile Include="Views\frmArticleManagement.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +165,12 @@
     <Compile Include="Views\frmLocationManagement.Designer.cs">
       <DependentUpon>frmLocationManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -179,6 +197,9 @@
     <EmbeddedResource Include="Report\rptPurchaseOrderDetail.resx">
       <DependentUpon>rptPurchaseOrderDetail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\CustomMessageBoxForm.resx">
+      <DependentUpon>CustomMessageBoxForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\frmArticleManagement.resx">
       <DependentUpon>frmArticleManagement.cs</DependentUpon>
     </EmbeddedResource>
@@ -202,6 +223,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frmLocationManagement.resx">
       <DependentUpon>frmLocationManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

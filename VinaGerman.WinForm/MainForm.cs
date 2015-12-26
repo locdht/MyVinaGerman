@@ -28,7 +28,19 @@ namespace VinaGerman
             this.WindowState = FormWindowState.Maximized;
             System.Net.ServicePointManager.ServerCertificateValidationCallback = ((sender1, certificate, chain, sslPolicyErrors) => true);
             RegisterImplementation();
-            Logon_Temp();
+            this.Hide();
+            frmLogin frmLG = new frmLogin();
+            frmLG.ShowDialog();
+
+            if (ApplicationHelper.CurrentUserProfile == null)
+                this.Close();
+            else
+            {
+                this.Show();
+                bsiUser.Caption = ApplicationHelper.CurrentUserProfile.FullName;
+                bsiUser.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            }
+            //Logon_Temp();
         }
         public void RegisterImplementation()
         {
