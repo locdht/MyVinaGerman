@@ -62,6 +62,13 @@ namespace VinaGerman.Report
                         documentViewer1.DocumentSource = rptSCTMH;
                         rptSCTMH.CreateDocument();
                         break;
+                    case "SoChiTietVatTuHangHoa":
+                        rptSoChiTietVatTuHangHoa rptSCTVTHH = new rptSoChiTietVatTuHangHoa();
+                        rptSCTVTHH.LoadHeader();
+                        rptSCTVTHH.LoadDetail();
+                        documentViewer1.DocumentSource = rptSCTVTHH;
+                        rptSCTVTHH.CreateDocument();
+                        break;
                 }
             }
             catch (Exception ex)

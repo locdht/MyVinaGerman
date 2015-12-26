@@ -653,7 +653,7 @@
             this.xrTableCell34.StylePriority.UseFont = false;
             this.xrTableCell34.StylePriority.UseTextAlignment = false;
             xrSummary1.FormatString = "{0:N1}";
-            xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Page;
+            xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
             this.xrTableCell34.Summary = xrSummary1;
             this.xrTableCell34.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell34.Weight = 0.49906710514529573D;
@@ -678,7 +678,7 @@
             this.xrTableCell65.StylePriority.UseFont = false;
             this.xrTableCell65.StylePriority.UseTextAlignment = false;
             xrSummary2.FormatString = "{0:N1}";
-            xrSummary2.Running = DevExpress.XtraReports.UI.SummaryRunning.Page;
+            xrSummary2.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
             this.xrTableCell65.Summary = xrSummary2;
             this.xrTableCell65.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell65.Weight = 0.39248119358657635D;
@@ -695,7 +695,7 @@
             this.xrTableCell66.StylePriority.UseFont = false;
             this.xrTableCell66.StylePriority.UseTextAlignment = false;
             xrSummary3.FormatString = "{0:N0}";
-            xrSummary3.Running = DevExpress.XtraReports.UI.SummaryRunning.Page;
+            xrSummary3.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
             this.xrTableCell66.Summary = xrSummary3;
             this.xrTableCell66.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell66.Weight = 0.63866954186008362D;

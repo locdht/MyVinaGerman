@@ -130,6 +130,12 @@
     <Compile Include="Report\rptSoChiTietMuaHang.Designer.cs">
       <DependentUpon>rptSoChiTietMuaHang.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\rptSoChiTietVatTuHangHoa.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptSoChiTietVatTuHangHoa.Designer.cs">
+      <DependentUpon>rptSoChiTietVatTuHangHoa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\ApplicationConstant.cs" />
     <Compile Include="Utilities\ApplicationHelper.cs" />
     <Compile Include="Utilities\CustomMessageBox.cs" />
@@ -236,6 +242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\rptSoChiTietMuaHang.resx">
       <DependentUpon>rptSoChiTietMuaHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptSoChiTietVatTuHangHoa.resx">
+      <DependentUpon>rptSoChiTietVatTuHangHoa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Utilities\CustomMessageBoxForm.resx">
       <DependentUpon>CustomMessageBoxForm.cs</DependentUpon>

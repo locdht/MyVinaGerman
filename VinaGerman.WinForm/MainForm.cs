@@ -214,7 +214,7 @@ namespace VinaGerman
                     fncCallFormInTab(new frmCategoryManagement());
                     break;
                 case "barButtonBCHangTonKho":
-                    fncCallFormInTab(new frmRPTPurchaseOrder() { _type = "SoChiTietMuaHang" });
+                    fncCallFormInTab(new frmRPTPurchaseOrder() { _type = "SoChiTietVatTuHangHoa" });
                     break;
                 case "barButtonDSHangHoa":
                     fncCallFormInTab(new frmArticleManagement());
