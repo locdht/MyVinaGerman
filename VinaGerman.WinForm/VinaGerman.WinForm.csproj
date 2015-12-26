@@ -91,16 +91,44 @@
     <Compile Include="Report\frmRPTPurchaseOrder.Designer.cs">
       <DependentUpon>frmRPTPurchaseOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Report\PurchaseOrderDetail.cs">
+      <DependentUpon>PurchaseOrderDetail.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\PurchaseOrderDetail.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PurchaseOrderDetail.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptPhieuThu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptPhieuThu.Designer.cs">
+      <DependentUpon>rptPhieuThu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptPhieuXuatKhoBanHang.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptPhieuXuatKhoBanHang.Designer.cs">
+      <DependentUpon>rptPhieuXuatKhoBanHang.cs</DependentUpon>
     </Compile>
     <Compile Include="Report\rptPurchaseOrderDetail.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\rptPurchaseOrderDetail.Designer.cs">
       <DependentUpon>rptPurchaseOrderDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptSoChiTietBanHang.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptSoChiTietBanHang.Designer.cs">
+      <DependentUpon>rptSoChiTietBanHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\rptSoChiTietMuaHang.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\rptSoChiTietMuaHang.Designer.cs">
+      <DependentUpon>rptSoChiTietMuaHang.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities\ApplicationConstant.cs" />
     <Compile Include="Utilities\ApplicationHelper.cs" />
@@ -194,8 +222,20 @@
     <EmbeddedResource Include="Report\frmRPTPurchaseOrder.resx">
       <DependentUpon>frmRPTPurchaseOrder.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptPhieuThu.resx">
+      <DependentUpon>rptPhieuThu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptPhieuXuatKhoBanHang.resx">
+      <DependentUpon>rptPhieuXuatKhoBanHang.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\rptPurchaseOrderDetail.resx">
       <DependentUpon>rptPurchaseOrderDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptSoChiTietBanHang.resx">
+      <DependentUpon>rptSoChiTietBanHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\rptSoChiTietMuaHang.resx">
+      <DependentUpon>rptSoChiTietMuaHang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Utilities\CustomMessageBoxForm.resx">
       <DependentUpon>CustomMessageBoxForm.cs</DependentUpon>
