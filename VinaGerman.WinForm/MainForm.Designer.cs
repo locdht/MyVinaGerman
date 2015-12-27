@@ -65,12 +65,12 @@
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.bar3 = new DevExpress.XtraBars.Bar();
+            this.bsiUser = new DevExpress.XtraBars.BarStaticItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.bar3 = new DevExpress.XtraBars.Bar();
-            this.bsiUser = new DevExpress.XtraBars.BarStaticItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
@@ -111,7 +111,7 @@
             this.rbXuatNhapKho,
             this.rbSanXuat,
             this.rbBaoCao});
-            this.ribbon.Size = new System.Drawing.Size(1177, 141);
+            this.ribbon.Size = new System.Drawing.Size(1177, 143);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             // 
             // barButtonQuanLyNguoiDung
@@ -218,6 +218,7 @@
             this.barButtonLapPhieuNhapHang.Id = 13;
             this.barButtonLapPhieuNhapHang.LargeGlyph = global::VinaGerman.Properties.Resources.purchase_order;
             this.barButtonLapPhieuNhapHang.Name = "barButtonLapPhieuNhapHang";
+            this.barButtonLapPhieuNhapHang.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonDSPhongBan_ItemClick);
             // 
             // barButtonTraCuuPhieuNhapHang
             // 
@@ -226,6 +227,7 @@
             this.barButtonTraCuuPhieuNhapHang.Id = 14;
             this.barButtonTraCuuPhieuNhapHang.LargeGlyph = global::VinaGerman.Properties.Resources.purchase_order;
             this.barButtonTraCuuPhieuNhapHang.Name = "barButtonTraCuuPhieuNhapHang";
+            this.barButtonTraCuuPhieuNhapHang.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonDSPhongBan_ItemClick);
             // 
             // barButtonLapPhieuBan
             // 
@@ -234,6 +236,7 @@
             this.barButtonLapPhieuBan.Id = 15;
             this.barButtonLapPhieuBan.LargeGlyph = global::VinaGerman.Properties.Resources.sale_order;
             this.barButtonLapPhieuBan.Name = "barButtonLapPhieuBan";
+            this.barButtonLapPhieuBan.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonDSPhongBan_ItemClick);
             // 
             // barButtonTraCuuPhieuBanHang
             // 
@@ -242,6 +245,7 @@
             this.barButtonTraCuuPhieuBanHang.Id = 16;
             this.barButtonTraCuuPhieuBanHang.LargeGlyph = global::VinaGerman.Properties.Resources.sale_order;
             this.barButtonTraCuuPhieuBanHang.Name = "barButtonTraCuuPhieuBanHang";
+            this.barButtonTraCuuPhieuBanHang.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonDSPhongBan_ItemClick);
             // 
             // barButtonLenhSX
             // 
@@ -378,6 +382,27 @@
             this.barManager1.MaxItemId = 1;
             this.barManager1.StatusBar = this.bar3;
             // 
+            // bar3
+            // 
+            this.bar3.BarName = "Status bar";
+            this.bar3.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Bottom;
+            this.bar3.DockCol = 0;
+            this.bar3.DockRow = 0;
+            this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
+            this.bar3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.bsiUser)});
+            this.bar3.OptionsBar.AllowQuickCustomization = false;
+            this.bar3.OptionsBar.DrawDragBorder = false;
+            this.bar3.OptionsBar.UseWholeRow = true;
+            this.bar3.Text = "Status bar";
+            // 
+            // bsiUser
+            // 
+            this.bsiUser.Caption = "barStaticItem1";
+            this.bsiUser.Id = 0;
+            this.bsiUser.Name = "bsiUser";
+            this.bsiUser.TextAlignment = System.Drawing.StringAlignment.Near;
+            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
@@ -405,26 +430,6 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(1177, 0);
             this.barDockControlRight.Size = new System.Drawing.Size(0, 555);
-            // 
-            // bar3
-            // 
-            this.bar3.BarName = "Status bar";
-            this.bar3.CanDockStyle = DevExpress.XtraBars.BarCanDockStyle.Bottom;
-            this.bar3.DockCol = 0;
-            this.bar3.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
-            this.bar3.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.bsiUser)});
-            this.bar3.OptionsBar.AllowQuickCustomization = false;
-            this.bar3.OptionsBar.DrawDragBorder = false;
-            this.bar3.OptionsBar.UseWholeRow = true;
-            this.bar3.Text = "Status bar";
-            // 
-            // bsiUser
-            // 
-            this.bsiUser.Caption = "barStaticItem1";
-            this.bsiUser.Id = 0;
-            this.bsiUser.Name = "bsiUser";
-            this.bsiUser.TextAlignment = System.Drawing.StringAlignment.Near;
             // 
             // MainForm
             // 

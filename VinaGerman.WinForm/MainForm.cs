@@ -219,6 +219,9 @@ namespace VinaGerman
                 case "barButtonDSHangHoa":
                     fncCallFormInTab(new frmArticleManagement());
                     break;
+                case "barButtonLapPhieuNhapHang":
+                    fncCallFormInTab(new frmPurchaseOrderDetail(this));
+                    break;
             }
         }
     }
