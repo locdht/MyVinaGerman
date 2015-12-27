@@ -69,6 +69,26 @@ namespace VinaGerman.Report
                         documentViewer1.DocumentSource = rptSCTVTHH;
                         rptSCTVTHH.CreateDocument();
                         break;
+                    case "TongHopTonKho":
+                        rptTongHopTonKho rptTHTK = new rptTongHopTonKho();
+                        rptTHTK.LoadDetail();
+                        documentViewer1.DocumentSource = rptTHTK;
+                        rptTHTK.CreateDocument();
+                        break;
+                    case "LenhSanXuat":
+                        rptLenhSanXuat rptLSX = new rptLenhSanXuat();
+                        rptLSX.LoadHeader();
+                        rptLSX.LoadDetail();
+                        documentViewer1.DocumentSource = rptLSX;
+                        rptLSX.CreateDocument();
+                        break;
+                    case "TongHopXuatKhoTheoLenhSX":
+                        rptTongHopXuatKhoTheoLenhSX rptTHXKTLSX = new rptTongHopXuatKhoTheoLenhSX();
+                        rptTHXKTLSX.LoadDetail();
+                        documentViewer1.DocumentSource = rptTHXKTLSX;
+                        rptTHXKTLSX.CreateDocument();
+                        break;
+                    //rptTongHopXuatKhoTheoLenhSX
                 }
             }
             catch (Exception ex)
