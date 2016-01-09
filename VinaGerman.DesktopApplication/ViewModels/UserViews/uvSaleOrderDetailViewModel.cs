@@ -510,7 +510,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateOrder(SelectedOrder);
+                    var updatedEntity = Factory.Resolve<IOrderDS>().AddOrUpdateOrder(SelectedOrder);
 
                     HideLoading();
 
@@ -631,7 +631,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateOrderline(entityObject);
+                        var updatedEntity = Factory.Resolve<IOrderDS>().AddOrUpdateOrderline(entityObject);
 
                         HideLoading();
                     }
@@ -698,7 +698,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var _oLoanList = Factory.Resolve<IBaseDataDS>().GetLoansForOrderline(SelectedOrderline);
+                        var _oLoanList = Factory.Resolve<IOrderDS>().GetLoansForOrderline(SelectedOrderline);
 
                         HideLoading();
 
@@ -780,7 +780,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateLoan(entityObject);
+                        var updatedEntity = Factory.Resolve<IOrderDS>().AddOrUpdateLoan(entityObject);
 
                         HideLoading();
                     }
@@ -802,7 +802,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var isSuccess = Factory.Resolve<IBaseDataDS>().DeleteLoan(entityObject);
+                        var isSuccess = Factory.Resolve<IOrderDS>().DeleteLoan(entityObject);
 
                         HideLoading();
 
@@ -911,7 +911,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         SearchText = ""
                     });
 
-                    var _oLocationList = Factory.Resolve<IBaseDataDS>().SearchLocation(new LocationSearchEntity()
+                    var _oLocationList = Factory.Resolve<ICompanyDS>().SearchLocation(new LocationSearchEntity()
                     {
                         SearchText = ""
                     });

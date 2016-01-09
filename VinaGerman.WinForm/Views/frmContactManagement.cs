@@ -33,7 +33,7 @@ namespace VinaGerman.Views
         #region functions
         private void LoadData()
         {
-            List<VinaGerman.Entity.BusinessEntity.ContactEntity> list = Factory.Resolve<IBaseDataDS>().SearchContact(new ContactSearchEntity()
+            List<VinaGerman.Entity.BusinessEntity.ContactEntity> list = Factory.Resolve<ICompanyDS>().SearchContact(new ContactSearchEntity()
             {
                 SearchText = ""
             });
@@ -63,7 +63,7 @@ namespace VinaGerman.Views
                     try
                     {
                         if (i.ContactId > 0)
-                            Factory.Resolve<IBaseDataDS>().DeleteContact(i);
+                            Factory.Resolve<ICompanyDS>().DeleteContact(i);
                     }
                     catch (Exception ex)
                     {
@@ -153,7 +153,7 @@ namespace VinaGerman.Views
 
         private void frmContactManagement_Load(object sender, EventArgs e)
         {
-            List<Entity.BusinessEntity.DepartmentEntity> list = Factory.Resolve<IBaseDataDS>().SearchDepartment(new DepartmentSearchEntity()
+            List<Entity.BusinessEntity.DepartmentEntity> list = Factory.Resolve<ICompanyDS>().SearchDepartment(new DepartmentSearchEntity()
             {
                 SearchText = ""
             });
@@ -173,7 +173,7 @@ namespace VinaGerman.Views
                     foreach (VinaGerman.Entity.BusinessEntity.ContactEntity dr in source)
                     {
                         dr.CompanyId = ApplicationHelper.CurrentUserProfile.CompanyId;
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateContact(dr);
+                        var updatedEntity = Factory.Resolve<ICompanyDS>().AddOrUpdateContact(dr);
                     }
                 }
                 DeleteList();

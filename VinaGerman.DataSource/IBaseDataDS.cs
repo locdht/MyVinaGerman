@@ -39,38 +39,6 @@ namespace VinaGerman.DataSource
         List<ArticleRelationEntity> GetArticleRelationsForArticle(ArticleEntity searchObject);
         ArticleRelationEntity AddOrUpdateArticleRelation(ArticleRelationEntity entityObject);
         bool DeleteArticleRelation(ArticleRelationEntity entityObject);
-        #endregion
-
-        #region Department
-        List<VinaGerman.Entity.BusinessEntity.DepartmentEntity> SearchDepartment(DepartmentSearchEntity searchObject);
-        VinaGerman.Entity.BusinessEntity.DepartmentEntity AddOrUpdateDepartment(VinaGerman.Entity.BusinessEntity.DepartmentEntity entityObject);
-        bool DeleteDepartment(VinaGerman.Entity.BusinessEntity.DepartmentEntity entityObject);
-        #endregion
-
-        #region Location
-        List<VinaGerman.Entity.BusinessEntity.LocationEntity> SearchLocation(LocationSearchEntity searchObject);
-        VinaGerman.Entity.BusinessEntity.LocationEntity AddOrUpdateLocation(VinaGerman.Entity.BusinessEntity.LocationEntity entityObject);
-        bool DeleteLocation(VinaGerman.Entity.BusinessEntity.LocationEntity entityObject);
-        #endregion
-
-        #region Contact
-        List<VinaGerman.Entity.BusinessEntity.ContactEntity> SearchContact(ContactSearchEntity searchObject);
-        VinaGerman.Entity.BusinessEntity.ContactEntity AddOrUpdateContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject);
-        bool DeleteContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject);
-        List<VinaGerman.Entity.BusinessEntity.ContactEntity> GetContactForCompany(CompanyEntity Object);
-        #endregion
-
-        #region Order
-        List<OrderEntity> SearchOrder(OrderSearchEntity searchObject);
-        OrderEntity AddOrUpdateOrder(OrderEntity entityObject);
-        bool DeleteOrder(OrderEntity entityObject);
-        List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity searchObject);
-        OrderlineEntity AddOrUpdateOrderline(OrderlineEntity entityObject);
-        bool DeleteOrderline(OrderlineEntity entityObject);
-        List<LoanEntity> GetLoansForOrderline(OrderlineEntity searchObject);
-        LoanEntity AddOrUpdateLoan(LoanEntity entityObject);
-        bool DeleteLoan(LoanEntity entityObject);
-        #endregion
-    
+        #endregion                  
     }
 }

@@ -116,7 +116,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().DeleteDepartment(entityObject);
+                        var updatedEntity = Factory.Resolve<ICompanyDS>().DeleteDepartment(entityObject);
 
                         HideLoading();
 
@@ -169,7 +169,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var list = Factory.Resolve<IBaseDataDS>().SearchDepartment(new DepartmentSearchEntity()
+                    var list = Factory.Resolve<ICompanyDS>().SearchDepartment(new DepartmentSearchEntity()
                     {
                         SearchText = this.SearchText
                     });
@@ -201,7 +201,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var list = Factory.Resolve<IBaseDataDS>().SearchDepartment(new DepartmentSearchEntity()
+                    var list = Factory.Resolve<ICompanyDS>().SearchDepartment(new DepartmentSearchEntity()
                     {
                         SearchText = this.SearchText
                     });

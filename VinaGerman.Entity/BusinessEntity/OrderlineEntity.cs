@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -16,6 +17,8 @@ namespace VinaGerman.Entity.BusinessEntity
         public int OrderId { get; set; }
         [DataMember]
         public int Quantity { get; set; }
+        [DataMember]
+        public int RealQuantity { get; set; }
         [DataMember]
         public float Price { get; set; }
         [DataMember]
@@ -56,5 +59,23 @@ namespace VinaGerman.Entity.BusinessEntity
 
         [DataMember]
         public DateTime ModifiedDate { get; set; }
+
+         public OrderlineEntity()
+        {
+            OrderlineId = -1;
+            OrderId = -1;
+            ArticleId = -1;
+            CategoryId = -1;
+            ArticleNo = "";
+            Description = "";
+            Quantity = 0;
+            RealQuantity = 0;
+            Price = 0;
+            Commission = 0;
+            PayDate = DateTime.Now.AddDays(7);
+
+            ChildList = new BindingList<LoanEntity>();
+        }
+         public BindingList<LoanEntity> ChildList { get; set; }
     }
 }

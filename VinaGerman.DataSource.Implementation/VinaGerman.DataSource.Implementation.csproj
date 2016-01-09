@@ -48,6 +48,7 @@
     <Compile Include="CommonDS.cs" />
     <Compile Include="CompanyDS.cs" />
     <Compile Include="BaseDataDS.cs" />
+    <Compile Include="OrderDS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportDS.cs">
       <SubType>Code</SubType>

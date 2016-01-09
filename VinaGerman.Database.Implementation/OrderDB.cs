@@ -82,7 +82,7 @@ namespace VinaGerman.Database.Implementation
         {
             string sqlStatement = "";
             entityObject.CreatedDate = DateTime.Now;
-
+            
             sqlStatement += "DECLARE @NewOrderId INT " + Environment.NewLine;
             //if insert
             if (entityObject.OrderId > 0)
@@ -195,7 +195,7 @@ namespace VinaGerman.Database.Implementation
         }
         public bool DeleteOrder(OrderEntity entityObject)
         {
-            string sqlStatement = "UPDATE Order SET Deleted=1 WHERE OrderId=@OrderId  " + Environment.NewLine;
+            string sqlStatement = "UPDATE [Order] SET Deleted=1 WHERE OrderId=@OrderId  " + Environment.NewLine;
 
             //execute
             var db = GetDatabaseInstance();

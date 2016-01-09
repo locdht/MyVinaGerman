@@ -484,7 +484,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().DeleteOrder(SelectedOrder);
+                        var updatedEntity = Factory.Resolve<IOrderDS>().DeleteOrder(SelectedOrder);
 
                         HideLoading();
 
@@ -543,7 +543,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var _oOrderlineList = Factory.Resolve<IBaseDataDS>().GetOrderlinesForOrder(SelectedOrder);
+                        var _oOrderlineList = Factory.Resolve<IOrderDS>().GetOrderlinesForOrder(SelectedOrder);
 
                         HideLoading();
 
@@ -583,7 +583,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                             PayDate = DateTime.Now.AddDays(7)
                         };
 
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateOrderline(newEntity);
+                        var updatedEntity = Factory.Resolve<IOrderDS>().AddOrUpdateOrderline(newEntity);
 
                         HideLoading();
 
@@ -654,7 +654,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var isSuccess = Factory.Resolve<IBaseDataDS>().DeleteOrderline(entityObject);
+                        var isSuccess = Factory.Resolve<IOrderDS>().DeleteOrderline(entityObject);
 
                         HideLoading();
 
@@ -699,7 +699,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var _oLoanList = Factory.Resolve<IBaseDataDS>().GetLoansForOrderline(SelectedOrderline);
+                        var _oLoanList = Factory.Resolve<IOrderDS>().GetLoansForOrderline(SelectedOrderline);
 
                         HideLoading();
 
@@ -781,7 +781,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateLoan(entityObject);
+                        var updatedEntity = Factory.Resolve<IOrderDS>().AddOrUpdateLoan(entityObject);
 
                         HideLoading();
                     }
@@ -845,7 +845,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var list = Factory.Resolve<IBaseDataDS>().GetContactForCompany(SelectedCustomer);
+                    var list = Factory.Resolve<ICompanyDS>().GetContactForCompany(SelectedCustomer);
 
                     HideLoading();
 
@@ -892,7 +892,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         IsSupplier = true
                     });
 
-                    var _ocontactList = Factory.Resolve<IBaseDataDS>().SearchContact(new ContactSearchEntity()
+                    var _ocontactList = Factory.Resolve<ICompanyDS>().SearchContact(new ContactSearchEntity()
                     {
                         SearchText = ""
                     });                    
@@ -912,7 +912,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         SearchText = ""
                     });
 
-                    var _oLocationList = Factory.Resolve<IBaseDataDS>().SearchLocation(new LocationSearchEntity()
+                    var _oLocationList = Factory.Resolve<ICompanyDS>().SearchLocation(new LocationSearchEntity()
                     {
                         SearchText = ""
                     });

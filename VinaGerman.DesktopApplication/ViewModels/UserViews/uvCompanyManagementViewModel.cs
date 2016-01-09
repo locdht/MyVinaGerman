@@ -312,7 +312,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                         NotIncludedCompany = ApplicationHelper.CurrentUserProfile.CompanyId
                     });
 
-                    var _Departmentlist = Factory.Resolve<IBaseDataDS>().SearchDepartment(new DepartmentSearchEntity()
+                    var _Departmentlist = Factory.Resolve<ICompanyDS>().SearchDepartment(new DepartmentSearchEntity()
                     {
                         SearchText = ""
                     });
@@ -351,7 +351,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var list = Factory.Resolve<IBaseDataDS>().GetContactForCompany(SelectedCompany);
+                    var list = Factory.Resolve<ICompanyDS>().GetContactForCompany(SelectedCompany);
 
                     HideLoading();
 
@@ -377,7 +377,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateContact(entityObject);
+                    var updatedEntity = Factory.Resolve<ICompanyDS>().AddOrUpdateContact(entityObject);
 
                     HideLoading();
 

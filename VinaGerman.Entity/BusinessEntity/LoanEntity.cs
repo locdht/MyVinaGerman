@@ -35,5 +35,15 @@ namespace VinaGerman.Entity.BusinessEntity
 
         [DataMember]
         public bool Deleted { get; set; }
+
+        public LoanEntity()
+        {
+            OrderlineId = -1;
+            ArticleId = -1;
+            CategoryId = -1;
+            ArticleNo = "";
+            Description = "";
+            Quantity = 0;
+        }
     }
 }

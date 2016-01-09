@@ -118,7 +118,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                     {
                         ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().DeleteLocation(entityObject);
+                        var updatedEntity = Factory.Resolve<ICompanyDS>().DeleteLocation(entityObject);
 
                         HideLoading();
 
@@ -144,7 +144,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateLocation(entityObject);
+                    var updatedEntity = Factory.Resolve<ICompanyDS>().AddOrUpdateLocation(entityObject);
 
                     HideLoading();
 
@@ -202,7 +202,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var list = Factory.Resolve<IBaseDataDS>().SearchLocation(new LocationSearchEntity()
+                    var list = Factory.Resolve<ICompanyDS>().SearchLocation(new LocationSearchEntity()
                     {
                         SearchText = this.SearchText
                     });

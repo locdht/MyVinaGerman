@@ -189,7 +189,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var list = Factory.Resolve<IBaseDataDS>().SearchContact(new ContactSearchEntity()
+                    var list = Factory.Resolve<ICompanyDS>().SearchContact(new ContactSearchEntity()
                     {
                         SearchText = this.SearchText
                     });
@@ -221,12 +221,12 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var list = Factory.Resolve<IBaseDataDS>().SearchContact(new ContactSearchEntity()
+                    var list = Factory.Resolve<ICompanyDS>().SearchContact(new ContactSearchEntity()
                     {
                         SearchText = this.SearchText
                     });
 
-                    var _Departmentlist = Factory.Resolve<IBaseDataDS>().SearchDepartment(new DepartmentSearchEntity()
+                    var _Departmentlist = Factory.Resolve<ICompanyDS>().SearchDepartment(new DepartmentSearchEntity()
                     {
                         SearchText = ""
                     });

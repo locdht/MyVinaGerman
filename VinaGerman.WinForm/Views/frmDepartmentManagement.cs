@@ -52,7 +52,7 @@ namespace VinaGerman.Views
                     foreach (Entity.BusinessEntity.DepartmentEntity dr in source)
                     {
                         dr.CompanyId = ApplicationHelper.CurrentUserProfile.CompanyId;
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateDepartment(dr);
+                        var updatedEntity = Factory.Resolve<ICompanyDS>().AddOrUpdateDepartment(dr);
                     }
                 }
                 DeleteList();
@@ -69,7 +69,7 @@ namespace VinaGerman.Views
         #region functions
         private void LoadData()
         {
-            List<Entity.BusinessEntity.DepartmentEntity> list = Factory.Resolve<IBaseDataDS>().SearchDepartment(new DepartmentSearchEntity()
+            List<Entity.BusinessEntity.DepartmentEntity> list = Factory.Resolve<ICompanyDS>().SearchDepartment(new DepartmentSearchEntity()
             {
                 SearchText = ""
             });
@@ -98,7 +98,7 @@ namespace VinaGerman.Views
                     try
                     {
                         if (i.DepartmentId > 0)
-                            Factory.Resolve<IBaseDataDS>().DeleteDepartment(i);
+                            Factory.Resolve<ICompanyDS>().DeleteDepartment(i);
                     }
                     catch (Exception ex)
                     {

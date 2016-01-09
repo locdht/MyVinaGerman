@@ -34,7 +34,7 @@ namespace VinaGerman.Views
         #region functions
         private void LoadData()
         {
-            List<VinaGerman.Entity.BusinessEntity.LocationEntity> list = Factory.Resolve<IBaseDataDS>().SearchLocation(new LocationSearchEntity()
+            List<VinaGerman.Entity.BusinessEntity.LocationEntity> list = Factory.Resolve<ICompanyDS>().SearchLocation(new LocationSearchEntity()
             {
                 SearchText = ""
             });
@@ -63,7 +63,7 @@ namespace VinaGerman.Views
                     try
                     {
                         if (i.LocationId > 0)
-                            Factory.Resolve<IBaseDataDS>().DeleteLocation(i);
+                            Factory.Resolve<ICompanyDS>().DeleteLocation(i);
                     }
                     catch (Exception ex)
                     {
@@ -173,7 +173,7 @@ namespace VinaGerman.Views
                     foreach (Entity.BusinessEntity.LocationEntity dr in source)
                     {
                         dr.CompanyId = ApplicationHelper.CurrentUserProfile.CompanyId;
-                        var updatedEntity = Factory.Resolve<IBaseDataDS>().AddOrUpdateLocation(dr);
+                        var updatedEntity = Factory.Resolve<ICompanyDS>().AddOrUpdateLocation(dr);
                     }
                 }
                 DeleteList();

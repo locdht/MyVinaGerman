@@ -48,6 +48,7 @@ namespace VinaGerman
             VinaGerman.Entity.Factory.Register<VinaGerman.DataSource.ICommonDS, VinaGerman.DataSource.Implementation.CommonDS>();
             VinaGerman.Entity.Factory.Register<VinaGerman.DataSource.ICompanyDS, VinaGerman.DataSource.Implementation.CompanyDS>();
             VinaGerman.Entity.Factory.Register<VinaGerman.DataSource.IBaseDataDS, VinaGerman.DataSource.Implementation.BaseDataDS>();
+            VinaGerman.Entity.Factory.Register<VinaGerman.DataSource.IOrderDS, VinaGerman.DataSource.Implementation.OrderDS>();
         }  
         private int Method1(string sParam)
         {
@@ -73,17 +74,29 @@ namespace VinaGerman
 
         public object PerformActionWithLoading(Delegate method, params object[] args)
         {
+            object result = null;
+            Exception exc = null;
             //Open Wait Form
             SplashScreenManager.ShowForm(this, typeof(MainWaitForm), true, true, false);
             try
             {
-                return method.DynamicInvoke(args);
+                result = method.DynamicInvoke(args);
+            }
+            catch (Exception ex)
+            {
+                result = null;
+                exc = ex;
             }
             finally
             {
                 //Close Wait Form
                 SplashScreenManager.CloseForm(false);
-            }            
+                if (exc != null)
+                {
+                    Utilities.Utils.ShowError(exc.Message, exc);
+                }                
+            }
+            return result;
         }
 
         private void fncCallFormInTab(XtraForm xtraForm)
@@ -216,11 +229,26 @@ namespace VinaGerman
                 case "barButtonBCHangTonKho":
                     fncCallFormInTab(new frmRPTPurchaseOrder() { _type = "TongHopTonKho" });
                     break;
+                case "barButtonBCSoChiTietBanHang":
+                    fncCallFormInTab(new frmRPTPurchaseOrder() { _type = "SoChiTietBanHang" });
+                    break;
+                case "barButtonBCSoChiTietMuaHang":
+                    fncCallFormInTab(new frmRPTPurchaseOrder() { _type = "SoChiTietMuaHang" });
+                    break;
                 case "barButtonDSHangHoa":
                     fncCallFormInTab(new frmArticleManagement());
                     break;
                 case "barButtonLapPhieuNhapHang":
                     fncCallFormInTab(new frmPurchaseOrderDetail(this));
+                    break;
+                case "barButtonLapPhieuBan":
+                    fncCallFormInTab(new frmSaleOrderDetail(this));
+                    break;
+                case "barButtonTraCuuPhieuNhapHang":
+                    fncCallFormInTab(new frmPurchaseOrderManagement());
+                    break;
+                case "barButtonTraCuuPhieuBanHang":
+                    fncCallFormInTab(new frmSaleOrderManagement());
                     break;
             }
         }

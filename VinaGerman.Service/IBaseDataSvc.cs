@@ -55,57 +55,6 @@ namespace VinaGerman.Service
         ArticleRelationEntity AddOrUpdateArticleRelation(ArticleRelationEntity entityObject);
         [OperationContract]
         bool DeleteArticleRelation(ArticleRelationEntity entityObject);
-        #endregion
-
-        #region Department
-        [OperationContract]
-        List<VinaGerman.Entity.BusinessEntity.DepartmentEntity> SearchDepartment(DepartmentSearchEntity searchObject);
-        [OperationContract]
-        VinaGerman.Entity.BusinessEntity.DepartmentEntity AddOrUpdateDepartment(VinaGerman.Entity.BusinessEntity.DepartmentEntity entityObject);
-        [OperationContract]
-        bool DeleteDepartment(VinaGerman.Entity.BusinessEntity.DepartmentEntity entityObject);
-        #endregion
-
-        #region Location
-        [OperationContract]
-        List<VinaGerman.Entity.BusinessEntity.LocationEntity> SearchLocation(LocationSearchEntity searchObject);
-        [OperationContract]
-        VinaGerman.Entity.BusinessEntity.LocationEntity AddOrUpdateLocation(VinaGerman.Entity.BusinessEntity.LocationEntity entityObject);
-        [OperationContract]
-        bool DeleteLocation(VinaGerman.Entity.BusinessEntity.LocationEntity entityObject);
-        #endregion
-
-        #region Contact
-        [OperationContract]
-        List<VinaGerman.Entity.BusinessEntity.ContactEntity> SearchContact(ContactSearchEntity searchObject);
-        [OperationContract]
-        VinaGerman.Entity.BusinessEntity.ContactEntity AddOrUpdateContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject);
-        [OperationContract]
-        bool DeleteContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject);
-        [OperationContract]
-        List<VinaGerman.Entity.BusinessEntity.ContactEntity> GetContactForCompany(CompanyEntity hObject);
-        #endregion
-
-        #region Order
-        [OperationContract]
-        List<OrderEntity> SearchOrder(OrderSearchEntity searchObject);
-        [OperationContract]
-        OrderEntity AddOrUpdateOrder(OrderEntity entityObject);
-        [OperationContract]
-        bool DeleteOrder(OrderEntity entityObject);
-        [OperationContract]
-        List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity searchObject);
-        [OperationContract]
-        OrderlineEntity AddOrUpdateOrderline(OrderlineEntity entityObject);
-        [OperationContract]
-        bool DeleteOrderline(OrderlineEntity entityObject);
-        [OperationContract]
-        List<LoanEntity> GetLoansForOrderline(OrderlineEntity searchObject);
-        [OperationContract]
-        LoanEntity AddOrUpdateLoan(LoanEntity entityObject);
-        [OperationContract]
-        bool DeleteLoan(LoanEntity entityObject);
-        #endregion
-    
+        #endregion    
     }
 }

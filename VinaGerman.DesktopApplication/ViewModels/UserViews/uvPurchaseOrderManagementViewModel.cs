@@ -176,7 +176,7 @@ namespace VinaGerman.DesktopApplication.ViewModels.UserViews
                 {
                     ShowLoading(StringResources.captionInformation, StringResources.msgLoading);
 
-                    var list = Factory.Resolve<IBaseDataDS>().SearchOrder(new OrderSearchEntity()
+                    var list = Factory.Resolve<IOrderDS>().SearchOrder(new OrderSearchEntity()
                     {
                         SearchText = this.SearchText,
                         BusinessId = SelectedBusiness!=null?SelectedBusiness.BusinessId:0,

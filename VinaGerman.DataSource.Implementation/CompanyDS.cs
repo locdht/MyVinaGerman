@@ -19,6 +19,8 @@ namespace VinaGerman.DataSource.Implementation
                 return "Company.svc";
             }
         }
+
+        #region Company
         public List<CompanyEntity> SearchCompanies(CompanySearchEntity searchObject)
         {
             ICompanySvc channel = CreateChannel();
@@ -40,5 +42,86 @@ namespace VinaGerman.DataSource.Implementation
             channel.Dispose();
             return result;
         }
+        #endregion
+
+        #region Department
+        public List<VinaGerman.Entity.BusinessEntity.DepartmentEntity> SearchDepartment(DepartmentSearchEntity searchObject)
+        {
+            ICompanySvc channel = CreateChannel();
+            var result = channel.SearchDepartment(searchObject);
+            channel.Dispose();
+            return result;
+        }
+        public VinaGerman.Entity.BusinessEntity.DepartmentEntity AddOrUpdateDepartment(VinaGerman.Entity.BusinessEntity.DepartmentEntity entityObject)
+        {
+            ICompanySvc channel = CreateChannel();
+            var result = channel.AddOrUpdateDepartment(entityObject);
+            channel.Dispose();
+            return result;
+        }
+        public bool DeleteDepartment(VinaGerman.Entity.BusinessEntity.DepartmentEntity entityObject)
+        {
+            ICompanySvc channel = CreateChannel();
+            var result = channel.DeleteDepartment(entityObject);
+            channel.Dispose();
+            return result;
+        }
+        #endregion
+
+        #region Location
+        public List<VinaGerman.Entity.BusinessEntity.LocationEntity> SearchLocation(LocationSearchEntity searchObject)
+        {
+            ICompanySvc channel = CreateChannel();
+            var result = channel.SearchLocation(searchObject);
+            channel.Dispose();
+            return result;
+        }
+        public VinaGerman.Entity.BusinessEntity.LocationEntity AddOrUpdateLocation(VinaGerman.Entity.BusinessEntity.LocationEntity entityObject)
+        {
+            ICompanySvc channel = CreateChannel();
+            var result = channel.AddOrUpdateLocation(entityObject);
+            channel.Dispose();
+            return result;
+        }
+        public bool DeleteLocation(VinaGerman.Entity.BusinessEntity.LocationEntity entityObject)
+        {
+            ICompanySvc channel = CreateChannel();
+            var result = channel.DeleteLocation(entityObject);
+            channel.Dispose();
+            return result;
+        }
+        #endregion
+
+        #region Contact
+        public List<VinaGerman.Entity.BusinessEntity.ContactEntity> SearchContact(ContactSearchEntity searchObject)
+        {
+            ICompanySvc channel = CreateChannel();
+            var result = channel.SearchContact(searchObject);
+            channel.Dispose();
+            return result;
+        }
+        public VinaGerman.Entity.BusinessEntity.ContactEntity AddOrUpdateContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject)
+        {
+            ICompanySvc channel = CreateChannel();
+            var result = channel.AddOrUpdateContact(entityObject);
+            channel.Dispose();
+            return result;
+        }
+        public bool DeleteContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject)
+        {
+            ICompanySvc channel = CreateChannel();
+            var result = channel.DeleteContact(entityObject);
+            channel.Dispose();
+            return result;
+        }
+
+        public List<VinaGerman.Entity.BusinessEntity.ContactEntity> GetContactForCompany(CompanyEntity Object)
+        {
+            ICompanySvc channel = CreateChannel();
+            var result = channel.GetContactForCompany(Object);
+            channel.Dispose();
+            return result;
+        }
+        #endregion
     }
 }
