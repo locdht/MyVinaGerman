@@ -33,6 +33,16 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=e44a2bc38ed2c13c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling">
+      <HintPath>..\packages\EnterpriseLibrary.ExceptionHandling.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBaseDB.cs" />
     <Compile Include="IOrderDB.cs" />
     <Compile Include="IContactDB.cs" />
     <Compile Include="IDepartmentDB.cs" />
@@ -50,12 +61,13 @@
     <Compile Include="IIndustryDB.cs" />
     <Compile Include="IBusinessDB.cs" />
     <Compile Include="ICategoryDB.cs" />
-    <Compile Include="ICompanyDB.cs" />    
+    <Compile Include="ICompanyDB.cs" />
     <Compile Include="IReportDB.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IUserDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VinagermanDatabase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VinaGerman.Entity\VinaGerman.Entity.csproj">

@@ -9,7 +9,7 @@ using VinaGerman.Entity.SearchEntity;
 
 namespace VinaGerman.Database
 {
-    public interface IContactDB
+    public interface IContactDB : IBaseDB
     {
         List<VinaGerman.Entity.BusinessEntity.ContactEntity> SearchContact(ContactSearchEntity searchObject);
         VinaGerman.Entity.BusinessEntity.ContactEntity AddOrUpdateContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject);

@@ -7,7 +7,7 @@ using VinaGerman.Entity.DatabaseEntity;
 
 namespace VinaGerman.Database
 {
-    public interface IReportDB
+    public interface IReportDB : IBaseDB
     {
         OfficialNoteEntity GetOfficialNoteByReportName(string reportName);
     }

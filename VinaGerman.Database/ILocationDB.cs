@@ -8,7 +8,7 @@ using VinaGerman.Entity.SearchEntity;
 
 namespace VinaGerman.Database
 {
-    public interface ILocationDB
+    public interface ILocationDB : IBaseDB
     {
         LocationEntity GetLocationById(int locationId);
         List<LocationEntity> SearchLocation(LocationSearchEntity searchObject);

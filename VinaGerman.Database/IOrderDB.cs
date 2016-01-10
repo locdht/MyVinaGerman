@@ -8,7 +8,7 @@ using VinaGerman.Entity.SearchEntity;
 
 namespace VinaGerman.Database
 {
-    public interface IOrderDB
+    public interface IOrderDB : IBaseDB
     {
         List<OrderEntity> SearchOrder(OrderSearchEntity searchObject);
         OrderEntity AddOrUpdateOrder(OrderEntity entityObject);

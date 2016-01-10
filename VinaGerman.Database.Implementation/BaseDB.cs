@@ -8,15 +8,43 @@ using System.Text;
 using System.Threading.Tasks;
 namespace VinaGerman.Database.Implementation
 {
-    public class BaseDB
-    {
-        public static string CONNECTION_STRING = "DefaultConnection";
-        protected Microsoft.Practices.EnterpriseLibrary.Data.Database GetDatabaseInstance()
+    public class BaseDB : IBaseDB
+    {                
+        private IDbConnection _connection = null;
+        private IDbTransaction _transaction = null;
+        private Microsoft.Practices.EnterpriseLibrary.Data.Database _database = null;
+        public IDbConnection Connection
         {
-            // Configure the DatabaseFactory to read its configuration from the .config file
-            DatabaseProviderFactory factory = new DatabaseProviderFactory();
-            // Create a Database object from the factory using the connection string name.
-            return factory.Create(CONNECTION_STRING);
+            get
+            {
+                return _connection;
+            }
+            set
+            {
+                _connection = value;
+            }
+        }
+        public IDbTransaction Transaction
+        {
+            get
+            {
+                return _transaction;
+            }
+            set
+            {
+                _transaction = value;
+            }
+        }
+        public Microsoft.Practices.EnterpriseLibrary.Data.Database DatabaseProvider
+        {
+            get
+            {
+                return _database;
+            }
+            set
+            {
+                _database = value;
+            }
         }
     }    
 }

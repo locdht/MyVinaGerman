@@ -25,13 +25,7 @@ namespace VinaGerman.Database.Implementation
                 sqlStatement += "AND (Description LIKE N'%" + searchObject.SearchText + "%')" + Environment.NewLine;
             }
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                result = conn.Query<IndustryEntity>(sqlStatement).ToList();
-            }
+            result = Connection.Query<IndustryEntity>(sqlStatement).ToList();
             return result;
         }
 
@@ -59,18 +53,12 @@ namespace VinaGerman.Database.Implementation
             }
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
+            entityObject.IndustryId = Connection.ExecuteScalar<int>(sqlStatement, new
             {
-                entityObject.IndustryId = conn.ExecuteScalar<int>(sqlStatement, new
-                {
-                    IndustryId = entityObject.IndustryId,
-                    Description = entityObject.Description,
-                    Deleted = (entityObject.Deleted ? 1 : 0)
-                });
-            }
+                IndustryId = entityObject.IndustryId,
+                Description = entityObject.Description,
+                Deleted = (entityObject.Deleted ? 1 : 0)
+            });
             return entityObject;
         }
         public bool DeleteIndustry(IndustryEntity entityObject)
@@ -78,13 +66,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "UPDATE Industry SET Deleted=1 WHERE IndustryId=@IndustryId  " + Environment.NewLine;
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                conn.Execute(sqlStatement, new { IndustryId = entityObject.IndustryId });
-            }
+            Connection.Execute(sqlStatement, new { IndustryId = entityObject.IndustryId });
             return true;
         }
     }

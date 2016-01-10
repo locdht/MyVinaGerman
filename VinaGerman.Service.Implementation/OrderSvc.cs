@@ -33,30 +33,13 @@ namespace VinaGerman.Service.Implementation
         {
             return Factory.Resolve<IOrderBL>().DeleteOrder(entityObject);
         }
-        public List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity searchObject)
+        public List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity order, bool populateLoan)
         {
-            return Factory.Resolve<IOrderBL>().GetOrderlinesForOrder(searchObject);
+            return Factory.Resolve<IOrderBL>().GetOrderlinesForOrder(order, populateLoan);
         }
-        public OrderlineEntity AddOrUpdateOrderline(OrderlineEntity entityObject)
+        public bool SaveOrder(OrderEntity order, List<OrderlineEntity> orderlines)
         {
-            return Factory.Resolve<IOrderBL>().AddOrUpdateOrderline(entityObject);
-        }
-        public bool DeleteOrderline(OrderlineEntity entityObject)
-        {
-            return Factory.Resolve<IOrderBL>().DeleteOrderline(entityObject);
-        }
-
-        public List<LoanEntity> GetLoansForOrderline(OrderlineEntity searchObject)
-        {
-            return Factory.Resolve<IOrderBL>().GetLoansForOrderline(searchObject);
-        }
-        public LoanEntity AddOrUpdateLoan(LoanEntity entityObject)
-        {
-            return Factory.Resolve<IOrderBL>().AddOrUpdateLoan(entityObject);
-        }
-        public bool DeleteLoan(LoanEntity entityObject)
-        {
-            return Factory.Resolve<IOrderBL>().DeleteLoan(entityObject);
+            return Factory.Resolve<IOrderBL>().SaveOrder(order, orderlines);
         }
         #endregion
 

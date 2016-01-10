@@ -14,15 +14,51 @@ namespace VinaGerman.Business.Implementation
     {
         public List<DepartmentEntity> SearchDepartment(DepartmentSearchEntity searchObject)
         {
-            return Factory.Resolve<IDepartmentDB>().SearchDepartment(searchObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IDepartmentDB>().SearchDepartment(searchObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }             
         }
         public DepartmentEntity AddOrUpdateDepartment(DepartmentEntity entityObject)
         {
-            return Factory.Resolve<IDepartmentDB>().AddOrUpdateDepartment(entityObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IDepartmentDB>().AddOrUpdateDepartment(entityObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }               
         }
         public bool DeleteDepartment(DepartmentEntity entityObject)
         {
-            return Factory.Resolve<IDepartmentDB>().DeleteDepartment(entityObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IDepartmentDB>().DeleteDepartment(entityObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }              
         }
     }
 }

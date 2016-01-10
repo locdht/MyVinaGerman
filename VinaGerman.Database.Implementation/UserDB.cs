@@ -25,17 +25,15 @@ namespace VinaGerman.Database.Implementation
             sqlStatement += "INSERT INTO UserProfile(UserId,UserName,FullName,Position,Phone) values(@UserId,@UserName,@FullName,@Position,@Phone)";
             int result = -1;
             // Create a suitable command type and add the required parameter.
-            var db = GetDatabaseInstance();
-
-            using (DbCommand sqlCmd = db.GetSqlStringCommand(sqlStatement))
+            using (DbCommand sqlCmd = DatabaseProvider.GetSqlStringCommand(sqlStatement))
             {
-                db.AddInParameter(sqlCmd, "UserId", DbType.Int32, iUserId);
-                db.AddInParameter(sqlCmd, "UserName", DbType.String, sUserName);
-                db.AddInParameter(sqlCmd, "FullName", DbType.String, sFullName);
-                db.AddInParameter(sqlCmd, "Position", DbType.String, sPosition);
-                db.AddInParameter(sqlCmd, "Phone", DbType.String, sPhone);
-                
-                result = db.ExecuteNonQuery(sqlCmd);
+                DatabaseProvider.AddInParameter(sqlCmd, "UserId", DbType.Int32, iUserId);
+                DatabaseProvider.AddInParameter(sqlCmd, "UserName", DbType.String, sUserName);
+                DatabaseProvider.AddInParameter(sqlCmd, "FullName", DbType.String, sFullName);
+                DatabaseProvider.AddInParameter(sqlCmd, "Position", DbType.String, sPosition);
+                DatabaseProvider.AddInParameter(sqlCmd, "Phone", DbType.String, sPhone);
+
+                result = DatabaseProvider.ExecuteNonQuery(sqlCmd);
             }
             return result;            
         }
@@ -44,16 +42,13 @@ namespace VinaGerman.Database.Implementation
         {
             IEnumerable<UserProfileEntity> list = null;
             string sqlStatement = "SELECT TOP 1 * FROM UserProfile WHERE UserName=@UserName " + Environment.NewLine;
-            var db = GetDatabaseInstance();            
-            using (DbCommand sqlCmd = db.GetSqlStringCommand(sqlStatement))
+            
+            using (DbCommand sqlCmd = DatabaseProvider.GetSqlStringCommand(sqlStatement))
             {
-                db.AddInParameter(sqlCmd, "UserName", DbType.String, sUserName);
+                DatabaseProvider.AddInParameter(sqlCmd, "UserName", DbType.String, sUserName);
                                 
                 // Call the ExecuteReader method with the command.                
-                using (IDbConnection conn = db.CreateConnection())
-                {
-                    list = conn.Query<UserProfileEntity>(sqlStatement, new { UserName = sUserName });
-                }
+                list = Connection.Query<UserProfileEntity>(sqlStatement, new { UserName = sUserName });
             }
             return list.FirstOrDefault<UserProfileEntity>();
         }
@@ -102,19 +97,14 @@ namespace VinaGerman.Database.Implementation
                 "UserAccount.UserName," + Environment.NewLine +
                 "UserAccount.AccountType" + Environment.NewLine +
                 "FROM UserAccount JOIN Contact ON UserAccount.UserAccountId=Contact.UserAccountId" + Environment.NewLine +
-                "WHERE UserName=@UserName AND Password=@Password" + Environment.NewLine;            
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
+                "WHERE UserName=@UserName AND Password=@Password" + Environment.NewLine;
+
+            list = Connection.Query<UserProfileEntity>(sqlStatement, new { UserName = sUserName, Password = MD5Hash(sPassword) });
+            result = list.FirstOrDefault<UserProfileEntity>();
+            if (result != null)
             {
-                list = conn.Query<UserProfileEntity>(sqlStatement, new { UserName = sUserName, Password = MD5Hash(sPassword) });
-                result = list.FirstOrDefault<UserProfileEntity>();
-                if (result != null)
-                {
-                    //return original password
-                    result.Password = sPassword;
-                }
+                //return original password
+                result.Password = sPassword;
             }
             return result;
         }

@@ -33,13 +33,7 @@ namespace VinaGerman.Database.Implementation
                 sqlStatement += "AND (FullName LIKE N'%" + searchObject.SearchText + "%' OR Phone LIKE N'%" + searchObject.SearchText + "%' OR Email LIKE N'%" + searchObject.SearchText + "%' OR Address LIKE N'%" + searchObject.SearchText + "%')" + Environment.NewLine;
             }
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                result = conn.Query<VinaGerman.Entity.BusinessEntity.ContactEntity>(sqlStatement).ToList();
-            }
+            result = Connection.Query<VinaGerman.Entity.BusinessEntity.ContactEntity>(sqlStatement).ToList();
             return result;
         }
 
@@ -88,25 +82,19 @@ namespace VinaGerman.Database.Implementation
             }
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
+            entityObject.ContactId = Connection.ExecuteScalar<int>(sqlStatement, new
             {
-                entityObject.ContactId = conn.ExecuteScalar<int>(sqlStatement, new
-                {
-                    ContactId = entityObject.ContactId,
-                    FullName = entityObject.FullName,
-                    Email = entityObject.Email,
-                    Phone = entityObject.Phone,
-                    Address = entityObject.Address,
-                    CompanyId = entityObject.CompanyId,
-                    UserAccountId = entityObject.UserAccountId,
-                    Position = entityObject.Position,
-                    DepartmentId = entityObject.DepartmentId,
-                    Deleted = (entityObject.Deleted ? 1 : 0)
-                });
-            }
+                ContactId = entityObject.ContactId,
+                FullName = entityObject.FullName,
+                Email = entityObject.Email,
+                Phone = entityObject.Phone,
+                Address = entityObject.Address,
+                CompanyId = entityObject.CompanyId,
+                UserAccountId = entityObject.UserAccountId,
+                Position = entityObject.Position,
+                DepartmentId = entityObject.DepartmentId,
+                Deleted = (entityObject.Deleted ? 1 : 0)
+            });
             return entityObject;
         }
 
@@ -115,13 +103,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "UPDATE Contact SET Deleted=1 WHERE ContactId=@ContactId  " + Environment.NewLine;
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                conn.Execute(sqlStatement, new { ContactId = entityObject.ContactId });
-            }
+            Connection.Execute(sqlStatement, new { ContactId = entityObject.ContactId });
             return true;
         }
 
@@ -141,13 +123,7 @@ namespace VinaGerman.Database.Implementation
                 "FROM Contact join Company on Contact.CompanyId= Company.CompanyId" + Environment.NewLine +
                 "WHERE Contact.Deleted=0 and Contact.CompanyId=@CompanyId" + Environment.NewLine;
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                result = conn.Query<VinaGerman.Entity.BusinessEntity.ContactEntity>(sqlStatement, new { CompanyId = hObject.CompanyId }).ToList();
-            }
+            result = Connection.Query<VinaGerman.Entity.BusinessEntity.ContactEntity>(sqlStatement, new { CompanyId = hObject.CompanyId }).ToList();
             return result;
         }
     }

@@ -24,13 +24,7 @@ namespace VinaGerman.Database.Implementation
                 "WHERE LocationId=@LocationId " + Environment.NewLine;
         
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                result = conn.Query<LocationEntity>(sqlStatement, new { LocationId = locationId }).FirstOrDefault();
-            }
+            result = Connection.Query<LocationEntity>(sqlStatement, new { LocationId = locationId }).FirstOrDefault();
             return result;
         }
         public List<LocationEntity> SearchLocation(LocationSearchEntity searchObject)
@@ -50,13 +44,7 @@ namespace VinaGerman.Database.Implementation
                 sqlStatement += "AND (Description LIKE N'%" + searchObject.SearchText + "%' OR Address LIKE N'%" + searchObject.SearchText + "%')" + Environment.NewLine;
             }
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                result = conn.Query<LocationEntity>(sqlStatement).ToList();
-            }
+            result = Connection.Query<LocationEntity>(sqlStatement).ToList();
             return result;
         }
 
@@ -90,21 +78,15 @@ namespace VinaGerman.Database.Implementation
             }
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
+            entityObject.LocationId = Connection.ExecuteScalar<int>(sqlStatement, new
             {
-                entityObject.LocationId = conn.ExecuteScalar<int>(sqlStatement, new
-                {
-                    LocationId = entityObject.LocationId,
-                    Phone = entityObject.Address,
-                    Description = entityObject.Description,
-                    CompanyId = entityObject.CompanyId,
-                    Address = entityObject.Address,
-                    Deleted = (entityObject.Deleted ? 1 : 0)
-                });
-            }
+                LocationId = entityObject.LocationId,
+                Phone = entityObject.Address,
+                Description = entityObject.Description,
+                CompanyId = entityObject.CompanyId,
+                Address = entityObject.Address,
+                Deleted = (entityObject.Deleted ? 1 : 0)
+            });
             return entityObject;
         }
         public bool DeleteLocation(LocationEntity entityObject)
@@ -112,13 +94,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "UPDATE Location SET Deleted=1 WHERE LocationId=@LocationId  " + Environment.NewLine;
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                conn.Execute(sqlStatement, new { LocationId = entityObject.LocationId });
-            }
+            Connection.Execute(sqlStatement, new { LocationId = entityObject.LocationId });
             return true;
         }
     }

@@ -9,7 +9,7 @@ using VinaGerman.Entity.SearchEntity;
 
 namespace VinaGerman.Database
 {
-    public interface IArticleDB
+    public interface IArticleDB : IBaseDB
     {
         List<ArticleEntity> SearchArticle(ArticleSearchEntity searchObject);
         ArticleEntity GetArticleByID(int ID);

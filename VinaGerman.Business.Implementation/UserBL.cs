@@ -16,12 +16,34 @@ namespace VinaGerman.Business.Implementation
        
         public bool Login(string sUserName, string sPassword)
         {
-            return Factory.Resolve<IUserDB>().Login(sUserName, sPassword);
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IUserDB>().Login(sUserName, sPassword);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }              
         }
 
         public UserProfileEntity GetUserProfile(string sUserName, string sPassword)
         {
-            return Factory.Resolve<IUserDB>().GetUserProfile(sUserName, sPassword);
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IUserDB>().GetUserProfile(sUserName, sPassword);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }             
         }
     }
 }

@@ -13,6 +13,7 @@ using VinaGerman.Entity.SearchEntity;
 using VinaGerman.WinForm.Utilities;
 using VinaGerman.Report;
 using DevExpress.XtraGrid.Views.Grid;
+using VinaGerman.Model;
 
 namespace VinaGerman.Views
 {
@@ -27,7 +28,7 @@ namespace VinaGerman.Views
         public List<KeyValuePair<int,string>> StatusList { get; set; }
 
         public OrderEntity CurrentOrder { get; set; }
-        public BindingList<OrderlineEntity> OrderlineList { get; set; }
+        public BindingList<OrderlineModel> OrderlineList { get; set; }
         public MainForm OwnerForm { get; set; }
         #endregion
 
@@ -43,7 +44,7 @@ namespace VinaGerman.Views
         public void LoadOrder(OrderEntity order = null)
         {
             //reset orderlines
-            OrderlineList = new BindingList<OrderlineEntity>();
+            OrderlineList = new BindingList<OrderlineModel>();
             DataGrid.DataSource = OrderlineList;
             if (order == null)
             {
@@ -55,56 +56,54 @@ namespace VinaGerman.Views
                     ResponsibleBy = ApplicationHelper.CurrentUserProfile.ContactId,
                     OrderNumber = ""
                 };
-                CurrentOrder = order;                
+                CurrentOrder = order;
             }
             else
             {
-                CurrentOrder = order;
-                var orderlines = VinaGerman.Entity.Factory.Resolve<VinaGerman.DataSource.IOrderDS>().GetOrderlinesForOrder(CurrentOrder);
-                for (int i = 0; i < orderlines.Count; i++)
+                CurrentOrder = order;                
+                var orderlines = VinaGerman.Entity.Factory.Resolve<VinaGerman.DataSource.IOrderDS>().GetOrderlinesForOrder(CurrentOrder, true);
+                if (orderlines != null && orderlines.Count > 0)
                 {
-                    var newOrderline = new OrderlineEntity()
+                    for (int i = 0; i < orderlines.Count; i++)
                     {
-                        ArticleId = orderlines[i].ArticleId,
-                        ArticleNo = orderlines[i].ArticleNo,
-                        CategoryId = orderlines[i].CategoryId,
-                        Commission = orderlines[i].Commission,
-                        CreatedBy = orderlines[i].CreatedBy,
-                        CreatedDate = orderlines[i].CreatedDate,
-                        Deleted = orderlines[i].Deleted,
-                        Description = orderlines[i].Description,
-                        ModifiedBy = orderlines[i].ModifiedBy,
-                        ModifiedDate = orderlines[i].ModifiedDate,
-                        OrderId = orderlines[i].OrderId,
-                        OrderlineId = orderlines[i].OrderlineId,
-                        PaidDate = orderlines[i].PaidDate,
-                        PayDate = orderlines[i].PayDate,
-                        Price = orderlines[i].Price,
-                        Quantity = orderlines[i].Quantity,
-                        RemainingQuantity = orderlines[i].RemainingQuantity,
-                        Unit = orderlines[i].Unit                      
-                    };
-                    //populate loan list            
-                    newOrderline.ChildList = new BindingList<LoanEntity>();
-
-                    var loanList = VinaGerman.Entity.Factory.Resolve<VinaGerman.DataSource.IOrderDS>().GetLoansForOrderline(orderlines[i]);
-                    for (int j = 0; j < loanList.Count; j++)
-                    {
-                        newOrderline.ChildList.Add(new LoanEntity() 
+                        var newOrderline = new OrderlineModel()
                         {
-                            ArticleId = orderlines[i].ArticleId,
-                            ArticleNo = orderlines[i].ArticleNo,
-                            CategoryId = orderlines[i].CategoryId,                          
-                            Deleted = orderlines[i].Deleted,
-                            Description = orderlines[i].Description,                                                       
                             OrderlineId = orderlines[i].OrderlineId,
+                            OrderId = orderlines[i].OrderId,
+                            ArticleId = orderlines[i].ArticleId,
+                            CreatedBy = orderlines[i].CreatedBy,
+                            CreatedDate = orderlines[i].CreatedDate,
+                            ModifiedBy = orderlines[i].ModifiedBy,
+                            ModifiedDate = orderlines[i].ModifiedDate,
+                            PaidDate = orderlines[i].PaidDate,
+                            PayDate = orderlines[i].PayDate,
+                            Price = orderlines[i].Price,
                             Quantity = orderlines[i].Quantity,
+                            RealQuantity = orderlines[i].RealQuantity,
                             RemainingQuantity = orderlines[i].RemainingQuantity,
-                            Unit = orderlines[i].Unit,
-                        });
+                            Unit = orderlines[i].Unit
+                        };
+
+                        //populate loan list
+                        if (orderlines[i].LoanList != null && orderlines[i].LoanList.Count > 0)
+                        {
+                            for (int j = 0; j < orderlines[i].LoanList.Count; j++)
+                            {
+                                newOrderline.LoanList.Add(new LoanModel()
+                                {
+                                    LoanId = orderlines[i].LoanList[j].LoanId,
+                                    OrderlineId = orderlines[i].LoanList[j].OrderlineId,                                    
+                                    ArticleId = orderlines[i].LoanList[j].ArticleId,
+                                    Quantity = orderlines[i].LoanList[j].Quantity,
+                                    RemainingQuantity = orderlines[i].LoanList[j].RemainingQuantity,
+                                    Unit = orderlines[i].Unit
+                                });
+                            }                            
+                        }
+
+                        OrderlineList.Add(newOrderline);
                     }
-                    OrderlineList.Add(newOrderline);                    
-                }
+                }                
             }            
 
             StatusList = new List<KeyValuePair<int, string>>();
@@ -194,41 +193,7 @@ namespace VinaGerman.Views
             {
                 OwnerForm.PerformActionWithLoading(new Action(() =>
                 {
-                    //save order first
-                    if (CurrentOrder != null)
-                    {
-                        CurrentOrder.OrderDate = (DateTime)txtOrderDate.EditValue;
-                        CurrentOrder.CustomerCompanyId = (int)cboCustomer.EditValue;
-                        CurrentOrder.BusinessId = (int)cboBusiness.EditValue;
-                        CurrentOrder.IndustryId = (int)cboIndustry.EditValue;
-                        CurrentOrder.ResponsibleBy = (int)cboEmployee.EditValue;
-                        CurrentOrder.OrderStatus = (int)cboStatus.EditValue;
-                        CurrentOrder = VinaGerman.Entity.Factory.Resolve<VinaGerman.DataSource.IOrderDS>().AddOrUpdateOrder(CurrentOrder);
-
-                        if (CurrentOrder != null && CurrentOrder.OrderId > 0)
-                        {
-                            //save orderlines
-                            for (int i = 0; i < OrderlineList.Count; i++)
-                            {
-                                OrderlineList[i].OrderId = CurrentOrder.OrderId;
-                                var newOrderline = VinaGerman.Entity.Factory.Resolve<VinaGerman.DataSource.IOrderDS>().AddOrUpdateOrderline((VinaGerman.Entity.BusinessEntity.OrderlineEntity)OrderlineList[i]);
-                                if (newOrderline != null && newOrderline.OrderlineId > 0)
-                                {
-                                    OrderlineList[i].OrderlineId = newOrderline.OrderlineId;
-                                    //save loan
-                                    for (int j = 0; j < OrderlineList[i].ChildList.Count; j++)
-                                    {
-                                        OrderlineList[i].ChildList[j].OrderlineId = OrderlineList[i].OrderlineId;
-                                        var newLoan = VinaGerman.Entity.Factory.Resolve<VinaGerman.DataSource.IOrderDS>().AddOrUpdateLoan((VinaGerman.Entity.BusinessEntity.LoanEntity)OrderlineList[i].ChildList[j]);
-                                        if (newLoan != null && newLoan.LoanId > 0)
-                                        {
-                                            OrderlineList[i].ChildList[j].LoanId = newLoan.LoanId;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }                      
+                                      
                 }));
             }
         }
@@ -256,14 +221,14 @@ namespace VinaGerman.Views
             {
                 OwnerForm.PerformActionWithLoading(new Action(() =>
                 {
-                    var entityObject = (OrderlineEntity)e.Row;
+                    var entityObject = (OrderlineModel)e.Row;
                     //get article relation
                     var relatedArticleList = VinaGerman.Entity.Factory.Resolve<VinaGerman.DataSource.IBaseDataDS>().GetArticleRelationsForArticle(new VinaGerman.Entity.DatabaseEntity.ArticleEntity() { ArticleId = entityObject.ArticleId });
                     if (relatedArticleList != null && relatedArticleList.Count > 0)
                     {
                         for (int i = 0; i < relatedArticleList.Count; i++)
                         {
-                            entityObject.ChildList.Add(new LoanEntity()
+                            entityObject.ChildList.Add(new LoanModel()
                             {
                                 ArticleId = relatedArticleList[i].ArticleId,
                                 Description = relatedArticleList[i].Description,
@@ -282,11 +247,10 @@ namespace VinaGerman.Views
         }
 
         private void RepositoryButtonEdit_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {            
-            DevExpress.XtraGrid.GridControl grid = (DevExpress.XtraGrid.GridControl)(((ButtonEdit)sender).Parent);//MasterGridView.GetRow,SourceRowHandle
-            GridView view = (GridView)grid.FocusedView;
-            LoanEntity selectedRow = (LoanEntity)view.GetFocusedRow();
-            ((LoanEntity)selectedRow).Quantity = 1000;
+        {
+            GridView view = (GridView)DataGrid.FocusedView;
+            LoanModel selectedRow = (LoanModel)view.GetFocusedRow();
+            ((LoanModel)selectedRow).Quantity = 1000;
             view.RefreshRow(view.FocusedRowHandle);
             //view.DeleteRow(view.FocusedRowHandle);
         }

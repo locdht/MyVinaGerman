@@ -182,6 +182,7 @@
             this.colMasterPayDate,
             this.colRemoveOrderline});
             this.MasterGridView.GridControl = this.DataGrid;
+            this.MasterGridView.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.MasterGridView.Name = "MasterGridView";
             this.MasterGridView.OptionsBehavior.AutoExpandAllGroups = true;
             this.MasterGridView.OptionsBehavior.AutoPopulateColumns = false;
@@ -223,7 +224,7 @@
             // colMasterPrice
             // 
             this.colMasterPrice.Caption = "Giá";
-            this.colMasterPrice.FieldName = "Price";
+            this.colMasterPrice.FieldName = ".Price";
             this.colMasterPrice.Name = "colMasterPrice";
             this.colMasterPrice.Visible = true;
             this.colMasterPrice.VisibleIndex = 3;

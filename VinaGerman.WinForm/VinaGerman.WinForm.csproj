@@ -83,6 +83,7 @@
     <Compile Include="MainWaitForm.Designer.cs">
       <DependentUpon>MainWaitForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\LoanModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\PurchaseOrderDetail.Designer.cs">
@@ -160,6 +161,7 @@
       <DependentUpon>CustomMessageBoxForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities\Global.cs" />
+    <Compile Include="Model\OrderlineModel.cs" />
     <Compile Include="Utilities\ImageHelper.cs" />
     <Compile Include="Utilities\Log.cs" />
     <Compile Include="Utilities\PathProvider.cs" />

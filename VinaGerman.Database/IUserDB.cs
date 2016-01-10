@@ -8,7 +8,7 @@ using VinaGerman.Entity.BusinessEntity;
 
 namespace VinaGerman.Database
 {
-    public interface IUserDB
+    public interface IUserDB : IBaseDB
     {
         bool Login(string sUserName, string sPassword);
         UserProfileEntity GetUserProfile(string sUserName, string sPassword);

@@ -8,7 +8,7 @@ using VinaGerman.Entity.SearchEntity;
 
 namespace VinaGerman.Database
 {
-    public interface IBusinessDB
+    public interface IBusinessDB : IBaseDB
     {
         List<BusinessEntity> SearchBusiness(BusinessSearchEntity searchObject);
         BusinessEntity AddOrUpdateBusiness(BusinessEntity entityObject);

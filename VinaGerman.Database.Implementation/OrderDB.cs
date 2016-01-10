@@ -68,13 +68,7 @@ namespace VinaGerman.Database.Implementation
             //    sqlStatement += "AND Order.OrderDate<=" + searchObject.ToOrderDate + Environment.NewLine;
             //}
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                result = conn.Query<OrderEntity>(sqlStatement).ToList();
-            }
+            result = Connection.Query<OrderEntity>(sqlStatement).ToList();
             return result;
         }
 
@@ -162,35 +156,29 @@ namespace VinaGerman.Database.Implementation
                 "WHERE OrderId=@NewOrderId " + Environment.NewLine;
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
+            var result = Connection.Query<OrderEntity>(sqlStatement, new
             {
-                var result = conn.Query<OrderEntity>(sqlStatement, new
-                {
-                    OrderId = entityObject.OrderId,
-                    OrderType = entityObject.OrderType,
-                    BusinessId = entityObject.BusinessId,
-                    IndustryId = entityObject.IndustryId,
-                    CreatedBy = entityObject.CreatedBy,
-                    ResponsibleBy = entityObject.ResponsibleBy,
-                    OrderStatus = entityObject.OrderStatus,
-                    OrderDate = entityObject.OrderDate,
-                    CreatedDate = entityObject.CreatedDate,
-                    CompanyId = entityObject.CompanyId,
-                    LocationId = entityObject.LocationId,
-                    CustomerCompanyId = entityObject.CustomerCompanyId,
-                    CustomerContactId = entityObject.CustomerContactId,
-                    OrderNumber = entityObject.OrderNumber,
-                    Description = entityObject.Description
-                }).ToList();
+                OrderId = entityObject.OrderId,
+                OrderType = entityObject.OrderType,
+                BusinessId = entityObject.BusinessId,
+                IndustryId = entityObject.IndustryId,
+                CreatedBy = entityObject.CreatedBy,
+                ResponsibleBy = entityObject.ResponsibleBy,
+                OrderStatus = entityObject.OrderStatus,
+                OrderDate = entityObject.OrderDate,
+                CreatedDate = entityObject.CreatedDate,
+                CompanyId = entityObject.CompanyId,
+                LocationId = entityObject.LocationId,
+                CustomerCompanyId = entityObject.CustomerCompanyId,
+                CustomerContactId = entityObject.CustomerContactId,
+                OrderNumber = entityObject.OrderNumber,
+                Description = entityObject.Description
+            }).ToList();
 
-                if (result.Count > 0)
-                    entityObject = result[0];
-                else
-                    entityObject = null;
-            }
+            if (result.Count > 0)
+                entityObject = result[0];
+            else
+                entityObject = null;
             return entityObject;
         }
         public bool DeleteOrder(OrderEntity entityObject)
@@ -198,13 +186,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "UPDATE [Order] SET Deleted=1 WHERE OrderId=@OrderId  " + Environment.NewLine;
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                conn.Execute(sqlStatement, new { OrderId = entityObject.OrderId });
-            }
+            Connection.Execute(sqlStatement, new { OrderId = entityObject.OrderId });
             return true;
         }
         public List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity searchObject)
@@ -230,13 +212,7 @@ namespace VinaGerman.Database.Implementation
                 "WHERE Deleted=0 AND Orderline.OrderId=@OrderId" + Environment.NewLine;
             
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                result = conn.Query<OrderlineEntity>(sqlStatement, new { OrderId = searchObject.OrderId }).ToList();
-            }
+            result = Connection.Query<OrderlineEntity>(sqlStatement, new { OrderId = searchObject.OrderId }).ToList();
             return result;
         }
         public OrderlineEntity AddOrUpdateOrderline(OrderlineEntity entityObject)
@@ -317,36 +293,30 @@ namespace VinaGerman.Database.Implementation
                 "WHERE Orderline.OrderlineId=@NewOrderlineId" + Environment.NewLine;
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
+            var result = Connection.Query<OrderlineEntity>(sqlStatement, new
             {
-                var result = conn.Query<OrderlineEntity>(sqlStatement, new
-                {
-                    OrderlineId = entityObject.OrderlineId,
-                    OrderId = entityObject.OrderId,
-                    Commission = entityObject.Commission,
-                    ArticleId = entityObject.ArticleId,
-                    Quantity = entityObject.Quantity,
-                    Price = entityObject.Price,
-                    CreatedBy = entityObject.CreatedBy,
-                    CreatedDate = entityObject.CreatedDate,
-                    PayDate = entityObject.PayDate,
-                    ModifiedBy = entityObject.ModifiedBy,
-                    ModifiedDate = entityObject.ModifiedDate,
-                    CategoryId = entityObject.CategoryId,
-                    ArticleNo = entityObject.ArticleNo,
+                OrderlineId = entityObject.OrderlineId,
+                OrderId = entityObject.OrderId,
+                Commission = entityObject.Commission,
+                ArticleId = entityObject.ArticleId,
+                Quantity = entityObject.Quantity,
+                Price = entityObject.Price,
+                CreatedBy = entityObject.CreatedBy,
+                CreatedDate = entityObject.CreatedDate,
+                PayDate = entityObject.PayDate,
+                ModifiedBy = entityObject.ModifiedBy,
+                ModifiedDate = entityObject.ModifiedDate,
+                CategoryId = entityObject.CategoryId,
+                ArticleNo = entityObject.ArticleNo,
 
-                    Description = entityObject.Description,
-                    Unit = entityObject.Unit                    
-                }).ToList();
+                Description = entityObject.Description,
+                Unit = entityObject.Unit
+            }).ToList();
 
-                if(result.Count > 0)
-                    entityObject = result[0];
-                else
-                    entityObject = null;
-            }
+            if (result.Count > 0)
+                entityObject = result[0];
+            else
+                entityObject = null;
             return entityObject;
         }
         public bool DeleteOrderline(OrderlineEntity entityObject)
@@ -354,13 +324,30 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "DELETE FROM Orderline WHERE OrderlineId=@OrderlineId  " + Environment.NewLine;
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
+            var result = Connection.Query<OrderlineEntity>(sqlStatement, new
             {
-                conn.Execute(sqlStatement, new { OrderlineId = entityObject.OrderlineId });
-            }
+                OrderlineId = entityObject.OrderlineId,
+                OrderId = entityObject.OrderId,
+                Commission = entityObject.Commission,
+                ArticleId = entityObject.ArticleId,
+                Quantity = entityObject.Quantity,
+                Price = entityObject.Price,
+                CreatedBy = entityObject.CreatedBy,
+                CreatedDate = entityObject.CreatedDate,
+                PayDate = entityObject.PayDate,
+                ModifiedBy = entityObject.ModifiedBy,
+                ModifiedDate = entityObject.ModifiedDate,
+                CategoryId = entityObject.CategoryId,
+                ArticleNo = entityObject.ArticleNo,
+
+                Description = entityObject.Description,
+                Unit = entityObject.Unit
+            }).ToList();
+
+            if (result.Count > 0)
+                entityObject = result[0];
+            else
+                entityObject = null;
             return true;
         }
 
@@ -380,13 +367,7 @@ namespace VinaGerman.Database.Implementation
                 "WHERE Loan.OrderlineId=@OrderlineId" + Environment.NewLine;
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                result = conn.Query<LoanEntity>(sqlStatement, new { OrderlineId = searchObject.OrderlineId }).ToList();
-            }
+            result = Connection.Query<LoanEntity>(sqlStatement, new { OrderlineId = searchObject.OrderlineId }).ToList();
             return result;
         }
         public LoanEntity AddOrUpdateLoan(LoanEntity entityObject)
@@ -429,24 +410,18 @@ namespace VinaGerman.Database.Implementation
                 "WHERE Loan.LoanId=@NewLoanId" + Environment.NewLine;
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
+            var result = Connection.Query<LoanEntity>(sqlStatement, new
             {
-                var result = conn.Query<LoanEntity>(sqlStatement, new
-                {
-                    OrderlineId = entityObject.OrderlineId,
-                    ArticleId = entityObject.ArticleId,
-                    Quantity = entityObject.Quantity,
-                    LoanId = entityObject.LoanId
-                }).ToList();
+                OrderlineId = entityObject.OrderlineId,
+                ArticleId = entityObject.ArticleId,
+                Quantity = entityObject.Quantity,
+                LoanId = entityObject.LoanId
+            }).ToList();
 
-                if (result.Count > 0)
-                    entityObject = result[0];
-                else
-                    entityObject = null;
-            }
+            if (result.Count > 0)
+                entityObject = result[0];
+            else
+                entityObject = null;
             return entityObject;
         }
         public bool DeleteLoan(LoanEntity entityObject)
@@ -454,13 +429,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "DELETE FROM Loan WHERE LoanId=@LoanId  " + Environment.NewLine;
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                conn.Execute(sqlStatement, new { LoanId = entityObject.LoanId });
-            }
+            Connection.Execute(sqlStatement, new { LoanId = entityObject.LoanId });
             return true;
         }
     

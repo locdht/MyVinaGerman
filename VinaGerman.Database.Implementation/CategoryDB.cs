@@ -25,13 +25,7 @@ namespace VinaGerman.Database.Implementation
                 sqlStatement += "AND (Description LIKE N'%" + searchObject.SearchText + "%')" + Environment.NewLine;
             }
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                result = conn.Query<CategoryEntity>(sqlStatement).ToList();
-            }
+            result = Connection.Query<CategoryEntity>(sqlStatement).ToList();
             return result;
         }
 
@@ -59,18 +53,12 @@ namespace VinaGerman.Database.Implementation
             }
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
+            entityObject.CategoryId = Connection.ExecuteScalar<int>(sqlStatement, new
             {
-                entityObject.CategoryId = conn.ExecuteScalar<int>(sqlStatement, new
-                {
-                    CategoryId = entityObject.CategoryId,
-                    Description = entityObject.Description,
-                    Deleted = (entityObject.Deleted ? 1 : 0)
-                });
-            }
+                CategoryId = entityObject.CategoryId,
+                Description = entityObject.Description,
+                Deleted = (entityObject.Deleted ? 1 : 0)
+            });
             return entityObject;
         }
         public bool DeleteCategory(CategoryEntity entityObject)
@@ -78,13 +66,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "UPDATE Category SET Deleted=1 WHERE CategoryId=@CategoryId  " + Environment.NewLine;
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                conn.Execute(sqlStatement, new { CategoryId = entityObject.CategoryId });
-            }
+            Connection.Execute(sqlStatement, new { CategoryId = entityObject.CategoryId });
             return true;
         }
     }

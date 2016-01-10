@@ -14,15 +14,51 @@ namespace VinaGerman.Business.Implementation
     {
         public List<CompanyEntity> SearchCompanies(CompanySearchEntity searchObject)
         {
-            return Factory.Resolve<ICompanyDB>().SearchCompanies(searchObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<ICompanyDB>().SearchCompanies(searchObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }              
         }
         public CompanyEntity AddOrUpdateCompany(CompanyEntity entityObject)
         {
-            return Factory.Resolve<ICompanyDB>().AddOrUpdateCompany(entityObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<ICompanyDB>().AddOrUpdateCompany(entityObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }             
         }
         public bool DeleteCompany(CompanyEntity entityObject)
         {
-            return Factory.Resolve<ICompanyDB>().DeleteCompany(entityObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<ICompanyDB>().DeleteCompany(entityObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }             
         }
     }
 }

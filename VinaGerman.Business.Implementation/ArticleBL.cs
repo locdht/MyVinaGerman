@@ -15,31 +15,115 @@ namespace VinaGerman.Business.Implementation
     {
         public List<ArticleEntity> SearchArticle(ArticleSearchEntity searchObject)
         {
-            return Factory.Resolve<IArticleDB>().SearchArticle(searchObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IArticleDB>().SearchArticle(searchObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }            
         }
         public ArticleEntity GetArticleByID(int ID)
         {
-            return Factory.Resolve<IArticleDB>().GetArticleByID(ID);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IArticleDB>().GetArticleByID(ID);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }               
         }
         public ArticleEntity AddOrUpdateArticle(ArticleEntity entityObject)
         {
-            return Factory.Resolve<IArticleDB>().AddOrUpdateArticle(entityObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IArticleDB>().AddOrUpdateArticle(entityObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }             
         }
         public bool DeleteArticle(ArticleEntity entityObject)
         {
-            return Factory.Resolve<IArticleDB>().DeleteArticle(entityObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IArticleDB>().DeleteArticle(entityObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }             
         }
         public List<ArticleRelationEntity> GetArticleRelationsForArticle(ArticleEntity searchObject)
         {
-            return Factory.Resolve<IArticleDB>().GetArticleRelationsForArticle(searchObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IArticleDB>().GetArticleRelationsForArticle(searchObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }  
         }
         public ArticleRelationEntity AddOrUpdateArticleRelation(ArticleRelationEntity entityObject)
         {
-            return Factory.Resolve<IArticleDB>().AddOrUpdateArticleRelation(entityObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IArticleDB>().AddOrUpdateArticleRelation(entityObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }             
         }
         public bool DeleteArticleRelation(ArticleRelationEntity entityObject)
         {
-            return Factory.Resolve<IArticleDB>().DeleteArticleRelation(entityObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IArticleDB>().DeleteArticleRelation(entityObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }              
         }
     }
 }

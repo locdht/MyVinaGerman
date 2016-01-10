@@ -29,13 +29,7 @@ namespace VinaGerman.Database.Implementation
                 sqlStatement += "AND (ArticleNo LIKE N'%" + searchObject.SearchText + "%')" + Environment.NewLine;
             }
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                result = conn.Query<ArticleEntity>(sqlStatement).ToList();
-            }
+            result = Connection.Query<ArticleEntity>(sqlStatement).ToList();
             return result;
         }
 
@@ -52,13 +46,7 @@ namespace VinaGerman.Database.Implementation
                 "FROM Article " + Environment.NewLine +
                 "WHERE Deleted=0 and ArticleId=@ID" + Environment.NewLine;
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                result = conn.Query<ArticleEntity>(sqlStatement, new {ID = ID }).FirstOrDefault();
-            }
+            result = Connection.Query<ArticleEntity>(sqlStatement, new { ID = ID }).FirstOrDefault();
             return result;
         }
 
@@ -95,21 +83,15 @@ namespace VinaGerman.Database.Implementation
             }
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
+            entityObject.ArticleId = Connection.ExecuteScalar<int>(sqlStatement, new
             {
-                entityObject.ArticleId = conn.ExecuteScalar<int>(sqlStatement, new
-                {
-                    ArticleId = entityObject.ArticleId,
-                    ArticleNo = entityObject.ArticleNo,
-                    CategoryId = entityObject.CategoryId,
-                    Description = entityObject.Description,
-                    Unit = entityObject.Unit,
-                    Deleted = (entityObject.Deleted ? 1 : 0)
-                });
-            }
+                ArticleId = entityObject.ArticleId,
+                ArticleNo = entityObject.ArticleNo,
+                CategoryId = entityObject.CategoryId,
+                Description = entityObject.Description,
+                Unit = entityObject.Unit,
+                Deleted = (entityObject.Deleted ? 1 : 0)
+            });
             return entityObject;
         }
         public bool DeleteArticle(ArticleEntity entityObject)
@@ -117,13 +99,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "UPDATE Article SET Deleted=1 WHERE ArticleId=@ArticleId  " + Environment.NewLine;
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                conn.Execute(sqlStatement, new { ArticleId = entityObject.ArticleId });
-            }
+            Connection.Execute(sqlStatement, new { ArticleId = entityObject.ArticleId });
             return true;
         }
         public List<ArticleRelationEntity> GetArticleRelationsForArticle(ArticleEntity searchObject)
@@ -142,13 +118,7 @@ namespace VinaGerman.Database.Implementation
                 "WHERE Deleted=0 AND ArticleRelation.ArticleId=@ArticleId" + Environment.NewLine;
             
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                result = conn.Query<ArticleRelationEntity>(sqlStatement, new { ArticleId = searchObject.ArticleId }).ToList();
-            }
+            result = Connection.Query<ArticleRelationEntity>(sqlStatement, new { ArticleId = searchObject.ArticleId }).ToList();
             return result;
         }
         public ArticleRelationEntity AddOrUpdateArticleRelation(ArticleRelationEntity entityObject)
@@ -190,24 +160,18 @@ namespace VinaGerman.Database.Implementation
                "WHERE Deleted=0 AND ArticleRelation.ArticleRelationId=@NewArticleRelationId" + Environment.NewLine;
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
+            var result = Connection.Query<ArticleRelationEntity>(sqlStatement, new
             {
-                var result = conn.Query<ArticleRelationEntity>(sqlStatement, new
-                {
-                    ArticleId = entityObject.ArticleId,
-                    RelatedArticleId = entityObject.RelatedArticleId,
-                    Comment = entityObject.Comment,
-                    ArticleRelationId = entityObject.ArticleRelationId
-                }).ToList();
+                ArticleId = entityObject.ArticleId,
+                RelatedArticleId = entityObject.RelatedArticleId,
+                Comment = entityObject.Comment,
+                ArticleRelationId = entityObject.ArticleRelationId
+            }).ToList();
 
-                if(result.Count > 0)
-                    entityObject = result[0];
-                else
-                    entityObject = null;
-            }
+            if (result.Count > 0)
+                entityObject = result[0];
+            else
+                entityObject = null;
             return entityObject;
         }
         public bool DeleteArticleRelation(ArticleRelationEntity entityObject)
@@ -215,13 +179,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "DELETE FROM ArticleRelation WHERE ArticleRelationId=@ArticleRelationId  " + Environment.NewLine;
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                conn.Execute(sqlStatement, new { ArticleRelationId = entityObject.ArticleRelationId });
-            }
+            Connection.Execute(sqlStatement, new { ArticleRelationId = entityObject.ArticleRelationId });
             return true;
         }
     }

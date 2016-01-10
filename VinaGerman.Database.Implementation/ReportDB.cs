@@ -21,13 +21,7 @@ namespace VinaGerman.Database.Implementation
                 "WHERE ReportName=@ReportName" + Environment.NewLine;
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                result = conn.Query<OfficialNoteEntity>(sqlStatement, new { ReportName = reportName }).FirstOrDefault();
-            }
+            result = Connection.Query<OfficialNoteEntity>(sqlStatement, new { ReportName = reportName }).FirstOrDefault();
             return result;
         }
     }

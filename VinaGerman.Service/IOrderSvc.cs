@@ -16,21 +16,13 @@ namespace VinaGerman.Service
         [OperationContract]
         List<OrderEntity> SearchOrder(OrderSearchEntity searchObject);
         [OperationContract]
-        OrderEntity AddOrUpdateOrder(OrderEntity entityObject);
+        OrderEntity AddOrUpdateOrder(OrderEntity entityObjectz);
         [OperationContract]
         bool DeleteOrder(OrderEntity entityObject);
         [OperationContract]
-        List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity searchObject);
+        List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity searchObject, bool populateLoan);
         [OperationContract]
-        OrderlineEntity AddOrUpdateOrderline(OrderlineEntity entityObject);
-        [OperationContract]
-        bool DeleteOrderline(OrderlineEntity entityObject);
-        [OperationContract]
-        List<LoanEntity> GetLoansForOrderline(OrderlineEntity searchObject);
-        [OperationContract]
-        LoanEntity AddOrUpdateLoan(LoanEntity entityObject);
-        [OperationContract]
-        bool DeleteLoan(LoanEntity entityObject);
+        bool SaveOrder(OrderEntity order, List<OrderlineEntity> orderlines);
         #endregion
     }
 }

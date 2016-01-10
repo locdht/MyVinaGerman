@@ -15,40 +15,124 @@ namespace VinaGerman.Business.Implementation
     {
         public List<OrderEntity> SearchOrder(OrderSearchEntity searchObject)
         {
-            return Factory.Resolve<IOrderDB>().SearchOrder(searchObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IOrderDB>().SearchOrder(searchObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }             
         }
         public OrderEntity AddOrUpdateOrder(OrderEntity entityObject)
         {
-            return Factory.Resolve<IOrderDB>().AddOrUpdateOrder(entityObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IOrderDB>().AddOrUpdateOrder(entityObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }  
         }
         public bool DeleteOrder(OrderEntity entityObject)
         {
-            return Factory.Resolve<IOrderDB>().DeleteOrder(entityObject);
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IOrderDB>().DeleteOrder(entityObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }            
         }
-        public List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity searchObject)
+        public List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity searchObject, bool populateLoan)
         {
-            return Factory.Resolve<IOrderDB>().GetOrderlinesForOrder(searchObject);
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    var orderlines = db.Resolve<IOrderDB>().GetOrderlinesForOrder(searchObject);
+                    if (populateLoan)
+                    {
+                        for (int i = 0; orderlines != null && i < orderlines.Count; i++)
+                        {
+                            orderlines[i].LoanList = db.Resolve<IOrderDB>().GetLoansForOrderline(orderlines[i]);
+                        }
+                    }
+                    return orderlines;
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }                
         }
-        public OrderlineEntity AddOrUpdateOrderline(OrderlineEntity entityObject)
-        {
-            return Factory.Resolve<IOrderDB>().AddOrUpdateOrderline(entityObject);
-        }
-        public bool DeleteOrderline(OrderlineEntity entityObject)
-        {
-            return Factory.Resolve<IOrderDB>().DeleteOrderline(entityObject);
-        }
+        public bool SaveOrder(OrderEntity order, List<OrderlineEntity> orderlines)
+        {            
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    db.BeginTransaction();
 
-        public List<LoanEntity> GetLoansForOrderline(OrderlineEntity searchObject)
-        {
-            return Factory.Resolve<IOrderDB>().GetLoansForOrderline(searchObject);
-        }
-        public LoanEntity AddOrUpdateLoan(LoanEntity entityObject)
-        {
-            return Factory.Resolve<IOrderDB>().AddOrUpdateLoan(entityObject);
-        }
-        public bool DeleteLoan(LoanEntity entityObject)
-        {
-            return Factory.Resolve<IOrderDB>().DeleteLoan(entityObject);
+                    //save order first
+                    order = db.Resolve<IOrderDB>().AddOrUpdateOrder(order);
+
+                    //save orderlines
+                    if (order != null && order.OrderId > 0)
+                    {
+                        //save orderlines
+                        for (int i = 0; orderlines != null && i < orderlines.Count; i++)
+                        {
+                            orderlines[i].OrderId = order.OrderId;
+                            var newOrderline = db.Resolve<IOrderDB>().AddOrUpdateOrderline(orderlines[i]);
+                            if (newOrderline != null && newOrderline.OrderlineId > 0)
+                            {
+                                orderlines[i].OrderlineId = newOrderline.OrderlineId;
+                                //save loan
+                                for (int j = 0; j < orderlines[i].LoanList.Count; j++)
+                                {
+                                    orderlines[i].LoanList[j].OrderlineId = orderlines[i].OrderlineId;
+                                    var newLoan = db.Resolve<IOrderDB>().AddOrUpdateLoan(orderlines[i].LoanList[j]);
+                                    if (newLoan != null && newLoan.LoanId > 0)
+                                    {
+                                        orderlines[i].LoanList[j].LoanId = newLoan.LoanId;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    db.CommitTransaction();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    db.RollbackTransaction();
+                    throw ex;
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }
         }
     }
 }

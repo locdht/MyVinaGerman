@@ -8,7 +8,7 @@ using VinaGerman.Entity.SearchEntity;
 
 namespace VinaGerman.Database
 {
-    public interface ICompanyDB
+    public interface ICompanyDB : IBaseDB
     {
         CompanyEntity GetCompanyById(int companyId);
         List<CompanyEntity> SearchCompanies(CompanySearchEntity searchObject);

@@ -50,13 +50,7 @@ namespace VinaGerman.Database.Implementation
             }
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                result = conn.Query<CompanyEntity>(sqlStatement).ToList();
-            }
+            result = Connection.Query<CompanyEntity>(sqlStatement).ToList();
             return result;
         }
         public CompanyEntity GetCompanyById(int companyId)
@@ -78,13 +72,7 @@ namespace VinaGerman.Database.Implementation
                 "WHERE CompanyId=@CompanyId" + Environment.NewLine;
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                result = conn.Query<CompanyEntity>(sqlStatement, new { CompanyId = companyId }).FirstOrDefault();
-            }
+            result = Connection.Query<CompanyEntity>(sqlStatement, new { CompanyId = companyId }).FirstOrDefault();
             return result;
         }
         public CompanyEntity AddOrUpdateCompany(CompanyEntity entityObject)
@@ -135,26 +123,20 @@ namespace VinaGerman.Database.Implementation
             }
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
+            entityObject.CompanyId = Connection.ExecuteScalar<int>(sqlStatement, new
             {
-                entityObject.CompanyId = conn.ExecuteScalar<int>(sqlStatement, new
-                {
-                    Address = entityObject.Address,
-                    CompanyCode = entityObject.CompanyCode,
-                    CompanyId = entityObject.CompanyId,
-                    CompanyOwner = entityObject.CompanyOwner,
-                    Description = entityObject.Description,
-                    IsCustomer = (entityObject.IsCustomer ? 1 : 0),
-                    IsSupplier = (entityObject.IsSupplier ? 1 : 0),
-                    Deleted = (entityObject.Deleted ? 1 : 0),
-                    Phone = entityObject.Phone,
-                    TaxCode = entityObject.TaxCode,
-                    Website = entityObject.Website
-                });
-            }
+                Address = entityObject.Address,
+                CompanyCode = entityObject.CompanyCode,
+                CompanyId = entityObject.CompanyId,
+                CompanyOwner = entityObject.CompanyOwner,
+                Description = entityObject.Description,
+                IsCustomer = (entityObject.IsCustomer ? 1 : 0),
+                IsSupplier = (entityObject.IsSupplier ? 1 : 0),
+                Deleted = (entityObject.Deleted ? 1 : 0),
+                Phone = entityObject.Phone,
+                TaxCode = entityObject.TaxCode,
+                Website = entityObject.Website
+            });
             return entityObject;
         }
         public bool DeleteCompany(CompanyEntity entityObject)
@@ -162,13 +144,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "UPDATE Company SET Deleted=1 WHERE CompanyId=@CompanyId  " + Environment.NewLine;
 
             //execute
-            var db = GetDatabaseInstance();
-            // Get a GetSqlStringCommandWrapper to specify the query and parameters                
-            // Call the ExecuteReader method with the command.                
-            using (IDbConnection conn = db.CreateConnection())
-            {
-                conn.Execute(sqlStatement, new { CompanyId = entityObject.CompanyId });
-            }
+            Connection.Execute(sqlStatement, new { CompanyId = entityObject.CompanyId });
             return true;
         }
     }

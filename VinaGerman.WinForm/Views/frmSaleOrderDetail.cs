@@ -63,34 +63,7 @@ namespace VinaGerman.Views
             }
             else
             {
-                CurrentOrder = order;
-                var orderlines = VinaGerman.Entity.Factory.Resolve<VinaGerman.DataSource.IOrderDS>().GetOrderlinesForOrder(CurrentOrder);
-                for (int i = 0; i < orderlines.Count; i++)
-                {
-                    OrderlineList.Add(new PurchaseOrderlineEntity()
-                    {
-                        ArticleId = orderlines[i].ArticleId,
-                        ArticleNo = orderlines[i].ArticleNo,
-                        CategoryId = orderlines[i].CategoryId,
-                        Commission = orderlines[i].Commission,
-                        CreatedBy = orderlines[i].CreatedBy,
-                        CreatedDate = orderlines[i].CreatedDate,
-                        Deleted = orderlines[i].Deleted,
-                        Description = orderlines[i].Description,
-                        ModifiedBy = orderlines[i].ModifiedBy,
-                        ModifiedDate = orderlines[i].ModifiedDate,
-                        OrderId = orderlines[i].OrderId,
-                        OrderlineId = orderlines[i].OrderlineId,
-                        PaidDate = orderlines[i].PaidDate,
-                        PayDate = orderlines[i].PayDate,
-                        Price = orderlines[i].Price,
-                        Quantity = orderlines[i].Quantity,
-                        RemainingQuantity = orderlines[i].RemainingQuantity,
-                        Unit = orderlines[i].Unit,
-                        //populate loan list
-                        ChildList = new BindingList<LoanEntity>(VinaGerman.Entity.Factory.Resolve<VinaGerman.DataSource.IOrderDS>().GetLoansForOrderline(orderlines[i]))
-                    });
-                }
+                CurrentOrder = order;                
             }            
 
             StatusList = new List<KeyValuePair<int, string>>();

@@ -41,49 +41,13 @@ namespace VinaGerman.DataSource.Implementation
             channel.Dispose();
             return result;
         }
-        public List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity searchObject)
+        public List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity searchObject, bool populateLoan)
         {
             IOrderSvc channel = CreateChannel();
-            var result = channel.GetOrderlinesForOrder(searchObject);
+            var result = channel.GetOrderlinesForOrder(searchObject, populateLoan);
             channel.Dispose();
             return result;
-        }
-        public OrderlineEntity AddOrUpdateOrderline(OrderlineEntity entityObject)
-        {
-            IOrderSvc channel = CreateChannel();
-            var result = channel.AddOrUpdateOrderline(entityObject);
-            channel.Dispose();
-            return result;
-        }
-        public bool DeleteOrderline(OrderlineEntity entityObject)
-        {
-            IOrderSvc channel = CreateChannel();
-            var result = channel.DeleteOrderline(entityObject);
-            channel.Dispose();
-            return result;
-        }
-
-        public List<LoanEntity> GetLoansForOrderline(OrderlineEntity searchObject)
-        {
-            IOrderSvc channel = CreateChannel();
-            var result = channel.GetLoansForOrderline(searchObject);
-            channel.Dispose();
-            return result;
-        }
-        public LoanEntity AddOrUpdateLoan(LoanEntity entityObject)
-        {
-            IOrderSvc channel = CreateChannel();
-            var result = channel.AddOrUpdateLoan(entityObject);
-            channel.Dispose();
-            return result;
-        }
-        public bool DeleteLoan(LoanEntity entityObject)
-        {
-            IOrderSvc channel = CreateChannel();
-            var result = channel.DeleteLoan(entityObject);
-            channel.Dispose();
-            return result;
-        }
+        }       
         #endregion
     }
 }

@@ -15,20 +15,68 @@ namespace VinaGerman.Business.Implementation
     {
         public List<VinaGerman.Entity.BusinessEntity.ContactEntity> SearchContact(ContactSearchEntity searchObject)
         {
-            return Factory.Resolve<IContactDB>().SearchContact(searchObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IContactDB>().SearchContact(searchObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }             
         }
         public VinaGerman.Entity.BusinessEntity.ContactEntity AddOrUpdateContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject)
         {
-            return Factory.Resolve<IContactDB>().AddOrUpdateContact(entityObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IContactDB>().AddOrUpdateContact(entityObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }               
         }
         public bool DeleteContact(VinaGerman.Entity.BusinessEntity.ContactEntity entityObject)
         {
-            return Factory.Resolve<IContactDB>().DeleteContact(entityObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IContactDB>().DeleteContact(entityObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }                
         }
 
         public List<VinaGerman.Entity.BusinessEntity.ContactEntity> GetContactForCompany(CompanyEntity Object)
         {
-            return Factory.Resolve<IContactDB>().GetContactForCompany(Object);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IContactDB>().GetContactForCompany(Object);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }              
         }
     }
 }

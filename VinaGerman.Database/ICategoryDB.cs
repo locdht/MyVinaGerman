@@ -8,7 +8,7 @@ using VinaGerman.Entity.SearchEntity;
 
 namespace VinaGerman.Database
 {
-    public interface ICategoryDB
+    public interface ICategoryDB : IBaseDB
     {
         List<CategoryEntity> SearchCategories(CategorySearchEntity searchObject);
         CategoryEntity AddOrUpdateCategory(CategoryEntity entityObject);

@@ -8,7 +8,7 @@ using VinaGerman.Entity.SearchEntity;
 
 namespace VinaGerman.Database
 {
-    public interface IDepartmentDB
+    public interface IDepartmentDB : IBaseDB
     {
         List<DepartmentEntity> SearchDepartment(DepartmentSearchEntity searchObject);
         DepartmentEntity AddOrUpdateDepartment(DepartmentEntity entityObject);

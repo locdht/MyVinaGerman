@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -74,8 +73,8 @@ namespace VinaGerman.Entity.BusinessEntity
             Commission = 0;
             PayDate = DateTime.Now.AddDays(7);
 
-            ChildList = new BindingList<LoanEntity>();
+            LoanList = new List<LoanEntity>();
         }
-         public BindingList<LoanEntity> ChildList { get; set; }
+         public List<LoanEntity> LoanList { get; set; }
     }
 }

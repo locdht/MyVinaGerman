@@ -15,15 +15,51 @@ namespace VinaGerman.Business.Implementation
     {
         public List<IndustryEntity> SearchIndustry(IndustrySearchEntity searchObject)
         {
-            return Factory.Resolve<IIndustryDB>().SearchIndustry(searchObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IIndustryDB>().SearchIndustry(searchObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }             
         }
         public IndustryEntity AddOrUpdateIndustry(IndustryEntity entityObject)
         {
-            return Factory.Resolve<IIndustryDB>().AddOrUpdateIndustry(entityObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IIndustryDB>().AddOrUpdateIndustry(entityObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }               
         }
         public bool DeleteIndustry(IndustryEntity entityObject)
         {
-            return Factory.Resolve<IIndustryDB>().DeleteIndustry(entityObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<IIndustryDB>().DeleteIndustry(entityObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }
         }
     }
 }

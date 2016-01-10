@@ -14,15 +14,51 @@ namespace VinaGerman.Business.Implementation
     {
         public List<LocationEntity> SearchLocation(LocationSearchEntity searchObject)
         {
-            return Factory.Resolve<ILocationDB>().SearchLocation(searchObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<ILocationDB>().SearchLocation(searchObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }            
         }
         public LocationEntity AddOrUpdateLocation(LocationEntity entityObject)
         {
-            return Factory.Resolve<ILocationDB>().AddOrUpdateLocation(entityObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<ILocationDB>().AddOrUpdateLocation(entityObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }               
         }
         public bool DeleteLocation(LocationEntity entityObject)
         {
-            return Factory.Resolve<ILocationDB>().DeleteLocation(entityObject);
+            //execute
+            using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
+            {
+                try
+                {
+                    db.OpenConnection();
+                    return db.Resolve<ILocationDB>().DeleteLocation(entityObject);
+                }
+                finally
+                {
+                    db.CloseConnection();
+                }
+            }             
         }
     }
 }
