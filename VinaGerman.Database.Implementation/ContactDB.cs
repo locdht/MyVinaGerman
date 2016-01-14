@@ -33,7 +33,7 @@ namespace VinaGerman.Database.Implementation
                 sqlStatement += "AND (FullName LIKE N'%" + searchObject.SearchText + "%' OR Phone LIKE N'%" + searchObject.SearchText + "%' OR Email LIKE N'%" + searchObject.SearchText + "%' OR Address LIKE N'%" + searchObject.SearchText + "%')" + Environment.NewLine;
             }
             //execute
-            result = Connection.Query<VinaGerman.Entity.BusinessEntity.ContactEntity>(sqlStatement).ToList();
+            result = Connection.Query<VinaGerman.Entity.BusinessEntity.ContactEntity>(sqlStatement, null, Transaction).ToList();
             return result;
         }
 
@@ -94,7 +94,7 @@ namespace VinaGerman.Database.Implementation
                 Position = entityObject.Position,
                 DepartmentId = entityObject.DepartmentId,
                 Deleted = (entityObject.Deleted ? 1 : 0)
-            });
+            }, Transaction);
             return entityObject;
         }
 
@@ -103,7 +103,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "UPDATE Contact SET Deleted=1 WHERE ContactId=@ContactId  " + Environment.NewLine;
 
             //execute
-            Connection.Execute(sqlStatement, new { ContactId = entityObject.ContactId });
+            Connection.Execute(sqlStatement, new { ContactId = entityObject.ContactId }, Transaction);
             return true;
         }
 
@@ -123,7 +123,7 @@ namespace VinaGerman.Database.Implementation
                 "FROM Contact join Company on Contact.CompanyId= Company.CompanyId" + Environment.NewLine +
                 "WHERE Contact.Deleted=0 and Contact.CompanyId=@CompanyId" + Environment.NewLine;
             //execute
-            result = Connection.Query<VinaGerman.Entity.BusinessEntity.ContactEntity>(sqlStatement, new { CompanyId = hObject.CompanyId }).ToList();
+            result = Connection.Query<VinaGerman.Entity.BusinessEntity.ContactEntity>(sqlStatement, new { CompanyId = hObject.CompanyId }, Transaction).ToList();
             return result;
         }
     }

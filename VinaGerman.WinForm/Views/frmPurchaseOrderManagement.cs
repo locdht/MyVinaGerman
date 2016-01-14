@@ -20,10 +20,12 @@ namespace VinaGerman.Views
 {
     public partial class frmPurchaseOrderManagement : DevExpress.XtraEditors.XtraForm
     {
+        public MainForm OwnerForm { get; set; }
         public BindingSource source = new BindingSource();
-        public frmPurchaseOrderManagement()
+        public frmPurchaseOrderManagement(MainForm parent)
         {
             InitializeComponent();
+            OwnerForm = parent;
         }
         private DataTable CreateStatus()
         {
@@ -45,11 +47,12 @@ namespace VinaGerman.Views
 
                 lstSource = Factory.Resolve<IOrderDS>().SearchOrder(new OrderSearchEntity()
                 {
-                    SearchText = ""
+                    SearchText = "",
+                    OrderType = (int)enumOrderType.Purchase
                 });
                 if (lstSource != null && lstSource.Count > 0)
                 {
-                    source.DataSource = lstSource.Where(c => c.OrderType == (int)enumOrderType.Purchase).OrderByDescending(c => c.OrderId).ToList();
+                    source.DataSource = lstSource;
                     GridPurchase.DataSource = source;
                 }
             }
@@ -77,6 +80,20 @@ namespace VinaGerman.Views
                     else
                         XtraMessageBox.Show("Xóa thất bại", "Thông báo");
                 }
+            }
+            catch (Exception ex)
+            {
+                CustomMessageBox.ShowError(ex.Message, "Thông báo", ex);
+                Log.WriteLog(this, MethodBase.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        private void rpsHPOpen_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OrderEntity order = (OrderEntity)gvPurchase.GetFocusedRow();
+                OwnerForm.GoToView(enumView.PurchaseOrderDetail, order);
             }
             catch (Exception ex)
             {

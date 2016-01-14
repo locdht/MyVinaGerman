@@ -41,26 +41,24 @@ namespace VinaGerman.Views
         #endregion
 
         #region public method
-        public void LoadOrder(OrderEntity order = null)
+        public void LoadOrder()
         {
             //reset orderlines
             OrderlineList = new BindingList<OrderlineModel>();
             DataGrid.DataSource = OrderlineList;
-            if (order == null)
+            if (CurrentOrder == null)
             {
-                order = new OrderEntity()
+                CurrentOrder = new OrderEntity()
                 {
                     OrderType = (int)enumOrderType.Purchase,
                     CompanyId = ApplicationHelper.CurrentUserProfile.CompanyId,
                     CreatedBy = ApplicationHelper.CurrentUserProfile.ContactId,
                     ResponsibleBy = ApplicationHelper.CurrentUserProfile.ContactId,
                     OrderNumber = ""
-                };
-                CurrentOrder = order;
+                };                
             }
             else
             {
-                CurrentOrder = order;                
                 var orderlines = VinaGerman.Entity.Factory.Resolve<VinaGerman.DataSource.IOrderDS>().GetOrderlinesForOrder(CurrentOrder, true);
                 if (orderlines != null && orderlines.Count > 0)
                 {
@@ -89,7 +87,7 @@ namespace VinaGerman.Views
                         {
                             for (int j = 0; j < orderlines[i].LoanList.Count; j++)
                             {
-                                newOrderline.LoanList.Add(new LoanModel()
+                                newOrderline.ChildList.Add(new LoanModel()
                                 {
                                     LoanId = orderlines[i].LoanList[j].LoanId,
                                     OrderlineId = orderlines[i].LoanList[j].OrderlineId,                                    
@@ -132,6 +130,9 @@ namespace VinaGerman.Views
 
             this.cboStatus.Properties.DataSource = StatusList;
             this.cboStatus.EditValue = CurrentOrder.OrderStatus;
+
+            this.txtOrderDate.EditValue = CurrentOrder.OrderDate;
+            this.txtOrderNumber.Text = CurrentOrder.OrderNumber;
         }
 
         void OrderlineList_ListChanged(object sender, ListChangedEventArgs e)
@@ -148,9 +149,31 @@ namespace VinaGerman.Views
             {
                 LoadOrder();
                 //update UI
+                ExpandAllRows(MasterGridView);
                 //DataGrid.Enabled = CurrentOrder != null && CurrentOrder.OrderId > 0;
             }));
-        }        
+        }
+
+        public void ExpandAllRows(GridView View)
+        {
+            View.BeginUpdate();
+            try
+            {
+                int dataRowCount = View.DataRowCount;
+                for (int rHandle = 0; rHandle < dataRowCount; rHandle++)
+                {
+                    var data = (OrderlineModel)View.GetRow(rHandle);
+                    if (data.ChildList != null && data.ChildList.Count > 0)
+                        View.SetMasterRowExpanded(rHandle, true);
+                    else
+                        View.SetMasterRowExpanded(rHandle, false);
+                }
+            }
+            finally
+            {
+                View.EndUpdate();
+            }
+        }
 
         private void MasterGridView_MasterRowGetRelationName(object sender, DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventArgs e)
         {
@@ -193,7 +216,43 @@ namespace VinaGerman.Views
             {
                 OwnerForm.PerformActionWithLoading(new Action(() =>
                 {
-                                      
+                    List<OrderlineEntity> orderlines = new List<OrderlineEntity>();
+                    for (int i = 0; i < OrderlineList.Count; i++)
+                    {
+                        var newOrderline = new OrderlineEntity()
+                        {
+                            OrderlineId = OrderlineList[i].OrderlineId,
+                            OrderId = OrderlineList[i].OrderId,
+                            ArticleId = OrderlineList[i].ArticleId,
+                            CreatedBy = OrderlineList[i].CreatedBy,
+                            CreatedDate = OrderlineList[i].CreatedDate,
+                            ModifiedBy = OrderlineList[i].ModifiedBy,
+                            ModifiedDate = OrderlineList[i].ModifiedDate,
+                            PaidDate = OrderlineList[i].PaidDate,
+                            PayDate = OrderlineList[i].PayDate,
+                            Price = OrderlineList[i].Price,
+                            Quantity = OrderlineList[i].Quantity,
+                            RealQuantity = OrderlineList[i].RealQuantity
+                        };
+
+                        //populate loan list
+                        if (OrderlineList[i].ChildList != null && OrderlineList[i].ChildList.Count > 0)
+                        {
+                            for (int j = 0; j < OrderlineList[i].ChildList.Count; j++)
+                            {
+                                newOrderline.LoanList.Add(new LoanEntity()
+                                {
+                                    LoanId = OrderlineList[i].ChildList[j].LoanId,
+                                    OrderlineId = OrderlineList[i].ChildList[j].OrderlineId,
+                                    ArticleId = OrderlineList[i].ChildList[j].ArticleId,
+                                    Quantity = OrderlineList[i].ChildList[j].Quantity
+                                });
+                            }
+                        }
+
+                        orderlines.Add(newOrderline);
+                    }
+                    VinaGerman.Entity.Factory.Resolve<VinaGerman.DataSource.IOrderDS>().SaveOrder(CurrentOrder, orderlines);
                 }));
             }
         }

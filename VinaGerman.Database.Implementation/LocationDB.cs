@@ -24,7 +24,7 @@ namespace VinaGerman.Database.Implementation
                 "WHERE LocationId=@LocationId " + Environment.NewLine;
         
             //execute
-            result = Connection.Query<LocationEntity>(sqlStatement, new { LocationId = locationId }).FirstOrDefault();
+            result = Connection.Query<LocationEntity>(sqlStatement, new { LocationId = locationId }, Transaction).FirstOrDefault();
             return result;
         }
         public List<LocationEntity> SearchLocation(LocationSearchEntity searchObject)
@@ -44,7 +44,7 @@ namespace VinaGerman.Database.Implementation
                 sqlStatement += "AND (Description LIKE N'%" + searchObject.SearchText + "%' OR Address LIKE N'%" + searchObject.SearchText + "%')" + Environment.NewLine;
             }
             //execute
-            result = Connection.Query<LocationEntity>(sqlStatement).ToList();
+            result = Connection.Query<LocationEntity>(sqlStatement, null, Transaction).ToList();
             return result;
         }
 
@@ -86,7 +86,7 @@ namespace VinaGerman.Database.Implementation
                 CompanyId = entityObject.CompanyId,
                 Address = entityObject.Address,
                 Deleted = (entityObject.Deleted ? 1 : 0)
-            });
+            }, Transaction);
             return entityObject;
         }
         public bool DeleteLocation(LocationEntity entityObject)
@@ -94,7 +94,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "UPDATE Location SET Deleted=1 WHERE LocationId=@LocationId  " + Environment.NewLine;
 
             //execute
-            Connection.Execute(sqlStatement, new { LocationId = entityObject.LocationId });
+            Connection.Execute(sqlStatement, new { LocationId = entityObject.LocationId }, Transaction);
             return true;
         }
     }

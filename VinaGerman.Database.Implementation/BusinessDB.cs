@@ -25,7 +25,7 @@ namespace VinaGerman.Database.Implementation
                 sqlStatement += "AND (Description LIKE N'%" + searchObject.SearchText + "%')" + Environment.NewLine;
             }
             //execute
-            result = Connection.Query<BusinessEntity>(sqlStatement).ToList();
+            result = Connection.Query<BusinessEntity>(sqlStatement, null, Transaction).ToList();
             return result;
         }
 
@@ -58,7 +58,7 @@ namespace VinaGerman.Database.Implementation
                 BusinessId = entityObject.BusinessId,
                 Description = entityObject.Description,
                 Deleted = (entityObject.Deleted ? 1 : 0)
-            });
+            }, Transaction);
             return entityObject;
         }
         public bool DeleteBusiness(BusinessEntity entityObject)
@@ -66,7 +66,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "UPDATE Business SET Deleted=1 WHERE BusinessId=@BusinessId  " + Environment.NewLine;
 
             //execute
-            Connection.Execute(sqlStatement, new { BusinessId = entityObject.BusinessId });
+            Connection.Execute(sqlStatement, new { BusinessId = entityObject.BusinessId }, Transaction);
             return true;
         }
     }

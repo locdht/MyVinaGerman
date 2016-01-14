@@ -29,7 +29,7 @@ namespace VinaGerman.Database.Implementation
                 sqlStatement += "AND (ArticleNo LIKE N'%" + searchObject.SearchText + "%')" + Environment.NewLine;
             }
             //execute
-            result = Connection.Query<ArticleEntity>(sqlStatement).ToList();
+            result = Connection.Query<ArticleEntity>(sqlStatement, null, Transaction).ToList();
             return result;
         }
 
@@ -46,7 +46,7 @@ namespace VinaGerman.Database.Implementation
                 "FROM Article " + Environment.NewLine +
                 "WHERE Deleted=0 and ArticleId=@ID" + Environment.NewLine;
             //execute
-            result = Connection.Query<ArticleEntity>(sqlStatement, new { ID = ID }).FirstOrDefault();
+            result = Connection.Query<ArticleEntity>(sqlStatement, new { ID = ID }, Transaction).FirstOrDefault();
             return result;
         }
 
@@ -91,7 +91,7 @@ namespace VinaGerman.Database.Implementation
                 Description = entityObject.Description,
                 Unit = entityObject.Unit,
                 Deleted = (entityObject.Deleted ? 1 : 0)
-            });
+            }, Transaction);
             return entityObject;
         }
         public bool DeleteArticle(ArticleEntity entityObject)
@@ -99,7 +99,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "UPDATE Article SET Deleted=1 WHERE ArticleId=@ArticleId  " + Environment.NewLine;
 
             //execute
-            Connection.Execute(sqlStatement, new { ArticleId = entityObject.ArticleId });
+            Connection.Execute(sqlStatement, new { ArticleId = entityObject.ArticleId }, Transaction);
             return true;
         }
         public List<ArticleRelationEntity> GetArticleRelationsForArticle(ArticleEntity searchObject)
@@ -118,7 +118,7 @@ namespace VinaGerman.Database.Implementation
                 "WHERE Deleted=0 AND ArticleRelation.ArticleId=@ArticleId" + Environment.NewLine;
             
             //execute
-            result = Connection.Query<ArticleRelationEntity>(sqlStatement, new { ArticleId = searchObject.ArticleId }).ToList();
+            result = Connection.Query<ArticleRelationEntity>(sqlStatement, new { ArticleId = searchObject.ArticleId }, Transaction).ToList();
             return result;
         }
         public ArticleRelationEntity AddOrUpdateArticleRelation(ArticleRelationEntity entityObject)
@@ -166,7 +166,7 @@ namespace VinaGerman.Database.Implementation
                 RelatedArticleId = entityObject.RelatedArticleId,
                 Comment = entityObject.Comment,
                 ArticleRelationId = entityObject.ArticleRelationId
-            }).ToList();
+            }, Transaction).ToList();
 
             if (result.Count > 0)
                 entityObject = result[0];
@@ -179,7 +179,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "DELETE FROM ArticleRelation WHERE ArticleRelationId=@ArticleRelationId  " + Environment.NewLine;
 
             //execute
-            Connection.Execute(sqlStatement, new { ArticleRelationId = entityObject.ArticleRelationId });
+            Connection.Execute(sqlStatement, new { ArticleRelationId = entityObject.ArticleRelationId }, Transaction);
             return true;
         }
     }

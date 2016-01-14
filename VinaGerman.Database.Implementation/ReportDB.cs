@@ -21,7 +21,7 @@ namespace VinaGerman.Database.Implementation
                 "WHERE ReportName=@ReportName" + Environment.NewLine;
 
             //execute
-            result = Connection.Query<OfficialNoteEntity>(sqlStatement, new { ReportName = reportName }).FirstOrDefault();
+            result = Connection.Query<OfficialNoteEntity>(sqlStatement, new { ReportName = reportName }, Transaction).FirstOrDefault();
             return result;
         }
     }

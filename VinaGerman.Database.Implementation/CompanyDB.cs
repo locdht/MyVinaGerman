@@ -50,7 +50,7 @@ namespace VinaGerman.Database.Implementation
             }
 
             //execute
-            result = Connection.Query<CompanyEntity>(sqlStatement).ToList();
+            result = Connection.Query<CompanyEntity>(sqlStatement, null, Transaction).ToList();
             return result;
         }
         public CompanyEntity GetCompanyById(int companyId)
@@ -72,7 +72,7 @@ namespace VinaGerman.Database.Implementation
                 "WHERE CompanyId=@CompanyId" + Environment.NewLine;
 
             //execute
-            result = Connection.Query<CompanyEntity>(sqlStatement, new { CompanyId = companyId }).FirstOrDefault();
+            result = Connection.Query<CompanyEntity>(sqlStatement, new { CompanyId = companyId }, Transaction).FirstOrDefault();
             return result;
         }
         public CompanyEntity AddOrUpdateCompany(CompanyEntity entityObject)
@@ -136,7 +136,7 @@ namespace VinaGerman.Database.Implementation
                 Phone = entityObject.Phone,
                 TaxCode = entityObject.TaxCode,
                 Website = entityObject.Website
-            });
+            }, Transaction);
             return entityObject;
         }
         public bool DeleteCompany(CompanyEntity entityObject)
@@ -144,7 +144,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "UPDATE Company SET Deleted=1 WHERE CompanyId=@CompanyId  " + Environment.NewLine;
 
             //execute
-            Connection.Execute(sqlStatement, new { CompanyId = entityObject.CompanyId });
+            Connection.Execute(sqlStatement, new { CompanyId = entityObject.CompanyId }, Transaction);
             return true;
         }
     }

@@ -25,7 +25,7 @@ namespace VinaGerman.Database.Implementation
                 sqlStatement += "AND (Description LIKE N'%" + searchObject.SearchText + "%')" + Environment.NewLine;
             }
             //execute
-            result = Connection.Query<CategoryEntity>(sqlStatement).ToList();
+            result = Connection.Query<CategoryEntity>(sqlStatement, null, Transaction).ToList();
             return result;
         }
 
@@ -58,7 +58,7 @@ namespace VinaGerman.Database.Implementation
                 CategoryId = entityObject.CategoryId,
                 Description = entityObject.Description,
                 Deleted = (entityObject.Deleted ? 1 : 0)
-            });
+            }, Transaction);
             return entityObject;
         }
         public bool DeleteCategory(CategoryEntity entityObject)
@@ -66,7 +66,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "UPDATE Category SET Deleted=1 WHERE CategoryId=@CategoryId  " + Environment.NewLine;
 
             //execute
-            Connection.Execute(sqlStatement, new { CategoryId = entityObject.CategoryId });
+            Connection.Execute(sqlStatement, new { CategoryId = entityObject.CategoryId }, Transaction);
             return true;
         }
     }

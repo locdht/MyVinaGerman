@@ -48,7 +48,7 @@ namespace VinaGerman.Database.Implementation
                 DatabaseProvider.AddInParameter(sqlCmd, "UserName", DbType.String, sUserName);
                                 
                 // Call the ExecuteReader method with the command.                
-                list = Connection.Query<UserProfileEntity>(sqlStatement, new { UserName = sUserName });
+                list = Connection.Query<UserProfileEntity>(sqlStatement, new { UserName = sUserName }, Transaction);
             }
             return list.FirstOrDefault<UserProfileEntity>();
         }
@@ -99,7 +99,7 @@ namespace VinaGerman.Database.Implementation
                 "FROM UserAccount JOIN Contact ON UserAccount.UserAccountId=Contact.UserAccountId" + Environment.NewLine +
                 "WHERE UserName=@UserName AND Password=@Password" + Environment.NewLine;
 
-            list = Connection.Query<UserProfileEntity>(sqlStatement, new { UserName = sUserName, Password = MD5Hash(sPassword) });
+            list = Connection.Query<UserProfileEntity>(sqlStatement, new { UserName = sUserName, Password = MD5Hash(sPassword) }, Transaction);
             result = list.FirstOrDefault<UserProfileEntity>();
             if (result != null)
             {

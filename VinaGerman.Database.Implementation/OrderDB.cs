@@ -173,7 +173,7 @@ namespace VinaGerman.Database.Implementation
                 CustomerContactId = entityObject.CustomerContactId,
                 OrderNumber = entityObject.OrderNumber,
                 Description = entityObject.Description
-            }).ToList();
+            }, Transaction).ToList();
 
             if (result.Count > 0)
                 entityObject = result[0];
@@ -186,7 +186,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "UPDATE [Order] SET Deleted=1 WHERE OrderId=@OrderId  " + Environment.NewLine;
 
             //execute
-            Connection.Execute(sqlStatement, new { OrderId = entityObject.OrderId });
+            Connection.Execute(sqlStatement, new { OrderId = entityObject.OrderId }, Transaction);
             return true;
         }
         public List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity searchObject)
@@ -212,7 +212,7 @@ namespace VinaGerman.Database.Implementation
                 "WHERE Deleted=0 AND Orderline.OrderId=@OrderId" + Environment.NewLine;
             
             //execute
-            result = Connection.Query<OrderlineEntity>(sqlStatement, new { OrderId = searchObject.OrderId }).ToList();
+            result = Connection.Query<OrderlineEntity>(sqlStatement, new { OrderId = searchObject.OrderId }, Transaction).ToList();
             return result;
         }
         public OrderlineEntity AddOrUpdateOrderline(OrderlineEntity entityObject)
@@ -311,7 +311,7 @@ namespace VinaGerman.Database.Implementation
 
                 Description = entityObject.Description,
                 Unit = entityObject.Unit
-            }).ToList();
+            }, Transaction).ToList();
 
             if (result.Count > 0)
                 entityObject = result[0];
@@ -342,7 +342,7 @@ namespace VinaGerman.Database.Implementation
 
                 Description = entityObject.Description,
                 Unit = entityObject.Unit
-            }).ToList();
+            }, Transaction).ToList();
 
             if (result.Count > 0)
                 entityObject = result[0];
@@ -367,7 +367,7 @@ namespace VinaGerman.Database.Implementation
                 "WHERE Loan.OrderlineId=@OrderlineId" + Environment.NewLine;
 
             //execute
-            result = Connection.Query<LoanEntity>(sqlStatement, new { OrderlineId = searchObject.OrderlineId }).ToList();
+            result = Connection.Query<LoanEntity>(sqlStatement, new { OrderlineId = searchObject.OrderlineId }, Transaction).ToList();
             return result;
         }
         public LoanEntity AddOrUpdateLoan(LoanEntity entityObject)
@@ -416,7 +416,7 @@ namespace VinaGerman.Database.Implementation
                 ArticleId = entityObject.ArticleId,
                 Quantity = entityObject.Quantity,
                 LoanId = entityObject.LoanId
-            }).ToList();
+            }, Transaction).ToList();
 
             if (result.Count > 0)
                 entityObject = result[0];
@@ -429,7 +429,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "DELETE FROM Loan WHERE LoanId=@LoanId  " + Environment.NewLine;
 
             //execute
-            Connection.Execute(sqlStatement, new { LoanId = entityObject.LoanId });
+            Connection.Execute(sqlStatement, new { LoanId = entityObject.LoanId }, Transaction);
             return true;
         }
     

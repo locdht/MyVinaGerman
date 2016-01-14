@@ -59,7 +59,7 @@ namespace VinaGerman.Entity.BusinessEntity
         [DataMember]
         public DateTime ModifiedDate { get; set; }
 
-         public OrderlineEntity()
+        public OrderlineEntity()
         {
             OrderlineId = -1;
             OrderId = -1;
@@ -75,6 +75,8 @@ namespace VinaGerman.Entity.BusinessEntity
 
             LoanList = new List<LoanEntity>();
         }
-         public List<LoanEntity> LoanList { get; set; }
+
+        [DataMember]
+        public List<LoanEntity> LoanList { get; set; }
     }
 }

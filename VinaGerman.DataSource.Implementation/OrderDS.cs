@@ -47,7 +47,14 @@ namespace VinaGerman.DataSource.Implementation
             var result = channel.GetOrderlinesForOrder(searchObject, populateLoan);
             channel.Dispose();
             return result;
-        }       
+        }
+        public bool SaveOrder(OrderEntity order, List<OrderlineEntity> orderlines)
+        {
+            IOrderSvc channel = CreateChannel();
+            var result = channel.SaveOrder(order, orderlines);
+            channel.Dispose();
+            return result;
+        }
         #endregion
     }
 }

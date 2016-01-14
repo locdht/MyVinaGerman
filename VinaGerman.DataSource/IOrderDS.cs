@@ -17,7 +17,8 @@ namespace VinaGerman.DataSource
         List<OrderEntity> SearchOrder(OrderSearchEntity searchObject);
         OrderEntity AddOrUpdateOrder(OrderEntity entityObject);
         bool DeleteOrder(OrderEntity entityObject);
-        List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity searchObject, bool populateLoan);        
+        List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity searchObject, bool populateLoan);
+        bool SaveOrder(OrderEntity order, List<OrderlineEntity> orderlines);
         #endregion
     
     }

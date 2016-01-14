@@ -39,19 +39,22 @@
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.rpsLKStatus = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.rpsHPLDel = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
+            this.colOpen = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.rpsHPOpen = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.rpsLoaiHang = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
             this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.rpsHPLDel = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridPurchase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvPurchase)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rpsLKStatus)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rpsHPLDel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rpsHPOpen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rpsLoaiHang)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rpsHPLDel)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl2
@@ -72,7 +75,8 @@
             this.GridPurchase.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rpsLoaiHang,
             this.rpsLKStatus,
-            this.rpsHPLDel});
+            this.rpsHPLDel,
+            this.rpsHPOpen});
             this.GridPurchase.Size = new System.Drawing.Size(733, 386);
             this.GridPurchase.TabIndex = 2;
             this.GridPurchase.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -87,7 +91,8 @@
             this.gridColumn4,
             this.gridColumn5,
             this.gridColumn8,
-            this.gridColumn9});
+            this.gridColumn9,
+            this.colOpen});
             this.gvPurchase.GridControl = this.GridPurchase;
             this.gvPurchase.Name = "gvPurchase";
             this.gvPurchase.OptionsView.ShowAutoFilterRow = true;
@@ -198,6 +203,37 @@
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 6;
             // 
+            // rpsHPLDel
+            // 
+            this.rpsHPLDel.Appearance.ForeColor = System.Drawing.Color.Red;
+            this.rpsHPLDel.Appearance.Options.UseForeColor = true;
+            this.rpsHPLDel.AutoHeight = false;
+            this.rpsHPLDel.Caption = "Xóa";
+            this.rpsHPLDel.Name = "rpsHPLDel";
+            this.rpsHPLDel.Click += new System.EventHandler(this.rpsHPLDel_Click);
+            // 
+            // colOpen
+            // 
+            this.colOpen.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.colOpen.AppearanceCell.Options.UseFont = true;
+            this.colOpen.AppearanceCell.Options.UseTextOptions = true;
+            this.colOpen.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colOpen.Caption = "#";
+            this.colOpen.ColumnEdit = this.rpsHPOpen;
+            this.colOpen.FieldName = "OrderId";
+            this.colOpen.Name = "colOpen";
+            this.colOpen.Visible = true;
+            this.colOpen.VisibleIndex = 7;
+            // 
+            // rpsHPOpen
+            // 
+            this.rpsHPOpen.Appearance.ForeColor = System.Drawing.Color.Red;
+            this.rpsHPOpen.Appearance.Options.UseForeColor = true;
+            this.rpsHPOpen.AutoHeight = false;
+            this.rpsHPOpen.Caption = "Chi tiết";
+            this.rpsHPOpen.Name = "rpsHPOpen";
+            this.rpsHPOpen.Click += new System.EventHandler(this.rpsHPOpen_Click);
+            // 
             // rpsLoaiHang
             // 
             this.rpsLoaiHang.AutoHeight = false;
@@ -233,15 +269,6 @@
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 0;
             // 
-            // rpsHPLDel
-            // 
-            this.rpsHPLDel.Appearance.ForeColor = System.Drawing.Color.Red;
-            this.rpsHPLDel.Appearance.Options.UseForeColor = true;
-            this.rpsHPLDel.AutoHeight = false;
-            this.rpsHPLDel.Caption = "Xóa";
-            this.rpsHPLDel.Name = "rpsHPLDel";
-            this.rpsHPLDel.Click += new System.EventHandler(this.rpsHPLDel_Click);
-            // 
             // frmPurchaseOrderManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -256,9 +283,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.GridPurchase)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvPurchase)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rpsLKStatus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rpsHPLDel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rpsHPOpen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rpsLoaiHang)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rpsHPLDel)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -281,5 +309,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemSearchLookUpEdit1View;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit rpsHPOpen;
+        private DevExpress.XtraGrid.Columns.GridColumn colOpen;
     }
 }

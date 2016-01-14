@@ -28,7 +28,7 @@ namespace VinaGerman.Database.Implementation
                 sqlStatement += "AND (Description LIKE N'%" + searchObject.SearchText + "%' OR Phone LIKE N'%" + searchObject.SearchText + "%')" + Environment.NewLine;
             }
             //execute
-            result = Connection.Query<DepartmentEntity>(sqlStatement).ToList();
+            result = Connection.Query<DepartmentEntity>(sqlStatement, null, Transaction).ToList();
             return result;
         }
 
@@ -69,7 +69,7 @@ namespace VinaGerman.Database.Implementation
                 Description = entityObject.Description,
                 CompanyId = entityObject.CompanyId,
                 Deleted = (entityObject.Deleted ? 1 : 0)
-            });
+            }, Transaction);
             return entityObject;
         }
         public bool DeleteDepartment(DepartmentEntity entityObject)
@@ -77,7 +77,7 @@ namespace VinaGerman.Database.Implementation
             string sqlStatement = "UPDATE Department SET Deleted=1 WHERE DepartmentId=@DepartmentId  " + Environment.NewLine;
 
             //execute
-            Connection.Execute(sqlStatement, new { DepartmentId = entityObject.DepartmentId });
+            Connection.Execute(sqlStatement, new { DepartmentId = entityObject.DepartmentId }, Transaction);
             return true;
         }
     }

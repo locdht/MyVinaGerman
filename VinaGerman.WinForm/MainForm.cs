@@ -189,12 +189,17 @@ namespace VinaGerman
             }
         }
 
-        public void GoToView(enumView view)
+        public void GoToView(enumView view, object parameter = null)
         {
             switch (view)
             {
                 case enumView.CompanyManagement:
                     fncCallFormInTab(new frmCompanyManagement());
+                    break;
+                case enumView.PurchaseOrderDetail:
+                    var frm = new frmPurchaseOrderDetail(this);
+                    frm.CurrentOrder = (VinaGerman.Entity.BusinessEntity.OrderEntity)parameter;
+                    fncCallFormInTab(frm);
                     break;
                 default: break;
             }
@@ -245,7 +250,7 @@ namespace VinaGerman
                     fncCallFormInTab(new frmSaleOrderDetail(this));
                     break;
                 case "barButtonTraCuuPhieuNhapHang":
-                    fncCallFormInTab(new frmPurchaseOrderManagement());
+                    fncCallFormInTab(new frmPurchaseOrderManagement(this));
                     break;
                 case "barButtonTraCuuPhieuBanHang":
                     fncCallFormInTab(new frmSaleOrderManagement());
