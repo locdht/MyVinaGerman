@@ -22,7 +22,7 @@ namespace VinaGerman.Service
         [OperationContract]
         List<OrderlineEntity> GetOrderlinesForOrder(OrderEntity searchObject, bool populateLoan);
         [OperationContract]
-        bool SaveOrder(OrderEntity order, List<OrderlineEntity> orderlines);
+        OrderEntity SaveOrder(OrderEntity order, List<OrderlineEntity> orderlines);
         #endregion
     }
 }

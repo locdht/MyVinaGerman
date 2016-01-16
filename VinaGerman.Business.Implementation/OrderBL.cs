@@ -83,7 +83,7 @@ namespace VinaGerman.Business.Implementation
                 }
             }                
         }
-        public bool SaveOrder(OrderEntity order, List<OrderlineEntity> orderlines)
+        public OrderEntity SaveOrder(OrderEntity order, List<OrderlineEntity> orderlines)
         {            
             using (var db = VinaGerman.Database.VinagermanDatabase.GetDatabaseInstance())
             {
@@ -121,7 +121,7 @@ namespace VinaGerman.Business.Implementation
                     }
 
                     db.CommitTransaction();
-                    return true;
+                    return order;
                 }
                 catch (Exception ex)
                 {

@@ -51,8 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OrderDB.cs" />
     <Compile Include="ArticleDB.cs" />
+    <Compile Include="OrderDB.cs" />
     <Compile Include="BaseDB.cs" />
     <Compile Include="BusinessDB.cs" />
     <Compile Include="CategoryDB.cs" />

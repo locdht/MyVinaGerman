@@ -37,7 +37,7 @@ namespace VinaGerman.Service.Implementation
         {
             return Factory.Resolve<IOrderBL>().GetOrderlinesForOrder(order, populateLoan);
         }
-        public bool SaveOrder(OrderEntity order, List<OrderlineEntity> orderlines)
+        public OrderEntity SaveOrder(OrderEntity order, List<OrderlineEntity> orderlines)
         {
             return Factory.Resolve<IOrderBL>().SaveOrder(order, orderlines);
         }

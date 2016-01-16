@@ -51,6 +51,7 @@ namespace VinaGerman.Views
                 CurrentOrder = new OrderEntity()
                 {
                     OrderType = (int)enumOrderType.Purchase,
+                    OrderDate = DateTime.Now,
                     CompanyId = ApplicationHelper.CurrentUserProfile.CompanyId,
                     CreatedBy = ApplicationHelper.CurrentUserProfile.ContactId,
                     ResponsibleBy = ApplicationHelper.CurrentUserProfile.ContactId,
@@ -69,8 +70,7 @@ namespace VinaGerman.Views
                             OrderlineId = orderlines[i].OrderlineId,
                             OrderId = orderlines[i].OrderId,
                             ArticleId = orderlines[i].ArticleId,
-                            CreatedBy = orderlines[i].CreatedBy,
-                            CreatedDate = orderlines[i].CreatedDate,
+                            CreatedBy = orderlines[i].CreatedBy,                            
                             ModifiedBy = orderlines[i].ModifiedBy,
                             ModifiedDate = orderlines[i].ModifiedDate,
                             PaidDate = orderlines[i].PaidDate,
@@ -133,6 +133,8 @@ namespace VinaGerman.Views
 
             this.txtOrderDate.EditValue = CurrentOrder.OrderDate;
             this.txtOrderNumber.Text = CurrentOrder.OrderNumber;
+
+            ExpandAllRows(MasterGridView);
         }
 
         void OrderlineList_ListChanged(object sender, ListChangedEventArgs e)
@@ -147,10 +149,7 @@ namespace VinaGerman.Views
         {
             OwnerForm.PerformActionWithLoading(new Action(() =>
             {
-                LoadOrder();
-                //update UI
-                ExpandAllRows(MasterGridView);
-                //DataGrid.Enabled = CurrentOrder != null && CurrentOrder.OrderId > 0;
+                LoadOrder();                
             }));
         }
 
@@ -207,6 +206,16 @@ namespace VinaGerman.Views
                 VinaGerman.Utilities.Utils.ShowMsg("Thiếu thông tin ngành nghề!");
                 return false;
             }
+            //populate current value to order
+            CurrentOrder.ModifiedBy = ApplicationHelper.CurrentUserProfile.ContactId;
+            CurrentOrder.OrderDate = (DateTime)txtOrderDate.EditValue;
+            CurrentOrder.OrderStatus = (int)cboStatus.EditValue;
+            CurrentOrder.BusinessId = (int)cboStatus.EditValue;
+            CurrentOrder.IndustryId = (int)cboStatus.EditValue;
+            CurrentOrder.ResponsibleBy = (int)cboStatus.EditValue;
+            CurrentOrder.OrderType = (int)enumOrderType.Purchase;
+            CurrentOrder.OrderStatus = (int)cboStatus.EditValue;
+            CurrentOrder.CustomerCompanyId = (int)cboCustomer.EditValue;
             return true;
         }
 
@@ -224,10 +233,8 @@ namespace VinaGerman.Views
                             OrderlineId = OrderlineList[i].OrderlineId,
                             OrderId = OrderlineList[i].OrderId,
                             ArticleId = OrderlineList[i].ArticleId,
-                            CreatedBy = OrderlineList[i].CreatedBy,
-                            CreatedDate = OrderlineList[i].CreatedDate,
-                            ModifiedBy = OrderlineList[i].ModifiedBy,
-                            ModifiedDate = OrderlineList[i].ModifiedDate,
+                            CreatedBy = OrderlineList[i].CreatedBy,                            
+                            ModifiedBy = OrderlineList[i].ModifiedBy,                            
                             PaidDate = OrderlineList[i].PaidDate,
                             PayDate = OrderlineList[i].PayDate,
                             Price = OrderlineList[i].Price,
@@ -252,7 +259,17 @@ namespace VinaGerman.Views
 
                         orderlines.Add(newOrderline);
                     }
-                    VinaGerman.Entity.Factory.Resolve<VinaGerman.DataSource.IOrderDS>().SaveOrder(CurrentOrder, orderlines);
+                    
+                    var order = VinaGerman.Entity.Factory.Resolve<VinaGerman.DataSource.IOrderDS>().SaveOrder(CurrentOrder, orderlines);
+                    if (order != null && order.OrderId > 0)
+                    {
+                        CurrentOrder = order;
+                        LoadOrder();
+                    }
+                    else
+                    {
+                        VinaGerman.Utilities.Utils.ShowError("Lưu phiếu nhập kho không thành công!");
+                    }
                 }));
             }
         }
@@ -281,6 +298,7 @@ namespace VinaGerman.Views
                 OwnerForm.PerformActionWithLoading(new Action(() =>
                 {
                     var entityObject = (OrderlineModel)e.Row;
+                    entityObject.CreatedBy = ApplicationHelper.CurrentUserProfile.ContactId;
                     //get article relation
                     var relatedArticleList = VinaGerman.Entity.Factory.Resolve<VinaGerman.DataSource.IBaseDataDS>().GetArticleRelationsForArticle(new VinaGerman.Entity.DatabaseEntity.ArticleEntity() { ArticleId = entityObject.ArticleId });
                     if (relatedArticleList != null && relatedArticleList.Count > 0)
@@ -292,7 +310,7 @@ namespace VinaGerman.Views
                                 ArticleId = relatedArticleList[i].ArticleId,
                                 Description = relatedArticleList[i].Description,
                                 ArticleNo = relatedArticleList[i].ArticleNo,
-                                CategoryId = relatedArticleList[i].CategoryId,
+                                CategoryId = relatedArticleList[i].CategoryId,                                
                                 Quantity = 0
                             });
                         }

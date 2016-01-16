@@ -37,11 +37,12 @@ namespace VinaGerman.Database.Implementation
                 "Industry.Description as IndustryName," + Environment.NewLine +
                 "Contact.FullName as CustomerContactName," + Environment.NewLine +
                 "ResponsibleContact.FullName as ResponsibleContactName" + Environment.NewLine +
-                "FROM [Order] join Company on [Order].CustomerCompanyId = Company.CompanyId join Contact on [Order].CustomerContactId = Contact.ContactId" + Environment.NewLine +
-                "join Contact ResponsibleContact on [Order].ResponsibleBy = ResponsibleContact.ContactId" + Environment.NewLine +
+                "FROM [Order] join Company on [Order].CustomerCompanyId = Company.CompanyId " + Environment.NewLine +
+                "left join Contact on [Order].CustomerContactId = Contact.ContactId" + Environment.NewLine +
+                "left join Contact ResponsibleContact on [Order].ResponsibleBy = ResponsibleContact.ContactId" + Environment.NewLine +
+                "left join Location on [Order].LocationId = Location.LocationId" + Environment.NewLine +
                 "join Business on [Order].BusinessId = Business.BusinessId" + Environment.NewLine +
-                "join Industry on [Order].IndustryId = Industry.IndustryId" + Environment.NewLine +
-                "join Location on [Order].LocationId = Location.LocationId" + Environment.NewLine +
+                "join Industry on [Order].IndustryId = Industry.IndustryId" + Environment.NewLine +                
                 "WHERE 1=1 " + Environment.NewLine;
             if (searchObject.SearchText != null && searchObject.SearchText.Length > 0)
             {
@@ -85,10 +86,10 @@ namespace VinaGerman.Database.Implementation
                 "OrderType=@OrderType," + Environment.NewLine +
                 "BusinessId=@BusinessId," + Environment.NewLine +
                 "IndustryId=@IndustryId," + Environment.NewLine +
-                "CreatedBy=@CreatedBy," + Environment.NewLine +
+                "ModifiedBy=@ModifiedBy," + Environment.NewLine +
+                "ModifiedDate=GETDATE()," + Environment.NewLine +
                 "ResponsibleBy=@ResponsibleBy," + Environment.NewLine +
-                "OrderDate=@OrderDate," + Environment.NewLine +
-                "CreatedDate=@CreatedDate," + Environment.NewLine +
+                "OrderDate=@OrderDate," + Environment.NewLine +                
                 "CompanyId=@CompanyId," + Environment.NewLine +
                 "LocationId=@LocationId," + Environment.NewLine +
                 "OrderStatus=@OrderStatus," + Environment.NewLine +
@@ -106,9 +107,11 @@ namespace VinaGerman.Database.Implementation
                 "BusinessId," + Environment.NewLine +
                 "IndustryId," + Environment.NewLine +
                 "CreatedBy," + Environment.NewLine +
+                "ModifiedBy," + Environment.NewLine +
                 "ResponsibleBy, " + Environment.NewLine +
                 "OrderDate," + Environment.NewLine +
                 "CreatedDate," + Environment.NewLine +
+                "ModifiedDate," + Environment.NewLine +
                 "CompanyId," + Environment.NewLine +
                 "LocationId," + Environment.NewLine +
                 "CustomerCompanyId," + Environment.NewLine +
@@ -121,9 +124,11 @@ namespace VinaGerman.Database.Implementation
                 "@BusinessId," + Environment.NewLine +
                 "@IndustryId," + Environment.NewLine +
                 "@CreatedBy," + Environment.NewLine +
+                "@ModifiedBy," + Environment.NewLine +
                 "@ResponsibleBy," + Environment.NewLine +
                 "@OrderDate," + Environment.NewLine +
-                "@CreatedDate," + Environment.NewLine +
+                "GETDATE()," + Environment.NewLine +
+                "GETDATE()," + Environment.NewLine +
                 "@CompanyId," + Environment.NewLine +
                 "@LocationId," + Environment.NewLine +
                 "@CustomerCompanyId," + Environment.NewLine +
@@ -142,9 +147,11 @@ namespace VinaGerman.Database.Implementation
                 "[Order].BusinessId," + Environment.NewLine +
                 "[Order].IndustryId," + Environment.NewLine +
                 "[Order].CreatedBy," + Environment.NewLine +
+                "[Order].ModifiedBy," + Environment.NewLine +
                 "[Order].ResponsibleBy," + Environment.NewLine +
                 "[Order].OrderDate," + Environment.NewLine +
-                "[Order].CreatedDate," + Environment.NewLine +
+                "[Order].CreatedDate," + Environment.NewLine +                
+                "[Order].ModifiedDate," + Environment.NewLine +
                 "[Order].CompanyId," + Environment.NewLine +
                 "[Order].LocationId," + Environment.NewLine +
                 "[Order].CustomerCompanyId," + Environment.NewLine +
@@ -163,10 +170,10 @@ namespace VinaGerman.Database.Implementation
                 BusinessId = entityObject.BusinessId,
                 IndustryId = entityObject.IndustryId,
                 CreatedBy = entityObject.CreatedBy,
+                ModifiedBy = entityObject.ModifiedBy,
                 ResponsibleBy = entityObject.ResponsibleBy,
                 OrderStatus = entityObject.OrderStatus,
-                OrderDate = entityObject.OrderDate,
-                CreatedDate = entityObject.CreatedDate,
+                OrderDate = entityObject.OrderDate,                
                 CompanyId = entityObject.CompanyId,
                 LocationId = entityObject.LocationId,
                 CustomerCompanyId = entityObject.CustomerCompanyId,
@@ -200,7 +207,7 @@ namespace VinaGerman.Database.Implementation
                 "Orderline.Quantity," + Environment.NewLine +
                 "Orderline.Price," + Environment.NewLine +
                 "Orderline.CreatedBy," + Environment.NewLine +
-                "Orderline.CreatedDate," + Environment.NewLine +
+                "Orderline.CreatedDate," + Environment.NewLine +                
                 "Orderline.ModifiedBy," + Environment.NewLine +
                 "Orderline.ModifiedDate," + Environment.NewLine +
                 "Orderline.PayDate," + Environment.NewLine +
@@ -231,11 +238,9 @@ namespace VinaGerman.Database.Implementation
                 "ArticleId=@ArticleId, " + Environment.NewLine +
                 "Quantity=@Quantity, " + Environment.NewLine +
                 "Price=@Price, " + Environment.NewLine +
-                "CreatedBy=@CreatedBy, " + Environment.NewLine +
                 "PayDate=@PayDate, " + Environment.NewLine +
-                "CreatedDate=@CreatedDate, " + Environment.NewLine +
                 "ModifiedBy=@ModifiedBy, " + Environment.NewLine +
-                "ModifiedDate=@ModifiedDate " + Environment.NewLine +
+                "ModifiedDate=GETDATE() " + Environment.NewLine +
                 "WHERE OrderlineId=@OrderlineId " + Environment.NewLine +
                 "SET @NewOrderlineId = @OrderlineId " + Environment.NewLine;
             }
@@ -263,9 +268,9 @@ namespace VinaGerman.Database.Implementation
                 "@Price," + Environment.NewLine +
                 "@CreatedBy," + Environment.NewLine +
                 "@PayDate," + Environment.NewLine +
-                "@CreatedDate," + Environment.NewLine +
+                "GETDATE()," + Environment.NewLine +
                 "@ModifiedBy," + Environment.NewLine +
-                "@ModifiedDate)" + Environment.NewLine +
+                "GETDATE())" + Environment.NewLine +
                 "SET @NewOrderlineId = (SELECT SCOPE_IDENTITY()) " + Environment.NewLine;
 
                 //also insert default loans if needed
@@ -301,16 +306,9 @@ namespace VinaGerman.Database.Implementation
                 ArticleId = entityObject.ArticleId,
                 Quantity = entityObject.Quantity,
                 Price = entityObject.Price,
-                CreatedBy = entityObject.CreatedBy,
-                CreatedDate = entityObject.CreatedDate,
+                CreatedBy = entityObject.CreatedBy,                
                 PayDate = entityObject.PayDate,
-                ModifiedBy = entityObject.ModifiedBy,
-                ModifiedDate = entityObject.ModifiedDate,
-                CategoryId = entityObject.CategoryId,
-                ArticleNo = entityObject.ArticleNo,
-
-                Description = entityObject.Description,
-                Unit = entityObject.Unit
+                ModifiedBy = entityObject.ModifiedBy
             }, Transaction).ToList();
 
             if (result.Count > 0)

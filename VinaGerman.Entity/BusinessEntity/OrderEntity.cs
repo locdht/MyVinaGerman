@@ -35,6 +35,12 @@ namespace VinaGerman.Entity.BusinessEntity
         public DateTime CreatedDate { get; set; }
 
         [DataMember]
+        public int ModifiedBy { get; set; }
+
+        [DataMember]
+        public DateTime ModifiedDate { get; set; }
+
+        [DataMember]
         public int CompanyId { get; set; }
 
         [DataMember]
@@ -72,5 +78,6 @@ namespace VinaGerman.Entity.BusinessEntity
 
         [DataMember]
         public string IndustryName { get; set; }
+
     }
 }
